@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("sp-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);}catch(e){}})();</script>
 <title>Shortcut Press — Self-paced software skills guides</title>
 <meta name="description" content="Self-paced software skills guides delivered as digital downloads: a step-by-step PDF with annotated illustrations, practice exercises with worked solutions, and practice files.">
 <link rel="canonical" href="https://discordaccslog-max.github.io/shortcut-press/">
@@ -13,194 +14,228 @@
 <meta property="og:url" content="https://discordaccslog-max.github.io/shortcut-press/">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#f3f0e9" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141518" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f4f1" media="(prefers-color-scheme: light)">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&amp;family=Geist:wght@400..600&amp;family=Geist+Mono:wght@400..500&amp;display=swap">
 <link rel="stylesheet" href="css/styles.css">
 <script src="js/site-config.js" defer></script>
 <script src="js/products.js" defer></script>
+<script src="js/search-index.js" defer></script>
 <script src="js/main.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header" data-header>
-  <div class="header-bg" aria-hidden="true"></div>
+<header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true" focusable="false"><rect class="bm-side" x="1" y="3" width="32" height="30" rx="8"/><rect class="bm-face" x="3.5" y="1.5" width="27" height="25" rx="6"/><text class="bm-letter" x="17" y="18.5" text-anchor="middle">S/P</text><rect class="bm-dot" x="9" y="21" width="16" height="2.4" rx="1.2"/></svg><span class="brand-name">Shortcut Press</span></a>
-    <nav aria-label="Primary"><ul class="nav-list"><li><a href="index.html#guides">Guides</a></li><li><a href="about.html">About</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">S/P</span><span class="brand-name">Shortcut Press</span></a>
+    <nav class="nav" aria-label="Primary"><ul><li><a href="index.html#guides">Guides</a></li><li><a href="about.html">About</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    <div class="header-tools js-only">
+      <button type="button" class="search-btn" data-open-palette aria-label="Search" aria-keyshortcuts="Control+K Meta+K"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.75" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span class="search-btn-label" aria-hidden="true">Search</span><kbd aria-hidden="true"><span data-mod-key>Ctrl</span>&nbsp;K</kbd></button>
+      <button type="button" class="icon-btn theme-btn" data-theme-toggle aria-label="Switch theme"><svg class="i-sun" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1.1 1.1M11.5 11.5l1.1 1.1M3.4 12.6l1.1-1.1M11.5 4.5l1.1-1.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><svg class="i-moon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M13.2 10.1A5.6 5.6 0 0 1 5.9 2.8a5.6 5.6 0 1 0 7.3 7.3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></button>
+    </div>
   </div>
 </header>
 <main id="main">
 
-<section class="hero">
+<section class="hero" aria-labelledby="hero-title">
   <div class="container hero-grid">
-    <div>
-      <p class="eyebrow">Self-paced software guides</p>
-      <h1>Software skills, written down step by step.</h1>
+    <div class="hero-copy">
+      <p class="label"><span class="label-num">Shortcut Press</span><span class="label-sep">/</span>Self-paced software guides</p>
+      <h1 class="hero-title" id="hero-title"><span class="line"><span>Software skills,</span></span><span class="line"><span>written down</span></span><span class="line"><span>step by step.</span></span></h1>
       <p class="lead">Shortcut Press guides are digital downloads. Each one is a PDF that walks through a program one skill at a time with annotated illustrations, then gives you practice exercises, worked solutions, and the files to do them in.</p>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="#guides">Browse the guides</a>
-        <a class="btn btn-secondary" href="#how-it-works">How it works</a>
+      <div class="hero-actions">
+        <a class="btn btn-ghost" href="#guides">Browse the guides</a>
+        <p class="hint js-only">or press <kbd data-mod-key>Ctrl</kbd> <kbd>K</kbd> to search</p>
       </div>
-      <ul class="facts-strip" aria-label="Every guide at a glance">
-        <li>PDF guide</li><li>Practice files</li><li>Worked solutions</li><li>Self-study, no video</li>
-      </ul>
+      <ul class="hero-facts" aria-label="Every guide at a glance"><li>PDF guide</li><li>Practice files</li><li>Worked solutions</li><li>No video or tutoring</li></ul>
     </div>
-    <div class="hero-keys">
-      <svg class="keycaps" viewBox="0 0 520 150" role="img" aria-labelledby="kc-title" xmlns="http://www.w3.org/2000/svg"><title id="kc-title">Three keycaps, Ctrl, Shift and S, pressed down one after another</title><g class="kc kc-1"><rect class="kc-side" x="4" y="32" width="138" height="98" rx="16"/><g class="kc-top"><rect class="kc-face" x="4" y="20" width="138" height="96" rx="15"/><rect class="kc-dish" x="13" y="27" width="120" height="76" rx="11"/><rect class="kc-glow" x="6" y="22" width="134" height="92" rx="13"/><text class="kc-label" x="24" y="60">Ctrl</text></g></g><text class="kc-plus" x="152" y="84">+</text><g class="kc kc-2"><rect class="kc-side" x="176" y="32" width="172" height="98" rx="16"/><g class="kc-top"><rect class="kc-face" x="176" y="20" width="172" height="96" rx="15"/><rect class="kc-dish" x="185" y="27" width="154" height="76" rx="11"/><rect class="kc-glow" x="178" y="22" width="168" height="92" rx="13"/><text class="kc-label" x="196" y="60">Shift</text></g></g><text class="kc-plus" x="358" y="84">+</text><g class="kc kc-3 kc-accent"><rect class="kc-side" x="382" y="32" width="132" height="98" rx="16"/><g class="kc-top"><rect class="kc-face" x="382" y="20" width="132" height="96" rx="15"/><rect class="kc-dish" x="391" y="27" width="114" height="76" rx="11"/><rect class="kc-glow" x="384" y="22" width="128" height="92" rx="13"/><text class="kc-label" x="402" y="60">S</text></g></g></svg>
-      <p class="hero-keys-caption"><span>Ctrl + Shift + S</span><span>Save as. Then practice.</span></p>
+    <div class="kb-panel">
+      <div class="kb-stage" role="img" aria-label="A cluster of keyboard keys. Each key presses down when you press the same key on your keyboard, and the cluster plays through common shortcuts on its own when idle.">
+        <div class="kb" data-kb><div class="kb-row"><span class="key" data-code="Escape" style="--w:1.5"><span class="key-cap"><span class="key-label">Esc</span></span></span><span class="key" data-code="KeyQ"><span class="key-cap"><span class="key-label">Q</span></span></span><span class="key" data-code="KeyW"><span class="key-cap"><span class="key-label">W</span></span></span><span class="key" data-code="KeyE"><span class="key-cap"><span class="key-label">E</span></span></span><span class="key" data-code="KeyR"><span class="key-cap"><span class="key-label">R</span></span></span><span class="key" data-code="KeyT"><span class="key-cap"><span class="key-label">T</span></span></span></div><div class="kb-row"><span class="key" data-code="Tab" style="--w:1.5"><span class="key-cap"><span class="key-label">Tab</span></span></span><span class="key" data-code="KeyA"><span class="key-cap"><span class="key-label">A</span></span></span><span class="key" data-code="KeyS"><span class="key-cap"><span class="key-label">S</span></span></span><span class="key" data-code="KeyD"><span class="key-cap"><span class="key-label">D</span></span></span><span class="key" data-code="KeyF"><span class="key-cap"><span class="key-label">F</span></span></span><span class="key" data-code="KeyG"><span class="key-cap"><span class="key-label">G</span></span></span></div><div class="kb-row"><span class="key" data-code="ShiftLeft" style="--w:1.5"><span class="key-cap"><span class="key-label">Shift</span></span></span><span class="key" data-code="KeyZ"><span class="key-cap"><span class="key-label">Z</span></span></span><span class="key" data-code="KeyX"><span class="key-cap"><span class="key-label">X</span></span></span><span class="key" data-code="KeyC"><span class="key-cap"><span class="key-label">C</span></span></span><span class="key" data-code="KeyV"><span class="key-cap"><span class="key-label">V</span></span></span><span class="key" data-code="KeyB"><span class="key-cap"><span class="key-label">B</span></span></span></div><div class="kb-row"><span class="key" data-code="ControlLeft" style="--w:1.5"><span class="key-cap"><span class="key-label">Ctrl</span></span></span><span class="key" data-code="AltLeft" style="--w:1.25"><span class="key-cap"><span class="key-label">Alt</span></span></span><span class="key" data-code="Space" style="--w:3.75"><span class="key-cap"><span class="key-label"></span></span></span></div></div>
+      </div>
+      <p class="kb-caption"><span class="kb-now" data-kb-now aria-hidden="true"><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>S</kbd><span class="kb-action">Save as</span></span><span class="kb-hint js-only">Press a key on your keyboard</span></p>
     </div>
   </div>
 </section>
 
-<section class="section section-alt" id="guides" aria-labelledby="guides-title">
+<section class="section" id="guides" aria-labelledby="guides-title">
   <div class="container">
-    <div class="section-head">
-      <p class="eyebrow">The guides</p>
-      <h2 id="guides-title">Seven guides, plus the complete library</h2>
+    <div class="sec-head">
+      <div><p class="label"><span class="label-num">01</span><span class="label-sep">/</span>The guides</p><h2 id="guides-title">Seven guides and the complete library</h2></div>
       <p>Each guide covers one program, from the first steps to a finished piece of work. Prices are in US dollars, and taxes are calculated at checkout.</p>
     </div>
-    <div class="card-grid">
-      <article class="card reveal" style="--i:0">
-  <div class="card-art" aria-hidden="true"><svg viewBox="0 0 240 110" focusable="false"><rect class="s-paper" x="0.5" y="0.5" width="239" height="109" rx="4"/><rect class="s-soft" x="1" y="1" width="238" height="21"/><rect class="s-soft" x="1" y="1" width="27" height="108"/><line class="s-stroke-faint" x1="28" y1="1" x2="28" y2="109"/><line class="s-stroke-faint" x1="70" y1="1" x2="70" y2="109"/><line class="s-stroke-faint" x1="112" y1="1" x2="112" y2="109"/><line class="s-stroke-faint" x1="154" y1="1" x2="154" y2="109"/><line class="s-stroke-faint" x1="196" y1="1" x2="196" y2="109"/><line class="s-stroke-faint" x1="1" y1="22" x2="239" y2="22"/><line class="s-stroke-faint" x1="1" y1="44" x2="239" y2="44"/><line class="s-stroke-faint" x1="1" y1="66" x2="239" y2="66"/><line class="s-stroke-faint" x1="1" y1="88" x2="239" y2="88"/><rect class="s-line" x="34" y="51" width="28" height="5" rx="2"/><rect class="s-line" x="34" y="73" width="22" height="5" rx="2"/><rect class="s-line" x="76" y="29" width="30" height="5" rx="2"/><rect class="s-line" x="76" y="95" width="26" height="5" rx="2"/><rect class="s-accent-soft" x="196" y="44" width="42" height="22"/><rect class="s-astroke" x="113" y="66" width="42" height="22" stroke-width="2.5"/><path class="s-astroke" d="M155 77 C 178 77, 196 74, 205 66" stroke-dasharray="4 3"/><path class="s-accent" d="M201 62 l9 1 -4 8 z"/></svg></div>
-  <div class="card-body">
-    <p class="card-meta"><span class="tag">Beginner to intermediate</span><span>Microsoft Excel or Google Sheets</span></p>
-    <h3 class="card-title"><a class="card-link" href="spreadsheet-formulas-functions.html">Spreadsheet Formulas &amp; Functions</a></h3>
-    <p class="card-desc">Cell references, lookups, logical, text and date functions, and error handling, for Excel and Google Sheets.</p>
-    <p class="card-foot"><span class="price" data-price="spreadsheet-formulas">$29</span><span class="card-cta" aria-hidden="true">View guide</span></p>
+    <div class="bento">
+      <article class="tile" data-area="lib" style="--i:0">
+  <div class="tile-art"><div class="art-lib" aria-hidden="true"><div class="kb-mini"><div class="kb-row"><span class="key"><span class="key-cap" style="--d:0"><span class="key-label">Fx</span></span></span><span class="key"><span class="key-cap" style="--d:1"><span class="key-label">Pv</span></span></span><span class="key"><span class="key-cap" style="--d:2"><span class="key-label">Dc</span></span></span><span class="key"><span class="key-cap" style="--d:3"><span class="key-label">3D</span></span></span></div><div class="kb-row"><span class="key"><span class="key-cap" style="--d:4"><span class="key-label">Ed</span></span></span><span class="key"><span class="key-cap" style="--d:5"><span class="key-label">UI</span></span></span><span class="key"><span class="key-cap" style="--d:6"><span class="key-label">Vx</span></span></span></div></div></div></div>
+  <div class="tile-body">
+    <p class="tile-meta"><span>Beginner to intermediate</span><span>7 guides</span></p>
+    <h3 class="tile-title"><a class="tile-link" href="complete-software-skills-library.html">Complete Software Skills Library</a></h3>
+    <p class="tile-desc">All seven guides together, each with its PDF, practice files, and worked solutions.</p>
+    <p class="tile-foot"><span class="price" data-price="complete-library">$149</span><span class="tile-go" aria-hidden="true">View guide &rarr;</span></p>
   </div>
+  <span class="tile-glow" aria-hidden="true"><span class="glow-dot"></span></span>
+  <span class="tile-edge" aria-hidden="true"><span class="glow-dot"></span></span>
 </article>
-      <article class="card reveal" style="--i:1">
-  <div class="card-art" aria-hidden="true"><svg viewBox="0 0 240 110" focusable="false"><rect class="s-paper" x="0.5" y="0.5" width="239" height="109" rx="4"/><line class="s-stroke" x1="22" y1="14" x2="22" y2="92"/><line class="s-stroke" x1="22" y1="92" x2="150" y2="92"/><rect class="s-line" x="32" y="48" width="19" height="44" rx="2"/><rect class="s-accent" x="61" y="26" width="19" height="66" rx="2"/><rect class="s-line" x="90" y="62" width="19" height="30" rx="2"/><rect class="s-line" x="119" y="34" width="19" height="58" rx="2"/><line class="s-stroke-faint" x1="22" y1="26" x2="150" y2="26"/><line class="s-stroke-faint" x1="22" y1="43" x2="150" y2="43"/><line class="s-stroke-faint" x1="22" y1="60" x2="150" y2="60"/><line class="s-stroke-faint" x1="22" y1="77" x2="150" y2="77"/><rect class="s-soft" x="164" y="14" width="64" height="82" rx="4"/><rect class="s-muted" x="170" y="22" width="7" height="7" rx="1.5"/><rect class="s-line" x="182" y="24" width="34" height="5" rx="2"/><rect class="s-muted" x="170" y="42" width="7" height="7" rx="1.5"/><rect class="s-line" x="182" y="44" width="31" height="5" rx="2"/><rect class="s-accent" x="170" y="62" width="7" height="7" rx="1.5"/><rect class="s-line" x="182" y="64" width="28" height="5" rx="2"/><rect class="s-muted" x="170" y="82" width="7" height="7" rx="1.5"/><rect class="s-line" x="182" y="84" width="25" height="5" rx="2"/></svg></div>
-  <div class="card-body">
-    <p class="card-meta"><span class="tag">Intermediate</span><span>Microsoft Excel or Google Sheets</span></p>
-    <h3 class="card-title"><a class="card-link" href="data-analysis-pivot-tables-charts.html">Data Analysis with Pivot Tables &amp; Charts</a></h3>
-    <p class="card-desc">Cleaning data, building pivot tables, summarizing and filtering, and choosing and formatting charts.</p>
-    <p class="card-foot"><span class="price" data-price="pivot-tables-charts">$39</span><span class="card-cta" aria-hidden="true">View guide</span></p>
+      <article class="tile" data-area="sh" style="--i:1">
+  <div class="tile-art"><svg class="art-sheets" viewBox="0 0 240 150" aria-hidden="true" focusable="false"><rect class="i-cell" x="6" y="19" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:0" x="8.5" y="21.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="35" y="19" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:1" x="37.5" y="21.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="64" y="19" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:2" x="66.5" y="21.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="93" y="19" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:3" x="95.5" y="21.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="122" y="19" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:4" x="124.5" y="21.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="151" y="19" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:5" x="153.5" y="21.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="180" y="19" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:6" x="182.5" y="21.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="209" y="19" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:7" x="211.5" y="21.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="6" y="42" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:8" x="8.5" y="44.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="35" y="42" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:9" x="37.5" y="44.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="64" y="42" width="26" height="20" rx="2"/><rect class="cf i-acc on" style="--d:10" x="66.5" y="44.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="93" y="42" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:11" x="95.5" y="44.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="122" y="42" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:12" x="124.5" y="44.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="151" y="42" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:13" x="153.5" y="44.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="180" y="42" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:14" x="182.5" y="44.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="209" y="42" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:15" x="211.5" y="44.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="6" y="65" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:16" x="8.5" y="67.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="35" y="65" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:17" x="37.5" y="67.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="64" y="65" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:18" x="66.5" y="67.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="93" y="65" width="26" height="20" rx="2"/><rect class="cf i-acc on" style="--d:19" x="95.5" y="67.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="122" y="65" width="26" height="20" rx="2"/><rect class="cf cf-fill on" style="--d:20" x="124.5" y="67.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="151" y="65" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:21" x="153.5" y="67.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="180" y="65" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:22" x="182.5" y="67.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="209" y="65" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:23" x="211.5" y="67.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="6" y="88" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:24" x="8.5" y="90.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="35" y="88" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:25" x="37.5" y="90.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="64" y="88" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:26" x="66.5" y="90.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="93" y="88" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:27" x="95.5" y="90.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="122" y="88" width="26" height="20" rx="2"/><rect class="cf i-acc" style="--d:28" x="124.5" y="90.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="151" y="88" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:29" x="153.5" y="90.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="180" y="88" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:30" x="182.5" y="90.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="209" y="88" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:31" x="211.5" y="90.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="6" y="111" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:32" x="8.5" y="113.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="35" y="111" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:33" x="37.5" y="113.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="64" y="111" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:34" x="66.5" y="113.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="93" y="111" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:35" x="95.5" y="113.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="122" y="111" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:36" x="124.5" y="113.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="151" y="111" width="26" height="20" rx="2"/><rect class="cf i-acc" style="--d:37" x="153.5" y="113.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="180" y="111" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:38" x="182.5" y="113.5" width="21" height="15" rx="1.5"/><rect class="i-cell" x="209" y="111" width="26" height="20" rx="2"/><rect class="cf cf-fill" style="--d:39" x="211.5" y="113.5" width="21" height="15" rx="1.5"/></svg></div>
+  <div class="tile-body">
+    <p class="tile-meta"><span>Beginner to intermediate</span><span>Microsoft Excel or Google Sheets</span></p>
+    <h3 class="tile-title"><a class="tile-link" href="spreadsheet-formulas-functions.html">Spreadsheet Formulas &amp; Functions</a></h3>
+    <p class="tile-desc">Cell references, lookups, logical, text and date functions, and error handling, for Excel and Google Sheets.</p>
+    <p class="tile-foot"><span class="price" data-price="spreadsheet-formulas">$29</span><span class="tile-go" aria-hidden="true">View guide &rarr;</span></p>
   </div>
+  <span class="tile-glow" aria-hidden="true"><span class="glow-dot"></span></span>
+  <span class="tile-edge" aria-hidden="true"><span class="glow-dot"></span></span>
 </article>
-      <article class="card reveal" style="--i:2">
-  <div class="card-art" aria-hidden="true"><svg viewBox="0 0 240 110" focusable="false"><rect class="s-paper" x="20" y="4" width="78" height="102" rx="3"/><rect class="s-ink" x="30" y="16" width="48" height="7" rx="2"/><rect class="s-line" x="30" y="30" width="58" height="4" rx="2"/><rect class="s-line" x="30" y="38" width="52" height="4" rx="2"/><rect class="s-accent" x="30" y="50" width="36" height="5" rx="2"/><rect class="s-line" x="30" y="61" width="58" height="4" rx="2"/><rect class="s-line" x="30" y="69" width="44" height="4" rx="2"/><rect class="s-accent" x="30" y="81" width="30" height="5" rx="2"/><rect class="s-line" x="30" y="92" width="54" height="4" rx="2"/><path class="s-astroke" d="M106 55 h22" /><path class="s-accent" d="M127 50 l8 5 -8 5 z"/><rect class="s-paper" x="142" y="14" width="80" height="82" rx="3"/><rect class="s-ink" x="152" y="24" width="30" height="5" rx="2"/><rect class="s-muted" x="152" y="40" width="34" height="4" rx="2"/><line class="s-dash" x1="190" y1="42" x2="204" y2="42" stroke-dasharray="1.5 3"/><rect class="s-muted" x="207" y="40" width="7" height="4" rx="1"/><rect class="s-line" x="160" y="54" width="26" height="4" rx="2"/><line class="s-dash" x1="190" y1="56" x2="204" y2="56" stroke-dasharray="1.5 3"/><rect class="s-muted" x="207" y="54" width="7" height="4" rx="1"/><rect class="s-muted" x="152" y="68" width="34" height="4" rx="2"/><line class="s-dash" x1="190" y1="70" x2="204" y2="70" stroke-dasharray="1.5 3"/><rect class="s-muted" x="207" y="68" width="7" height="4" rx="1"/><rect class="s-line" x="160" y="82" width="26" height="4" rx="2"/><line class="s-dash" x1="190" y1="84" x2="204" y2="84" stroke-dasharray="1.5 3"/><rect class="s-muted" x="207" y="82" width="7" height="4" rx="1"/></svg></div>
-  <div class="card-body">
-    <p class="card-meta"><span class="tag">Beginner</span><span>Microsoft Word or Google Docs</span></p>
-    <h3 class="card-title"><a class="card-link" href="professional-document-formatting.html">Professional Document Formatting</a></h3>
-    <p class="card-desc">Styles, headings, automatic tables of contents, page layout, and reusable templates in Word and Google Docs.</p>
-    <p class="card-foot"><span class="price" data-price="document-formatting">$22</span><span class="card-cta" aria-hidden="true">View guide</span></p>
+      <article class="tile" data-area="pv" style="--i:2">
+  <div class="tile-art"><svg class="art-pivot" viewBox="0 0 240 150" aria-hidden="true" focusable="false"><line class="i-stroke-faint" x1="14" y1="38" x2="226" y2="38" stroke-dasharray="3 4"/><line class="i-stroke-faint" x1="14" y1="68" x2="226" y2="68" stroke-dasharray="3 4"/><line class="i-stroke-faint" x1="14" y1="98" x2="226" y2="98" stroke-dasharray="3 4"/><line class="i-stroke" x1="14" y1="128" x2="226" y2="128"/><rect class="bar i-faint" style="--d:0" x="22" y="82" width="16" height="46" rx="2"/><rect class="bar i-faint" style="--d:1" x="48" y="58" width="16" height="70" rx="2"/><rect class="bar i-faint" style="--d:2" x="74" y="90" width="16" height="38" rx="2"/><rect class="bar i-faint" style="--d:3" x="100" y="40" width="16" height="88" rx="2"/><rect class="bar i-faint" style="--d:4" x="126" y="68" width="16" height="60" rx="2"/><rect class="bar i-acc" style="--d:5" x="152" y="32" width="16" height="96" rx="2"/><rect class="bar i-faint" style="--d:6" x="178" y="76" width="16" height="52" rx="2"/><rect class="bar i-faint" style="--d:7" x="204" y="54" width="16" height="74" rx="2"/></svg></div>
+  <div class="tile-body">
+    <p class="tile-meta"><span>Intermediate</span><span>Microsoft Excel or Google Sheets</span></p>
+    <h3 class="tile-title"><a class="tile-link" href="data-analysis-pivot-tables-charts.html">Data Analysis with Pivot Tables &amp; Charts</a></h3>
+    <p class="tile-desc">Cleaning data, building pivot tables, summarizing and filtering, and choosing and formatting charts.</p>
+    <p class="tile-foot"><span class="price" data-price="pivot-tables-charts">$39</span><span class="tile-go" aria-hidden="true">View guide &rarr;</span></p>
   </div>
+  <span class="tile-glow" aria-hidden="true"><span class="glow-dot"></span></span>
+  <span class="tile-edge" aria-hidden="true"><span class="glow-dot"></span></span>
 </article>
-      <article class="card reveal" style="--i:0">
-  <div class="card-art" aria-hidden="true"><svg viewBox="0 0 240 110" focusable="false"><rect class="s-paper" x="0.5" y="0.5" width="239" height="109" rx="4"/><path class="s-accent-soft" d="M120 14 L170 38 L120 62 L70 38 Z"/><path class="s-soft" d="M70 38 L120 62 L120 104 L70 80 Z"/><path class="s-stroke-ink" d="M120 14 L170 38 L120 62 L70 38 Z M70 38 L70 80 L120 104 L170 80 L170 38 M120 62 L120 104" stroke-linejoin="round"/><path class="s-dash" d="M120 14 L120 56 M70 80 L120 56 L170 80"/><circle class="s-ink" cx="120" cy="14" r="2.6"/><circle class="s-accent" cx="170" cy="38" r="4"/><circle class="s-ink" cx="120" cy="62" r="2.6"/><circle class="s-ink" cx="70" cy="38" r="2.6"/><circle class="s-ink" cx="70" cy="80" r="2.6"/><circle class="s-ink" cx="120" cy="104" r="2.6"/><circle class="s-ink" cx="170" cy="80" r="2.6"/><circle class="s-accent" cx="206" cy="24" r="7"/><path class="s-astroke" d="M206 8 v5 M206 35 v5 M190 24 h5 M217 24 h5 M195 13 l3 3 M214 32 l3 3 M217 13 l-3 3 M198 32 l-3 3"/><path class="s-dash" d="M199 31 L172 40"/></svg></div>
-  <div class="card-body">
-    <p class="card-meta"><span class="tag">Beginner</span><span>Blender</span></p>
-    <h3 class="card-title"><a class="card-link" href="blender-3d-modeling-fundamentals.html">3D Modeling Fundamentals in Blender</a></h3>
-    <p class="card-desc">Navigating the interface, modeling with basic shapes, modifiers, materials, lighting, and rendering a scene.</p>
-    <p class="card-foot"><span class="price" data-price="blender-3d-modeling">$49</span><span class="card-cta" aria-hidden="true">View guide</span></p>
+      <article class="tile" data-area="bl" style="--i:3">
+  <div class="tile-art"><div class="art-cube" aria-hidden="true"><div class="cube-scene"><div class="cube"><span class="face f-front"></span><span class="face f-back"></span><span class="face f-right"></span><span class="face f-left"></span><span class="face f-top"></span><span class="face f-bottom"></span></div></div><svg class="cube-floor" viewBox="0 0 180 24" focusable="false"><ellipse class="i-stroke-faint" cx="90" cy="12" rx="84" ry="10"/><ellipse class="i-fill" cx="90" cy="12" rx="48" ry="5"/></svg></div></div>
+  <div class="tile-body">
+    <p class="tile-meta"><span>Beginner</span><span>Blender</span></p>
+    <h3 class="tile-title"><a class="tile-link" href="blender-3d-modeling-fundamentals.html">3D Modeling Fundamentals in Blender</a></h3>
+    <p class="tile-desc">Navigating the interface, modeling with basic shapes, modifiers, materials, lighting, and rendering a scene.</p>
+    <p class="tile-foot"><span class="price" data-price="blender-3d-modeling">$49</span><span class="tile-go" aria-hidden="true">View guide &rarr;</span></p>
   </div>
+  <span class="tile-glow" aria-hidden="true"><span class="glow-dot"></span></span>
+  <span class="tile-edge" aria-hidden="true"><span class="glow-dot"></span></span>
 </article>
-      <article class="card reveal" style="--i:1">
-  <div class="card-art" aria-hidden="true"><svg viewBox="0 0 240 110" focusable="false"><rect class="s-paper" x="0.5" y="0.5" width="239" height="109" rx="4"/><rect class="s-soft" x="1" y="1" width="238" height="14"/><line class="s-stroke-faint" x1="12" y1="6" x2="12" y2="15"/><line class="s-stroke-faint" x1="32" y1="10" x2="32" y2="15"/><line class="s-stroke-faint" x1="52" y1="6" x2="52" y2="15"/><line class="s-stroke-faint" x1="72" y1="10" x2="72" y2="15"/><line class="s-stroke-faint" x1="92" y1="6" x2="92" y2="15"/><line class="s-stroke-faint" x1="112" y1="10" x2="112" y2="15"/><line class="s-stroke-faint" x1="132" y1="6" x2="132" y2="15"/><line class="s-stroke-faint" x1="152" y1="10" x2="152" y2="15"/><line class="s-stroke-faint" x1="172" y1="6" x2="172" y2="15"/><line class="s-stroke-faint" x1="192" y1="10" x2="192" y2="15"/><line class="s-stroke-faint" x1="212" y1="6" x2="212" y2="15"/><line class="s-stroke-faint" x1="232" y1="10" x2="232" y2="15"/><rect class="s-line" x="10" y="24" width="64" height="20" rx="3"/><rect class="s-accent-soft" x="76" y="24" width="70" height="20" rx="3"/><rect class="s-astroke" x="76" y="24" width="70" height="20" rx="3"/><rect class="s-line" x="148" y="24" width="82" height="20" rx="3"/><rect class="s-soft" x="40" y="50" width="56" height="16" rx="3"/><rect class="s-stroke" x="40" y="50" width="56" height="16" rx="3"/><rect class="s-soft" x="10" y="74" width="220" height="24" rx="3"/><rect class="s-muted" x="14" y="84.5" width="2.2" height="3" rx="1"/><rect class="s-muted" x="19" y="79.5" width="2.2" height="13" rx="1"/><rect class="s-muted" x="24" y="83.5" width="2.2" height="5" rx="1"/><rect class="s-muted" x="29" y="82.5" width="2.2" height="7" rx="1"/><rect class="s-muted" x="34" y="81" width="2.2" height="10" rx="1"/><rect class="s-muted" x="39" y="81" width="2.2" height="10" rx="1"/><rect class="s-muted" x="44" y="81" width="2.2" height="10" rx="1"/><rect class="s-muted" x="49" y="80.5" width="2.2" height="11" rx="1"/><rect class="s-muted" x="54" y="83" width="2.2" height="6" rx="1"/><rect class="s-muted" x="59" y="84.5" width="2.2" height="3" rx="1"/><rect class="s-muted" x="64" y="80" width="2.2" height="12" rx="1"/><rect class="s-muted" x="69" y="84.5" width="2.2" height="3" rx="1"/><rect class="s-muted" x="74" y="79" width="2.2" height="14" rx="1"/><rect class="s-muted" x="79" y="83" width="2.2" height="6" rx="1"/><rect class="s-muted" x="84" y="82.5" width="2.2" height="7" rx="1"/><rect class="s-muted" x="89" y="82" width="2.2" height="8" rx="1"/><rect class="s-muted" x="94" y="81.5" width="2.2" height="9" rx="1"/><rect class="s-muted" x="99" y="81" width="2.2" height="10" rx="1"/><rect class="s-muted" x="104" y="79.5" width="2.2" height="13" rx="1"/><rect class="s-muted" x="109" y="83" width="2.2" height="6" rx="1"/><rect class="s-muted" x="114" y="83.5" width="2.2" height="5" rx="1"/><rect class="s-muted" x="119" y="81" width="2.2" height="10" rx="1"/><rect class="s-muted" x="124" y="84.5" width="2.2" height="3" rx="1"/><rect class="s-muted" x="129" y="78.5" width="2.2" height="15" rx="1"/><rect class="s-muted" x="134" y="82.5" width="2.2" height="7" rx="1"/><rect class="s-muted" x="139" y="82" width="2.2" height="8" rx="1"/><rect class="s-muted" x="144" y="83.5" width="2.2" height="5" rx="1"/><rect class="s-muted" x="149" y="81.5" width="2.2" height="9" rx="1"/><rect class="s-muted" x="154" y="81" width="2.2" height="10" rx="1"/><rect class="s-muted" x="159" y="79" width="2.2" height="14" rx="1"/><rect class="s-muted" x="164" y="83.5" width="2.2" height="5" rx="1"/><rect class="s-muted" x="169" y="82.5" width="2.2" height="7" rx="1"/><rect class="s-muted" x="174" y="82" width="2.2" height="8" rx="1"/><rect class="s-muted" x="179" y="84.5" width="2.2" height="3" rx="1"/><rect class="s-muted" x="184" y="78.5" width="2.2" height="15" rx="1"/><rect class="s-muted" x="189" y="82" width="2.2" height="8" rx="1"/><rect class="s-muted" x="194" y="81.5" width="2.2" height="9" rx="1"/><rect class="s-muted" x="199" y="84.5" width="2.2" height="3" rx="1"/><rect class="s-muted" x="204" y="82" width="2.2" height="8" rx="1"/><rect class="s-muted" x="209" y="81" width="2.2" height="10" rx="1"/><rect class="s-muted" x="214" y="79" width="2.2" height="14" rx="1"/><rect class="s-muted" x="219" y="83.5" width="2.2" height="5" rx="1"/><rect class="s-muted" x="224" y="81.5" width="2.2" height="9" rx="1"/><rect class="s-muted" x="229" y="83" width="2.2" height="6" rx="1"/><line class="s-astroke" x1="132" y1="15" x2="132" y2="104" stroke-width="2"/><path class="s-accent" d="M126 6 h12 v6 l-6 5 -6 -5 z"/></svg></div>
-  <div class="card-body">
-    <p class="card-meta"><span class="tag">Beginner to intermediate</span><span>DaVinci Resolve</span></p>
-    <h3 class="card-title"><a class="card-link" href="davinci-resolve-video-editing.html">Video Editing in DaVinci Resolve</a></h3>
-    <p class="card-desc">Organizing footage, cutting on the timeline, transitions, titles, color correction, audio cleanup, and exporting.</p>
-    <p class="card-foot"><span class="price" data-price="davinci-resolve-editing">$45</span><span class="card-cta" aria-hidden="true">View guide</span></p>
+      <article class="tile" data-area="rs" style="--i:4">
+  <div class="tile-art"><svg class="art-video" viewBox="0 0 240 150" aria-hidden="true" focusable="false"><line class="i-stroke-faint" x1="12" y1="8" x2="12" y2="20"/><line class="i-stroke-faint" x1="30" y1="14" x2="30" y2="20"/><line class="i-stroke-faint" x1="48" y1="8" x2="48" y2="20"/><line class="i-stroke-faint" x1="66" y1="14" x2="66" y2="20"/><line class="i-stroke-faint" x1="84" y1="8" x2="84" y2="20"/><line class="i-stroke-faint" x1="102" y1="14" x2="102" y2="20"/><line class="i-stroke-faint" x1="120" y1="8" x2="120" y2="20"/><line class="i-stroke-faint" x1="138" y1="14" x2="138" y2="20"/><line class="i-stroke-faint" x1="156" y1="8" x2="156" y2="20"/><line class="i-stroke-faint" x1="174" y1="14" x2="174" y2="20"/><line class="i-stroke-faint" x1="192" y1="8" x2="192" y2="20"/><line class="i-stroke-faint" x1="210" y1="14" x2="210" y2="20"/><line class="i-stroke-faint" x1="228" y1="8" x2="228" y2="20"/><rect class="i-fill" x="12" y="30" width="70" height="24" rx="3"/><rect class="i-cell" x="12" y="30" width="70" height="24" rx="3"/><rect class="i-fill" x="86" y="30" width="64" height="24" rx="3"/><rect class="i-cell" x="86" y="30" width="64" height="24" rx="3"/><rect class="clip-hi" x="86" y="30" width="64" height="24" rx="3"/><rect class="i-fill" x="154" y="30" width="74" height="24" rx="3"/><rect class="i-cell" x="154" y="30" width="74" height="24" rx="3"/><rect class="i-faint" x="40" y="60" width="92" height="18" rx="3"/><rect class="i-faint" x="140" y="60" width="60" height="18" rx="3"/><rect class="i-fill" x="12" y="86" width="216" height="40" rx="3"/><rect class="i-ink" x="17" y="104" width="2" height="4" rx="1" opacity="0.7"/><rect class="i-ink" x="22" y="97" width="2" height="18" rx="1" opacity="0.7"/><rect class="i-ink" x="27" y="102.5" width="2" height="7" rx="1" opacity="0.7"/><rect class="i-ink" x="32" y="102" width="2" height="8" rx="1" opacity="0.7"/><rect class="i-ink" x="37" y="99" width="2" height="14" rx="1" opacity="0.7"/><rect class="i-ink" x="42" y="98.5" width="2" height="15" rx="1" opacity="0.7"/><rect class="i-ink" x="47" y="99.5" width="2" height="13" rx="1" opacity="0.7"/><rect class="i-ink" x="52" y="98.5" width="2" height="15" rx="1" opacity="0.7"/><rect class="i-ink" x="57" y="102" width="2" height="8" rx="1" opacity="0.7"/><rect class="i-ink" x="62" y="103.5" width="2" height="5" rx="1" opacity="0.7"/><rect class="i-ink" x="67" y="96.5" width="2" height="19" rx="1" opacity="0.7"/><rect class="i-ink" x="72" y="102.5" width="2" height="7" rx="1" opacity="0.7"/><rect class="i-ink" x="77" y="97.5" width="2" height="17" rx="1" opacity="0.7"/><rect class="i-ink" x="82" y="102.5" width="2" height="7" rx="1" opacity="0.7"/><rect class="i-ink" x="87" y="101.5" width="2" height="9" rx="1" opacity="0.7"/><rect class="i-ink" x="92" y="99.5" width="2" height="13" rx="1" opacity="0.7"/><rect class="i-ink" x="97" y="97.5" width="2" height="17" rx="1" opacity="0.7"/><rect class="i-ink" x="102" y="101" width="2" height="10" rx="1" opacity="0.7"/><rect class="i-ink" x="107" y="98.5" width="2" height="15" rx="1" opacity="0.7"/><rect class="i-ink" x="112" y="102.5" width="2" height="7" rx="1" opacity="0.7"/><rect class="i-ink" x="117" y="104" width="2" height="4" rx="1" opacity="0.7"/><rect class="i-ink" x="122" y="96.5" width="2" height="19" rx="1" opacity="0.7"/><rect class="i-ink" x="127" y="101" width="2" height="10" rx="1" opacity="0.7"/><rect class="i-ink" x="132" y="98.5" width="2" height="15" rx="1" opacity="0.7"/><rect class="i-ink" x="137" y="102" width="2" height="8" rx="1" opacity="0.7"/><rect class="i-ink" x="142" y="101.5" width="2" height="9" rx="1" opacity="0.7"/><rect class="i-ink" x="147" y="100" width="2" height="12" rx="1" opacity="0.7"/><rect class="i-ink" x="152" y="96.5" width="2" height="19" rx="1" opacity="0.7"/><rect class="i-ink" x="157" y="102.5" width="2" height="7" rx="1" opacity="0.7"/><rect class="i-ink" x="162" y="99" width="2" height="14" rx="1" opacity="0.7"/><rect class="i-ink" x="167" y="102.5" width="2" height="7" rx="1" opacity="0.7"/><rect class="i-ink" x="172" y="103.5" width="2" height="5" rx="1" opacity="0.7"/><rect class="i-ink" x="177" y="96.5" width="2" height="19" rx="1" opacity="0.7"/><rect class="i-ink" x="182" y="99.5" width="2" height="13" rx="1" opacity="0.7"/><rect class="i-ink" x="187" y="99" width="2" height="14" rx="1" opacity="0.7"/><rect class="i-ink" x="192" y="102" width="2" height="8" rx="1" opacity="0.7"/><rect class="i-ink" x="197" y="101" width="2" height="10" rx="1" opacity="0.7"/><rect class="i-ink" x="202" y="100.5" width="2" height="11" rx="1" opacity="0.7"/><rect class="i-ink" x="207" y="96" width="2" height="20" rx="1" opacity="0.7"/><rect class="i-ink" x="212" y="104" width="2" height="4" rx="1" opacity="0.7"/><rect class="i-ink" x="217" y="99" width="2" height="14" rx="1" opacity="0.7"/><rect class="i-ink" x="222" y="102.5" width="2" height="7" rx="1" opacity="0.7"/><g class="playhead"><line x1="22" y1="4" x2="22" y2="138" stroke="var(--accent)" stroke-width="1.5"/><path d="M16 2h12v7l-6 5-6-5z" fill="var(--accent)"/></g></svg></div>
+  <div class="tile-body">
+    <p class="tile-meta"><span>Beginner to intermediate</span><span>DaVinci Resolve</span></p>
+    <h3 class="tile-title"><a class="tile-link" href="davinci-resolve-video-editing.html">Video Editing in DaVinci Resolve</a></h3>
+    <p class="tile-desc">Organizing footage, cutting on the timeline, transitions, titles, color correction, audio cleanup, and exporting.</p>
+    <p class="tile-foot"><span class="price" data-price="davinci-resolve-editing">$45</span><span class="tile-go" aria-hidden="true">View guide &rarr;</span></p>
   </div>
+  <span class="tile-glow" aria-hidden="true"><span class="glow-dot"></span></span>
+  <span class="tile-edge" aria-hidden="true"><span class="glow-dot"></span></span>
 </article>
-      <article class="card reveal" style="--i:2">
-  <div class="card-art" aria-hidden="true"><svg viewBox="0 0 240 110" focusable="false"><rect class="s-paper" x="0.5" y="0.5" width="239" height="109" rx="4"/><rect class="s-bg" x="28" y="8" width="62" height="94" rx="7"/><rect class="s-ink" x="36" y="18" width="30" height="5" rx="2"/><rect class="s-soft" x="36" y="30" width="46" height="18" rx="3"/><rect class="s-soft" x="36" y="54" width="46" height="18" rx="3"/><rect class="s-accent" x="36" y="80" width="46" height="13" rx="6.5"/><rect class="s-bg" x="150" y="8" width="62" height="94" rx="7"/><rect class="s-ink" x="158" y="18" width="30" height="5" rx="2"/><rect class="s-soft" x="158" y="30" width="46" height="18" rx="3"/><rect class="s-soft" x="158" y="54" width="46" height="18" rx="3"/><rect class="s-accent" x="158" y="80" width="46" height="13" rx="6.5"/><path class="s-astroke" d="M36 49 v4 M36 73 v6" stroke-width="1.5"/><path class="s-astroke" d="M24 30 h-4 v18 h4" stroke-width="1.5"/><path class="s-astroke" d="M82 87 C 112 87, 118 40, 146 40" stroke-dasharray="4 3"/><circle class="s-accent" cx="82" cy="87" r="3.5"/><path class="s-accent" d="M142 35 l8 5 -8 5 z"/></svg></div>
-  <div class="card-body">
-    <p class="card-meta"><span class="tag">Beginner to intermediate</span><span>Figma</span></p>
-    <h3 class="card-title"><a class="card-link" href="figma-interface-design.html">Interface Design in Figma</a></h3>
-    <p class="card-desc">Frames, auto layout, components, styles, and prototyping a simple app screen flow.</p>
-    <p class="card-foot"><span class="price" data-price="figma-interface-design">$35</span><span class="card-cta" aria-hidden="true">View guide</span></p>
+      <article class="tile" data-area="fg" style="--i:5">
+  <div class="tile-art"><svg class="art-frames" viewBox="0 0 240 150" aria-hidden="true" focusable="false"><rect class="i-paper" x="78" y="8" width="84" height="134" rx="10"/><rect class="fb i-ink" style="--d:0;--x:-70px;--y:-4px;--r:-12deg" x="88" y="20" width="40" height="8" rx="2"/><rect class="fb i-fill" style="--d:1;--x:64px;--y:-16px;--r:9deg" x="88" y="36" width="64" height="26" rx="4" stroke="var(--line-strong)"/><rect class="fb i-fill" style="--d:2;--x:-66px;--y:20px;--r:-7deg" x="88" y="68" width="64" height="26" rx="4" stroke="var(--line-strong)"/><rect class="fb i-faint" style="--d:3;--x:60px;--y:28px;--r:14deg" x="88" y="100" width="64" height="12" rx="3"/><rect class="fb i-acc" style="--d:4;--x:-34px;--y:14px;--r:-18deg" x="88" y="118" width="64" height="14" rx="7"/><g class="fm"><path class="i-astroke" d="M170 28v8M167 28h6M167 36h6" stroke-width="1.2"/><path class="i-astroke" d="M170 62v6M167 62h6M167 68h6" stroke-width="1.2"/><path class="i-astroke" d="M170 94v6M167 94h6M167 100h6" stroke-width="1.2"/><path class="i-astroke" d="M170 112v6M167 112h6M167 118h6" stroke-width="1.2"/><path class="i-astroke" d="M83 50h5M83 47v6" stroke-width="1.2"/></g></svg></div>
+  <div class="tile-body">
+    <p class="tile-meta"><span>Beginner to intermediate</span><span>Figma</span></p>
+    <h3 class="tile-title"><a class="tile-link" href="figma-interface-design.html">Interface Design in Figma</a></h3>
+    <p class="tile-desc">Frames, auto layout, components, styles, and prototyping a simple app screen flow.</p>
+    <p class="tile-foot"><span class="price" data-price="figma-interface-design">$35</span><span class="tile-go" aria-hidden="true">View guide &rarr;</span></p>
   </div>
+  <span class="tile-glow" aria-hidden="true"><span class="glow-dot"></span></span>
+  <span class="tile-edge" aria-hidden="true"><span class="glow-dot"></span></span>
 </article>
-      <article class="card reveal" style="--i:0">
-  <div class="card-art" aria-hidden="true"><svg viewBox="0 0 240 110" focusable="false"><rect class="s-paper" x="0.5" y="0.5" width="239" height="109" rx="4"/><circle class="s-soft" cx="176" cy="66" r="30"/><rect class="s-accent-soft" x="40" y="22" width="56" height="56" rx="6"/><path class="s-stroke-ink" d="M22 92 C 60 4, 140 120, 218 22" stroke-width="2.5"/><path class="s-astroke" d="M22 92 L60 4 M218 22 L140 120" stroke-width="1.2"/><circle class="s-accent" cx="60" cy="4" r="4"/><circle class="s-accent" cx="140" cy="106" r="4"/><rect class="s-ink" x="18" y="88" width="8" height="8"/><rect class="s-paper" x="214" y="18" width="8" height="8" stroke-width="2"/></svg></div>
-  <div class="card-body">
-    <p class="card-meta"><span class="tag">Beginner</span><span>Inkscape</span></p>
-    <h3 class="card-title"><a class="card-link" href="inkscape-vector-illustration.html">Vector Illustration in Inkscape</a></h3>
-    <p class="card-desc">Shapes, paths, the pen tool, text, and exporting for print and web.</p>
-    <p class="card-foot"><span class="price" data-price="inkscape-vector-illustration">$27</span><span class="card-cta" aria-hidden="true">View guide</span></p>
+      <article class="tile" data-area="dc" style="--i:6">
+  <div class="tile-art"><svg class="art-docs" viewBox="0 0 240 150" aria-hidden="true" focusable="false"><rect class="i-paper" x="64" y="8" width="112" height="134" rx="4"/><rect class="dl i-acc" style="--d:0;--x:-44px;--y:-4px;--s:1.5" x="76" y="20" width="56" height="7" rx="2"/><rect class="dl i-faint" style="--d:1;--x:38px;--y:3px;--s:0.6" x="76" y="36" width="88" height="4" rx="2"/><rect class="dl i-faint" style="--d:2;--x:-44px;--y:1px;--s:1.3" x="76" y="44" width="84" height="4" rx="2"/><rect class="dl i-faint" style="--d:3;--x:38px;--y:-1px;--s:1.5" x="76" y="52" width="88" height="4" rx="2"/><rect class="dl i-faint" style="--d:4;--x:-44px;--y:-3px;--s:0.6" x="76" y="60" width="52" height="4" rx="2"/><rect class="dl i-ink" style="--d:5;--x:38px;--y:4px;--s:1.3" x="76" y="74" width="40" height="5" rx="2"/><rect class="dl i-faint" style="--d:6;--x:-44px;--y:2px;--s:1.5" x="76" y="86" width="88" height="4" rx="2"/><rect class="dl i-faint" style="--d:7;--x:38px;--y:0px;--s:0.6" x="76" y="94" width="80" height="4" rx="2"/><rect class="dl i-faint" style="--d:8;--x:-44px;--y:-2px;--s:1.3" x="76" y="102" width="86" height="4" rx="2"/><rect class="dl i-faint" style="--d:9;--x:38px;--y:-4px;--s:1.5" x="76" y="110" width="60" height="4" rx="2"/><rect class="dl i-faint" style="--d:10;--x:-44px;--y:3px;--s:0.6" x="76" y="124" width="88" height="4" rx="2"/><rect class="dl i-faint" style="--d:11;--x:38px;--y:1px;--s:1.3" x="76" y="132" width="40" height="4" rx="2"/></svg></div>
+  <div class="tile-body">
+    <p class="tile-meta"><span>Beginner</span><span>Microsoft Word or Google Docs</span></p>
+    <h3 class="tile-title"><a class="tile-link" href="professional-document-formatting.html">Professional Document Formatting</a></h3>
+    <p class="tile-desc">Styles, headings, automatic tables of contents, page layout, and reusable templates in Word and Google Docs.</p>
+    <p class="tile-foot"><span class="price" data-price="document-formatting">$22</span><span class="tile-go" aria-hidden="true">View guide &rarr;</span></p>
   </div>
+  <span class="tile-glow" aria-hidden="true"><span class="glow-dot"></span></span>
+  <span class="tile-edge" aria-hidden="true"><span class="glow-dot"></span></span>
 </article>
-      <article class="card reveal card-wide" style="--i:1">
-  <div class="card-art" aria-hidden="true"><svg viewBox="0 0 240 110" focusable="false"><rect class="s-paper" x="0.5" y="0.5" width="239" height="109" rx="4"/><rect class="s-ink" x="22" y="19" width="44" height="36" rx="7"/><rect class="s-bg" x="22" y="14" width="44" height="34" rx="7"/><rect class="s-line" x="32" y="28" width="24" height="5" rx="2"/><rect class="s-ink" x="74" y="19" width="44" height="36" rx="7"/><rect class="s-bg" x="74" y="14" width="44" height="34" rx="7"/><rect class="s-line" x="84" y="28" width="24" height="5" rx="2"/><rect class="s-ink" x="126" y="19" width="44" height="36" rx="7"/><rect class="s-bg" x="126" y="14" width="44" height="34" rx="7"/><rect class="s-line" x="136" y="28" width="24" height="5" rx="2"/><rect class="s-ink" x="178" y="19" width="44" height="36" rx="7"/><rect class="s-bg" x="178" y="14" width="44" height="34" rx="7"/><rect class="s-line" x="188" y="28" width="24" height="5" rx="2"/><rect class="s-ink" x="48" y="65" width="44" height="36" rx="7"/><rect class="s-bg" x="48" y="60" width="44" height="34" rx="7"/><rect class="s-line" x="58" y="74" width="24" height="5" rx="2"/><rect class="s-ink" x="100" y="65" width="44" height="36" rx="7"/><rect class="s-bg" x="100" y="60" width="44" height="34" rx="7"/><rect class="s-line" x="110" y="74" width="24" height="5" rx="2"/><rect class="s-accent" x="152" y="65" width="44" height="36" rx="7"/><rect class="s-accent" x="152" y="60" width="44" height="34" rx="7"/><rect class="s-ink" x="162" y="74" width="24" height="5" rx="2"/></svg></div>
-  <div class="card-body">
-    <p class="card-meta"><span class="tag">Beginner to intermediate</span><span>Each guide uses its own program</span></p>
-    <h3 class="card-title"><a class="card-link" href="complete-software-skills-library.html">Complete Software Skills Library</a></h3>
-    <p class="card-desc">All seven guides together, each with its PDF, practice files, and worked solutions.</p>
-    <p class="card-foot"><span class="price" data-price="complete-library">$149</span><span class="card-cta" aria-hidden="true">View guide</span></p>
+      <article class="tile" data-area="in" style="--i:7">
+  <div class="tile-art"><svg class="art-vector" viewBox="0 0 240 150" aria-hidden="true" focusable="false"><circle class="i-fill" cx="176" cy="96" r="34"/><rect class="i-fill" x="40" y="22" width="56" height="56" rx="6" opacity="0.8"/><path class="vc vc-a" d="M30 112 C 70 43 170 111 210 42" fill="none" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"/><path class="vc vc-b" d="M30 112 C 44 33 149 93 210 42" fill="none" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"/><path class="vc vc-c" d="M30 112 C 91 61 196 121 210 42" fill="none" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round"/><g class="vh vh-1"><line x1="30" y1="112" x2="70" y2="43" stroke="var(--accent)" stroke-width="1.2"/><circle cx="70" cy="43" r="4.5" fill="var(--accent)"/></g><g class="vh vh-2"><line x1="210" y1="42" x2="170" y2="111" stroke="var(--accent)" stroke-width="1.2"/><circle cx="170" cy="111" r="4.5" fill="var(--accent)"/></g><rect x="25.5" y="107.5" width="9" height="9" fill="var(--text)"/><rect x="205.5" y="37.5" width="9" height="9" fill="var(--panel)" stroke="var(--text)" stroke-width="1.5"/></svg></div>
+  <div class="tile-body">
+    <p class="tile-meta"><span>Beginner</span><span>Inkscape</span></p>
+    <h3 class="tile-title"><a class="tile-link" href="inkscape-vector-illustration.html">Vector Illustration in Inkscape</a></h3>
+    <p class="tile-desc">Shapes, paths, the pen tool, text, and exporting for print and web.</p>
+    <p class="tile-foot"><span class="price" data-price="inkscape-vector-illustration">$27</span><span class="tile-go" aria-hidden="true">View guide &rarr;</span></p>
   </div>
+  <span class="tile-glow" aria-hidden="true"><span class="glow-dot"></span></span>
+  <span class="tile-edge" aria-hidden="true"><span class="glow-dot"></span></span>
 </article>
     </div>
   </div>
 </section>
 
 <section class="section" id="included" aria-labelledby="included-title">
-  <div class="container">
-    <div class="section-head">
-      <p class="eyebrow">In every guide</p>
-      <h2 id="included-title">What you get in each .zip</h2>
-      <p>Every guide is built the same way, so once you have worked through one, you know how the others work.</p>
+  <div class="container split-2">
+    <div class="sec-head fade">
+      <div><p class="label"><span class="label-num">02</span><span class="label-sep">/</span>In every guide</p><h2 id="included-title">What's inside each .zip</h2></div>
+      <div class="sec-head-text"><p>Every guide is built the same way. The PDF explains each skill and breaks it into numbered steps with annotated illustrations. Then you practice in an exercise and check your work against a worked solution that goes through every step.</p><p style="margin-top:16px">The practice files mean you never start from a blank screen, and never practice on your own work.</p></div>
     </div>
-    <div class="feature-grid">
-      <div class="feature reveal" style="--i:0"><svg viewBox="0 0 56 56" aria-hidden="true" focusable="false"><path class="s-bg" d="M12 4h22l12 12v36H12z"/><path class="s-soft" d="M34 4v12h12"/><rect class="s-accent" x="18" y="22" width="16" height="4" rx="2"/><rect class="s-line" x="18" y="30" width="22" height="3" rx="1.5"/><rect class="s-line" x="18" y="36" width="20" height="3" rx="1.5"/><rect class="s-line" x="18" y="42" width="14" height="3" rx="1.5"/></svg><h3>The PDF guide</h3><p>Each skill is explained, then broken into numbered steps with annotated illustrations that show where to look and what to do.</p></div>
-      <div class="feature reveal" style="--i:1"><svg viewBox="0 0 56 56" aria-hidden="true" focusable="false"><path class="s-soft" d="M6 14h16l4 5h24v29H6z"/><path class="s-bg" d="M6 22h44v26H6z"/><rect class="s-accent" x="13" y="29" width="10" height="10" rx="2"/><rect class="s-line" x="27" y="30" width="16" height="3" rx="1.5"/><rect class="s-line" x="27" y="36" width="11" height="3" rx="1.5"/></svg><h3>Practice files</h3><p>The starter documents, spreadsheets, footage or project files the exercises use, so you never start from a blank screen or practice on your own work.</p></div>
-      <div class="feature reveal" style="--i:2"><svg viewBox="0 0 56 56" aria-hidden="true" focusable="false"><rect class="s-bg" x="8" y="6" width="40" height="44" rx="5"/><circle class="s-ink" cx="17" cy="18" r="4"/><rect class="s-line" x="25" y="16" width="16" height="4" rx="2"/><circle class="s-ink" cx="17" cy="30" r="4"/><rect class="s-line" x="25" y="28" width="13" height="4" rx="2"/><circle class="s-accent" cx="17" cy="42" r="5"/><path d="M14.5 42l2 2 3.5-4" fill="none" stroke="#1e2023" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect class="s-line" x="25" y="40" width="16" height="4" rx="2"/></svg><h3>Worked solutions</h3><p>Every exercise has a worked solution that goes through each step, not only the final answer, so you can check your work yourself.</p></div>
-    </div>
+    <div class="fade"><div class="panel tree-panel">
+  <p class="tree-title">.zip download</p>
+  <ul class="tree">
+    <li><span class="tree-name">PDF guide</span><span class="tree-desc">Each skill explained, then broken into numbered steps.</span>
+      <ul>
+        <li><span class="tree-name">Step-by-step instructions</span></li>
+        <li><span class="tree-name">Annotated illustrations</span></li>
+        <li><span class="tree-name">Practice exercises</span></li>
+        <li><span class="tree-name">Worked solutions</span><span class="tree-desc">Every step, not only the final answer.</span></li>
+      </ul>
+    </li>
+    <li><span class="tree-name">Practice files</span><span class="tree-desc">The starter documents, spreadsheets, datasets, footage or project files the exercises use.</span></li>
+  </ul>
+  <p class="tree-note">Software is not included. Each guide's page names the program it uses, which you obtain separately from its maker.</p>
+</div></div>
   </div>
 </section>
 
-<section class="section section-alt" id="how-it-works" aria-labelledby="how-title">
+<section class="section" id="how-it-works" aria-labelledby="how-title">
   <div class="container">
-    <div class="section-head">
-      <p class="eyebrow">Purchase and delivery</p>
-      <h2 id="how-title">How buying a guide works</h2>
+    <div class="sec-head">
+      <div><p class="label"><span class="label-num">03</span><span class="label-sep">/</span>Purchase and delivery</p><h2 id="how-title">How buying a guide works</h2></div>
       <p>Everything is digital. There is nothing to ship and nothing to wait for.</p>
     </div>
-    <ol class="steps">
-      <li class="reveal" style="--i:0"><h3>Choose a guide</h3><p>Each guide's page lists what it covers, its level, the software it uses, what is in the .zip, and its price.</p></li>
-      <li class="reveal" style="--i:1"><h3>Pay at checkout</h3><p>Payment is handled by a third-party payment provider. Applicable taxes are calculated at checkout.</p></li>
-      <li class="reveal" style="--i:2"><h3>Download the .zip</h3><p>A download link is emailed to you immediately after payment and shown on the order confirmation screen.</p></li>
-      <li class="reveal" style="--i:3"><h3>Work through it</h3><p>Open the PDF, open the practice files in your own copy of the software, and go at your own pace.</p></li>
+    <ol class="timeline fade">
+      <li class="tl-item"><span class="tl-step" aria-hidden="true">01</span><h3>Choose a guide</h3><p>Each guide's page lists what it covers, its level, the software it uses, what is in the .zip, and its price.</p></li>
+      <li class="tl-item"><span class="tl-step" aria-hidden="true">02</span><h3>Pay at checkout</h3><p>Payment is handled by a third-party payment provider. Applicable taxes are calculated at checkout.</p></li>
+      <li class="tl-item"><span class="tl-step" aria-hidden="true">03</span><h3>Download the .zip</h3><p>A download link is emailed to you immediately after payment and shown on the order confirmation screen.</p></li>
+      <li class="tl-item"><span class="tl-step" aria-hidden="true">04</span><h3>Work through it</h3><p>Open the PDF, open the practice files in your own copy of the software, and go at your own pace.</p></li>
     </ol>
-    <p class="small-note" style="margin-top:28px">Every purchase has a <a href="refund-policy.html">14-day refund policy</a>, no reason needed. Read the <a href="delivery-policy.html">Delivery Policy</a> for what to do if a link doesn't arrive.</p>
+    <p class="after-note">Every purchase has a <a href="refund-policy.html">14-day refund policy</a>, no reason needed. The <a href="delivery-policy.html">Delivery Policy</a> explains what to do if a link doesn't arrive.</p>
   </div>
 </section>
 
 <section class="section" id="self-study" aria-labelledby="self-study-title">
-  <div class="container">
-    <div class="notice reveal">
-      <div>
-        <p class="eyebrow">Plainly stated</p>
-        <h2 id="self-study-title">These are self-study materials</h2>
-      </div>
-      <div>
-        <ul class="notice-list" aria-label="Not included"><li>video</li><li>live instruction</li><li>tutoring</li><li>feedback on your work</li></ul>
-        <p>Shortcut Press guides are written for working through on your own. There is no video, no live instruction, no tutoring, and no feedback on your work. Everything you get is in the .zip: the PDF guide and the practice files.</p>
-        <p>The software itself is not included. Each guide's page tells you which program it uses, and you obtain that program separately from its maker.</p>
-      </div>
+  <div class="container split-2">
+    <div class="sec-head fade">
+      <div><p class="label"><span class="label-num">04</span><span class="label-sep">/</span>Plainly stated</p><h2 id="self-study-title">Self-study material, nothing more</h2></div>
+      <div class="sec-head-text"><p>Shortcut Press guides are written for working through on your own. There is no video, no live instruction, no tutoring, and no feedback on your work. Everything you get is in the .zip.</p></div>
+    </div>
+    <div class="fade">
+      <table class="spec-table">
+        <caption class="visually-hidden">What a Shortcut Press guide includes and does not include</caption>
+        <thead><tr><th scope="col">Item</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">PDF guide with annotated illustrations</th><td><span class="status status-yes">Included</span></td></tr>
+          <tr><th scope="row">Practice files</th><td><span class="status status-yes">Included</span></td></tr>
+          <tr><th scope="row">Exercises with worked solutions</th><td><span class="status status-yes">Included</span></td></tr>
+          <tr><th scope="row">Video</th><td><span class="status status-no">Not included</span></td></tr>
+          <tr><th scope="row">Live instruction</th><td><span class="status status-no">Not included</span></td></tr>
+          <tr><th scope="row">Tutoring</th><td><span class="status status-no">Not included</span></td></tr>
+          <tr><th scope="row">Feedback on your work</th><td><span class="status status-no">Not included</span></td></tr>
+          <tr><th scope="row">The software itself<span class="spec-note">Obtained separately from its maker</span></th><td><span class="status status-no">Not included</span></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
 
-<section class="section section-alt" id="faq-preview" aria-labelledby="faq-preview-title">
-  <div class="container">
-    <div class="section-head">
-      <p class="eyebrow">Questions</p>
-      <h2 id="faq-preview-title">Before you buy</h2>
+<section class="section" id="faq-preview" aria-labelledby="faq-preview-title">
+  <div class="container split-2">
+    <div class="sec-head">
+      <div><p class="label"><span class="label-num">05</span><span class="label-sep">/</span>Questions</p><h2 id="faq-preview-title">Before you buy</h2></div>
+      <div class="sec-head-text"><p>The questions people ask most. Every other answer is on the FAQ page.</p></div>
     </div>
-    <div class="faq-list">
-      <details class="faq-item"><summary>How do I receive my guide?</summary><div class="faq-answer"><p>Every guide is a digital download. Right after payment, a download link is sent to the email address you used at checkout, and the same link is shown on the order confirmation screen. The download is a single .zip file. Nothing is shipped. See the <a href="delivery-policy.html">Delivery Policy</a> for details.</p></div></details>
-      <details class="faq-item"><summary>Is the software included?</summary><div class="faq-answer"><p>No. The guides do not include any software. Each guide's page has a "Software required" section that names the program the guide uses. You need your own copy or access, obtained separately from the software's maker, and your use of it is governed by that maker's own terms.</p></div></details>
-      <details class="faq-item"><summary>Is there video or tutoring?</summary><div class="faq-answer"><p>No. The guides are self-study material. There is no video, no live instruction, no tutoring, and no feedback on your work. You read each step, carry it out in the software, then do the exercises and check your work against the worked solutions in the guide.</p></div></details>
-      <details class="faq-item"><summary>What is the refund policy?</summary><div class="faq-answer"><p>You can get a full refund on any purchase if you ask within 14 days. No reason is needed, and nothing needs to be returned. <a href="contact.html">Contact us through the Contact page</a> with your order number. Refunds go to your original payment method and are issued within 5 business days of your request; your payment provider's processing time may add a few days. See the <a href="refund-policy.html">Refund Policy</a>.</p></div></details>
+    <div class="fade">
+      <div class="faq-list"><details class="faq" id="q-how-do-i-receive-my-guide"><summary>How do I receive my guide?</summary><div class="faq-a"><p>Every guide is a digital download. Right after payment, a download link is sent to the email address you used at checkout, and the same link is shown on the order confirmation screen. The download is a single .zip file. Nothing is shipped. See the <a href="delivery-policy.html">Delivery Policy</a> for details.</p></div></details><details class="faq" id="q-is-the-software-included"><summary>Is the software included?</summary><div class="faq-a"><p>No. The guides do not include any software. Each guide's page has a "Software required" section that names the program the guide uses. You need your own copy or access, obtained separately from the software's maker, and your use of it is governed by that maker's own terms.</p></div></details><details class="faq" id="q-is-there-video-or-tutoring"><summary>Is there video or tutoring?</summary><div class="faq-a"><p>No. The guides are self-study material. There is no video, no live instruction, no tutoring, and no feedback on your work. You read each step, carry it out in the software, then do the exercises and check your work against the worked solutions in the guide.</p></div></details><details class="faq" id="q-what-is-the-refund-policy"><summary>What is the refund policy?</summary><div class="faq-a"><p>You can get a full refund on any purchase if you ask within 14 days. No reason is needed, and nothing needs to be returned. <a href="contact.html">Contact us through the Contact page</a> with your order number. Refunds go to your original payment method and are issued within 5 business days of your request; your payment provider's processing time may add a few days. See the <a href="refund-policy.html">Refund Policy</a>.</p></div></details></div>
+      <a class="more-link" href="faq.html">Read all frequently asked questions &rarr;</a>
     </div>
-    <p style="margin-top:28px"><a class="text-link" href="faq.html">Read all frequently asked questions</a></p>
   </div>
 </section>
 
@@ -208,21 +243,22 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true" focusable="false"><rect class="bm-side" x="1" y="3" width="32" height="30" rx="8"/><rect class="bm-face" x="3.5" y="1.5" width="27" height="25" rx="6"/><text class="bm-letter" x="17" y="18.5" text-anchor="middle">S/P</text><rect class="bm-dot" x="9" y="21" width="16" height="2.4" rx="1.2"/></svg><span>Shortcut Press</span></a>
-        <p>Self-paced software skills guides, delivered as digital downloads: a PDF guide and practice files in every .zip.</p>
+      <div class="footer-about">
+        <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">S/P</span><span>Shortcut Press</span></a>
+        <p style="margin-top:16px">Self-paced software skills guides, delivered as digital downloads: a PDF guide and practice files in every .zip.</p>
         <p class="footer-email" data-email-block hidden><span data-email-link></span></p>
+        <button type="button" class="footer-keys js-only" data-open-shortcuts><kbd>?</kbd> Keyboard shortcuts</button>
       </div>
       <nav aria-labelledby="footer-guides">
-        <h2 class="footer-heading" id="footer-guides">Guides</h2>
+        <h2 class="footer-h" id="footer-guides">Guides</h2>
         <ul class="footer-links"><li><a href="spreadsheet-formulas-functions.html">Spreadsheet Formulas &amp; Functions</a></li><li><a href="data-analysis-pivot-tables-charts.html">Data Analysis with Pivot Tables &amp; Charts</a></li><li><a href="professional-document-formatting.html">Professional Document Formatting</a></li><li><a href="blender-3d-modeling-fundamentals.html">3D Modeling Fundamentals in Blender</a></li><li><a href="davinci-resolve-video-editing.html">Video Editing in DaVinci Resolve</a></li><li><a href="figma-interface-design.html">Interface Design in Figma</a></li><li><a href="inkscape-vector-illustration.html">Vector Illustration in Inkscape</a></li><li><a href="complete-software-skills-library.html">Complete Software Skills Library</a></li></ul>
       </nav>
       <nav aria-labelledby="footer-company">
-        <h2 class="footer-heading" id="footer-company">Shortcut Press</h2>
+        <h2 class="footer-h" id="footer-company">Shortcut Press</h2>
         <ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul>
       </nav>
       <nav aria-labelledby="footer-policies">
-        <h2 class="footer-heading" id="footer-policies">Policies</h2>
+        <h2 class="footer-h" id="footer-policies">Policies</h2>
         <ul class="footer-links"><li><a href="terms-of-service.html">Terms</a></li><li><a href="privacy-policy.html">Privacy</a></li><li><a href="refund-policy.html">Refunds</a></li><li><a href="delivery-policy.html">Delivery</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="contact.html">Contact</a></li></ul>
       </nav>
     </div>
@@ -232,5 +268,34 @@
     </div>
   </div>
 </footer>
+<dialog class="dlg palette" id="palette" aria-label="Search the site">
+  <div class="pal-input-row">
+    <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.75" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <label class="visually-hidden" for="pal-input">Search guides and pages</label>
+    <input class="pal-input" id="pal-input" type="text" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search guides, pages and questions">
+    <kbd>Esc</kbd>
+  </div>
+  <ul class="pal-list" id="pal-list" role="listbox" aria-label="Results"></ul>
+  <p class="pal-empty" hidden>No matches. Try a program name, a topic, or a word like “refund”.</p>
+  <p class="pal-foot"><span><kbd>&uarr;</kbd><kbd>&darr;</kbd> to move</span><span><kbd>Enter</kbd> to open</span><span><kbd>Esc</kbd> to close</span></p>
+</dialog>
+<dialog class="dlg" id="shortcuts" aria-labelledby="shortcuts-title">
+  <div class="dlg-head"><h2 id="shortcuts-title">Keyboard shortcuts</h2><button type="button" class="icon-btn" data-close-dialog aria-label="Close keyboard shortcuts"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+  <div class="dlg-scroll">
+    <dl class="keys-list">
+      <div><dt><kbd data-mod-key>Ctrl</kbd> <kbd>K</kbd></dt><dd>Open search</dd></div>
+      <div><dt><kbd>/</kbd></dt><dd>Open search <span class="tag-single">single key</span></dd></div>
+      <div><dt><kbd>?</kbd></dt><dd>Show this list <span class="tag-single">single key</span></dd></div>
+      <div><dt><kbd>T</kbd></dt><dd>Switch between light and dark theme <span class="tag-single">single key</span></dd></div>
+      <div><dt><kbd>&uarr;</kbd> <kbd>&darr;</kbd></dt><dd>Move through search results</dd></div>
+      <div><dt><kbd>Enter</kbd></dt><dd>Open the selected result</dd></div>
+      <div><dt><kbd>Esc</kbd></dt><dd>Close search or this panel</dd></div>
+    </dl>
+    <div class="switch-row">
+      <div><p class="switch-label" id="sk-label">Single-key shortcuts</p><p class="switch-desc" id="sk-desc">Turn off <kbd>/</kbd>, <kbd>?</kbd> and <kbd>T</kbd> if you use speech input or press keys by accident. <kbd data-mod-key>Ctrl</kbd> <kbd>K</kbd> and the footer link keep working.</p></div>
+      <button type="button" class="switch" role="switch" aria-checked="true" aria-labelledby="sk-label" aria-describedby="sk-desc" data-single-key-switch><span class="switch-on"></span><span class="switch-thumb"></span></button>
+    </div>
+  </div>
+</dialog>
 </body>
 </html>
