@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>(function(){var h=location.hostname,p=location.pathname.split("/");if(/\.github\.io$/.test(h)&&p.length>2&&p[1]){var b=document.createElement("base");b.href="/"+p[1]+"/";document.head.appendChild(b);}})();</script>
+<script>(function(){if(location.protocol==="file:")return;var p=location.pathname.split("/"),b=document.createElement("base");b.href=/\.github\.io$/.test(location.hostname)&&p.length>2&&p[1]?"/"+p[1]+"/":"/";document.head.appendChild(b);})();</script>
 <title>Page not found — Shortcut Press</title>
 <meta name="description" content="The page you were looking for doesn't exist on the Shortcut Press website.">
 <meta name="robots" content="noindex">
