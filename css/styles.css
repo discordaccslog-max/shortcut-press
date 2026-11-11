@@ -3211,3 +3211,71 @@ html:not(.js) .js-only {
     display: none;
   }
 }
+
+/* ================= Terms agreement before checkout ================= */
+
+.agree {
+  margin: 0 0 var(--s-4);
+  padding: var(--s-3) var(--s-4);
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-2);
+}
+
+.agree-label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  font-size: var(--t-14);
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.agree-box {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--accent-text);
+  cursor: pointer;
+}
+
+.agree-box:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.agree-label a {
+  color: var(--text);
+  text-decoration-color: var(--accent-text);
+}
+
+.agree-hint {
+  margin: var(--s-2) 0 0 calc(18px + var(--s-3));
+  font-size: var(--t-12);
+  color: var(--muted);
+}
+
+.btn-buy.is-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+@media (hover: hover) {
+  .btn-buy.is-disabled:hover {
+    transform: none;
+  }
+}
+
+.p-bar-hint {
+  margin: 2px 0 0;
+  font-size: var(--t-12);
+  color: var(--muted);
+}
+
+@media (min-width: 980px) {
+  .p-bar-hint {
+    display: none;
+  }
+}

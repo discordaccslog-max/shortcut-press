@@ -70,6 +70,8 @@
     }
   });
 
+  var buyButtons = [];
+
   each("[data-buy]", function (slot) {
     var product = catalog[slot.getAttribute("data-buy")];
     if (!product) return;
@@ -78,9 +80,53 @@
     var button = document.createElement("a");
     button.className = "btn btn-buy";
     button.href = url;
+    button.setAttribute("data-href", url);
     button.textContent = "Buy now · " + formatPrice(product.price);
     slot.appendChild(button);
+    buyButtons.push(button);
   });
+
+  /* Terms agreement: shown only when buy buttons exist; buttons stay disabled until it is ticked */
+  var agree = document.querySelector("[data-agree]");
+  var agreeBox = agree ? agree.querySelector("[data-agree-box]") : null;
+  var agreeHint = agree ? agree.querySelector("[data-agree-hint]") : null;
+  var barHint = document.querySelector("[data-agree-bar-hint]");
+
+  function syncBuyButtons() {
+    var ok = !!(agreeBox && agreeBox.checked);
+    buyButtons.forEach(function (button) {
+      if (ok) {
+        button.href = button.getAttribute("data-href");
+        button.removeAttribute("aria-disabled");
+        button.removeAttribute("role");
+        button.removeAttribute("aria-describedby");
+        button.classList.remove("is-disabled");
+      } else {
+        button.removeAttribute("href");
+        button.setAttribute("role", "link");
+        button.setAttribute("aria-disabled", "true");
+        button.setAttribute("aria-describedby", "agree-hint");
+        button.classList.add("is-disabled");
+      }
+    });
+    if (agreeHint) agreeHint.hidden = ok;
+    if (barHint) barHint.hidden = ok;
+  }
+
+  if (buyButtons.length && agree && agreeBox) {
+    agree.hidden = false;
+    agreeBox.checked = false;
+    agreeBox.addEventListener("change", syncBuyButtons);
+    buyButtons.forEach(function (button) {
+      button.addEventListener("click", function (e) {
+        if (agreeBox.checked) return;
+        e.preventDefault();
+        agreeBox.focus();
+        agreeBox.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" });
+      });
+    });
+    syncBuyButtons();
+  }
 
   each("[data-year]", function (el) {
     el.textContent = String(new Date().getFullYear());

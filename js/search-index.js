@@ -127,9 +127,9 @@ window.SHORTCUT_INDEX = [
   },
   {
     "kind": "FAQ",
-    "title": "How do I receive my guide?",
-    "url": "faq.html#q-how-do-i-receive-my-guide",
-    "keywords": "Delivery and downloads  Every guide is a digital download. Right after payment, a download link is sent to the email address you used at checkout, and the same link is shown on the order confirmation screen. The download is a single .zip file."
+    "title": "What exactly do I receive after purchase, and how?",
+    "url": "faq.html#q-what-exactly-do-i-receive-after-purchase-and-how",
+    "keywords": "Delivery and downloads  You receive one .zip file. For a single guide, it contains the PDF guide and the practice files its exercises use. For the Complete Software Skills Library, it contains all seven guides, each in its own folder. No softw"
   },
   {
     "kind": "FAQ",
