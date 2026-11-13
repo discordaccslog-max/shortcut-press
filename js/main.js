@@ -60,6 +60,22 @@
     });
   }
 
+  /* ---------- Optional legal details (Consumer Rights page) ---------- */
+
+  var legalLines = [clean(config.legalName), clean(config.businessAddress)].filter(Boolean);
+  if (legalLines.length) {
+    each("[data-legal-lines]", function (el) {
+      el.textContent = "";
+      legalLines.forEach(function (line, i) {
+        if (i) el.appendChild(document.createElement("br"));
+        el.appendChild(document.createTextNode(line));
+      });
+    });
+    each("[data-legal-block]", function (block) {
+      block.hidden = false;
+    });
+  }
+
   /* ---------- Prices and buy buttons ---------- */
 
   each("[data-price]", function (el) {
@@ -283,6 +299,8 @@
   var active = 0;
 
   var actions = [
+    { kind: "Action", title: "Activate a license", keywords: "license code key add unlock activate redeem", run: function () { if (window.SPDock) window.SPDock.open(true); } },
+    { kind: "Action", title: "Open my guides", keywords: "my guides library dock progress resume", run: function () { if (window.SPDock) window.SPDock.open(false); } },
     { kind: "Action", title: "Switch light / dark theme", keywords: "theme dark light mode appearance", run: toggleTheme },
     { kind: "Action", title: "Show keyboard shortcuts", keywords: "keys shortcuts help accessibility single-key", run: openShortcuts }
   ];
@@ -479,6 +497,7 @@
   }
 
   document.addEventListener("keydown", function (e) {
+    if (e.target && e.target.closest && e.target.closest("[data-shortcut-capture]")) return;
     if ((e.ctrlKey || e.metaKey) && !e.altKey && !e.shiftKey && (e.key === "k" || e.key === "K")) {
       e.preventDefault();
       if (palette && palette.isOpen()) palette.close();

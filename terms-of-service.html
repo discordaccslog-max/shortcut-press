@@ -2,28 +2,35 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script>(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("sp-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("sp-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);var s=JSON.parse(localStorage.getItem("sp-data-v1")||"null");if(s&&s.settings&&s.settings.largeUI)d.setAttribute("data-ui","large");}catch(e){}})();</script>
 <title>Terms of Service — Shortcut Press</title>
-<meta name="description" content="Shortcut Press terms of service: the personal-use license for the guides, what it doesn't allow, group licensing, payment, and limits of liability.">
-<link rel="canonical" href="https://discordaccslog-max.github.io/shortcut-press/terms-of-service.html">
+<meta name="description" content="Shortcut Press terms of service: browser-based guides unlocked with a license, the personal-use license, license codes, backups, payment, delivery, refunds and limits of liability.">
+<link rel="canonical" href="https://www.shortcutpress.online/terms-of-service.html">
 <meta property="og:site_name" content="Shortcut Press">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Terms of Service — Shortcut Press">
-<meta property="og:description" content="Shortcut Press terms of service: the personal-use license for the guides, what it doesn't allow, group licensing, payment, and limits of liability.">
-<meta property="og:url" content="https://discordaccslog-max.github.io/shortcut-press/terms-of-service.html">
+<meta property="og:description" content="Shortcut Press terms of service: browser-based guides unlocked with a license, the personal-use license, license codes, backups, payment, delivery, refunds and limits of liability.">
+<meta property="og:url" content="https://www.shortcutpress.online/terms-of-service.html">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f4f4f1" media="(prefers-color-scheme: light)">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&amp;family=Geist:wght@400..600&amp;family=Geist+Mono:wght@400..500&amp;display=swap">
 <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
 <script src="js/site-config.js" defer></script>
 <script src="js/products.js" defer></script>
+<script src="js/license.js" defer></script>
+<script src="js/store.js" defer></script>
+<script src="js/guides-index.js" defer></script>
+<script src="js/dock.js" defer></script>
 <script src="js/search-index.js" defer></script>
 <script src="js/main.js" defer></script>
 </head>
@@ -41,18 +48,14 @@
   </div>
 </header>
 <main id="main">
-
 <div class="container doc">
-  <nav class="doc-toc" aria-label="On this page">
-    <p class="toc-title">On this page</p>
-    <ol class="toc-list"><li><a href="#acceptance">Acceptance of these terms</a></li><li><a href="#agreement">Agreeing before checkout</a></li><li><a href="#products">What Shortcut Press sells</a></li><li><a href="#license">Your personal-use license</a></li><li><a href="#not-allowed">What the license doesn't allow</a></li><li><a href="#groups">Teachers, schools and companies</a></li><li><a href="#software">Software is not included</a></li><li><a href="#payment">Prices, taxes and payment</a></li><li><a href="#delivery">Delivery and refunds</a></li><li><a href="#ownership">Ownership</a></li><li><a href="#warranties">Warranties</a></li><li><a href="#liability">Limitation of liability</a></li><li><a href="#changes">Changes to these terms</a></li><li><a href="#contact">Contact</a></li></ol>
-  </nav>
+  <nav class="doc-toc" aria-label="On this page"><p class="toc-title">On this page</p><ol class="toc-list"><li><a href="#acceptance">Acceptance of these terms</a></li><li><a href="#agreement">Agreeing before checkout</a></li><li><a href="#products">What Shortcut Press sells</a></li><li><a href="#license">Your personal-use license</a></li><li><a href="#license-codes">License codes</a></li><li><a href="#groups">Teachers, schools and companies</a></li><li><a href="#software">Software is not included</a></li><li><a href="#your-data">Your data and backups</a></li><li><a href="#payment">Prices, taxes and payment</a></li><li><a href="#delivery">Delivery and refunds</a></li><li><a href="#ownership">Ownership</a></li><li><a href="#warranties">Warranties</a></li><li><a href="#liability">Limitation of liability</a></li><li><a href="#changes">Changes to these terms</a></li><li><a href="#contact">Contact</a></li></ol></nav>
   <div class="doc-main">
     <header class="doc-head">
       <p class="label"><span class="label-num">Policy</span></p>
       <h1>Terms of Service</h1>
       <p class="lead">The terms that apply to this website and every purchase.</p>
-      <p class="updated">Last updated: <time datetime="2026-11-11">November 11, 2026</time></p>
+      <p class="updated">Last updated: <time datetime="2026-11-13">November 13, 2026</time></p>
     </header>
     <article class="doc-body">
 <section class="fade"><div class="h-wrap h2"><h2 id="acceptance">Acceptance of these terms</h2><a class="anchor" href="#acceptance" aria-label="Link to this section: Acceptance of these terms">#</a></div>
@@ -60,44 +63,35 @@
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="agreement">Agreeing before checkout</h2><a class="anchor" href="#agreement" aria-label="Link to this section: Agreeing before checkout">#</a></div>
-<p>Before you can go to checkout, you must agree to these Terms of Service and the <a href="refund-policy.html">Refund Policy</a>. On each product page, the buy button stays disabled until you tick the box that reads "I agree to the Terms of Service and Refund Policy". Completing a purchase confirms that you agreed to both.</p>
+<p>Before you can go to checkout, you must agree to these Terms of Service and the <a href="refund-policy.html">Refund Policy</a>. On each product page, the buy button stays disabled until you tick the box that reads “I agree to the Terms of Service and Refund Policy”. Completing a purchase confirms that you agreed to both.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="products">What Shortcut Press sells</h2><a class="anchor" href="#products" aria-label="Link to this section: What Shortcut Press sells">#</a></div>
-<p>Shortcut Press sells self-paced digital training materials. Each product is a .zip file containing a PDF guide and practice files. The guides are self-study materials: they include no video, no live instruction, no tutoring, and no feedback on your work.</p>
+<p>Shortcut Press sells self-paced, interactive software skills guides that run in your web browser and are unlocked with a license code. Each guide includes lessons with step-by-step instructions, diagrams, quizzes, exercises with worked solutions, downloadable practice files, a keyboard shortcut trainer and progress tracking. The guides are self-study materials: they include no video lessons, no live instruction, no tutoring and no feedback on your work.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="license">Your personal-use license</h2><a class="anchor" href="#license" aria-label="Link to this section: Your personal-use license">#</a></div>
-<p>When you buy a guide, you receive a personal, non-transferable license to:</p>
-<ul>
-<li>use the guide and its practice files for your own learning;</li>
-<li>keep copies on your own devices; and</li>
-<li>print copies of the guide for your own use.</li>
-</ul>
-<p>Anything you create while working through the exercises is yours.</p>
+<p>When you buy a guide, you receive a personal, non-transferable license to use that guide (or, for the Complete Software Skills Library, all seven guides) and its practice files for your own learning, on any devices you use. Anything you create while working through the exercises is yours.</p>
 
 </section>
-<section class="fade"><div class="h-wrap h2"><h2 id="not-allowed">What the license doesn't allow</h2><a class="anchor" href="#not-allowed" aria-label="Link to this section: What the license doesn't allow">#</a></div>
-<p>You may not:</p>
-<ul>
-<li>resell the guides or practice files, on their own or as part of anything else;</li>
-<li>redistribute them, or give copies to others;</li>
-<li>share them with a class, students, coworkers or a team;</li>
-<li>upload them to file-sharing sites, shared drives open to others, or any public website; or</li>
-<li>claim the guides, illustrations or practice files as your own work.</li>
-</ul>
+<section class="fade"><div class="h-wrap h2"><h2 id="license-codes">License codes</h2><a class="anchor" href="#license-codes" aria-label="Link to this section: License codes">#</a></div>
+<p>Your license code is for you alone. You may not share, publish, sell or transfer it, or post it where others can use it. You may also not resell, redistribute or upload the guides or practice files, share them with a class or with coworkers, or claim them as your own work.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="groups">Teachers, schools and companies</h2><a class="anchor" href="#groups" aria-label="Link to this section: Teachers, schools and companies">#</a></div>
-<p>Teachers, schools and companies who want to use the guides with a group can get in touch through the <a href="contact.html">Contact page</a> about a separate license. A personal purchase does not cover group use.</p>
+<p>Teachers, schools and companies who want to use the guides with a group can ask about a group license through the <a href="contact.html">Contact page</a>. A personal purchase does not cover group use.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="software">Software is not included</h2><a class="anchor" href="#software" aria-label="Link to this section: Software is not included">#</a></div>
-<p>The guides do not include any software. You are responsible for obtaining the software each guide uses, separately from its maker. Your use of any third-party software is governed by that software maker's own terms, not by these terms. All software names mentioned are trademarks of their respective owners. Shortcut Press is not affiliated with or endorsed by any software maker.</p>
+<p>The guides do not include any software. You are responsible for obtaining the software each guide covers, separately from its maker. Your use of that software is governed by its maker's own terms, not by these terms. All software names are trademarks of their respective owners, and Shortcut Press is not affiliated with or endorsed by any software maker.</p>
+
+</section>
+<section class="fade"><div class="h-wrap h2"><h2 id="your-data">Your data and backups</h2><a class="anchor" href="#your-data" aria-label="Link to this section: Your data and backups">#</a></div>
+<p>Your licenses and learning progress are stored only in your own browser. You are responsible for backing up that data using the Export backup feature in My Guides. Shortcut Press can't recover data that was stored only in your browser.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="payment">Prices, taxes and payment</h2><a class="anchor" href="#payment" aria-label="Link to this section: Prices, taxes and payment">#</a></div>
-<p>Prices are shown in US dollars on each product's page. Applicable taxes are calculated at checkout. Payment is handled by a third-party payment provider at checkout, under that provider's own terms. Prices may change from time to time, but a change never affects a purchase you have already made.</p>
+<p>Prices are shown in US dollars on each product page. Payment is handled by a third-party payment provider at checkout, under its own terms, and applicable taxes are shown at checkout. Prices may change from time to time, but a change never affects a purchase you've already made.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="delivery">Delivery and refunds</h2><a class="anchor" href="#delivery" aria-label="Link to this section: Delivery and refunds">#</a></div>
@@ -105,19 +99,19 @@
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="ownership">Ownership</h2><a class="anchor" href="#ownership" aria-label="Link to this section: Ownership">#</a></div>
-<p>All written content, illustrations and practice files in the guides, and all content on this website, are owned by Shortcut Press. Buying a guide gives you the license described above; it does not transfer ownership of the materials.</p>
+<p>All content in the guides and on this website, including the text, diagrams, quizzes and practice files, is owned by Shortcut Press. Buying a guide gives you the license described above; it doesn't transfer ownership of any content.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="warranties">Warranties</h2><a class="anchor" href="#warranties" aria-label="Link to this section: Warranties">#</a></div>
-<p>The guides are provided as they are. To the extent permitted by law, Shortcut Press disclaims all warranties, express or implied, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement. No specific result from using a guide is promised; see the <a href="disclaimer.html">Disclaimer</a>. Nothing in these terms limits any right you have under consumer protection law that cannot be limited by agreement.</p>
+<p>To the extent permitted by law, the guides are provided as they are, and Shortcut Press disclaims all warranties, express or implied, including implied warranties of merchantability, fitness for a particular purpose and non-infringement. No specific result from using a guide is promised; see the <a href="disclaimer.html">Disclaimer</a>. Nothing in these terms limits any right you have under consumer protection law that can't be limited by agreement; see <a href="consumer-rights.html">Consumer Rights</a>.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="liability">Limitation of liability</h2><a class="anchor" href="#liability" aria-label="Link to this section: Limitation of liability">#</a></div>
-<p>To the extent permitted by law, Shortcut Press's total liability for any claim relating to a product or this website is limited to the amount you paid for the product concerned. Shortcut Press is not liable for indirect or consequential losses, including the loss of your own files, which is why the <a href="disclaimer.html">Disclaimer</a> asks you to keep backups before practicing techniques on them.</p>
+<p>To the extent permitted by law, Shortcut Press's total liability for any claim relating to a product or this website is limited to the amount you paid for the product concerned. Shortcut Press is not liable for indirect or consequential losses, including the loss of your own files, which is why the Disclaimer asks you to keep backups before practicing techniques on them.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="changes">Changes to these terms</h2><a class="anchor" href="#changes" aria-label="Link to this section: Changes to these terms">#</a></div>
-<p>These terms may be updated from time to time. The current version is always posted on this page with its "Last updated" date. The terms in effect when you made a purchase apply to that purchase.</p>
+<p>These terms may be updated from time to time. The current version is always posted on this page with its “Last updated” date. The terms in effect when you made a purchase apply to that purchase.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="contact">Contact</h2><a class="anchor" href="#contact" aria-label="Link to this section: Contact">#</a></div>
@@ -126,29 +120,19 @@
     </article>
   </div>
 </div>
-
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-about">
         <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">S/P</span><span>Shortcut Press</span></a>
-        <p style="margin-top:16px">Self-paced software skills guides, delivered as digital downloads: a PDF guide and practice files in every .zip.</p>
+        <p style="margin-top:16px">Interactive software skills guides that run in your browser, unlocked with a license code.</p>
         <p class="footer-email" data-email-block hidden><span data-email-link></span></p>
         <button type="button" class="footer-keys js-only" data-open-shortcuts><kbd>?</kbd> Keyboard shortcuts</button>
       </div>
-      <nav aria-labelledby="footer-guides">
-        <h2 class="footer-h" id="footer-guides">Guides</h2>
-        <ul class="footer-links"><li><a href="spreadsheet-formulas-functions.html">Spreadsheet Formulas &amp; Functions</a></li><li><a href="data-analysis-pivot-tables-charts.html">Data Analysis with Pivot Tables &amp; Charts</a></li><li><a href="professional-document-formatting.html">Professional Document Formatting</a></li><li><a href="blender-3d-modeling-fundamentals.html">3D Modeling Fundamentals in Blender</a></li><li><a href="davinci-resolve-video-editing.html">Video Editing in DaVinci Resolve</a></li><li><a href="figma-interface-design.html">Interface Design in Figma</a></li><li><a href="inkscape-vector-illustration.html">Vector Illustration in Inkscape</a></li><li><a href="complete-software-skills-library.html">Complete Software Skills Library</a></li></ul>
-      </nav>
-      <nav aria-labelledby="footer-company">
-        <h2 class="footer-h" id="footer-company">Shortcut Press</h2>
-        <ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul>
-      </nav>
-      <nav aria-labelledby="footer-policies">
-        <h2 class="footer-h" id="footer-policies">Policies</h2>
-        <ul class="footer-links"><li><a href="terms-of-service.html">Terms</a></li><li><a href="privacy-policy.html">Privacy</a></li><li><a href="refund-policy.html">Refunds</a></li><li><a href="delivery-policy.html">Delivery</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="contact.html">Contact</a></li></ul>
-      </nav>
+      <nav aria-labelledby="footer-guides"><h2 class="footer-h" id="footer-guides">Guides</h2><ul class="footer-links"><li><a href="spreadsheet-formulas-functions.html">Spreadsheet Formulas &amp; Functions</a></li><li><a href="data-analysis-pivot-tables-charts.html">Data Analysis with Pivot Tables &amp; Charts</a></li><li><a href="professional-document-formatting.html">Professional Document Formatting</a></li><li><a href="blender-3d-modeling-fundamentals.html">3D Modeling Fundamentals in Blender</a></li><li><a href="davinci-resolve-video-editing.html">Video Editing in DaVinci Resolve</a></li><li><a href="figma-interface-design.html">Interface Design in Figma</a></li><li><a href="inkscape-vector-illustration.html">Vector Illustration in Inkscape</a></li><li><a href="complete-software-skills-library.html">Complete Software Skills Library</a></li></ul></nav>
+      <nav aria-labelledby="footer-company"><h2 class="footer-h" id="footer-company">Shortcut Press</h2><ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+      <nav aria-labelledby="footer-policies"><h2 class="footer-h" id="footer-policies">Policies</h2><ul class="footer-links"><li><a href="terms-of-service.html">Terms</a></li><li><a href="privacy-policy.html">Privacy</a></li><li><a href="refund-policy.html">Refunds</a></li><li><a href="delivery-policy.html">Delivery</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="consumer-rights.html">Consumer rights</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
     </div>
     <div class="footer-base">
       <p>&copy; <span data-year>2026</span> Shortcut Press. All rights reserved.</p>
@@ -157,27 +141,22 @@
   </div>
 </footer>
 <dialog class="dlg palette" id="palette" aria-label="Search the site">
-  <div class="pal-input-row">
-    <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.75" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <label class="visually-hidden" for="pal-input">Search guides and pages</label>
-    <input class="pal-input" id="pal-input" type="text" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search guides, pages and questions">
-    <kbd>Esc</kbd>
-  </div>
+  <div class="pal-input-row"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.75" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><label class="visually-hidden" for="pal-input">Search guides, pages and commands</label><input class="pal-input" id="pal-input" type="text" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search guides, pages and commands"><kbd>Esc</kbd></div>
   <ul class="pal-list" id="pal-list" role="listbox" aria-label="Results"></ul>
-  <p class="pal-empty" hidden>No matches. Try a program name, a topic, or a word like “refund”.</p>
+  <p class="pal-empty" hidden>No matches. Try a program name, a topic, or a word like “license” or “refund”.</p>
   <p class="pal-foot"><span><kbd>&uarr;</kbd><kbd>&darr;</kbd> to move</span><span><kbd>Enter</kbd> to open</span><span><kbd>Esc</kbd> to close</span></p>
 </dialog>
 <dialog class="dlg" id="shortcuts" aria-labelledby="shortcuts-title">
   <div class="dlg-head"><h2 id="shortcuts-title">Keyboard shortcuts</h2><button type="button" class="icon-btn" data-close-dialog aria-label="Close keyboard shortcuts"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
   <div class="dlg-scroll">
     <dl class="keys-list">
-      <div><dt><kbd data-mod-key>Ctrl</kbd> <kbd>K</kbd></dt><dd>Open search</dd></div>
+      <div><dt><kbd data-mod-key>Ctrl</kbd> <kbd>K</kbd></dt><dd>Open search and commands</dd></div>
       <div><dt><kbd>/</kbd></dt><dd>Open search <span class="tag-single">single key</span></dd></div>
       <div><dt><kbd>?</kbd></dt><dd>Show this list <span class="tag-single">single key</span></dd></div>
       <div><dt><kbd>T</kbd></dt><dd>Switch between light and dark theme <span class="tag-single">single key</span></dd></div>
       <div><dt><kbd>&uarr;</kbd> <kbd>&darr;</kbd></dt><dd>Move through search results</dd></div>
       <div><dt><kbd>Enter</kbd></dt><dd>Open the selected result</dd></div>
-      <div><dt><kbd>Esc</kbd></dt><dd>Close search or this panel</dd></div>
+      <div><dt><kbd>Esc</kbd></dt><dd>Close search, My Guides or this panel</dd></div>
     </dl>
     <div class="switch-row">
       <div><p class="switch-label" id="sk-label">Single-key shortcuts</p><p class="switch-desc" id="sk-desc">Turn off <kbd>/</kbd>, <kbd>?</kbd> and <kbd>T</kbd> if you use speech input or press keys by accident. <kbd data-mod-key>Ctrl</kbd> <kbd>K</kbd> and the footer link keep working.</p></div>

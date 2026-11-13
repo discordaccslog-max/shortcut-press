@@ -2,28 +2,35 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script>(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("sp-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("sp-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);var s=JSON.parse(localStorage.getItem("sp-data-v1")||"null");if(s&&s.settings&&s.settings.largeUI)d.setAttribute("data-ui","large");}catch(e){}})();</script>
 <title>Privacy Policy — Shortcut Press</title>
-<meta name="description" content="Shortcut Press privacy policy: no cookies, analytics, trackers or forms on this site, and order information used only to deliver products and support customers.">
-<link rel="canonical" href="https://discordaccslog-max.github.io/shortcut-press/privacy-policy.html">
+<meta name="description" content="Shortcut Press privacy policy: no cookies, analytics or trackers; licenses and progress stored only in your browser; order information used only for support, refunds and tax obligations.">
+<link rel="canonical" href="https://www.shortcutpress.online/privacy-policy.html">
 <meta property="og:site_name" content="Shortcut Press">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Privacy Policy — Shortcut Press">
-<meta property="og:description" content="Shortcut Press privacy policy: no cookies, analytics, trackers or forms on this site, and order information used only to deliver products and support customers.">
-<meta property="og:url" content="https://discordaccslog-max.github.io/shortcut-press/privacy-policy.html">
+<meta property="og:description" content="Shortcut Press privacy policy: no cookies, analytics or trackers; licenses and progress stored only in your browser; order information used only for support, refunds and tax obligations.">
+<meta property="og:url" content="https://www.shortcutpress.online/privacy-policy.html">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f4f4f1" media="(prefers-color-scheme: light)">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&amp;family=Geist:wght@400..600&amp;family=Geist+Mono:wght@400..500&amp;display=swap">
 <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
 <script src="js/site-config.js" defer></script>
 <script src="js/products.js" defer></script>
+<script src="js/license.js" defer></script>
+<script src="js/store.js" defer></script>
+<script src="js/guides-index.js" defer></script>
+<script src="js/dock.js" defer></script>
 <script src="js/search-index.js" defer></script>
 <script src="js/main.js" defer></script>
 </head>
@@ -41,84 +48,82 @@
   </div>
 </header>
 <main id="main">
-
 <div class="container doc">
-  <nav class="doc-toc" aria-label="On this page">
-    <p class="toc-title">On this page</p>
-    <ol class="toc-list"><li><a href="#in-short">In short</a></li><li><a href="#browsing">When you browse this website</a></li><li><a href="#buying">When you buy a guide</a></li><li><a href="#use">How your information is used</a></li><li><a href="#contacting">When you contact us</a></li><li><a href="#sharing">Sharing</a></li><li><a href="#retention">How long information is kept</a></li><li><a href="#rights">Your rights</a></li><li><a href="#exercise">How to exercise your rights</a></li><li><a href="#children">Children</a></li><li><a href="#changes">Changes to this policy</a></li><li><a href="#questions">Questions</a></li></ol>
-  </nav>
+  <nav class="doc-toc" aria-label="On this page"><p class="toc-title">On this page</p><ol class="toc-list"><li><a href="#in-short">In short</a></li><li><a href="#browsing">When you browse this website</a></li><li><a href="#on-your-device">What's stored on your device</a></li><li><a href="#buying">When you buy a guide</a></li><li><a href="#use">How your information is used</a></li><li><a href="#contacting">When you contact us</a></li><li><a href="#sharing">Sharing</a></li><li><a href="#retention">How long information is kept</a></li><li><a href="#rights">Your rights</a></li><li><a href="#exercise">How to exercise your rights</a></li><li><a href="#children">Children</a></li><li><a href="#changes">Changes to this policy</a></li><li><a href="#questions">Questions</a></li></ol></nav>
   <div class="doc-main">
     <header class="doc-head">
       <p class="label"><span class="label-num">Policy</span></p>
       <h1>Privacy Policy</h1>
-      <p class="lead">What information Shortcut Press receives, how it is used, and your rights.</p>
-      <p class="updated">Last updated: <time datetime="2026-11-07">November 7, 2026</time></p>
+      <p class="lead">What information Shortcut Press receives, what stays on your device, and your rights.</p>
+      <p class="updated">Last updated: <time datetime="2026-11-13">November 13, 2026</time></p>
     </header>
     <article class="doc-body">
 <section class="fade"><div class="h-wrap h2"><h2 id="in-short">In short</h2><a class="anchor" href="#in-short" aria-label="Link to this section: In short">#</a></div>
 <div class="summary-box"><ul>
-<li>This website uses no cookies, no analytics, no advertising trackers, and no forms.</li>
-<li>Payments are handled by a third-party payment provider. Shortcut Press never sees your full payment card details.</li>
-<li>Your order information is used only to deliver products, provide support, process refunds, and meet tax and accounting obligations.</li>
+<li>This website uses no cookies, no analytics and no advertising trackers.</li>
+<li>Your licenses and learning progress are stored only in your own browser and are never sent anywhere.</li>
+<li>Payments are handled by third-party payment providers. Shortcut Press never sees your full card details.</li>
 <li>Your personal information is never sold or shared for advertising.</li>
 </ul></div>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="browsing">When you browse this website</h2><a class="anchor" href="#browsing" aria-label="Link to this section: When you browse this website">#</a></div>
-<p>This website uses no cookies, no analytics, no advertising trackers, and no forms. Shortcut Press does not collect any information about you while you browse it.</p>
-<p>Two outside services are involved in showing you the site, and you should know about them:</p>
+<p>This website uses no cookies, no analytics and no advertising trackers, and Shortcut Press does not collect information about you while you browse it. Two outside services are involved in showing you the site:</p>
 <ul>
-<li><strong>Hosting.</strong> The site is served by Vercel and GitHub Pages. Like any web host, their servers receive technical information such as your IP address when your browser requests a page, and each handles that information under its own privacy statement. Shortcut Press does not receive these server logs.</li>
-<li><strong>Fonts.</strong> The site's typefaces are loaded from Google Fonts. Your browser requests the font files from Google's servers, which means Google receives your IP address as part of that request and handles it under its own privacy policy. Google Fonts does not set cookies on this site.</li>
+<li><strong>Hosting.</strong> The site is hosted by Vercel and is also published through GitHub Pages. Like any web host, their servers receive technical information such as your IP address when your browser requests a page, and each handles that information under its own privacy statement. Shortcut Press does not receive these server logs.</li>
+<li><strong>Fonts.</strong> The site's typefaces are loaded from Google Fonts. Your browser requests the font files from Google's servers, so Google receives your IP address as part of that request and handles it under its own privacy policy. Google Fonts does not set cookies on this site.</li>
 </ul>
 
 </section>
+<section class="fade"><div class="h-wrap h2"><h2 id="on-your-device">What's stored on your device</h2><a class="anchor" href="#on-your-device" aria-label="Link to this section: What's stored on your device">#</a></div>
+<p>When you activate a license, the site stores the license code, your learning progress (lessons completed, quiz answers, where you left off) and your display settings in your browser's local storage. This information stays on your device and is never sent to Shortcut Press or anyone else. Because we never receive it, we can't recover it if your browser's data is cleared, so please use <strong>Export backup</strong> in My Guides. The site also asks your browser to keep this data persistently so it isn't cleared automatically when space runs low.</p>
+
+</section>
 <section class="fade"><div class="h-wrap h2"><h2 id="buying">When you buy a guide</h2><a class="anchor" href="#buying" aria-label="Link to this section: When you buy a guide">#</a></div>
-<p>Payments are handled by a third-party payment provider. At checkout, the payment provider collects your name, email address, billing details and payment information under its own privacy policy. Shortcut Press never sees your full payment card details.</p>
-<p>From each order, Shortcut Press receives order information: your name, your email address, the products you bought, and your country.</p>
+<p>Payments are handled by third-party payment providers. At checkout, the payment provider collects your name, email address, billing details and payment information under its own privacy policy. Shortcut Press never sees your full payment card details.</p>
+<p>From each order, the payment provider gives Shortcut Press order information: your name, your email address, the products you bought, and your country.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="use">How your information is used</h2><a class="anchor" href="#use" aria-label="Link to this section: How your information is used">#</a></div>
 <p>Order information is used only to:</p>
 <ul>
-<li>deliver the products you bought, including updated files when a guide is revised;</li>
-<li>provide support when you get in touch;</li>
+<li>provide support, including sending a lost license code again;</li>
 <li>process refunds; and</li>
 <li>meet tax and accounting obligations.</li>
 </ul>
-<p>It is not used for anything else. You won't be added to a marketing list.</p>
+<p>It is not used for anything else, and you won't be added to a marketing list.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="contacting">When you contact us</h2><a class="anchor" href="#contacting" aria-label="Link to this section: When you contact us">#</a></div>
-<p>When you get in touch, we receive your email address and whatever you include in your message. That information is used only to answer you and to resolve your request.</p>
+<p>When you get in touch, we receive your email address and whatever you include in your message. That information is used only to answer you and resolve your request.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="sharing">Sharing</h2><a class="anchor" href="#sharing" aria-label="Link to this section: Sharing">#</a></div>
-<p>Your personal information is never sold, and it is never shared for advertising. It is shared only with the service providers needed to run the store, such as the payment provider and the email service used to send download links and replies, and only to the extent they need it to provide that service. It may also be disclosed where the law requires it.</p>
+<p>Your personal information is never sold and never shared for advertising. It is shared only with the service providers needed to run the store, such as the payment provider and our email provider, and only as far as they need it to provide that service. It may also be disclosed where the law requires it.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="retention">How long information is kept</h2><a class="anchor" href="#retention" aria-label="Link to this section: How long information is kept">#</a></div>
-<p>Order information is kept for as long as legal and accounting requirements make it necessary, for example tax record-keeping rules, and is then deleted. Support messages are kept for as long as needed to resolve your request and handle any follow-up, and are then deleted.</p>
+<p>Order information is kept for as long as legal and accounting requirements make it necessary, such as tax record-keeping rules, and is then deleted. Support messages are kept for as long as needed to resolve your request and handle any follow-up, and are then deleted. Information stored in your browser stays there until you remove it, for example by removing a license in My Guides or clearing the site's data.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="rights">Your rights</h2><a class="anchor" href="#rights" aria-label="Link to this section: Your rights">#</a></div>
 <div class="h-wrap h3"><h3 id="under-the-gdpr-european-economic-area-and-united-kingdom">Under the GDPR (European Economic Area and United Kingdom)</h3><a class="anchor" href="#under-the-gdpr-european-economic-area-and-united-kingdom" aria-label="Link to this section: Under the GDPR (European Economic Area and United Kingdom)">#</a></div>
-<p>If you are in the European Economic Area or the United Kingdom, you have the right to:</p>
+<p>You have the right to:</p>
 <ul>
 <li><strong>access</strong> the personal information held about you;</li>
 <li><strong>correct</strong> information that is inaccurate or incomplete;</li>
-<li><strong>delete</strong> your information, where it is not needed to meet a legal obligation;</li>
+<li><strong>delete</strong> your information, where it isn't needed to meet a legal obligation;</li>
 <li><strong>object</strong> to how your information is used;</li>
-<li>restrict how your information is used, and receive a copy of it in a portable format; and</li>
+<li>restrict how it's used and receive a copy in a portable format; and</li>
 <li>complain to your local data protection authority.</li>
 </ul>
-<p>Order information is used to fulfil the contract you make when you buy a guide, to meet legal obligations such as tax record-keeping, and, for support, in the legitimate interest of answering your questions.</p>
+<p>Order information is used to perform the contract you make when you buy a guide, to meet legal obligations such as tax record-keeping, and, for support, in our legitimate interest in answering your questions.</p>
 <div class="h-wrap h3"><h3 id="under-the-ccpa-california">Under the CCPA (California)</h3><a class="anchor" href="#under-the-ccpa-california" aria-label="Link to this section: Under the CCPA (California)">#</a></div>
-<p>If you are a California resident, you have the right to know what personal information is held about you and how it is used, to access it, to correct it, to request its deletion, and to object to or limit its use. Shortcut Press does not sell personal information and does not share it for cross-context behavioral advertising. You will not be treated differently for exercising any of these rights.</p>
+<p>California residents have the right to know what personal information is held about them and how it's used, to access it, to correct it, to request its deletion, and to limit its use. Shortcut Press does not sell personal information and does not share it for cross-context behavioral advertising. You won't be treated differently for exercising any of these rights.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="exercise">How to exercise your rights</h2><a class="anchor" href="#exercise" aria-label="Link to this section: How to exercise your rights">#</a></div>
-<p>To make any request about your personal information, <a href="contact.html">contact us through the Contact page</a>. To protect your information, we may ask you to confirm a detail of your order, such as the email address you used at checkout, before acting on a request. Requests are answered within the time the law requires.</p>
+<p>To make any request about your personal information, <a href="contact.html">contact us through the Contact page</a>. To protect your information, we may ask you to confirm a detail of your order, such as the email address you used at checkout. Requests are answered within the time the law requires. Information stored only in your browser is under your control; you can view it in My Guides, export it, or delete it at any time.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="children">Children</h2><a class="anchor" href="#children" aria-label="Link to this section: Children">#</a></div>
@@ -126,7 +131,7 @@
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="changes">Changes to this policy</h2><a class="anchor" href="#changes" aria-label="Link to this section: Changes to this policy">#</a></div>
-<p>When this policy changes, the updated version is posted on this page with a new "Last updated" date. If a change materially affects how information from past orders is used, customers will be told by email before the change takes effect.</p>
+<p>When this policy changes, the updated version is posted on this page with a new “Last updated” date. If a change materially affects how information from past orders is used, customers will be told by email before it takes effect.</p>
 
 </section>
 <section class="fade"><div class="h-wrap h2"><h2 id="questions">Questions</h2><a class="anchor" href="#questions" aria-label="Link to this section: Questions">#</a></div>
@@ -135,29 +140,19 @@
     </article>
   </div>
 </div>
-
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-about">
         <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">S/P</span><span>Shortcut Press</span></a>
-        <p style="margin-top:16px">Self-paced software skills guides, delivered as digital downloads: a PDF guide and practice files in every .zip.</p>
+        <p style="margin-top:16px">Interactive software skills guides that run in your browser, unlocked with a license code.</p>
         <p class="footer-email" data-email-block hidden><span data-email-link></span></p>
         <button type="button" class="footer-keys js-only" data-open-shortcuts><kbd>?</kbd> Keyboard shortcuts</button>
       </div>
-      <nav aria-labelledby="footer-guides">
-        <h2 class="footer-h" id="footer-guides">Guides</h2>
-        <ul class="footer-links"><li><a href="spreadsheet-formulas-functions.html">Spreadsheet Formulas &amp; Functions</a></li><li><a href="data-analysis-pivot-tables-charts.html">Data Analysis with Pivot Tables &amp; Charts</a></li><li><a href="professional-document-formatting.html">Professional Document Formatting</a></li><li><a href="blender-3d-modeling-fundamentals.html">3D Modeling Fundamentals in Blender</a></li><li><a href="davinci-resolve-video-editing.html">Video Editing in DaVinci Resolve</a></li><li><a href="figma-interface-design.html">Interface Design in Figma</a></li><li><a href="inkscape-vector-illustration.html">Vector Illustration in Inkscape</a></li><li><a href="complete-software-skills-library.html">Complete Software Skills Library</a></li></ul>
-      </nav>
-      <nav aria-labelledby="footer-company">
-        <h2 class="footer-h" id="footer-company">Shortcut Press</h2>
-        <ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul>
-      </nav>
-      <nav aria-labelledby="footer-policies">
-        <h2 class="footer-h" id="footer-policies">Policies</h2>
-        <ul class="footer-links"><li><a href="terms-of-service.html">Terms</a></li><li><a href="privacy-policy.html">Privacy</a></li><li><a href="refund-policy.html">Refunds</a></li><li><a href="delivery-policy.html">Delivery</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="contact.html">Contact</a></li></ul>
-      </nav>
+      <nav aria-labelledby="footer-guides"><h2 class="footer-h" id="footer-guides">Guides</h2><ul class="footer-links"><li><a href="spreadsheet-formulas-functions.html">Spreadsheet Formulas &amp; Functions</a></li><li><a href="data-analysis-pivot-tables-charts.html">Data Analysis with Pivot Tables &amp; Charts</a></li><li><a href="professional-document-formatting.html">Professional Document Formatting</a></li><li><a href="blender-3d-modeling-fundamentals.html">3D Modeling Fundamentals in Blender</a></li><li><a href="davinci-resolve-video-editing.html">Video Editing in DaVinci Resolve</a></li><li><a href="figma-interface-design.html">Interface Design in Figma</a></li><li><a href="inkscape-vector-illustration.html">Vector Illustration in Inkscape</a></li><li><a href="complete-software-skills-library.html">Complete Software Skills Library</a></li></ul></nav>
+      <nav aria-labelledby="footer-company"><h2 class="footer-h" id="footer-company">Shortcut Press</h2><ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+      <nav aria-labelledby="footer-policies"><h2 class="footer-h" id="footer-policies">Policies</h2><ul class="footer-links"><li><a href="terms-of-service.html">Terms</a></li><li><a href="privacy-policy.html">Privacy</a></li><li><a href="refund-policy.html">Refunds</a></li><li><a href="delivery-policy.html">Delivery</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="consumer-rights.html">Consumer rights</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
     </div>
     <div class="footer-base">
       <p>&copy; <span data-year>2026</span> Shortcut Press. All rights reserved.</p>
@@ -166,27 +161,22 @@
   </div>
 </footer>
 <dialog class="dlg palette" id="palette" aria-label="Search the site">
-  <div class="pal-input-row">
-    <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.75" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <label class="visually-hidden" for="pal-input">Search guides and pages</label>
-    <input class="pal-input" id="pal-input" type="text" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search guides, pages and questions">
-    <kbd>Esc</kbd>
-  </div>
+  <div class="pal-input-row"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.75" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><label class="visually-hidden" for="pal-input">Search guides, pages and commands</label><input class="pal-input" id="pal-input" type="text" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search guides, pages and commands"><kbd>Esc</kbd></div>
   <ul class="pal-list" id="pal-list" role="listbox" aria-label="Results"></ul>
-  <p class="pal-empty" hidden>No matches. Try a program name, a topic, or a word like “refund”.</p>
+  <p class="pal-empty" hidden>No matches. Try a program name, a topic, or a word like “license” or “refund”.</p>
   <p class="pal-foot"><span><kbd>&uarr;</kbd><kbd>&darr;</kbd> to move</span><span><kbd>Enter</kbd> to open</span><span><kbd>Esc</kbd> to close</span></p>
 </dialog>
 <dialog class="dlg" id="shortcuts" aria-labelledby="shortcuts-title">
   <div class="dlg-head"><h2 id="shortcuts-title">Keyboard shortcuts</h2><button type="button" class="icon-btn" data-close-dialog aria-label="Close keyboard shortcuts"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
   <div class="dlg-scroll">
     <dl class="keys-list">
-      <div><dt><kbd data-mod-key>Ctrl</kbd> <kbd>K</kbd></dt><dd>Open search</dd></div>
+      <div><dt><kbd data-mod-key>Ctrl</kbd> <kbd>K</kbd></dt><dd>Open search and commands</dd></div>
       <div><dt><kbd>/</kbd></dt><dd>Open search <span class="tag-single">single key</span></dd></div>
       <div><dt><kbd>?</kbd></dt><dd>Show this list <span class="tag-single">single key</span></dd></div>
       <div><dt><kbd>T</kbd></dt><dd>Switch between light and dark theme <span class="tag-single">single key</span></dd></div>
       <div><dt><kbd>&uarr;</kbd> <kbd>&darr;</kbd></dt><dd>Move through search results</dd></div>
       <div><dt><kbd>Enter</kbd></dt><dd>Open the selected result</dd></div>
-      <div><dt><kbd>Esc</kbd></dt><dd>Close search or this panel</dd></div>
+      <div><dt><kbd>Esc</kbd></dt><dd>Close search, My Guides or this panel</dd></div>
     </dl>
     <div class="switch-row">
       <div><p class="switch-label" id="sk-label">Single-key shortcuts</p><p class="switch-desc" id="sk-desc">Turn off <kbd>/</kbd>, <kbd>?</kbd> and <kbd>T</kbd> if you use speech input or press keys by accident. <kbd data-mod-key>Ctrl</kbd> <kbd>K</kbd> and the footer link keep working.</p></div>

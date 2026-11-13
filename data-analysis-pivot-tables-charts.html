@@ -2,28 +2,35 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script>(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("sp-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("sp-theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);var s=JSON.parse(localStorage.getItem("sp-data-v1")||"null");if(s&&s.settings&&s.settings.largeUI)d.setAttribute("data-ui","large");}catch(e){}})();</script>
 <title>Data Analysis with Pivot Tables &amp; Charts — Shortcut Press</title>
-<meta name="description" content="A self-paced PDF guide to data analysis in Microsoft Excel and Google Sheets: cleaning data, pivot tables, summarizing and filtering, and choosing and formatting charts, with practice datasets.">
-<link rel="canonical" href="https://discordaccslog-max.github.io/shortcut-press/data-analysis-pivot-tables-charts.html">
+<meta name="description" content="Data Analysis with Pivot Tables &amp; Charts: an interactive browser guide to cleaning data, building pivot tables, summarizing and filtering, and choosing and formatting charts. Lessons, quizzes, worked solutions, practice files and a shortcut trainer. $39 USD.">
+<link rel="canonical" href="https://www.shortcutpress.online/data-analysis-pivot-tables-charts.html">
 <meta property="og:site_name" content="Shortcut Press">
 <meta property="og:type" content="product">
 <meta property="og:title" content="Data Analysis with Pivot Tables &amp; Charts — Shortcut Press">
-<meta property="og:description" content="A self-paced PDF guide to data analysis in Microsoft Excel and Google Sheets: cleaning data, pivot tables, summarizing and filtering, and choosing and formatting charts, with practice datasets.">
-<meta property="og:url" content="https://discordaccslog-max.github.io/shortcut-press/data-analysis-pivot-tables-charts.html">
+<meta property="og:description" content="Data Analysis with Pivot Tables &amp; Charts: an interactive browser guide to cleaning data, building pivot tables, summarizing and filtering, and choosing and formatting charts. Lessons, quizzes, worked solutions, practice files and a shortcut trainer. $39 USD.">
+<meta property="og:url" content="https://www.shortcutpress.online/data-analysis-pivot-tables-charts.html">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f4f4f1" media="(prefers-color-scheme: light)">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&amp;family=Geist:wght@400..600&amp;family=Geist+Mono:wght@400..500&amp;display=swap">
 <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/app.css">
 <script src="js/site-config.js" defer></script>
 <script src="js/products.js" defer></script>
+<script src="js/license.js" defer></script>
+<script src="js/store.js" defer></script>
+<script src="js/guides-index.js" defer></script>
+<script src="js/dock.js" defer></script>
 <script src="js/search-index.js" defer></script>
 <script src="js/main.js" defer></script>
 </head>
@@ -40,69 +47,62 @@
   </div>
 </header>
 <main id="main">
-
 <div class="container p-layout">
   <aside class="p-aside" aria-labelledby="p-title">
   <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="index.html#guides">Guides</a></li><li><span aria-current="page">Microsoft Excel or Google Sheets</span></li></ol></nav>
   <h1 class="p-title" id="p-title">Data Analysis with Pivot Tables &amp; Charts</h1>
   <dl class="p-specs">
     <dt>Level</dt><dd>Intermediate</dd>
+    <dt>Format</dt><dd>Interactive guide in your web browser, unlocked with a license</dd>
     <dt>Software</dt><dd>Microsoft Excel or Google Sheets (not included)</dd>
-    <dt>Format</dt><dd>.zip with a PDF guide and practice files</dd>
-    <dt>Delivery</dt><dd>Download link by email immediately after payment</dd>
+    <dt>Delivery</dt><dd>License code on your order confirmation page, immediately after payment</dd>
+    <dt>Needs</dt><dd>A modern web browser on a computer, tablet or phone</dd>
   </dl>
   <p class="p-price"><span class="price" data-price="pivot-tables-charts">$39</span><span class="p-currency">USD</span></p>
-  <p class="p-terms">Instant digital download &middot; <a href="refund-policy.html">14-day refund policy</a> &middot; Taxes calculated at checkout</p>
+  <p class="p-terms">Instant access with a license &middot; <a href="refund-policy.html">14-day refund policy</a> &middot; Applicable taxes are shown at checkout</p>
   <div class="agree" data-agree hidden>
     <label class="agree-label"><input type="checkbox" class="agree-box" data-agree-box aria-describedby="agree-hint"><span>I agree to the <a href="terms-of-service.html">Terms of Service</a> and <a href="refund-policy.html">Refund Policy</a></span></label>
     <p class="agree-hint" id="agree-hint" data-agree-hint>Tick the box to enable the buy button. You need to agree before checkout.</p>
   </div>
   <div class="buy-slot" data-buy="pivot-tables-charts"></div>
-  <p class="p-selfstudy"><strong>Self-study material.</strong> There is no video, no live instruction, no tutoring, and no feedback on your work.</p>
+  <p class="p-selfstudy"><strong>Self-study material.</strong> There are no video lessons, no live instruction, no tutoring, and no feedback on your work.</p>
 </aside>
   <div class="p-main">
-    <p class="p-lead">A step-by-step guide to turning a raw table of data into clear summaries and charts. It covers cleaning data, building pivot tables, summarizing and filtering, and choosing and formatting charts, with practice datasets for every exercise.</p>
+    <div class="status-msg status-info license-note" data-license-note hidden><span class="status-icon" aria-hidden="true"></span><span>This guide needs a license on this device. If you've bought it, open <button type="button" class="link-btn" data-open-dock>My Guides</button> and enter your license code.</span></div>
+    <p class="p-lead">An interactive browser guide to turning a raw table of data into clear summaries and charts in Microsoft Excel and Google Sheets: cleaning data, building pivot tables, summarizing and filtering, and choosing and formatting charts, with a formula sandbox and downloadable practice datasets.</p>
     <section class="p-sec" id="contents" aria-labelledby="contents-title">
       <h2 id="contents-title">What the guide covers</h2>
-      <ol class="seq" data-seq><span class="seq-track" aria-hidden="true"><span class="seq-fill"></span></span><li class="seq-item"><span class="seq-num" aria-hidden="true">01</span><div><h3>Preparing data</h3><p>What a well-structured table looks like, removing duplicates and blank rows, fixing inconsistent text and dates, and splitting values that were entered into a single column.</p></div></li><li class="seq-item"><span class="seq-num" aria-hidden="true">02</span><div><h3>Building pivot tables</h3><p>Choosing rows, columns and values, switching between sum, count and average, and grouping dates and numbers into useful ranges.</p></div></li><li class="seq-item"><span class="seq-num" aria-hidden="true">03</span><div><h3>Summarizing and filtering</h3><p>Filtering and sorting a pivot table, showing values as a share of a total, and adding calculated fields.</p></div></li><li class="seq-item"><span class="seq-num" aria-hidden="true">04</span><div><h3>Choosing a chart</h3><p>Matching the chart type to the question: comparing categories, showing change over time, showing parts of a whole, and showing how two values relate.</p></div></li><li class="seq-item"><span class="seq-num" aria-hidden="true">05</span><div><h3>Formatting charts</h3><p>Titles, axis labels, colors, gridlines and data labels, and removing clutter so a chart can be read at a glance.</p></div></li><li class="seq-item"><span class="seq-num" aria-hidden="true">06</span><div><h3>Keeping it current</h3><p>Refreshing a pivot table when the source data changes and keeping charts connected to the data they show.</p></div></li></ol>
+      <ol class="seq" data-seq><span class="seq-track" aria-hidden="true"><span class="seq-fill"></span></span><li class="seq-item"><span class="seq-num" aria-hidden="true">01</span><div><h3>Preparing data</h3><p>What a well-structured table looks like, and how to remove duplicates, fix stray spaces and capitals, and repair dates stored as text.</p></div></li><li class="seq-item"><span class="seq-num" aria-hidden="true">02</span><div><h3>Building pivot tables</h3><p>Choose rows, columns and values, switch between sum, count and average, and group dates and numbers.</p></div></li><li class="seq-item"><span class="seq-num" aria-hidden="true">03</span><div><h3>Summarizing and filtering</h3><p>Filter and sort a pivot table, show values as a share of the total, and add calculated fields.</p></div></li><li class="seq-item"><span class="seq-num" aria-hidden="true">04</span><div><h3>Choosing a chart</h3><p>Match the chart type to the question: comparing categories, change over time, part of a whole, and relationships between values.</p></div></li><li class="seq-item"><span class="seq-num" aria-hidden="true">05</span><div><h3>Formatting charts</h3><p>Titles, axis labels, colors, gridlines and data labels, and removing clutter so a chart can be read at a glance.</p></div></li><li class="seq-item"><span class="seq-num" aria-hidden="true">06</span><div><h3>Keeping it current</h3><p>Refresh a pivot table when the source data changes, and keep charts connected to the data they show.</p></div></li></ol>
+    </section>
+    <section class="p-sec" id="preview" aria-labelledby="preview-title">
+      <h2 id="preview-title">Preview from the guide</h2>
+      <p>This is the first lesson, rendered from the guide itself: the lesson list, the lesson overview with its diagram, and a quiz question.</p>
+      <div class="preview-frame" role="img" aria-label="Preview of the first lesson of Data Analysis with Pivot Tables &amp; Charts: the lesson list, the lesson overview with its diagram, and a quiz question">
+  <div class="preview-frame-bar" aria-hidden="true"><span>Lesson 1 of 6</span><span>·</span><span>Preparing data</span></div>
+  <div class="preview-frame-body" aria-hidden="true">
+    <ol class="preview-lessons"><li><span class="gd-lesson-n">01</span>Preparing data</li><li><span class="gd-lesson-n">02</span>Building pivot tables</li><li><span class="gd-lesson-n">03</span>Summarizing and filtering</li><li><span class="gd-lesson-n">04</span>Choosing a chart</li><li><span class="gd-lesson-n">05</span>Formatting charts</li><li><span class="gd-lesson-n">06</span>Keeping it current</li></ol>
+    <div class="preview-main"><h3>Preparing data</h3><p class="small-note">What a well-structured table looks like, and how to remove duplicates, fix stray spaces and capitals, and repair dates stored as text.</p><div class="gd-figure"><svg class="dg" viewBox="0 0 480 200" role="img" aria-label="From raw rows to analysis-ready data" xmlns="http://www.w3.org/2000/svg"><title>From raw rows to analysis-ready data</title><rect class="dg-box" x="10" y="80" width="74.4" height="64" rx="8"/><text class="dg-num" x="20" y="102">01</text><text class="dg-t" x="20" y="122">One header</text><text class="dg-t" x="20" y="137">row</text><path class="dg-arrow" d="M87.4 112 L103.4 112"/><path class="dg-arrowhead" d="M103.4 112 L96.5 116.1 L96.5 107.9 Z"/><rect class="dg-box" x="106.4" y="80" width="74.4" height="64" rx="8"/><text class="dg-num" x="116.4" y="102">02</text><text class="dg-t" x="116.4" y="122">Remove</text><text class="dg-t" x="116.4" y="137">duplicates</text><path class="dg-arrow" d="M183.8 112 L199.8 112"/><path class="dg-arrowhead" d="M199.8 112 L192.9 116.1 L192.9 107.9 Z"/><rect class="dg-box" x="202.8" y="80" width="74.4" height="64" rx="8"/><text class="dg-num" x="212.8" y="102">03</text><text class="dg-t" x="212.8" y="122">Trim and</text><text class="dg-t" x="212.8" y="137">fix case</text><path class="dg-arrow" d="M280.20000000000005 112 L296.20000000000005 112"/><path class="dg-arrowhead" d="M296.20000000000005 112 L289.3 116.1 L289.3 107.9 Z"/><rect class="dg-box" x="299.20000000000005" y="80" width="74.4" height="64" rx="8"/><text class="dg-num" x="309.20000000000005" y="102">04</text><text class="dg-t" x="309.20000000000005" y="122">Real dates</text><path class="dg-arrow" d="M376.6 112 L392.6 112"/><path class="dg-arrowhead" d="M392.6 112 L385.7 116.1 L385.7 107.9 Z"/><rect class="dg-box dg-box-acc" x="395.6" y="80" width="74.4" height="64" rx="8"/><text class="dg-num" x="405.6" y="102">05</text><text class="dg-t" x="405.6" y="122">Ready for</text><text class="dg-t" x="405.6" y="137">a pivot</text></svg></div>
+    <div class="preview-quiz"><strong>Check your understanding:</strong> Why might a pivot table show North twice?<ul><li>Some cells contain extra spaces or different capitals</li><li>The data has too many rows</li><li>The pivot table needs a filter</li><li>The region column is formatted as a date</li></ul></div></div>
+  </div>
+</div>
     </section>
     <section class="p-sec" id="inside" aria-labelledby="inside-title">
-  <h2 id="inside-title">Inside the guide</h2>
-  <p>Every chapter follows the same pattern: the skill is explained, broken into steps, practiced in an exercise, and checked against a worked solution. These illustrations show the three kinds of page you will find in the PDF.</p>
-  <div class="previews">
-    <figure class="preview"><svg viewBox="0 0 300 380" role="img" aria-labelledby="pivot-tables-charts-step-t pivot-tables-charts-step-d" xmlns="http://www.w3.org/2000/svg"><title id="pivot-tables-charts-step-t">Illustration of a step-by-step instruction page</title><desc id="pivot-tables-charts-step-d">A guide page with a section heading, three numbered steps, and an annotated illustration of a bar chart with one highlighted bar and a legend with lettered callouts.</desc><rect class="s-paper" x="0.5" y="0.5" width="299" height="379" rx="8"/><text class="s-label" x="24" y="34">PIVOT TABLES</text><rect class="s-ink" x="24" y="44" width="176" height="12" rx="3"/><rect class="s-line" x="24" y="66" width="236" height="5" rx="2"/><rect class="s-line" x="24" y="77" width="196" height="5" rx="2"/><circle class="s-accent" cx="34" cy="104" r="10"/><text class="s-num" x="34" y="108" text-anchor="middle">1</text><rect class="s-line" x="54" y="97" width="206" height="5" rx="2"/><rect class="s-line" x="54" y="107" width="150" height="5" rx="2"/><rect class="s-soft" x="24" y="124" width="252" height="124" rx="6"/><g transform="translate(30 131)"><rect class="s-paper" x="0.5" y="0.5" width="239" height="109" rx="4"/><line class="s-stroke" x1="22" y1="14" x2="22" y2="92"/><line class="s-stroke" x1="22" y1="92" x2="150" y2="92"/><rect class="s-line" x="32" y="48" width="19" height="44" rx="2"/><rect class="s-accent" x="61" y="26" width="19" height="66" rx="2"/><rect class="s-line" x="90" y="62" width="19" height="30" rx="2"/><rect class="s-line" x="119" y="34" width="19" height="58" rx="2"/><line class="s-stroke-faint" x1="22" y1="26" x2="150" y2="26"/><line class="s-stroke-faint" x1="22" y1="43" x2="150" y2="43"/><line class="s-stroke-faint" x1="22" y1="60" x2="150" y2="60"/><line class="s-stroke-faint" x1="22" y1="77" x2="150" y2="77"/><rect class="s-soft" x="164" y="14" width="64" height="82" rx="4"/><rect class="s-muted" x="170" y="22" width="7" height="7" rx="1.5"/><rect class="s-line" x="182" y="24" width="34" height="5" rx="2"/><rect class="s-muted" x="170" y="42" width="7" height="7" rx="1.5"/><rect class="s-line" x="182" y="44" width="31" height="5" rx="2"/><rect class="s-accent" x="170" y="62" width="7" height="7" rx="1.5"/><rect class="s-line" x="182" y="64" width="28" height="5" rx="2"/><rect class="s-muted" x="170" y="82" width="7" height="7" rx="1.5"/><rect class="s-line" x="182" y="84" width="25" height="5" rx="2"/></g><line class="s-stroke" x1="246" y1="142" x2="262" y2="134"/><circle class="s-ink" cx="266" cy="132" r="9"/><text class="s-num-inv" x="266" y="135.5" text-anchor="middle">A</text><line class="s-stroke" x1="236" y1="226" x2="262" y2="238"/><circle class="s-ink" cx="266" cy="240" r="9"/><text class="s-num-inv" x="266" y="243.5" text-anchor="middle">B</text><circle class="s-accent" cx="34" cy="276" r="10"/><text class="s-num" x="34" y="280" text-anchor="middle">2</text><rect class="s-line" x="54" y="269" width="190" height="5" rx="2"/><rect class="s-line" x="54" y="279" width="120" height="5" rx="2"/><circle class="s-accent" cx="34" cy="312" r="10"/><text class="s-num" x="34" y="316" text-anchor="middle">3</text><rect class="s-line" x="54" y="305" width="200" height="5" rx="2"/><rect class="s-line" x="54" y="315" width="164" height="5" rx="2"/><rect class="s-accent-soft" x="24" y="336" width="252" height="26" rx="4"/><rect class="s-accent" x="24" y="336" width="4" height="26" rx="1"/><text class="s-label" x="38" y="353">NOTE</text><rect class="s-line" x="80" y="347" width="170" height="5" rx="2"/></svg><figcaption><strong>Step-by-step instructions</strong>Numbered steps beside an annotated illustration, with lettered callouts tied to the text.</figcaption></figure>
-    <figure class="preview"><svg viewBox="0 0 300 380" role="img" aria-labelledby="pivot-tables-charts-ex-t pivot-tables-charts-ex-d" xmlns="http://www.w3.org/2000/svg"><title id="pivot-tables-charts-ex-t">Illustration of an exercise page with its worked solution</title><desc id="pivot-tables-charts-ex-d">The top half shows an exercise with a task description and a starting file; the bottom half shows the worked solution as numbered steps ending in a checked result.</desc><rect class="s-paper" x="0.5" y="0.5" width="299" height="379" rx="8"/><text class="s-label" x="24" y="34">EXERCISE</text><rect class="s-ink" x="24" y="44" width="150" height="12" rx="3"/><rect class="s-soft" x="24" y="72" width="140" height="80" rx="5"/><g transform="translate(30 78) scale(0.535)"><rect class="s-paper" x="0.5" y="0.5" width="239" height="109" rx="4"/><line class="s-stroke" x1="22" y1="14" x2="22" y2="92"/><line class="s-stroke" x1="22" y1="92" x2="150" y2="92"/><rect class="s-line" x="32" y="48" width="19" height="44" rx="2"/><rect class="s-accent" x="61" y="26" width="19" height="66" rx="2"/><rect class="s-line" x="90" y="62" width="19" height="30" rx="2"/><rect class="s-line" x="119" y="34" width="19" height="58" rx="2"/><line class="s-stroke-faint" x1="22" y1="26" x2="150" y2="26"/><line class="s-stroke-faint" x1="22" y1="43" x2="150" y2="43"/><line class="s-stroke-faint" x1="22" y1="60" x2="150" y2="60"/><line class="s-stroke-faint" x1="22" y1="77" x2="150" y2="77"/><rect class="s-soft" x="164" y="14" width="64" height="82" rx="4"/><rect class="s-muted" x="170" y="22" width="7" height="7" rx="1.5"/><rect class="s-line" x="182" y="24" width="34" height="5" rx="2"/><rect class="s-muted" x="170" y="42" width="7" height="7" rx="1.5"/><rect class="s-line" x="182" y="44" width="31" height="5" rx="2"/><rect class="s-accent" x="170" y="62" width="7" height="7" rx="1.5"/><rect class="s-line" x="182" y="64" width="28" height="5" rx="2"/><rect class="s-muted" x="170" y="82" width="7" height="7" rx="1.5"/><rect class="s-line" x="182" y="84" width="25" height="5" rx="2"/></g><rect class="s-line" x="176" y="78" width="96" height="5" rx="2"/><rect class="s-line" x="176" y="90" width="84" height="5" rx="2"/><rect class="s-line" x="176" y="102" width="70" height="5" rx="2"/><rect class="s-line" x="176" y="120" width="92" height="5" rx="2"/><rect class="s-line" x="176" y="132" width="60" height="5" rx="2"/><rect class="s-bg" x="176" y="141" width="100" height="14" rx="3"/><text class="s-label" x="182" y="151.5" style="font-size:8px">PRACTICE FILE</text><line class="s-dash" x1="24" y1="178" x2="276" y2="178"/><text class="s-label" x="24" y="204">WORKED SOLUTION</text><circle class="s-ink" cx="31" cy="224" r="7"/><text class="s-num-inv" x="31" y="227" text-anchor="middle">1</text><rect class="s-line" x="46" y="218" width="214" height="5" rx="2"/><rect class="s-line" x="46" y="227" width="140" height="5" rx="2"/><circle class="s-ink" cx="31" cy="254" r="7"/><text class="s-num-inv" x="31" y="257" text-anchor="middle">2</text><rect class="s-line" x="46" y="248" width="190" height="5" rx="2"/><rect class="s-line" x="46" y="257" width="168" height="5" rx="2"/><circle class="s-ink" cx="31" cy="284" r="7"/><text class="s-num-inv" x="31" y="287" text-anchor="middle">3</text><rect class="s-line" x="46" y="278" width="220" height="5" rx="2"/><rect class="s-line" x="46" y="287" width="118" height="5" rx="2"/><circle class="s-ink" cx="31" cy="314" r="7"/><text class="s-num-inv" x="31" y="317" text-anchor="middle">4</text><rect class="s-line" x="46" y="308" width="170" height="5" rx="2"/><rect class="s-line" x="46" y="317" width="150" height="5" rx="2"/><rect class="s-accent-soft" x="24" y="334" width="252" height="28" rx="4"/><circle class="s-accent" cx="40" cy="348" r="8"/><path d="M36 348 l3 3 5 -6" fill="none" stroke="#1e2023" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text class="s-label" x="56" y="351.5">RESULT</text><rect class="s-line" x="104" y="345" width="150" height="5" rx="2"/></svg><figcaption><strong>Exercise and worked solution</strong>A task that uses one of the practice files, followed by a solution that goes through every step.</figcaption></figure>
-    <figure class="preview"><svg viewBox="0 0 300 380" role="img" aria-labelledby="pivot-tables-charts-ref-t pivot-tables-charts-ref-d" xmlns="http://www.w3.org/2000/svg"><title id="pivot-tables-charts-ref-t">Illustration of a reference table page</title><desc id="pivot-tables-charts-ref-d">A quick-reference table with the columns Field and What it holds, listing: Rows — Groups down the side; Columns — Groups across the top; Values — The numbers summarized; Filters — Limits what is counted; Bar chart — Compare categories; Line chart — Change over time.</desc><rect class="s-paper" x="0.5" y="0.5" width="299" height="379" rx="8"/><text class="s-label" x="24" y="34">REFERENCE</text><rect class="s-ink" x="24" y="44" width="164" height="12" rx="3"/><rect class="s-line" x="24" y="66" width="220" height="5" rx="2"/><rect class="s-ink" x="24" y="86" width="252" height="26" rx="4"/><text class="s-th" x="36" y="103">FIELD</text><text class="s-th" x="132" y="103">WHAT IT HOLDS</text><text class="s-td" x="36" y="134">Rows</text><text class="s-tdesc" x="132" y="134">Groups down the side</text><rect class="s-soft" x="24" y="148" width="252" height="36"/><text class="s-td" x="36" y="170">Columns</text><text class="s-tdesc" x="132" y="170">Groups across the top</text><text class="s-td" x="36" y="206">Values</text><text class="s-tdesc" x="132" y="206">The numbers summarized</text><rect class="s-soft" x="24" y="220" width="252" height="36"/><text class="s-td" x="36" y="242">Filters</text><text class="s-tdesc" x="132" y="242">Limits what is counted</text><text class="s-td" x="36" y="278">Bar chart</text><text class="s-tdesc" x="132" y="278">Compare categories</text><rect class="s-soft" x="24" y="292" width="252" height="36"/><text class="s-td" x="36" y="314">Line chart</text><text class="s-tdesc" x="132" y="314">Change over time</text><line class="s-stroke-faint" x1="122" y1="112" x2="122" y2="328"/><rect class="s-stroke-faint" x="24" y="86" width="252" height="242" rx="4"/><rect class="s-line" x="24" y="346" width="180" height="5" rx="2"/><rect class="s-line" x="24" y="357" width="120" height="5" rx="2"/></svg><figcaption><strong>Reference table</strong>A quick-reference page for the terms and techniques covered, to keep beside you while you work.</figcaption></figure>
-  </div>
-  <p class="small-note">Illustrations represent the layout of guide pages. They are not reproductions of any software's interface.</p>
-</section>
-    <section class="p-sec" id="zip" aria-labelledby="zip-title">
-      <h2 id="zip-title">What's in the .zip</h2>
-      <div class="panel tree-panel">
-  <p class="tree-title">Your .zip download</p>
-  <ul class="tree">
-    <li><span class="tree-name">PDF guide</span><span class="tree-desc">Each skill explained, then broken into numbered steps.</span>
-      <ul>
-        <li><span class="tree-name">Step-by-step instructions</span></li>
-        <li><span class="tree-name">Annotated illustrations</span></li>
-        <li><span class="tree-name">Practice exercises</span></li>
-        <li><span class="tree-name">Worked solutions</span><span class="tree-desc">Every step, not only the final answer.</span></li>
-      </ul>
-    </li>
-    <li><span class="tree-name">Practice datasets</span><span class="tree-desc">The datasets the exercises use, including deliberately untidy data for the cleaning exercises. They are made to open in either Microsoft Excel or Google Sheets.</span></li>
-  </ul>
-  <p class="tree-note">The software is not included. See Software required below.</p>
-</div>
+      <h2 id="inside-title">What's inside</h2>
+      <div class="panel tree-panel"><p class="tree-title">Data Analysis with Pivot Tables &amp; Charts</p><ul class="tree"><li><span class="tree-name">6 lessons</span><span class="tree-desc">Each with step-by-step instructions, an original diagram, a short quiz (12 questions in total) and an exercise with a worked solution.</span></li><li><span class="tree-name">4 practice files</span><span class="tree-desc">sales-raw.xlsx, sales-clean.xlsx, sales-clean.csv, sales-new-rows.csv</span></li><li><span class="tree-name">Shortcut trainer</span><span class="tree-desc">10 Microsoft Excel or Google Sheets shortcuts to practice, with instant feedback.</span></li><li><span class="tree-name">Formula sandbox</span><span class="tree-desc">Type formulas into a grid and check your exercise answers in the browser.</span></li><li><span class="tree-name">Progress tracking</span><span class="tree-desc">Completed lessons, quiz answers and a Resume button that returns to where you left off.</span></li></ul><p class="tree-note">Works offline on a device once you've opened it there.</p></div>
     </section>
     <section class="p-sec" id="software" aria-labelledby="software-title">
       <h2 id="software-title">Software required</h2>
       <p>This guide is written for <strong>Microsoft Excel</strong> and <strong>Google Sheets</strong>. You can follow it with either one; where the steps differ, both are shown. Neither program is included with the guide; you need your own access to the one you choose, obtained separately from its maker.</p>
-      <div class="callout"><p><strong>About software updates.</strong> Software makers update their programs, so menus and button locations can change between versions. When an update changes the steps, the guide is revised, and updated files are free to anyone who bought this guide.</p></div>
+      <div class="callout"><p><strong>About software updates.</strong> Software makers update their programs, so menus and button locations can change between versions. This guide is revised when an update changes the steps, and the revised version appears the next time you open it.</p></div>
+    </section>
+    <section class="p-sec" id="needs" aria-labelledby="needs-title">
+      <h2 id="needs-title">What you need</h2>
+      <ul class="check-list"><li>A modern web browser (such as Chrome, Edge, Firefox or Safari) on a computer, tablet or phone.</li><li>Microsoft Excel or Google Sheets, obtained separately, to follow the steps.</li><li>An internet connection the first time you open the guide on a device; after that it also works offline.</li></ul>
     </section>
     <section class="p-sec" id="format" aria-labelledby="format-title">
-  <h2 id="format-title">How the guide works</h2>
-  <p>This is a self-study guide. You read each step, carry it out in your own copy of the software, then do the exercises and compare your work with the worked solutions. There is no video, no live instruction, no tutoring, and no feedback on your work. Everything you get is in the .zip.</p>
-</section>
+      <h2 id="format-title">How the guide works</h2>
+      <p>This is a self-study guide. You read each step, carry it out in your own copy of the software, check your understanding with the quiz, then try the exercise and compare your work with the worked solution. There are no video lessons, no live instruction, no tutoring, and no feedback on your work.</p>
+    </section>
     <section class="p-sec" id="fit" aria-labelledby="fit-title">
       <h2 id="fit-title">Is this guide a good fit?</h2>
       <div class="fit">
@@ -111,34 +111,24 @@
       </div>
     </section>
     <section class="p-sec" aria-labelledby="related-title">
-  <h2 id="related-title">Other guides</h2>
-  <ul class="chips"><li><a href="spreadsheet-formulas-functions.html">Spreadsheet Formulas &amp; Functions</a></li><li><a href="professional-document-formatting.html">Professional Document Formatting</a></li><li><a href="blender-3d-modeling-fundamentals.html">3D Modeling Fundamentals in Blender</a></li><li><a href="davinci-resolve-video-editing.html">Video Editing in DaVinci Resolve</a></li><li><a href="figma-interface-design.html">Interface Design in Figma</a></li><li><a href="inkscape-vector-illustration.html">Vector Illustration in Inkscape</a></li><li><a href="complete-software-skills-library.html">Complete Software Skills Library</a></li></ul>
-</section>
+      <h2 id="related-title">Other guides</h2>
+      <ul class="chips"><li><a href="spreadsheet-formulas-functions.html">Spreadsheet Formulas &amp; Functions</a></li><li><a href="professional-document-formatting.html">Professional Document Formatting</a></li><li><a href="blender-3d-modeling-fundamentals.html">3D Modeling Fundamentals in Blender</a></li><li><a href="davinci-resolve-video-editing.html">Video Editing in DaVinci Resolve</a></li><li><a href="figma-interface-design.html">Interface Design in Figma</a></li><li><a href="inkscape-vector-illustration.html">Vector Illustration in Inkscape</a></li><li><a href="complete-software-skills-library.html">Complete Software Skills Library</a></li></ul>
+    </section>
   </div>
 </div>
-
 </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-about">
         <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">S/P</span><span>Shortcut Press</span></a>
-        <p style="margin-top:16px">Self-paced software skills guides, delivered as digital downloads: a PDF guide and practice files in every .zip.</p>
+        <p style="margin-top:16px">Interactive software skills guides that run in your browser, unlocked with a license code.</p>
         <p class="footer-email" data-email-block hidden><span data-email-link></span></p>
         <button type="button" class="footer-keys js-only" data-open-shortcuts><kbd>?</kbd> Keyboard shortcuts</button>
       </div>
-      <nav aria-labelledby="footer-guides">
-        <h2 class="footer-h" id="footer-guides">Guides</h2>
-        <ul class="footer-links"><li><a href="spreadsheet-formulas-functions.html">Spreadsheet Formulas &amp; Functions</a></li><li><a href="data-analysis-pivot-tables-charts.html">Data Analysis with Pivot Tables &amp; Charts</a></li><li><a href="professional-document-formatting.html">Professional Document Formatting</a></li><li><a href="blender-3d-modeling-fundamentals.html">3D Modeling Fundamentals in Blender</a></li><li><a href="davinci-resolve-video-editing.html">Video Editing in DaVinci Resolve</a></li><li><a href="figma-interface-design.html">Interface Design in Figma</a></li><li><a href="inkscape-vector-illustration.html">Vector Illustration in Inkscape</a></li><li><a href="complete-software-skills-library.html">Complete Software Skills Library</a></li></ul>
-      </nav>
-      <nav aria-labelledby="footer-company">
-        <h2 class="footer-h" id="footer-company">Shortcut Press</h2>
-        <ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul>
-      </nav>
-      <nav aria-labelledby="footer-policies">
-        <h2 class="footer-h" id="footer-policies">Policies</h2>
-        <ul class="footer-links"><li><a href="terms-of-service.html">Terms</a></li><li><a href="privacy-policy.html">Privacy</a></li><li><a href="refund-policy.html">Refunds</a></li><li><a href="delivery-policy.html">Delivery</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="contact.html">Contact</a></li></ul>
-      </nav>
+      <nav aria-labelledby="footer-guides"><h2 class="footer-h" id="footer-guides">Guides</h2><ul class="footer-links"><li><a href="spreadsheet-formulas-functions.html">Spreadsheet Formulas &amp; Functions</a></li><li><a href="data-analysis-pivot-tables-charts.html">Data Analysis with Pivot Tables &amp; Charts</a></li><li><a href="professional-document-formatting.html">Professional Document Formatting</a></li><li><a href="blender-3d-modeling-fundamentals.html">3D Modeling Fundamentals in Blender</a></li><li><a href="davinci-resolve-video-editing.html">Video Editing in DaVinci Resolve</a></li><li><a href="figma-interface-design.html">Interface Design in Figma</a></li><li><a href="inkscape-vector-illustration.html">Vector Illustration in Inkscape</a></li><li><a href="complete-software-skills-library.html">Complete Software Skills Library</a></li></ul></nav>
+      <nav aria-labelledby="footer-company"><h2 class="footer-h" id="footer-company">Shortcut Press</h2><ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+      <nav aria-labelledby="footer-policies"><h2 class="footer-h" id="footer-policies">Policies</h2><ul class="footer-links"><li><a href="terms-of-service.html">Terms</a></li><li><a href="privacy-policy.html">Privacy</a></li><li><a href="refund-policy.html">Refunds</a></li><li><a href="delivery-policy.html">Delivery</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="consumer-rights.html">Consumer rights</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
     </div>
     <div class="footer-base">
       <p>&copy; <span data-year>2026</span> Shortcut Press. All rights reserved.</p>
@@ -151,27 +141,22 @@
   <div class="buy-slot" data-buy="pivot-tables-charts"></div>
 </div>
 <dialog class="dlg palette" id="palette" aria-label="Search the site">
-  <div class="pal-input-row">
-    <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.75" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-    <label class="visually-hidden" for="pal-input">Search guides and pages</label>
-    <input class="pal-input" id="pal-input" type="text" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search guides, pages and questions">
-    <kbd>Esc</kbd>
-  </div>
+  <div class="pal-input-row"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.75" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><label class="visually-hidden" for="pal-input">Search guides, pages and commands</label><input class="pal-input" id="pal-input" type="text" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search guides, pages and commands"><kbd>Esc</kbd></div>
   <ul class="pal-list" id="pal-list" role="listbox" aria-label="Results"></ul>
-  <p class="pal-empty" hidden>No matches. Try a program name, a topic, or a word like “refund”.</p>
+  <p class="pal-empty" hidden>No matches. Try a program name, a topic, or a word like “license” or “refund”.</p>
   <p class="pal-foot"><span><kbd>&uarr;</kbd><kbd>&darr;</kbd> to move</span><span><kbd>Enter</kbd> to open</span><span><kbd>Esc</kbd> to close</span></p>
 </dialog>
 <dialog class="dlg" id="shortcuts" aria-labelledby="shortcuts-title">
   <div class="dlg-head"><h2 id="shortcuts-title">Keyboard shortcuts</h2><button type="button" class="icon-btn" data-close-dialog aria-label="Close keyboard shortcuts"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
   <div class="dlg-scroll">
     <dl class="keys-list">
-      <div><dt><kbd data-mod-key>Ctrl</kbd> <kbd>K</kbd></dt><dd>Open search</dd></div>
+      <div><dt><kbd data-mod-key>Ctrl</kbd> <kbd>K</kbd></dt><dd>Open search and commands</dd></div>
       <div><dt><kbd>/</kbd></dt><dd>Open search <span class="tag-single">single key</span></dd></div>
       <div><dt><kbd>?</kbd></dt><dd>Show this list <span class="tag-single">single key</span></dd></div>
       <div><dt><kbd>T</kbd></dt><dd>Switch between light and dark theme <span class="tag-single">single key</span></dd></div>
       <div><dt><kbd>&uarr;</kbd> <kbd>&darr;</kbd></dt><dd>Move through search results</dd></div>
       <div><dt><kbd>Enter</kbd></dt><dd>Open the selected result</dd></div>
-      <div><dt><kbd>Esc</kbd></dt><dd>Close search or this panel</dd></div>
+      <div><dt><kbd>Esc</kbd></dt><dd>Close search, My Guides or this panel</dd></div>
     </dl>
     <div class="switch-row">
       <div><p class="switch-label" id="sk-label">Single-key shortcuts</p><p class="switch-desc" id="sk-desc">Turn off <kbd>/</kbd>, <kbd>?</kbd> and <kbd>T</kbd> if you use speech input or press keys by accident. <kbd data-mod-key>Ctrl</kbd> <kbd>K</kbd> and the footer link keep working.</p></div>
