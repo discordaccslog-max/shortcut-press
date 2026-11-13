@@ -2,3 +2,8 @@ README.md
 .nojekyll
 fulfillment-kit/
 fulfillment-kit
+node_modules
+package.json
+package-lock.json
+tools
+tests

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="80" viewBox="0 0 400 80">
+<title>Icon set — Shortcut Press practice file</title>
+<rect width="400" height="80" fill="#FFFFFF"/>
+<g id="icon-home" transform="translate(16 28)" fill="none" stroke="#1E2023" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></g>
+<g id="icon-search" transform="translate(64 28)" fill="none" stroke="#1E2023" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></g>
+<g id="icon-user" transform="translate(112 28)" fill="none" stroke="#1E2023" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></g>
+<g id="icon-settings" transform="translate(160 28)" fill="none" stroke="#1E2023" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></g>
+<g id="icon-bell" transform="translate(208 28)" fill="none" stroke="#1E2023" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></g>
+<g id="icon-heart" transform="translate(256 28)" fill="none" stroke="#1E2023" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></g>
+<g id="icon-plus" transform="translate(304 28)" fill="none" stroke="#1E2023" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></g>
+<g id="icon-arrow-left" transform="translate(352 28)" fill="none" stroke="#1E2023" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></g>
+</svg>

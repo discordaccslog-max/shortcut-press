@@ -1,0 +1,32 @@
+# Stool starter: a 1 m square seat and one leg. Duplicating the leg 0.8 m along X and Y places the other three.
+# Original practice model by Shortcut Press. Y is up; Blender's OBJ importer converts it to Z up.
+o Seat
+v -0.5000 0.8500 -0.5000
+v 0.5000 0.8500 -0.5000
+v 0.5000 0.9500 -0.5000
+v -0.5000 0.9500 -0.5000
+v -0.5000 0.8500 0.5000
+v 0.5000 0.8500 0.5000
+v 0.5000 0.9500 0.5000
+v -0.5000 0.9500 0.5000
+f 1 4 3 2
+f 5 6 7 8
+f 1 2 6 5
+f 3 4 8 7
+f 2 3 7 6
+f 1 5 8 4
+o Leg
+v 0.3600 0.0000 -0.4400
+v 0.4400 0.0000 -0.4400
+v 0.4400 0.8500 -0.4400
+v 0.3600 0.8500 -0.4400
+v 0.3600 0.0000 -0.3600
+v 0.4400 0.0000 -0.3600
+v 0.4400 0.8500 -0.3600
+v 0.3600 0.8500 -0.3600
+f 9 12 11 10
+f 13 14 15 16
+f 9 10 14 13
+f 11 12 16 15
+f 10 11 15 14
+f 9 13 16 12

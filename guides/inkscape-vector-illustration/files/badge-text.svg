@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" width="100mm" height="100mm" viewBox="0 0 400 400">
+<title>Badge for text on a path — Shortcut Press practice file</title>
+<g inkscape:groupmode="layer" inkscape:label="Badge" id="badge">
+<circle cx="200" cy="200" r="170" fill="#264653"/>
+<circle cx="200" cy="200" r="150" fill="none" stroke="#F4F4F1" stroke-width="3"/>
+<circle cx="200" cy="200" r="70" fill="#E9C46A"/>
+<path d="M200 140 l 18 38 42 6 -30 29 7 42 -37 -20 -37 20 7 -42 -30 -29 42 -6 Z" fill="#264653"/>
+</g>
+<g inkscape:groupmode="layer" inkscape:label="Guide" id="guide">
+<path id="text-guide" d="M 80 200 A 120 120 0 0 1 320 200" fill="none" stroke="#E76F51" stroke-width="1.5" stroke-dasharray="4 4"/>
+</g>
+</svg>

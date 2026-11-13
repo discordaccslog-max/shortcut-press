@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="360" viewBox="0 0 420 360" font-family="Arial, Helvetica, sans-serif">
+<title>Interface pieces — Shortcut Press practice file</title>
+<rect width="420" height="360" fill="#F4F4F1"/>
+<g id="button"><rect x="24" y="24" width="140" height="44" rx="10" fill="#3D6600"/><text x="94" y="51" font-size="15" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Sign in</text></g>
+<g id="text-field"><text x="24" y="104" font-size="13" fill="#55595F">Email</text><rect x="24" y="112" width="240" height="44" rx="8" fill="#FFFFFF" stroke="#CBCBC4"/><text x="38" y="139" font-size="14" fill="#9A9EA4">name@example.org</text></g>
+<g id="card"><rect x="24" y="180" width="240" height="150" rx="14" fill="#FFFFFF" stroke="#E0E0DA"/><rect x="40" y="196" width="208" height="70" rx="8" fill="#E0E0DA"/><text x="40" y="290" font-size="15" fill="#0F1012" font-weight="bold">Card title</text><text x="40" y="312" font-size="13" fill="#55595F">Supporting text</text></g>
+<g id="toggle"><rect x="300" y="40" width="52" height="30" rx="15" fill="#3D6600"/><circle cx="337" cy="55" r="11" fill="#FFFFFF"/></g>
+</svg>

@@ -11,5 +11,9 @@
     "kit": "node tools/kit/kit.mjs",
     "serve": "node tools/serve.mjs"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "fast-formula-parser": "^1.0.19",
+    "mp4-muxer": "^5.2.2",
+    "playwright-core": "^1.65.0"
+  }
 }

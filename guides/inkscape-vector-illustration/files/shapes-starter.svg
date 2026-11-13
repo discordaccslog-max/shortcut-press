@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" width="150mm" height="100mm" viewBox="0 0 600 400">
+<title>Shapes starter — Shortcut Press practice file</title>
+<g inkscape:groupmode="layer" inkscape:label="Reference" id="reference">
+<text x="20" y="40" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#55595F">Build this icon from a circle and eight rounded bars</text>
+<g transform="translate(470 220)" fill="none" stroke="#9A9EA4" stroke-width="3" stroke-dasharray="6 6">
+<circle r="40"/>
+<rect x="-6" y="-92" width="12" height="30" rx="6" transform="rotate(0)"/><rect x="-6" y="-92" width="12" height="30" rx="6" transform="rotate(45)"/><rect x="-6" y="-92" width="12" height="30" rx="6" transform="rotate(90)"/><rect x="-6" y="-92" width="12" height="30" rx="6" transform="rotate(135)"/><rect x="-6" y="-92" width="12" height="30" rx="6" transform="rotate(180)"/><rect x="-6" y="-92" width="12" height="30" rx="6" transform="rotate(225)"/><rect x="-6" y="-92" width="12" height="30" rx="6" transform="rotate(270)"/><rect x="-6" y="-92" width="12" height="30" rx="6" transform="rotate(315)"/>
+</g>
+<g transform="translate(20 340)"><rect x="0" y="0" width="40" height="40" rx="6" fill="#F2C14E" stroke="#30353C"/><rect x="50" y="0" width="40" height="40" rx="6" fill="#E76F51" stroke="#30353C"/><rect x="100" y="0" width="40" height="40" rx="6" fill="#2A9D8F" stroke="#30353C"/><rect x="150" y="0" width="40" height="40" rx="6" fill="#264653" stroke="#30353C"/><rect x="200" y="0" width="40" height="40" rx="6" fill="#E9C46A" stroke="#30353C"/><rect x="250" y="0" width="40" height="40" rx="6" fill="#F4F4F1" stroke="#30353C"/></g>
+</g>
+<g inkscape:groupmode="layer" inkscape:label="Your drawing" id="drawing"/>
+</svg>

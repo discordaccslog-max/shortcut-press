@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" width="150mm" height="100mm" viewBox="0 0 600 400">
+<title>Sketch to trace — Shortcut Press practice file</title>
+<g inkscape:groupmode="layer" inkscape:label="Sketch" id="sketch" sodipodi:insensitive="true" opacity="0.45">
+<path d="M150 320 C 70 250, 90 120, 190 70 C 260 140, 250 260, 150 320 Z" fill="none" stroke="#7A7F86" stroke-width="2.5"/>
+<path d="M150 320 L 150 360 M 152 300 C 170 220, 180 150, 190 80" fill="none" stroke="#7A7F86" stroke-width="2"/>
+<path d="M360 150 h 140 v 140 a 30 30 0 0 1 -30 30 h -80 a 30 30 0 0 1 -30 -30 Z M 500 180 c 50 0 50 80 0 80" fill="none" stroke="#7A7F86" stroke-width="2.5"/>
+</g>
+<g inkscape:groupmode="layer" inkscape:label="Trace here" id="trace"/>
+</svg>
