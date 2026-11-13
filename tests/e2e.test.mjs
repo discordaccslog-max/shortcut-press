@@ -125,6 +125,17 @@ test("a Complete Software Skills Library code unlocks all seven guides", async (
   await context.close();
 });
 
+test("product pages hide the license notice for ordinary visitors", async () => {
+  for (const id of Object.keys(catalog)) {
+    const { context, page } = await newPage();
+    await page.goto(BASE + catalog[id].page);
+    assert.ok(await page.isHidden("[data-license-note]"), id);
+    await page.click(".dock-btn");
+    assert.ok(await page.isHidden("[data-dock-reminder]"), id + " reminder");
+    await context.close();
+  }
+});
+
 test("visitors without a license are sent to the product page", async () => {
   for (const id of Object.keys(catalog)) {
     const { context, page } = await newPage();

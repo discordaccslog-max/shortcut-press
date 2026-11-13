@@ -3,6 +3,11 @@
   Extends css/styles.css and uses its tokens (spacing, radii, type scale, colors).
 */
 
+/* The hidden attribute always wins over component display rules. */
+[hidden] {
+  display: none !important;
+}
+
 /* larger interface setting */
 :root[data-ui="large"] {
   font-size: 112.5%;
