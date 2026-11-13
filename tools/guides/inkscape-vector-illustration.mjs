@@ -1,0 +1,248 @@
+import { k } from "./_helpers.mjs";
+
+export default {
+  id: "inkscape-vector-illustration",
+  slug: "inkscape-vector-illustration",
+  title: "Vector Illustration in Inkscape",
+  software: "Inkscape",
+  apps: ["Inkscape"],
+  intro:
+    "Draw clean vector artwork in Inkscape: shapes, paths, the pen tool, text, and exporting for print and web. The steps follow Inkscape 1.x, the current series.",
+  platformNote: "Shortcuts are shown for Windows and Linux. On a Mac, use Cmd in place of Ctrl.",
+  files: [
+    { name: "shapes-starter.svg", title: "Shapes starter", desc: "A blank page with a color swatch strip and outlines to copy with the shape tools." },
+    { name: "path-combine.svg", title: "Shapes to combine", desc: "Overlapping circles and rectangles for practicing union, difference and intersection." },
+    { name: "sketch-to-trace.svg", title: "Sketch to trace", desc: "A light gray line sketch of a leaf and a cup on a locked layer, for the pen tool." },
+    { name: "badge-text.svg", title: "Badge for text on a path", desc: "A round badge with a circular guide path for placing text along a curve." },
+  ],
+  shortcuts: [
+    { keys: "S", action: "Selector tool", app: "Inkscape" },
+    { keys: "N", action: "Node tool", app: "Inkscape" },
+    { keys: "R", action: "Rectangle tool", app: "Inkscape" },
+    { keys: "E", action: "Ellipse tool", app: "Inkscape" },
+    { keys: "B", action: "Pen (Bezier) tool", app: "Inkscape" },
+    { keys: "P", action: "Pencil tool", app: "Inkscape" },
+    { keys: "T", action: "Text tool", app: "Inkscape" },
+    { keys: "D", action: "Dropper tool", app: "Inkscape" },
+    { keys: "Ctrl+G", action: "Group", app: "Inkscape" },
+    { keys: "Ctrl+Shift+G", action: "Ungroup", app: "Inkscape" },
+    { keys: "Ctrl+D", action: "Duplicate", app: "Inkscape" },
+    { keys: "Ctrl++", action: "Path > Union", app: "Inkscape" },
+    { keys: "Ctrl+-", action: "Path > Difference", app: "Inkscape" },
+    { keys: "Ctrl+*", action: "Path > Intersection", app: "Inkscape" },
+    { keys: "Ctrl+Shift+F", action: "Open Fill and Stroke", app: "Inkscape" },
+    { keys: "Ctrl+Shift+E", action: "Open the Export dialog", app: "Inkscape" },
+    { keys: "Ctrl+Shift+D", action: "Open Document Properties", app: "Inkscape" },
+    { keys: "Home", action: "Raise the selection to the top", app: "Inkscape" },
+    { keys: "End", action: "Lower the selection to the bottom", app: "Inkscape" },
+    { keys: "Shift+C", action: "Make selected nodes corners (Node tool)", app: "Inkscape" },
+    { keys: "Shift+S", action: "Make selected nodes smooth (Node tool)", app: "Inkscape" },
+    { keys: "Ctrl+Z", action: "Undo", app: "Inkscape" },
+    { keys: "Ctrl+Shift+C", action: "Path > Object to Path", app: "Inkscape", practice: false, note: "Your browser may reserve this shortcut for developer tools." },
+    { keys: "Ctrl+Shift+A", action: "Open Align and Distribute", app: "Inkscape", practice: false, note: "Some browsers reserve this shortcut for searching tabs." },
+  ],
+  lessons: [
+    {
+      id: "shapes",
+      title: "Shapes",
+      summary: "Draw rectangles, circles, stars and polygons, set fill and stroke, and arrange, align and group objects.",
+      diagram: { type: "compare", title: "Shape tools and what they draw", left: { title: "Tool (key)", items: ["Rectangle (R)", "Ellipse (E)", "Star and Polygon (*)", "Selector (S)", "Node (N)"] }, right: { title: "Use it for", items: ["Boxes, rounded corners", "Circles, arcs and segments", "Stars and regular polygons", "Move, scale, rotate", "Edit points on a path"] } },
+      steps: [
+        {
+          title: "Draw shapes",
+          body: `<p>Press ${k("R")} for the Rectangle tool or ${k("E")} for the Ellipse tool, then drag on the page. Hold ${k("Ctrl")} while dragging for a square or circle. The Star and Polygon tool (on the toolbar, or ${k("*")}) draws stars or regular polygons; set the number of corners in the tool controls bar at the top. Rectangle corners can be rounded by dragging the small round handle at a corner.</p>`,
+        },
+        {
+          title: "Fill and stroke",
+          body: `<p>Click a swatch in the palette at the bottom of the window to set the fill; ${k("Shift")} + click a swatch sets the stroke (outline). For exact colors, stroke width and dashes, open <strong>Object &gt; Fill and Stroke</strong> (${k("Ctrl", "Shift", "F")}).</p>`,
+        },
+        {
+          title: "Select, move and transform",
+          body: `<p>Press ${k("S")} for the Selector tool. Click an object to show the scale arrows; click it again to switch to rotate and skew arrows. Hold ${k("Ctrl")} while scaling to keep proportions. Exact position and size can be typed in the tool controls bar (X, Y, W, H).</p>`,
+        },
+        {
+          title: "Align, order and group",
+          body: `<p><strong>Object &gt; Align and Distribute</strong> lines objects up relative to each other, the page or the first selected. ${k("Home")} raises the selection to the top of the stacking order and ${k("End")} lowers it to the bottom. ${k("Ctrl", "G")} groups the selection so it moves as one; ${k("Ctrl", "Shift", "G")} ungroups.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "How do you set an object's stroke color from the palette?", options: ["Click a swatch", "Shift + click a swatch", "Double-click a swatch", "Right-click the object"], answer: 1, explain: "A plain click sets the fill; Shift + click sets the stroke." },
+        { q: "Which key held while drawing makes a perfect circle with the Ellipse tool?", options: ["Shift", "Ctrl", "Alt", "Space"], answer: 1, explain: "Ctrl constrains the Ellipse tool to a circle and the Rectangle tool to a square." },
+      ],
+      exercise: {
+        title: "Build a simple icon from shapes",
+        task: `<p>Open <strong>shapes-starter.svg</strong> and build the outlined “sun” icon beside it: a circle with eight short rounded rectangles around it, all centered, with the same stroke color, grouped as one object.</p>`,
+        files: ["shapes-starter.svg"],
+        solution: [
+          `Press ${k("E")} and ${k("Ctrl")} + drag a circle about 80 px across. Set a fill swatch and Shift + click a darker swatch for the stroke.`,
+          `Press ${k("R")} and draw a small bar about 12 × 30 px above the circle; drag its corner handle to round it.`,
+          `With the bar selected, press ${k("Ctrl", "D")} to duplicate, click it again to show the rotate arrows, and drag its rotation center onto the circle's center. Rotate by 45° (hold Ctrl while rotating to snap in 15° steps). Repeat until there are eight bars.`,
+          `Select everything (Ctrl+A), center it with Align and Distribute relative to the circle, and press ${k("Ctrl", "G")}.`,
+        ],
+      },
+    },
+    {
+      id: "paths",
+      title: "Paths",
+      summary: "Convert shapes to paths, edit nodes, and combine shapes with union, difference and intersection.",
+      diagram: { type: "booleans" },
+      steps: [
+        {
+          title: "Shapes and paths",
+          body: `<p>Rectangles, ellipses and stars stay editable as shapes, with their own handles. To edit their outlines point by point, convert them with <strong>Path &gt; Object to Path</strong>. A path is a series of nodes joined by straight or curved segments.</p>`,
+        },
+        {
+          title: "Edit nodes",
+          body: `<p>Press ${k("N")} for the Node tool and click a path to see its nodes. Drag a node or a segment to reshape it; double-click a segment to add a node; select a node and press ${k("Delete")} to remove it. ${k("Shift", "C")} turns selected nodes into sharp corners and ${k("Shift", "S")} into smooth curves. The same options are on the Node tool's controls bar.</p>`,
+        },
+        {
+          title: "Combine shapes",
+          body: `<p>Select two or more overlapping objects and use the <strong>Path</strong> menu:</p>
+<ul><li><strong>Union</strong> (${k("Ctrl", "+")}) merges them into one outline.</li>
+<li><strong>Difference</strong> (${k("Ctrl", "-")}) cuts the top object out of the bottom one.</li>
+<li><strong>Intersection</strong> (${k("Ctrl", "*")}) keeps only where they overlap.</li>
+<li><strong>Exclusion</strong> keeps where they don't overlap; <strong>Division</strong> cuts the bottom object into pieces along the top one.</li></ul>
+<p>For Difference, the stacking order matters: the object on top is the one removed.</p>`,
+        },
+        {
+          title: "Strokes to shapes",
+          body: `<p><strong>Path &gt; Stroke to Path</strong> turns an outline into a filled shape of the same thickness. Do this before combining strokes with other shapes, or when an icon must keep its line weight when scaled.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "For Path > Difference, which object is cut away?", options: ["The bottom one", "The top one", "The larger one", "The one selected first"], answer: 1, explain: "Difference subtracts the top object from the one beneath it." },
+        { q: "With the Node tool, what's the quickest way to add a node to a segment?", options: ["Press A", "Double-click the segment", "Press Ctrl+N", "Right-click the path"], answer: 1, explain: "With the Node tool, double-clicking a segment adds a node at that spot." },
+      ],
+      exercise: {
+        title: "Make a cloud and a crescent",
+        task: `<p>Open <strong>path-combine.svg</strong>. Merge the three overlapping circles and the rectangle into one cloud shape, and turn the pair of circles on the right into a crescent moon.</p>`,
+        files: ["path-combine.svg"],
+        solution: [
+          `Cloud: select the three circles and the rectangle on the left (Shift + click each) and press ${k("Ctrl", "+")} (Path &gt; Union). They become a single path.`,
+          "Crescent: on the right, check the smaller circle is on top (select it and press Home if needed), then select both circles.",
+          `Press ${k("Ctrl", "-")} (Path &gt; Difference). The top circle is cut out, leaving a crescent.`,
+          `Press ${k("N")} and adjust a node or two to refine the shapes.`,
+        ],
+      },
+    },
+    {
+      id: "pen-tool",
+      title: "The pen tool",
+      summary: "Draw straight and curved segments, adjust nodes and handles, and trace over a sketch.",
+      diagram: { type: "bezier", variant: "handles", title: "Nodes and handles shape a curve" },
+      steps: [
+        {
+          title: "Straight lines and corners",
+          body: `<p>Press ${k("B")} for the Pen (Bezier) tool. Click to place a node, click again for the next one, and a straight segment joins them. Hold ${k("Ctrl")} to keep segments at 15° steps. Finish an open path with ${k("Enter")} or a right-click; close it by clicking the first node. ${k("Backspace")} removes the last node while you're drawing.</p>`,
+        },
+        {
+          title: "Curves",
+          body: `<p>Click and <em>drag</em> to place a smooth node: the drag pulls out handles that set the direction and depth of the curve. Place nodes at the start and end of each curve, not in the middle of it; fewer nodes give smoother shapes.</p>`,
+        },
+        {
+          title: "Adjust afterwards",
+          body: `<p>Switch to the Node tool (${k("N")}) to drag nodes and handles. Shorter handles give tighter curves. ${k("Shift", "C")} turns a smooth node into a corner, letting the handles move independently.</p>`,
+        },
+        {
+          title: "Trace over a sketch",
+          body: `<p>Import a sketch with <strong>File &gt; Import</strong>, lower its opacity in Fill and Stroke, and lock it in <strong>Layer &gt; Layers and Objects</strong> so it can't be moved by accident. Draw over it with the pen on a new layer, then hide or delete the sketch.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "How do you place a smooth curved node with the pen?", options: ["Click", "Click and drag", "Double-click", "Shift + click"], answer: 1, explain: "Dragging while placing a node pulls out handles that make it smooth." },
+        { q: "How do you finish an open path?", options: ["Press Enter or right-click", "Press Esc twice", "Click the last node again", "Press Ctrl+S"], answer: 0, explain: "Enter or a right-click ends the path without closing it." },
+      ],
+      exercise: {
+        title: "Trace the leaf",
+        task: `<p>Open <strong>sketch-to-trace.svg</strong>. The sketch is on a locked layer. On the empty layer above it, trace the leaf as one closed path using as few nodes as you can, then add a straight stem line.</p>`,
+        files: ["sketch-to-trace.svg"],
+        solution: [
+          "In Layer &gt; Layers and Objects, select the layer named Trace here so new drawing goes on it.",
+          `Press ${k("B")}. Click at the leaf's tip, then click and drag at the widest point of one side so the handle follows the edge; click and drag again at the base.`,
+          "Continue up the other side with one more dragged node, then click the first node to close the path.",
+          `Press ${k("N")} and adjust the handles until the outline follows the sketch. Draw the stem with two plain clicks and press Enter.`,
+          "Hide the sketch layer (the eye in Layers and Objects) to check the result.",
+        ],
+      },
+    },
+    {
+      id: "text",
+      title: "Text",
+      summary: "Add and style text, place text along a path, and convert text to paths when a file needs it.",
+      diagram: { type: "textpath" },
+      steps: [
+        {
+          title: "Add and style text",
+          body: `<p>Press ${k("T")}, click on the page and type. Clicking creates text on one line; dragging a box creates text that wraps inside it. Change the font family, style and size in the tool controls bar, or in <strong>Text &gt; Text and Font</strong>.</p>`,
+        },
+        {
+          title: "Spacing",
+          body: `<p>The Text tool's controls bar also sets line spacing and letter spacing. For one pair of letters, put the cursor between them and press ${k("Alt", "ArrowLeft")} or ${k("Alt", "ArrowRight")} to move them closer or further apart.</p>`,
+        },
+        {
+          title: "Text on a path",
+          body: `<p>Select a text object and a path together, then choose <strong>Text &gt; Put on Path</strong>. The text follows the path and stays editable. Move the start point by changing the text's alignment or adding spaces; flip which side it runs on by reversing the path (<strong>Path &gt; Reverse</strong>). <strong>Text &gt; Remove from Path</strong> undoes it.</p>`,
+        },
+        {
+          title: "Convert text to paths",
+          body: `<p>If a file will be opened on a computer without your fonts, or cut by a machine, convert the text: select it and choose <strong>Path &gt; Object to Path</strong>. It's no longer editable as text, so keep an unconverted copy.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Which menu command places text along a curve?", options: ["Path > Union", "Text > Put on Path", "Object > Align", "Text > Flow into Frame"], answer: 1, explain: "Put on Path makes text follow the selected path while staying editable." },
+        { q: "Why convert text to paths before sending a file to print?", options: ["To make it bold", "So it looks right without the font installed", "To make the file editable", "To change the language"], answer: 1, explain: "Paths don't depend on fonts, so the letters look the same anywhere." },
+      ],
+      exercise: {
+        title: "Finish the badge",
+        task: `<p>Open <strong>badge-text.svg</strong>. Put the words “HANDMADE WITH CARE” around the top of the badge on the circular guide path, centered, then hide the guide.</p>`,
+        files: ["badge-text.svg"],
+        solution: [
+          `Press ${k("T")}, click on the page and type HANDMADE WITH CARE. Choose a bold font and a size around 18 px.`,
+          "With the Selector, select the text, then Shift + click the circular guide path.",
+          "Text &gt; Put on Path. If the text runs inside the circle or upside down, select the guide and use Path &gt; Reverse.",
+          "Center the text along the top by setting the text to centered alignment, or by adding spaces in front.",
+          "Select the guide path and remove its stroke so it no longer shows, keeping it in place for the text.",
+        ],
+      },
+    },
+    {
+      id: "exporting",
+      title: "Exporting for print and web",
+      summary: "Set document size and units, export PNG images at the size you need, save SVG files for the web, and save PDF files for print.",
+      diagram: { type: "export", title: "One drawing, three outputs" },
+      steps: [
+        {
+          title: "Document size and units",
+          body: `<p>Open <strong>File &gt; Document Properties</strong> (${k("Ctrl", "Shift", "D")}) to set the page size and display units: pixels for screen work, millimeters or inches for print. <em>Resize to content</em> shrinks the page to fit the drawing.</p>`,
+        },
+        {
+          title: "Export a PNG",
+          body: `<p>Open <strong>File &gt; Export</strong> (${k("Ctrl", "Shift", "E")}). Choose what to export (Document, Page, Selection or Custom area), set the size in pixels or the DPI (96 for screen, 300 for print), choose PNG as the format, set the file name, and select <strong>Export</strong>.</p>`,
+        },
+        {
+          title: "SVG for the web",
+          body: `<p>Inkscape's own SVG files include extra editing information. For a website, choose <strong>File &gt; Save a Copy</strong> and pick <em>Plain SVG</em> or <em>Optimized SVG</em> as the file type; both are smaller and contain only the drawing. Keep the Inkscape SVG as your editable master.</p>`,
+        },
+        {
+          title: "PDF for print",
+          body: `<p>Choose <strong>File &gt; Save a Copy</strong> and pick PDF, or choose PDF as the format in the Export dialog. In the PDF options, choose to embed fonts or convert text to paths, and pick the area to include. Ask your printer whether they need a bleed area beyond the trim edge.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Which DPI suits a PNG for print?", options: ["72", "96", "300", "1200"], answer: 2, explain: "300 DPI is the common standard for printed images; 96 is typical for screens." },
+        { q: "What's the advantage of Plain or Optimized SVG for a website?", options: ["It keeps Inkscape's editing information", "It's smaller and contains only the drawing", "It can't be scaled", "It embeds a PNG"], answer: 1, explain: "Plain and Optimized SVG drop Inkscape-specific data, making cleaner, smaller files." },
+      ],
+      exercise: {
+        title: "Export the badge three ways",
+        task: `<p>Export your finished badge as a 512 × 512 px PNG, an optimized SVG for a website, and a PDF with the text converted to paths.</p>`,
+        files: ["badge-text.svg"],
+        solution: [
+          "Select the whole badge. File &gt; Export, choose Selection, set Width to 512 px (the height follows), choose PNG, name it badge.png, and select Export.",
+          "File &gt; Save a Copy, file type Optimized SVG, name badge-web.svg, and accept the default options.",
+          "File &gt; Save a Copy, file type PDF, name badge-print.pdf. In the PDF options, choose Convert text to paths.",
+          "Keep badge-text.svg as the editable master.",
+        ],
+      },
+    },
+  ],
+};

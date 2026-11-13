@@ -1,0 +1,334 @@
+import { k } from "./_helpers.mjs";
+
+export default {
+  id: "blender-3d-modeling",
+  slug: "blender-3d-modeling-fundamentals",
+  title: "3D Modeling Fundamentals in Blender",
+  software: "Blender",
+  apps: ["Blender"],
+  intro:
+    "Build and render your first 3D scenes in Blender: navigating the interface, modeling with basic shapes, modifiers, materials, lighting, and rendering a finished scene. The steps use Blender's default keymap and left-click selection.",
+  platformNote: "Shortcuts are shown for Windows and Linux. On a Mac, use Cmd in place of Ctrl and Option in place of Alt. Most shortcuts work when the mouse pointer is over the 3D Viewport.",
+  files: [
+    { name: "blockout-shapes.obj", title: "Blockout shapes", desc: "A cube, a cylinder and a sphere spaced apart, for the navigation and selection lesson." },
+    { name: "stool-start.obj", title: "Stool starter", desc: "A seat and one leg, for practicing extrude, loop cuts and duplicates." },
+    { name: "mug-half.obj", title: "Half a mug", desc: "One half of a mug body centered on the X axis, for the Mirror and Subdivision Surface modifiers." },
+    { name: "room-scene.obj", title: "Room scene", desc: "A floor, two walls, a table and simple props, for the materials, lighting and rendering lessons." },
+  ],
+  shortcuts: [
+    { keys: "G", action: "Move (grab) the selection", app: "Blender" },
+    { keys: "R", action: "Rotate the selection", app: "Blender" },
+    { keys: "S", action: "Scale the selection", app: "Blender" },
+    { keys: "Tab", action: "Switch between Object Mode and Edit Mode", app: "Blender" },
+    { keys: "Shift+A", action: "Open the Add menu", app: "Blender" },
+    { keys: "Shift+D", action: "Duplicate the selection", app: "Blender" },
+    { keys: "A", action: "Select all", app: "Blender" },
+    { keys: "Alt+A", action: "Deselect all", app: "Blender" },
+    { keys: "X", action: "Delete menu", app: "Blender" },
+    { keys: "E", action: "Extrude (Edit Mode)", app: "Blender" },
+    { keys: "I", action: "Inset faces (Edit Mode)", app: "Blender" },
+    { keys: "Ctrl+B", action: "Bevel edges (Edit Mode)", app: "Blender" },
+    { keys: "1", action: "Vertex select (Edit Mode)", app: "Blender" },
+    { keys: "2", action: "Edge select (Edit Mode)", app: "Blender" },
+    { keys: "3", action: "Face select (Edit Mode)", app: "Blender" },
+    { keys: "H", action: "Hide the selection", app: "Blender" },
+    { keys: "Alt+H", action: "Reveal hidden objects", app: "Blender" },
+    { keys: "N", action: "Toggle the sidebar", app: "Blender" },
+    { keys: "Z", action: "Viewport shading pie menu", app: "Blender" },
+    { keys: "Home", action: "Frame all objects in the view", app: "Blender" },
+    { keys: "Numpad1", action: "Front view", app: "Blender", note: "Needs a numeric keypad, or Emulate Numpad in Preferences." },
+    { keys: "Numpad3", action: "Right view", app: "Blender" },
+    { keys: "Numpad7", action: "Top view", app: "Blender" },
+    { keys: "Numpad0", action: "Look through the active camera", app: "Blender" },
+    { keys: "Ctrl+A", action: "Apply menu (Apply Scale and more)", app: "Blender" },
+    { keys: "F9", action: "Reopen the Adjust Last Operation panel", app: "Blender" },
+    { keys: "Ctrl+Z", action: "Undo", app: "Blender" },
+    { keys: "Ctrl+S", action: "Save the .blend file", app: "Blender" },
+    { keys: "Ctrl+R", action: "Loop cut (Edit Mode)", app: "Blender", practice: false, note: "Your browser uses this shortcut to reload the page." },
+    { keys: "F12", action: "Render the image", app: "Blender", practice: false, note: "Your browser may reserve this key for developer tools." },
+  ],
+  lessons: [
+    {
+      id: "navigating",
+      title: "Navigating the interface",
+      summary: "Move around the 3D view, select objects, switch modes, and find the editors you'll use most.",
+      diagram: { type: "mesh", variant: "axes", title: "The three axes and the transform keys" },
+      steps: [
+        {
+          title: "The main editors",
+          body: `<p>Blender's default layout has four editors you'll use constantly:</p>
+<ul><li><strong>3D Viewport</strong> (the big area): where you see and edit the scene.</li>
+<li><strong>Outliner</strong> (top right): a list of every object; click a name to select it.</li>
+<li><strong>Properties editor</strong> (bottom right): tabs for render settings, the selected object, modifiers, materials and more.</li>
+<li><strong>Timeline</strong> (bottom): for animation; you can ignore it in this guide.</li></ul>
+<p>Shortcuts act on the editor under the mouse pointer, so keep the pointer over the 3D Viewport when pressing them.</p>`,
+        },
+        {
+          title: "Orbit, pan and zoom",
+          body: `<ul><li><strong>Orbit:</strong> hold the middle mouse button and drag.</li>
+<li><strong>Pan:</strong> hold ${k("Shift")} and the middle mouse button and drag.</li>
+<li><strong>Zoom:</strong> scroll the wheel.</li></ul>
+<p>The navigation gizmo in the top-right corner of the viewport does the same with a left-click drag; click an axis letter to snap to that view. On a laptop without a middle button, go to <strong>Edit &gt; Preferences &gt; Input</strong> and turn on <em>Emulate 3 Button Mouse</em> (then ${k("Alt")} + left-drag orbits), and <em>Emulate Numpad</em> if you have no numeric keypad.</p>`,
+        },
+        {
+          title: "Standard views",
+          body: `<p>On the numeric keypad: ${k("Numpad1")} front, ${k("Numpad3")} right, ${k("Numpad7")} top, ${k("Numpad5")} switches between perspective and orthographic, and ${k("Numpad0")} looks through the camera. ${k("Home")} frames everything; ${k("Numpad.")} frames just the selection. Hold ${k("Ctrl")} with 1, 3 or 7 for the opposite side.</p>`,
+        },
+        {
+          title: "Select objects",
+          body: `<p>Left-click selects an object; ${k("Shift")} + left-click adds to or removes from the selection. ${k("A")} selects everything and ${k("Alt", "A")} deselects. Drag on empty space to box-select. The last object selected is the <em>active</em> one, drawn with a lighter outline; many tools use it as the reference.</p>`,
+        },
+        {
+          title: "Object Mode and Edit Mode",
+          body: `<p>In <strong>Object Mode</strong> you move whole objects. Press ${k("Tab")} for <strong>Edit Mode</strong> to work on an object's vertices, edges and faces, and ${k("Tab")} again to go back. The mode drop-down at the top left of the viewport shows which mode you're in. ${k("N")} toggles the sidebar with exact location, rotation and scale values.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Which key switches between Object Mode and Edit Mode?", options: ["E", "Tab", "M", "Space"], answer: 1, explain: "Tab toggles Edit Mode for the selected object." },
+        { q: "You have no middle mouse button. Where do you turn on mouse emulation?", options: ["File > Preferences", "Edit > Preferences > Input", "View > Navigation", "Render Properties"], answer: 1, explain: "Emulate 3 Button Mouse and Emulate Numpad are in Edit > Preferences > Input." },
+        { q: "Which key frames every object in the 3D Viewport?", options: ["Home", "F", "Numpad5", "Ctrl+Space"], answer: 0, explain: "Home fits all objects into view; Numpad period frames only the selection." },
+      ],
+      exercise: {
+        title: "Find your way around",
+        task: `<p>Import <strong>blockout-shapes.obj</strong>, then look at it from the front, right and top, select only the sphere, and frame it.</p>`,
+        files: ["blockout-shapes.obj"],
+        solution: [
+          "Start Blender with the default scene. Select the default cube and press X &gt; Delete if you don't want it.",
+          "<strong>File &gt; Import &gt; Wavefront (.obj)</strong>, choose blockout-shapes.obj, and select <em>Import Wavefront OBJ</em>.",
+          `With the pointer over the viewport, press ${k("Numpad1")}, ${k("Numpad3")} and ${k("Numpad7")} (or click X, Y and Z on the navigation gizmo).`,
+          `Press ${k("Alt", "A")}, click the sphere (or its name in the Outliner), then press ${k("Numpad.")} to frame it. Press ${k("Home")} to see everything again.`,
+        ],
+      },
+    },
+    {
+      id: "basic-shapes",
+      title: "Modeling with basic shapes",
+      summary: "Add basic shapes, move, rotate and scale them, and shape them further with extrude, inset and loop cuts.",
+      diagram: { type: "mesh", variant: "extrude", title: "Extruding a face" },
+      steps: [
+        {
+          title: "Add a shape",
+          body: `<p>Press ${k("Shift", "A")} &gt; <strong>Mesh</strong> and choose Cube, UV Sphere, Cylinder or another primitive. It appears at the 3D cursor (the red and white target). Straight away, open the <strong>Adjust Last Operation</strong> panel in the bottom-left corner of the viewport (or press ${k("F9")}) to set its size, number of vertices and position before doing anything else.</p>`,
+        },
+        {
+          title: "Move, rotate and scale",
+          body: `<p>Press ${k("G")}, ${k("R")} or ${k("S")}, move the mouse, and left-click to confirm (right-click or ${k("Esc")} cancels). Add ${k("X")}, ${k("Y")} or ${k("Z")} to lock to an axis, and type a number for an exact amount: <kbd>S</kbd> <kbd>Z</kbd> <kbd>0</kbd><kbd>.</kbd><kbd>5</kbd> <kbd>Enter</kbd> halves the height.</p>
+<p>After scaling in Object Mode, press ${k("Ctrl", "A")} &gt; <strong>Scale</strong> to apply it. Bevels and modifiers behave unevenly on objects with unapplied scale.</p>`,
+        },
+        {
+          title: "Edit vertices, edges and faces",
+          body: `<p>In Edit Mode, press ${k("1")}, ${k("2")} or ${k("3")} (on the number row) for vertex, edge or face selection. G, R and S work on the selected parts. ${k("X")} opens the Delete menu, where you choose what to delete.</p>`,
+        },
+        {
+          title: "Extrude, inset and loop cuts",
+          body: `<ul><li>${k("E")} <strong>extrudes</strong> the selected faces, edges or vertices: it pulls out new geometry joined to the old.</li>
+<li>${k("I")} <strong>insets</strong> the selected faces, making a smaller face inside each one.</li>
+<li>${k("Ctrl", "R")} adds a <strong>loop cut</strong>: hover over an edge to preview the loop, scroll to add more cuts, click to confirm, then slide it or right-click to leave it centered.</li>
+<li>${k("Ctrl", "B")} <strong>bevels</strong> selected edges; scroll while dragging to add segments.</li></ul>`,
+        },
+        {
+          title: "Duplicate and snap",
+          body: `<p>${k("Shift", "D")} duplicates the selection and starts moving it; press an axis key to keep it in line. Hold ${k("Ctrl")} while moving to snap to the grid, or turn on snapping in the viewport header (the magnet).</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Which keys scale the selection to half its height?", options: ["S, Z, 0.5, Enter", "G, Z, 0.5, Enter", "S, X, 2, Enter", "R, Z, 0.5, Enter"], answer: 0, explain: "S scales, Z locks to the vertical axis, and 0.5 sets the factor." },
+        { q: "Why apply scale (Ctrl+A > Scale) after resizing an object?", options: ["To save memory", "So bevels and modifiers behave evenly", "To make the object visible in renders", "To unlock Edit Mode"], answer: 1, explain: "Unapplied scale distorts tools such as Bevel that work in real distances." },
+        { q: "What does pressing I do with faces selected in Edit Mode?", options: ["Insets them", "Inserts a keyframe", "Inverts the selection", "Imports a file"], answer: 0, explain: "In Edit Mode with faces selected, I insets them. (In Object Mode the same key inserts a keyframe.)" },
+      ],
+      exercise: {
+        title: "Finish the stool",
+        task: `<p>Import <strong>stool-start.obj</strong>, which has a seat and one leg. Give the seat a rim with inset and extrude, then make three more legs so the stool stands evenly.</p>`,
+        files: ["stool-start.obj"],
+        solution: [
+          "Import it with File &gt; Import &gt; Wavefront (.obj).",
+          `Select the seat, press ${k("Tab")}, then ${k("3")} for face select and click the top face.`,
+          `Press ${k("I")} and move the mouse to inset about 0.05, click, then ${k("E")} and move down slightly to sink the middle, making a rim. Press ${k("Tab")} to leave Edit Mode.`,
+          `Select the leg, press ${k("Shift", "D")}, ${k("X")}, and type <kbd>-</kbd><kbd>0</kbd><kbd>.</kbd><kbd>8</kbd>, then Enter. The leg is copied 0.8 m along X, which matches the seat's width in the file. Select both legs, press ${k("Shift", "D")}, ${k("Y")}, <kbd>-</kbd><kbd>0</kbd><kbd>.</kbd><kbd>8</kbd>, Enter.`,
+          `Check from the front (${k("Numpad1")}) and right (${k("Numpad3")}) that all four legs reach the same height.`,
+        ],
+      },
+    },
+    {
+      id: "modifiers",
+      title: "Modifiers",
+      summary: "Work non-destructively with Mirror, Subdivision Surface, Bevel and Array, stack them in order, and apply them when you're ready.",
+      diagram: { type: "stack", title: "A modifier stack runs from top to bottom", items: ["Mirror", "Subdivision Surface", "Bevel"], highlight: 0 },
+      steps: [
+        {
+          title: "What modifiers do",
+          body: `<p>A modifier changes how an object looks without changing its actual mesh, so you can adjust or remove it at any time. Add one in the <strong>Properties editor &gt; Modifier Properties</strong> tab (the wrench), then <strong>Add Modifier &gt; Generate</strong> and choose a modifier.</p>`,
+        },
+        {
+          title: "Mirror",
+          body: `<p><strong>Mirror</strong> reflects the mesh across the object's origin, so you only model one half. Pick the axis (usually X), and tick <em>Clipping</em> so vertices on the center line can't cross it. The object's origin must sit on the line of symmetry.</p>`,
+        },
+        {
+          title: "Subdivision Surface",
+          body: `<p><strong>Subdivision Surface</strong> smooths the mesh by splitting each face. <em>Levels Viewport</em> controls the preview and <em>Render</em> the final image; 2 is usually enough. In Object Mode, ${k("Ctrl", "1")} or ${k("Ctrl", "2")} adds the modifier at that level. Add loop cuts near an edge to keep it sharper. Use <strong>Object &gt; Shade Smooth</strong> to hide the faceting.</p>`,
+        },
+        {
+          title: "Bevel and Array",
+          body: `<p><strong>Bevel</strong> rounds edges: set <em>Amount</em> and <em>Segments</em>. Apply the object's scale first so the bevel is even. <strong>Array</strong> repeats the object: set <em>Count</em> and the <em>Relative Offset</em> (1 along X places copies side by side). Fences, shelves and steps are quick with Array.</p>`,
+        },
+        {
+          title: "Order and applying",
+          body: `<p>Modifiers run from the top of the stack down: Mirror then Subdivision Surface gives a smooth join along the middle; the reverse can leave a crease. Drag a modifier by its handle to reorder it. When you're sure, open its drop-down arrow and choose <strong>Apply</strong> (or hover over it and press ${k("Ctrl", "A")}) to make the change permanent.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "In which order do modifiers run?", options: ["Bottom to top", "Top to bottom", "Alphabetically", "All at once"], answer: 1, explain: "Each modifier works on the result of the one above it." },
+        { q: "The mirrored half of your model is offset from the original. What's the likely cause?", options: ["The object's origin isn't on the line of symmetry", "Subdivision is set too high", "The material is missing", "Clipping is on"], answer: 0, explain: "Mirror reflects across the origin, so the origin has to sit on the center line." },
+      ],
+      exercise: {
+        title: "Mirror and smooth the mug",
+        task: `<p>Import <strong>mug-half.obj</strong>, which is half of a mug body whose origin is already on the center line. Use modifiers to make the full, smooth mug, then apply them.</p>`,
+        files: ["mug-half.obj"],
+        solution: [
+          "Import the file and select it.",
+          "Modifier Properties &gt; Add Modifier &gt; Generate &gt; <strong>Mirror</strong>. Keep Axis X and tick Clipping.",
+          `Add <strong>Subdivision Surface</strong> below it (or press ${k("Ctrl", "2")}). Check that Mirror is above Subdivision Surface.`,
+          "Right-click the object and choose Shade Smooth (Object &gt; Shade Smooth).",
+          "Open the Mirror modifier's drop-down and choose Apply, then do the same for Subdivision Surface. The mug is now one complete mesh.",
+        ],
+      },
+    },
+    {
+      id: "materials",
+      title: "Materials",
+      summary: "Assign materials, set base color, roughness and metallic values, and give one object more than one material.",
+      diagram: {
+        type: "compare",
+        title: "How two Principled BSDF settings change a surface",
+        left: { title: "Roughness", items: ["0.0: mirror-like gloss", "0.3: polished plastic", "0.6: satin paint", "1.0: chalky and matte"] },
+        right: { title: "Metallic", items: ["0: plastics, wood, paint", "1: bare metals", "Base Color tints metal", "Avoid values in between"] },
+        accentRight: true,
+      },
+      steps: [
+        {
+          title: "Add a material",
+          body: `<p>Select an object, open the <strong>Material Properties</strong> tab in the Properties editor, and select <strong>New</strong>. Blender creates a material using the <strong>Principled BSDF</strong> shader, which covers most real surfaces with a handful of settings. Name the material at the top so you can find it later.</p>`,
+        },
+        {
+          title: "See materials in the viewport",
+          body: `<p>Press ${k("Z")} for the shading pie menu and choose <strong>Material Preview</strong>, or use the shading buttons at the top right of the viewport. <em>Rendered</em> shading shows the final lighting but is slower.</p>`,
+        },
+        {
+          title: "The key settings",
+          body: `<ul><li><strong>Base Color:</strong> the surface color.</li>
+<li><strong>Metallic:</strong> 0 for non-metals (plastic, wood, paint), 1 for bare metal. Values in between rarely look real.</li>
+<li><strong>Roughness:</strong> 0 is mirror-smooth, 1 is completely matte. Most everyday surfaces sit between 0.3 and 0.7.</li></ul>`,
+        },
+        {
+          title: "More than one material on an object",
+          body: `<p>In Material Properties, select <strong>+</strong> to add a material slot and select <strong>New</strong> for a second material. Press ${k("Tab")}, select the faces that should use it, choose the slot and select <strong>Assign</strong>. To reuse an existing material, pick it from the browse drop-down next to its name instead of making a new one. To copy materials to other objects, select them, select the source object last, and press ${k("Ctrl", "L")} &gt; <strong>Link Materials</strong>.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "What Metallic value suits a painted wooden table?", options: ["0", "0.5", "1", "It depends on the color"], answer: 0, explain: "Paint and wood are non-metals, so Metallic should be 0." },
+        { q: "Which Roughness value gives a mirror-like shine?", options: ["0", "0.5", "1", "2"], answer: 0, explain: "Lower roughness means a smoother, glossier surface." },
+      ],
+      exercise: {
+        title: "Give the room its materials",
+        task: `<p>Import <strong>room-scene.obj</strong> and create four materials: matte floor, painted walls, a glossy table top, and a metal lamp. Give the table's legs a different material from its top.</p>`,
+        files: ["room-scene.obj"],
+        solution: [
+          "Import the scene. Each part (Floor, Walls, Table, Lamp…) is a separate object in the Outliner.",
+          "Select Floor &gt; Material Properties &gt; New, name it Floor, set a mid-brown Base Color and Roughness 0.8.",
+          "Walls: a light color, Roughness 0.6. Lamp: a gray Base Color, Metallic 1, Roughness 0.3.",
+          "Table: create a material for the top (Roughness 0.2). Add a second slot with + and a New material for the legs. In Edit Mode, select the leg faces, choose the second slot, and select Assign.",
+          `Check with ${k("Z")} &gt; Material Preview.`,
+        ],
+      },
+    },
+    {
+      id: "lighting",
+      title: "Lighting",
+      summary: "The different light types, a simple three-light setup, and using the world background to light a scene.",
+      diagram: { type: "lights" },
+      steps: [
+        {
+          title: "Light types",
+          body: `<p>Add a light with ${k("Shift", "A")} &gt; <strong>Light</strong>:</p>
+<ul><li><strong>Point:</strong> shines in every direction from one spot, like a bare bulb.</li>
+<li><strong>Sun:</strong> parallel light from one direction; only its rotation matters, not its position.</li>
+<li><strong>Spot:</strong> a cone of light, like a stage light.</li>
+<li><strong>Area:</strong> light from a flat shape; bigger areas give softer shadows.</li></ul>`,
+        },
+        {
+          title: "Light settings",
+          body: `<p>Select the light and open the <strong>Object Data Properties</strong> tab (the green bulb). Point, Spot and Area lights use <strong>Power</strong> in watts; a Sun uses <strong>Strength</strong>. Set <em>Color</em> for warm or cool light, and for an Area light increase <em>Size</em> to soften shadows.</p>`,
+        },
+        {
+          title: "A three-light setup",
+          body: `<ul><li><strong>Key light:</strong> the main, brightest light, about 45° to one side of the camera and a little above.</li>
+<li><strong>Fill light:</strong> on the opposite side, weaker, to lift the shadows.</li>
+<li><strong>Rim light:</strong> behind the subject, outlining its edges against the background.</li></ul>
+<p>Area lights work well for all three.</p>`,
+        },
+        {
+          title: "World lighting and previewing",
+          body: `<p>The <strong>World Properties</strong> tab sets the background. Its <em>Color</em> and <em>Strength</em> add soft light from every direction. Press ${k("Z")} &gt; <strong>Rendered</strong> to see the real lighting in the viewport as you adjust it.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Which light's position doesn't change the lighting, only its rotation?", options: ["Point", "Sun", "Spot", "Area"], answer: 1, explain: "A Sun light is treated as infinitely far away, so only its direction matters." },
+        { q: "How do you soften the shadows from an Area light?", options: ["Lower its power", "Increase its size", "Change it to a Point light", "Turn off the world"], answer: 1, explain: "A larger light source produces softer shadow edges." },
+      ],
+      exercise: {
+        title: "Light the room",
+        task: `<p>In the room scene with materials, add a key, fill and rim light, and set a dim world background. Preview in Rendered shading until the table is clearly lit with soft shadows.</p>`,
+        files: ["room-scene.obj"],
+        solution: [
+          "Delete the default light if it's still there.",
+          `${k("Shift", "A")} &gt; Light &gt; Area for the key light. Place it in front of the table, to one side and above; rotate it to face the table. Set Power around 300 W and Size 1 m.`,
+          "Add a second Area light on the other side at about a third of the power (fill), and a third behind the table pointing towards the camera (rim).",
+          "World Properties: set a dark blue-gray Color and Strength 0.3.",
+          `Check with ${k("Z")} &gt; Rendered and adjust the powers until no part of the table is completely black.`,
+        ],
+      },
+    },
+    {
+      id: "rendering",
+      title: "Rendering a finished scene",
+      summary: "Place a camera, choose render settings, and save a finished image of the scene you built.",
+      diagram: { type: "flow", title: "From camera to saved image", nodes: ["Place the camera", "Choose a render engine", "Set the resolution", "Render (F12)", "Save as PNG"], highlight: 3 },
+      steps: [
+        {
+          title: "Place the camera",
+          body: `<p>Add a camera with ${k("Shift", "A")} &gt; <strong>Camera</strong> if the scene has none. The easiest way to aim it: navigate the viewport until you like the view, then choose <strong>View &gt; Align View &gt; Align Active Camera to View</strong> (${k("Ctrl", "Alt", "Numpad0")}). Press ${k("Numpad0")} to look through the camera. To make another camera the active one, select it and choose <strong>View &gt; Cameras &gt; Set Active Object as Camera</strong>.</p>`,
+        },
+        {
+          title: "Choose a render engine",
+          body: `<p>In <strong>Render Properties</strong>, set <em>Render Engine</em>:</p>
+<ul><li><strong>EEVEE:</strong> fast, good for previews and stylized looks.</li>
+<li><strong>Cycles:</strong> traces light physically for realistic shadows and reflections, but takes longer. Lower <em>Samples</em> and keep <em>Denoise</em> on for quicker renders.</li>
+<li><strong>Workbench:</strong> flat shading for checking models.</li></ul>`,
+        },
+        {
+          title: "Set the size",
+          body: `<p>In <strong>Output Properties</strong>, set <em>Resolution X</em> and <em>Y</em> (1920 × 1080 for a standard landscape image) and the <em>%</em> below them. Lower the percentage for quick test renders, then set it back to 100% for the final image.</p>`,
+        },
+        {
+          title: "Render and save",
+          body: `<p>Choose <strong>Render &gt; Render Image</strong> (${k("F12")}). A window opens and fills in the image. When it's done, choose <strong>Image &gt; Save As</strong> in that window, pick PNG, and save. Save the scene itself with <strong>File &gt; Save</strong> (${k("Ctrl", "S")}) so you can return to it.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Which command points the active camera at what you're currently looking at?", options: ["View > Frame All", "View > Align View > Align Active Camera to View", "Object > Snap", "Render > View Render"], answer: 1, explain: "Align Active Camera to View (Ctrl+Alt+Numpad0) moves the camera to match the viewport." },
+        { q: "Your Cycles test renders are too slow. What's a sensible first change?", options: ["Switch the light to Sun", "Lower the samples and resolution percentage, keeping denoise on", "Delete the materials", "Turn off the camera"], answer: 1, explain: "Fewer samples and a smaller preview size speed up test renders; denoising cleans up the noise." },
+      ],
+      exercise: {
+        title: "Render the room",
+        task: `<p>Frame the lit room so the table fills about a third of the image, render it at 1920 × 1080 with Cycles, and save it as a PNG.</p>`,
+        files: ["room-scene.obj"],
+        solution: [
+          `Navigate to a three-quarter view of the table, then press ${k("Ctrl", "Alt", "Numpad0")}. Press ${k("Numpad0")} to check the framing; the camera's border shows exactly what will render.`,
+          "Render Properties: Render Engine Cycles, Samples about 128, Denoise on.",
+          "Output Properties: Resolution 1920 × 1080, 50% for a test.",
+          `${k("F12")} to test, adjust, then set 100% and render again. In the render window, Image &gt; Save As &gt; PNG.`,
+        ],
+      },
+    },
+  ],
+};
