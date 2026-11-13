@@ -192,6 +192,19 @@
 }
 
 /* ---------- dock button ---------- */
+/* Room at the end of every page so the floating button never covers the last content. */
+body::after {
+  content: "";
+  display: block;
+  height: 76px;
+}
+
+@media (max-width: 979px) {
+  .has-pbar::after {
+    height: 0;
+  }
+}
+
 .dock-btn {
   position: fixed;
   left: var(--s-4);

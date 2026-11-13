@@ -530,10 +530,10 @@ function guideShell(id) {
   if (g && g.sandbox) extra.unshift("vendor/fast-formula-parser/parser.min.js", "js/sandbox.js");
   extra.push(...(isHub ? [] : ["./content.js"]), "js/guide-app.js");
   const body = `<div id="guide-app" data-guide="${id}" data-mode="${isHub ? "hub" : "guide"}">
-  <div class="container gd-locked"><h1>${esc(p.name)}</h1>
+  <main id="main" class="container gd-locked"><h1>${esc(p.name)}</h1>
   <noscript><p class="lead">This guide runs in your browser and needs JavaScript. Turn JavaScript on and reload this page.</p></noscript>
   <p class="lead">Opening your guide…</p>
-  <p class="muted">If it doesn't open, you'll be taken to the <a href="${r}${p.page}">product page</a>, where you can add your license in My Guides.</p></div>
+  <p class="muted">If it doesn't open, you'll be taken to the <a href="${r}${p.page}">product page</a>, where you can add your license in My Guides.</p></main>
 </div>`;
   return page({ file: p.guidePath + "index.html", r, title: `${p.name} — Shortcut Press`, description: `${p.name}: the interactive guide. Requires a license.`, body, noindex: true, extraScripts: extra, noFooter: true });
 }

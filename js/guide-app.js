@@ -39,7 +39,7 @@
     var all = window.SP_GUIDES || {};
     var lib = catalog["complete-library"];
     app.innerHTML =
-      '<div class="container gd-hub"><p class="label"><span class="label-num">Your library</span></p><h1>' + esc(lib.name) + "</h1>" +
+      '<main id="main" class="container gd-hub"><p class="label"><span class="label-num">Your library</span></p><h1>' + esc(lib.name) + "</h1>" +
       '<p class="lead">Your license unlocks all seven guides. Open any of them; progress is saved separately for each guide in this browser.</p>' +
       '<ul class="gd-hub-list">' +
       (lib.includes || [])
@@ -51,7 +51,7 @@
           return '<li class="gd-hub-item"><a href="' + esc(href) + '"><span class="gd-hub-name">' + esc(p.name) + '</span><span class="gd-hub-meta"><span class="state-icon ' + (c.done === c.total && c.total ? "state-done" : c.last ? "state-progress" : "state-new") + '" aria-hidden="true"></span>' + c.done + " of " + c.total + " lessons complete · " + (c.last ? "Resume" : "Start") + '</span><span class="progress" aria-hidden="true"><span style="transform:scaleX(' + (c.percent / 100).toFixed(3) + ')"></span></span></a></li>';
         })
         .join("") +
-      "</ul></div>";
+      "</ul></main>";
     return;
   }
 

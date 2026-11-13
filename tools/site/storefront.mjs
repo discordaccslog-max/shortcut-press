@@ -14,8 +14,6 @@ export const products = [
     figureAlt: "a spreadsheet grid with a lookup traced from one cell to another",
     chapterLabel: "LOOKUPS",
     card: "Cell references, lookups, logical, text and date functions, and error handling, for Excel and Google Sheets.",
-    meta: "A self-paced PDF guide to spreadsheet formulas for Microsoft Excel and Google Sheets: cell references, lookups, logical, text and date functions, and error handling, with practice spreadsheets.",
-    lead: "A step-by-step guide to writing spreadsheet formulas that work: cell references, lookups, logical functions, text and date functions, and handling errors. Every technique is written for both Microsoft Excel and Google Sheets, and every exercise comes with a practice spreadsheet.",
     covers: [
       ["Formulas and cell references", "How a formula is put together, the difference between relative, absolute and mixed references, and what happens to each kind when you copy a formula into other cells."],
       ["Lookups", "Finding a value in one table and returning the matching value from another, exact and approximate matches, and lookups that can return a result from any column."],
@@ -54,8 +52,6 @@ export const products = [
     figureAlt: "a bar chart with one highlighted bar and a legend",
     chapterLabel: "PIVOT TABLES",
     card: "Cleaning data, building pivot tables, summarizing and filtering, and choosing and formatting charts.",
-    meta: "A self-paced PDF guide to data analysis in Microsoft Excel and Google Sheets: cleaning data, pivot tables, summarizing and filtering, and choosing and formatting charts, with practice datasets.",
-    lead: "A step-by-step guide to turning a raw table of data into clear summaries and charts. It covers cleaning data, building pivot tables, summarizing and filtering, and choosing and formatting charts, with practice datasets for every exercise.",
     covers: [
       ["Preparing data", "What a well-structured table looks like, removing duplicates and blank rows, fixing inconsistent text and dates, and splitting values that were entered into a single column."],
       ["Building pivot tables", "Choosing rows, columns and values, switching between sum, count and average, and grouping dates and numbers into useful ranges."],
@@ -92,8 +88,6 @@ export const products = [
     figureAlt: "a document page with heading levels feeding an automatic table of contents",
     chapterLabel: "STYLES",
     card: "Styles, headings, automatic tables of contents, page layout, and reusable templates in Word and Google Docs.",
-    meta: "A self-paced PDF guide to document formatting in Microsoft Word and Google Docs: styles, headings, automatic tables of contents, page layout and reusable templates, with practice documents.",
-    lead: "A step-by-step guide to formatting long documents so they stay consistent and are easy to update. It covers styles, headings, automatic tables of contents, page layout, and reusable templates in Microsoft Word and Google Docs, with practice documents for every exercise.",
     covers: [
       ["Styles", "Applying the built-in paragraph styles, changing a style once so every matching paragraph updates, creating your own styles, and why formatting text by hand causes problems later."],
       ["Headings and structure", "Using heading levels to give a document a clear outline, moving through a long document by its headings, and keeping numbering consistent."],
@@ -130,8 +124,6 @@ export const products = [
     figureAlt: "a wireframe cube with its corner points marked and a light source",
     chapterLabel: "MODIFIERS",
     card: "Navigating the interface, modeling with basic shapes, modifiers, materials, lighting, and rendering a scene.",
-    meta: "A self-paced PDF guide to 3D modeling fundamentals in Blender: navigating the interface, basic shapes, modifiers, materials, lighting and rendering a finished scene, with starter project files.",
-    lead: "A step-by-step guide to building and rendering your first 3D scenes in Blender. It covers navigating the interface, modeling with basic shapes, modifiers, materials, lighting, and rendering a finished scene, with starter project files for every exercise.",
     covers: [
       ["Navigating the interface", "Moving around the 3D view, selecting objects, switching between object and edit modes, and finding the panels you will use most."],
       ["Modeling with basic shapes", "Adding basic shapes, moving, rotating and scaling them, and shaping them further with extrude, inset and loop cuts."],
@@ -168,8 +160,6 @@ export const products = [
     figureAlt: "a timeline with clips on stacked tracks, an audio waveform and a playhead",
     chapterLabel: "THE TIMELINE",
     card: "Organizing footage, cutting on the timeline, transitions, titles, color correction, audio cleanup, and exporting.",
-    meta: "A self-paced PDF guide to video editing in DaVinci Resolve: organizing footage, cutting on the timeline, transitions, titles, basic color correction, audio cleanup and exporting, with practice footage.",
-    lead: "A step-by-step guide to editing a video from raw clips to a finished file in DaVinci Resolve. It covers importing and organizing footage, cutting on the timeline, transitions, titles, basic color correction, audio cleanup, and exporting, with practice footage for every exercise.",
     covers: [
       ["Importing and organizing footage", "Setting up a project, bringing in clips, sorting them into bins, and finding the shot you need quickly."],
       ["Cutting on the timeline", "Marking in and out points, placing clips, trimming, ripple edits, and working with more than one video and audio track."],
@@ -207,8 +197,6 @@ export const products = [
     figureAlt: "two app screen frames with stacked elements, spacing markers and a link between them",
     chapterLabel: "AUTO LAYOUT",
     card: "Frames, auto layout, components, styles, and prototyping a simple app screen flow.",
-    meta: "A self-paced PDF guide to interface design in Figma: frames, auto layout, components, styles and prototyping a simple app screen flow, with starter files.",
-    lead: "A step-by-step guide to designing app screens in Figma. It covers frames, auto layout, components, styles, and prototyping a simple app screen flow, with starter files for every exercise.",
     covers: [
       ["Frames", "Setting up frames for different screen sizes, nesting frames, and using layout grids to line things up."],
       ["Auto layout", "Building buttons, lists and cards that resize with their content, and controlling spacing, padding and alignment."],
@@ -244,8 +232,6 @@ export const products = [
     figureAlt: "a curved path with its end nodes and control handles shown over simple shapes",
     chapterLabel: "THE PEN TOOL",
     card: "Shapes, paths, the pen tool, text, and exporting for print and web.",
-    meta: "A self-paced PDF guide to vector illustration in Inkscape: shapes, paths, the pen tool, text and exporting for print and web, with practice files.",
-    lead: "A step-by-step guide to drawing clean vector artwork in Inkscape. It covers shapes, paths, the pen tool, text, and exporting for print and web, with practice files for every exercise.",
     covers: [
       ["Shapes", "Drawing rectangles, circles, stars and polygons, setting fill and stroke, and arranging, aligning and grouping objects."],
       ["Paths", "Converting shapes to paths, editing nodes, and combining shapes with union, difference and intersection."],
@@ -283,8 +269,6 @@ export const library = {
   figureAlt: "seven keycaps representing the seven guides",
   chapterLabel: "ALL SEVEN GUIDES",
   card: "All seven guides together, each with its PDF, practice files, and worked solutions.",
-  meta: "All seven Shortcut Press guides in one download: spreadsheets, data analysis, document formatting, Blender, DaVinci Resolve, Figma and Inkscape, each with its PDF guide and practice files.",
-  lead: "All seven Shortcut Press guides in one purchase. Each guide is complete on its own, with its PDF guide, practice files and worked solutions, so you can work through them in any order.",
   table: {
     head: ["Guide", "Covers"],
     rows: [["Formulas", "Spreadsheet functions"], ["Pivot tables", "Summaries and charts"], ["Documents", "Styles and layout"], ["Blender", "3D modeling basics"], ["Resolve", "Video editing"], ["Figma", "Interface design"]],
