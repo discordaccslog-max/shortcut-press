@@ -1,0 +1,15 @@
+{
+  "name": "shortcut-press",
+  "private": true,
+  "version": "2.0.0",
+  "description": "Shortcut Press website and browser-based guides. Static site; these scripts build pages, practice files and the fulfillment kit, and run the tests.",
+  "scripts": {
+    "build": "node tools/site/build.mjs",
+    "files": "node tools/files/build-files.mjs",
+    "test": "node --test tests/",
+    "test:unit": "node --test tests/license.test.mjs",
+    "kit": "node tools/kit/kit.mjs",
+    "serve": "node tools/serve.mjs"
+  },
+  "devDependencies": {}
+}
