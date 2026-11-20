@@ -17,6 +17,19 @@ const ctx = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(ROOT, "js/products.js"), "utf8"), ctx);
 const catalog = ctx.window.SHORTCUT_PRODUCTS;
 const GUIDE_IDS = Object.keys(catalog).filter((id) => id !== "complete-library");
+const LIB_IDS = catalog["complete-library"].includes;
+const MORE_IDS = GUIDE_IDS.filter((id) => !LIB_IDS.includes(id));
+const allAddons = (id) => (catalog[id].addons || []).map((a) => a.id).join(",");
+
+// Activates the Library and every other guide with all its add-ons in this page's browser.
+async function unlockAll(page) {
+  await page.goto(BASE + catalog["complete-library"].confirmationPath);
+  await page.waitForSelector("[data-cf-code]");
+  for (const id of MORE_IDS) {
+    await page.goto(BASE + catalog[id].confirmationPath + "?order=ALL-1&addons=" + allAddons(id));
+    await page.waitForSelector("[data-cf-code]");
+  }
+}
 
 let server, browser, BASE;
 
@@ -31,16 +44,16 @@ async function launch() {
 
 async function newPage(opts = {}) {
   const context = await browser.newContext({ acceptDownloads: true, serviceWorkers: opts.serviceWorkers || "block", viewport: opts.viewport || { width: 1360, height: 900 }, reducedMotion: "reduce", ...(opts.mobile ? { isMobile: true, hasTouch: true } : {}) });
-  await context.addInitScript(() => {
+  await context.addInitScript((ids) => {
     try {
       // Skip the first-run walkthrough unless a test asks for it.
       if (!sessionStorage.getItem("keep-tour")) {
         const d = JSON.parse(localStorage.getItem("sp-data-v1") || "null") || { version: 1, licenses: [], progress: {}, settings: {}, lastBackupAt: null, firstActivatedAt: null };
-        ["spreadsheet-formulas", "pivot-tables-charts", "document-formatting", "blender-3d-modeling", "davinci-resolve-editing", "figma-interface-design", "inkscape-vector-illustration"].forEach((g) => (d.settings["walkthrough-" + g] = true));
+        ids.forEach((g) => (d.settings["walkthrough-" + g] = true));
         localStorage.setItem("sp-data-v1", JSON.stringify(d));
       }
     } catch (e) {}
-  });
+  }, GUIDE_IDS);
   const page = await context.newPage();
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -110,11 +123,15 @@ test("confirmation pages: every product issues a valid code, activates it and op
   }
 });
 
-test("a Complete Software Skills Library code unlocks all seven guides", async () => {
+test("a Complete Software Skills Library code unlocks its seven guides and no others", async () => {
   const { context, page } = await newPage();
   await page.goto(BASE + catalog["complete-library"].confirmationPath);
   await page.waitForSelector("[data-cf-code]");
-  for (const id of GUIDE_IDS) {
+  for (const id of MORE_IDS.slice(0, 1)) {
+    await page.goto(BASE + catalog[id].guidePath);
+    await page.waitForURL(/license=required/);
+  }
+  for (const id of LIB_IDS) {
     await page.goto(BASE + catalog[id].guidePath);
     await page.waitForSelector(".gd-wrap h1");
     assert.ok(page.url().includes(catalog[id].guidePath), id);
@@ -273,9 +290,8 @@ test("the formula sandbox evaluates formulas and checks answers", async () => {
 
 test("practice file downloads work for every guide", async () => {
   const { context, page } = await newPage();
-  await page.goto(BASE + catalog["complete-library"].confirmationPath);
-  await page.waitForSelector("[data-cf-code]");
-  const sig = { xlsx: "PK", docx: "PK", mp4: "ftyp", wav: "RIFF", svg: "<svg", obj: "#", csv: "Order," };
+  await unlockAll(page);
+  const sig = { xlsx: "PK", docx: "PK", zip: "PK", mp4: "ftyp", wav: "RIFF", svg: "<svg", obj: "#", png: "PNG", mid: "MThd", stl: "solid", ipynb: "{" };
   let count = 0;
   for (const id of GUIDE_IDS) {
     await page.goto(BASE + catalog[id].guidePath + "#/files");
@@ -289,7 +305,8 @@ test("practice file downloads work for every guide", async () => {
       const body = await res.body();
       const ext = l.href.split(".").pop();
       const head = body.toString("latin1", 0, 64);
-      assert.ok(head.includes(sig[ext]), `${l.href} signature`);
+      assert.ok(body.length > 0, l.href);
+      if (sig[ext]) assert.ok(head.includes(sig[ext]), `${l.href} signature`);
       count++;
     }
     // one real download through the browser
@@ -360,6 +377,7 @@ test("guides load offline after the first visit", async () => {
     if (!navigator.serviceWorker.controller) await new Promise((r) => navigator.serviceWorker.addEventListener("controllerchange", r, { once: true }));
     return !!reg.active;
   });
+  await page.waitForFunction(async (u) => !!(await caches.match(u)), BASE + catalog["davinci-resolve-editing"].guidePath + "content.js");
   await context.setOffline(true);
   await page.reload();
   await page.waitForSelector(".gd-wrap h1");
@@ -393,10 +411,56 @@ test("the terms checkbox gates the buy buttons when checkout links exist (links 
   await live.context.close();
 });
 
+test("add-ons: the running total, the checkout link, and the extras each code unlocks", async () => {
+  const id = MORE_IDS[0];
+  const p = catalog[id];
+  const { context, page, errors } = await newPage();
+  const src = fs.readFileSync(path.join(ROOT, "js/products.js"), "utf8").replace(/checkoutUrl: ""/g, 'checkoutUrl: "https://checkout.invalid/x"');
+  await page.route("**/js/products.js", (r) => r.fulfill({ contentType: "text/javascript", body: src }));
+  await page.goto(BASE + p.page);
+  assert.equal(await page.textContent("[data-addons-total]"), "$" + p.price);
+  await page.check(`[data-addon][value="${p.addons[0].id}"]`);
+  await page.check(`[data-addon][value="${p.addons[2].id}"]`);
+  assert.equal(await page.textContent("[data-addons-total]"), "$" + (p.price + p.addons[0].price + p.addons[2].price));
+  await page.check("[data-agree-box]");
+  assert.equal(await page.getAttribute(".p-aside .btn-buy", "href"), `https://checkout.invalid/x?addons=${encodeURIComponent(p.addons[0].id + "," + p.addons[2].id)}`);
+  assert.match(await page.textContent(".p-aside .btn-buy"), new RegExp("\\$" + (p.price + p.addons[0].price + p.addons[2].price)));
+  await context.close();
+
+  // A code issued with two add-ons unlocks exactly those two.
+  const s = await newPage();
+  await s.page.goto(BASE + p.confirmationPath + `?order=ADD-1&addons=${p.addons[0].id},${p.addons[2].id}`);
+  await s.page.waitForSelector("[data-cf-code]");
+  const code = await s.page.textContent("[data-cf-code]");
+  assert.equal(code, await L.generateFromOrder(p.code, "ADD-1", 0b101));
+  assert.equal(L.validate(code).addonMask, 0b101);
+  assert.match(await s.page.textContent("#confirm-app"), new RegExp(p.addons[0].name.replace(/[.*+?^${}()|[\]\\&]/g, ".")));
+  await s.page.goto(BASE + p.guidePath + "#/");
+  await s.page.waitForSelector("[data-gd-extras] a");
+  const locked = await s.page.$$eval("[data-gd-extras] a", (as) => as.map((a) => a.classList.contains("is-locked")));
+  assert.deepEqual(locked, Array.from(p.addons, (_, i) => i !== 0 && i !== 2));
+  await s.page.evaluate((h) => (location.hash = h), "#/extra/" + p.addons[1].id);
+  await s.page.waitForSelector(".gd-main .status-info");
+
+  // Printable extras download as PDFs made from the guide.
+  for (const a of p.addons.filter((x, i) => (i === 0 || i === 2) && (x.kind === "cheatsheet" || x.kind === "workbook"))) {
+    await s.page.evaluate((h) => (location.hash = h), "#/extra/" + a.id);
+    await s.page.waitForSelector("[data-x-pdf]");
+    const [dl] = await Promise.all([s.page.waitForEvent("download"), s.page.click("[data-x-pdf]")]);
+    const file = path.join(ROOT, "tests", ".tmp-" + a.id + ".pdf");
+    await dl.saveAs(file);
+    const pdf = fs.readFileSync(file, "latin1");
+    fs.unlinkSync(file);
+    assert.ok(pdf.startsWith("%PDF-"), a.id);
+    assert.ok(pdf.includes(p.name.split(" ")[0]), a.id);
+  }
+  assert.deepEqual(errors, []);
+  await s.context.close();
+});
+
 async function walkGuides(viewport, label) {
   const { context, page, errors } = await newPage({ viewport, mobile: viewport.width < 500 });
-  await page.goto(BASE + catalog["complete-library"].confirmationPath);
-  await page.waitForSelector("[data-cf-code]");
+  await unlockAll(page);
   let steps = 0;
   for (const id of GUIDE_IDS) {
     const g = await page.evaluate(async (url) => {
@@ -420,6 +484,22 @@ async function walkGuides(viewport, label) {
       await page.click(".gd-q >> nth=0 >> input >> nth=0");
       await page.click(".gd-q >> nth=0 >> .gd-check");
       assert.match(await page.textContent(".gd-q >> nth=0 >> .gd-feedback"), /Correct\.|Not quite\./);
+    }
+    for (const a of catalog[id].addons || []) {
+      await page.evaluate((h) => (location.hash = h), "#/extra/" + a.id);
+      await page.waitForFunction((name) => document.title.startsWith(name) || (document.querySelector(".gd-crumbs") && document.querySelector(".gd-crumbs").textContent.includes(name)), a.name);
+      assert.equal(await page.locator(".gd-main .status-info").count(), 0, id + " extra " + a.id + " is locked");
+      if (a.kind === "project") {
+        const total = await page.locator(".gd-stepper li").count();
+        for (let s = 1; s < total; s++) {
+          await page.evaluate((h) => (location.hash = h), "#/extra/" + a.id + "/" + s);
+          await page.waitForFunction((t) => document.querySelector(".gd-step-n") && document.querySelector(".gd-step-n").textContent.startsWith("Step " + t), s + 1);
+          steps++;
+        }
+      }
+      if (a.kind === "flashcards") await page.click("[data-fc-flip]");
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      assert.ok(overflow <= 1, label + " " + id + " extra " + a.id + " overflows by " + overflow + "px");
     }
     for (const view of ["#/files", "#/trainer"]) {
       await page.evaluate((h) => (location.hash = h), view);
@@ -509,11 +589,11 @@ test("WebKit (the Safari engine) on an iPhone-sized screen: confirmation, dock, 
     return;
   }
   const context = await wk.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, serviceWorkers: "block" });
-  await context.addInitScript(() => {
+  await context.addInitScript((ids) => {
     const d = { version: 1, licenses: [], progress: {}, settings: {}, lastBackupAt: null, firstActivatedAt: null };
-    ["spreadsheet-formulas", "pivot-tables-charts", "document-formatting", "blender-3d-modeling", "davinci-resolve-editing", "figma-interface-design", "inkscape-vector-illustration"].forEach((g) => (d.settings["walkthrough-" + g] = true));
+    ids.forEach((g) => (d.settings["walkthrough-" + g] = true));
     if (!localStorage.getItem("sp-data-v1")) localStorage.setItem("sp-data-v1", JSON.stringify(d));
-  });
+  }, GUIDE_IDS);
   const page = await context.newPage();
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -533,6 +613,10 @@ test("WebKit (the Safari engine) on an iPhone-sized screen: confirmation, dock, 
   await page.fill(".sbx-input", "=VLOOKUP(G2,A2:E9,3,FALSE)");
   await page.press(".sbx-input", "Enter");
   assert.equal(await page.textContent('td[data-ref="H2"]'), "8.75");
+  for (const id of MORE_IDS) {
+    await page.goto(BASE + catalog[id].confirmationPath + "?order=WK-1");
+    await page.waitForSelector("[data-cf-code]");
+  }
   let steps = 0;
   for (const id of GUIDE_IDS) {
     await page.goto(BASE + catalog[id].guidePath);

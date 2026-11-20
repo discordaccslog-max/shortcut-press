@@ -162,6 +162,11 @@
             '<details class="dock-lic"><summary><span>' + esc(productName(l.productId)) + '</span><code>' + esc(l.code) + "</code></summary>" +
             '<dl class="dock-lic-dl"><dt>Code</dt><dd><code>' + esc(l.code) + '</code> <button type="button" class="link-btn" data-copy="' + esc(l.code) + '">Copy</button></dd>' +
             "<dt>Unlocks</dt><dd>" + (unlocks.length > 1 ? "All seven guides" : esc(productName(unlocks[0]))) + "</dd>" +
+            (function () {
+              var mask = L.validate(l.code).addonMask || 0;
+              var list = ((catalog[l.productId] && catalog[l.productId].addons) || []).filter(function (_, b) { return mask & (1 << b); });
+              return list.length ? "<dt>Extras</dt><dd>" + list.map(function (x) { return esc(x.name); }).join("<br>") + "</dd>" : "";
+            })() +
             "<dt>Added</dt><dd>" + esc(fmtDate(l.activatedAt)) + "</dd>" +
             (l.orderRef ? "<dt>Order</dt><dd>" + esc(l.orderRef) + "</dd>" : "") +
             '</dl><button type="button" class="link-btn link-btn-danger" data-remove="' + i + '">Remove from this device</button></details>'

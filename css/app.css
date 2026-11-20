@@ -1047,6 +1047,7 @@ html.guide-unlocked .gd-locked {
 .dg-h { fill: var(--muted); font-size: 11px; font-family: var(--font-mono); }
 .dg-cap { fill: var(--muted); font-size: 12px; }
 .dg-f { fill: var(--accent-text); font-size: 12px; font-family: var(--font-mono); }
+.dg-m { fill: var(--text); font-size: 12px; font-family: var(--font-mono); white-space: pre; }
 .dg-num { fill: var(--accent-text); font-size: 11px; font-family: var(--font-mono); }
 .dg-big { fill: var(--text); font-size: 18px; font-weight: 700; letter-spacing: 0.08em; font-family: var(--font-display); }
 .dg-tag-t { fill: var(--text); font-size: 11px; font-family: var(--font-mono); }
@@ -1585,5 +1586,212 @@ html.guide-unlocked .gd-locked {
 
   .cf-card {
     border-color: #999;
+  }
+}
+
+/* ---------- extras (add-ons) in the guide ---------- */
+.gd-tools-h {
+  margin: 0;
+  padding: var(--s-3) var(--s-6) var(--s-1);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: var(--t-12);
+  color: var(--muted);
+}
+
+.gd-extras {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.gd-extras a[aria-current="page"] {
+  color: var(--text);
+  background: var(--panel-3);
+  box-shadow: inset 2px 0 0 var(--accent-text);
+}
+
+.gd-extras a.is-locked,
+.gd-cards a.is-locked {
+  opacity: 0.75;
+}
+
+.gd-lock {
+  flex: none;
+  position: relative;
+  width: 10px;
+  height: 8px;
+  margin: 7px 0 0 auto;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+}
+
+.gd-lock::before {
+  content: "";
+  position: absolute;
+  left: 0.5px;
+  top: -6px;
+  width: 6px;
+  height: 5px;
+  border: 1.5px solid currentColor;
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+}
+
+.gd-extra-tag {
+  display: inline-block;
+  margin-left: var(--s-1);
+  padding: 0 6px;
+  font-family: var(--font-mono);
+  font-size: var(--t-12);
+  font-weight: 400;
+  color: var(--muted);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+}
+
+.gd-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin: var(--s-6) 0;
+}
+
+.gd-cheat {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--t-14);
+}
+
+.gd-cheat th,
+.gd-cheat td {
+  padding: var(--s-2) var(--s-3);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+
+.gd-cheat th {
+  font-family: var(--font-mono);
+  font-size: var(--t-12);
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.gd-cheat td:first-child {
+  white-space: nowrap;
+}
+
+.gd-cheat-lessons {
+  display: grid;
+  gap: var(--s-4);
+}
+
+@media (min-width: 640px) {
+  .gd-cheat-lessons {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.gd-cheat-lessons h3 {
+  margin: 0 0 var(--s-2);
+  font-size: var(--t-16);
+}
+
+.gd-cheat-lessons ul {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: var(--t-14);
+  color: var(--muted);
+}
+
+.gd-score {
+  margin: 0 0 var(--s-4);
+  font-family: var(--font-mono);
+  font-size: var(--t-13);
+  color: var(--muted);
+}
+
+.gd-xpractice + .gd-xpractice {
+  margin-top: var(--s-8);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--line);
+}
+
+.fc {
+  display: grid;
+  gap: var(--s-4);
+  margin-top: var(--s-6);
+}
+
+.fc-count {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--t-13);
+  color: var(--muted);
+}
+
+.fc-card {
+  display: grid;
+  align-content: center;
+  gap: var(--s-3);
+  min-height: 220px;
+  padding: var(--s-8) var(--s-6);
+  font: inherit;
+  text-align: center;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-3);
+  cursor: pointer;
+}
+
+.fc-card.is-flipped {
+  background: var(--panel-3);
+  border-color: var(--accent-text);
+}
+
+.fc-card:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.fc-hint,
+.fc-tap {
+  font-family: var(--font-mono);
+  font-size: var(--t-12);
+  color: var(--muted);
+}
+
+.fc-text {
+  font-size: var(--t-18);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.fc-explain {
+  display: block;
+  margin-top: var(--s-3);
+  font-size: var(--t-14);
+  color: var(--muted);
+}
+
+.fc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--s-3);
+  min-height: 44px;
+}
+
+@media print {
+  .gd-actions,
+  .gd-report,
+  .gd-crumbs {
+    display: none !important;
+  }
+
+  .gd-cheat td,
+  .gd-cheat th {
+    border-color: #bbb;
   }
 }

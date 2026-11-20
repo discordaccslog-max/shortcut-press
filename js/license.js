@@ -8,6 +8,9 @@
     K     hash character over the product code and random section
     C     check character (weighted sum, modulus 31)
 
+  For products sold with add-ons, the first R character also records which
+  add-ons the code includes (see NO_ADDONS below).
+
   Alphabet: 31 characters with no 0/O or 1/I/L. Because 31 is prime and every
   weight is between 1 and 30, the check character catches every
   single-character error and every swap of two adjacent characters.
@@ -29,10 +32,43 @@
     DR: "davinci-resolve-editing",
     FG: "figma-interface-design",
     VX: "inkscape-vector-illustration",
-    CS: "complete-library"
+    CS: "complete-library",
+    BG: "google-sheets-budgeting",
+    PP: "powerpoint-presentations",
+    PQ: "excel-power-query",
+    VB: "excel-vba-macros",
+    FM: "financial-modeling-excel",
+    PB: "power-bi-reports",
+    SQ: "sql-queries",
+    MD: "obsidian-notes",
+    PY: "python-automation",
+    PA: "python-pandas",
+    SK: "machine-learning-sklearn",
+    GH: "git-github",
+    HC: "html-css",
+    JV: "javascript-basics",
+    CM: "command-line",
+    DK: "docker-containers",
+    GP: "gimp-photo-editing",
+    KR: "krita-digital-painting",
+    CV: "canva-social-graphics",
+    GD: "godot-game-dev",
+    FC: "freecad-3d-printing",
+    AE: "after-effects-motion",
+    AU: "audacity-audio",
+    BM: "lmms-beat-making",
+    ST: "obs-streaming"
   };
 
   var LIBRARY_CODE = "CS";
+  // The guides the Complete Software Skills Library unlocks.
+  var LIBRARY_INCLUDES = ["SF", "PT", "DF", "BD", "DR", "FG", "VX"];
+  // Codes issued before add-ons existed. Every other product code carries an
+  // add-on mask in its first random character: the character's alphabet value
+  // modulo 16 is a bit mask of the product's add-ons (bit n = add-on n in the
+  // catalog), so one code covers the guide and every extra bought with it.
+  var NO_ADDONS = ["SF", "PT", "DF", "BD", "DR", "FG", "VX", "CS"];
+
 
   function valueOf(ch) {
     return ALPHABET.indexOf(ch);
@@ -102,17 +138,36 @@
     return null;
   }
 
-  function generateRandom(productCode) {
-    if (!PRODUCT_CODES[productCode]) throw new Error("Unknown product code");
-    var c = cryptoObj();
-    return build(productCode, randomSection(c.getRandomValues.bind(c)));
+  function hasAddons(productCode) {
+    return !!PRODUCT_CODES[productCode] && NO_ADDONS.indexOf(productCode) === -1;
   }
 
-  // Same order ID and product always give the same code.
-  function generateFromOrder(productCode, orderId) {
+  // Character that stores an add-on mask (0-15). Two characters map to most
+  // masks; `pick` (any byte) chooses between them so codes don't all look alike.
+  function maskChar(mask, pick) {
+    var v = (mask & 15) + ((pick & 1) && (mask & 15) + 16 < MOD ? 16 : 0);
+    return ALPHABET[v];
+  }
+
+  function applyMask(productCode, randomPart, mask, pick) {
+    if (!hasAddons(productCode)) return randomPart;
+    return maskChar(mask || 0, pick) + randomPart.slice(1);
+  }
+
+  function generateRandom(productCode, addonMask) {
+    if (!PRODUCT_CODES[productCode]) throw new Error("Unknown product code");
+    var c = cryptoObj();
+    var buf = new Uint8Array(1);
+    c.getRandomValues(buf);
+    return build(productCode, applyMask(productCode, randomSection(c.getRandomValues.bind(c)), addonMask, buf[0]));
+  }
+
+  // Same order ID, product and add-ons always give the same code.
+  function generateFromOrder(productCode, orderId, addonMask) {
     if (!PRODUCT_CODES[productCode]) return Promise.reject(new Error("Unknown product code"));
     var c = cryptoObj();
-    var data = new TextEncoder().encode(PREFIX + "|" + productCode + "|" + String(orderId).trim());
+    var mask = hasAddons(productCode) ? (addonMask || 0) & 15 : 0;
+    var data = new TextEncoder().encode(PREFIX + "|" + productCode + "|" + String(orderId).trim() + (hasAddons(productCode) ? "|" + mask : ""));
     return c.subtle.digest("SHA-256", data).then(function (digest) {
       var bytes = new Uint8Array(digest);
       var out = "";
@@ -121,7 +176,7 @@
       }
       var j = 0;
       while (out.length < RANDOM_LENGTH) out += ALPHABET[bytes[j++] % MOD];
-      return build(productCode, out);
+      return build(productCode, applyMask(productCode, out, mask, bytes[31]));
     });
   }
 
@@ -144,17 +199,15 @@
       code: format(n),
       productCode: productCode,
       productId: PRODUCT_CODES[productCode],
-      isLibrary: productCode === LIBRARY_CODE
+      isLibrary: productCode === LIBRARY_CODE,
+      addonMask: hasAddons(productCode) ? valueOf(payload[2]) % 16 : 0
     };
   }
 
-  // Product IDs a license unlocks. The Library unlocks all seven guides.
+  // Product IDs a license unlocks. The Library unlocks its seven guides.
   function unlocks(productId) {
     if (productId === PRODUCT_CODES[LIBRARY_CODE]) {
-      return Object.keys(PRODUCT_CODES)
-        .filter(function (c) {
-          return c !== LIBRARY_CODE;
-        })
+      return LIBRARY_INCLUDES
         .map(function (c) {
           return PRODUCT_CODES[c];
         });
@@ -172,6 +225,8 @@
     PREFIX: PREFIX,
     PRODUCT_CODES: PRODUCT_CODES,
     LIBRARY_CODE: LIBRARY_CODE,
+    LIBRARY_INCLUDES: LIBRARY_INCLUDES,
+    hasAddons: hasAddons,
     normalize: normalize,
     format: format,
     validate: validate,

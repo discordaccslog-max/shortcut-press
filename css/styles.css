@@ -3279,3 +3279,267 @@ html:not(.js) .js-only {
     display: none;
   }
 }
+
+/* ---------- add-on picker on product pages ---------- */
+.addons {
+  margin: 0 0 var(--s-4);
+  padding: var(--s-2) var(--s-4) var(--s-4);
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-2);
+}
+
+.addons legend {
+  padding: 0 var(--s-1);
+  font-family: var(--font-mono);
+  font-size: var(--t-12);
+  color: var(--muted);
+}
+
+.addon {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: var(--s-1) var(--s-3);
+  padding: var(--s-2) 0;
+  cursor: pointer;
+}
+
+.addon + .addon {
+  border-top: 1px solid var(--line);
+}
+
+.addon input {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--accent-text);
+  cursor: pointer;
+}
+
+.addon input:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.addon-name {
+  font-size: var(--t-14);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.addon-price {
+  font-family: var(--font-mono);
+  font-size: var(--t-13);
+  white-space: nowrap;
+}
+
+.addon-desc {
+  grid-column: 2 / 4;
+  font-size: var(--t-13);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.addons-total {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin: var(--s-3) 0 0;
+  padding-top: var(--s-3);
+  font-size: var(--t-14);
+  border-top: 1px solid var(--line-strong);
+}
+
+.addons-total strong {
+  font-family: var(--font-mono);
+}
+
+.addon-list {
+  display: grid;
+  gap: var(--s-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.addon-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--s-1) var(--s-4);
+  padding: var(--s-4);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2);
+}
+
+.addon-list .addon-price {
+  font-size: var(--t-14);
+}
+
+.addon-list p {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: var(--t-14);
+  color: var(--muted);
+}
+
+/* ---------- catalog grid (all guides) ---------- */
+.cat-head {
+  margin: var(--s-16) 0 var(--s-6);
+}
+
+.cat-head h3 {
+  margin: 0 0 var(--s-2);
+  font-size: var(--t-24, 1.5rem);
+}
+
+.cat-head p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.cat-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin: 0 0 var(--s-6);
+  padding: 0;
+  list-style: none;
+}
+
+.cat-filter {
+  min-height: 36px;
+  padding: 0 var(--s-4);
+  font: inherit;
+  font-size: var(--t-14);
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.cat-filter[aria-pressed="true"] {
+  color: var(--text);
+  background: var(--accent-soft);
+  border-color: var(--accent-text);
+}
+
+.cat-filter:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.cat-grid {
+  display: grid;
+  gap: var(--s-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .cat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cat-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cat-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: start;
+  gap: var(--s-1) var(--s-4);
+  height: 100%;
+  padding: var(--s-5);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-3);
+}
+
+.cat-card:focus-within {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .cat-card:hover {
+    background: var(--panel-2);
+    border-color: var(--line-strong);
+  }
+}
+
+.cat-key {
+  grid-row: span 4;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  font-family: var(--font-mono);
+  font-size: var(--t-14);
+  color: var(--text);
+  background: var(--panel-3);
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 3px;
+  border-radius: 8px;
+}
+
+.cat-meta {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--t-12);
+  color: var(--muted);
+}
+
+.cat-title {
+  margin: 0;
+  font-size: var(--t-16);
+  line-height: 1.35;
+}
+
+.cat-link {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.cat-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.cat-link:focus-visible {
+  outline: none;
+}
+
+.cat-desc {
+  margin: 0;
+  font-size: var(--t-14);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.cat-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin: var(--s-2) 0 0;
+  font-size: var(--t-13);
+  color: var(--muted);
+}
+
+.cat-foot .price {
+  font-family: var(--font-mono);
+  color: var(--text);
+}
+
+.cat-card[hidden] {
+  display: none;
+}

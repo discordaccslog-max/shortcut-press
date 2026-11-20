@@ -60,6 +60,27 @@ window.SHORTCUT_INDEX = [
     "keywords": "Each guide uses its own program Beginner to intermediate All seven guides, unlocked by a single license. all seven bundle"
   },
   {
+    "kind": "Guide",
+    "id": "google-sheets-budgeting",
+    "title": "Personal Budgeting in Google Sheets",
+    "url": "google-sheets-budgeting.html",
+    "keywords": "Google Sheets Beginner A monthly budget built from scratch: transactions, SUMIF totals, budget versus actual, charts and savings goals. Set up the budget sheet Totals with SUM and SUMIF Category summaries Budget versus actual Conditional formatting and charts Savings goals and the monthly review extras add-ons Bonus project: yearly budget dashboard Extra quiz pack Printable cheat sheet Flashcard deck Office & data"
+  },
+  {
+    "kind": "Guide",
+    "id": "powerpoint-presentations",
+    "title": "Presentation Design in PowerPoint",
+    "url": "powerpoint-presentations.html",
+    "keywords": "Microsoft PowerPoint Beginner to intermediate Slide masters, outlines to slides, alignment, charts, pictures and icons, animation and presenting. Slide masters and layouts From outline to slides Alignment, spacing and space Charts and tables Pictures and icons Animation, transitions and presenting extras add-ons Bonus project: five-slide pitch Extra practice pack Printable workbook Printable cheat sheet Office & data"
+  },
+  {
+    "kind": "Guide",
+    "id": "excel-power-query",
+    "title": "Cleaning Data with Excel Power Query",
+    "url": "excel-power-query.html",
+    "keywords": "Microsoft Excel (Microsoft 365 or Excel 2021 and later, for Windows) Intermediate Repeatable data cleaning: import, fix text and types, unpivot, append, merge, group and refresh. Get data and the Power Query Editor Clean text, rows and types Reshape: unpivot and headers Append months of data Merge: look up values from another table Group, summarize and refresh extras add-ons Bonus project: self-refreshing report Extra quiz pack Printable cheat sheet Printable workbook Office & data"
+  },
+  {
     "kind": "Page",
     "title": "Home",
     "url": "index.html",
@@ -145,6 +166,18 @@ window.SHORTCUT_INDEX = [
   },
   {
     "kind": "FAQ",
+    "title": "What are extras?",
+    "url": "faq.html#q-what-are-extras",
+    "keywords": "Buying and delivery  Some guides offer optional extras you can add when you buy, each for a few dollars: for example a printable cheat sheet, a printable workbook, a flashcard deck, an extra set of quiz questions or practice exercises, or a"
+  },
+  {
+    "kind": "FAQ",
+    "title": "Can I add an extra after buying?",
+    "url": "faq.html#q-can-i-add-an-extra-after-buying",
+    "keywords": "Buying and delivery  Extras are chosen on the guide's page before checkout. If you'd like to add one to a guide you've already bought,  contact us through the Contact page  with your order number and we'll arrange it and send you an updated"
+  },
+  {
+    "kind": "FAQ",
     "title": "Is there video or tutoring?",
     "url": "faq.html#q-is-there-video-or-tutoring",
     "keywords": "Buying and delivery  No. The guides are self-study material. There are no video lessons, no live instruction, no tutoring, and no feedback on your work. You read each step, carry it out in the software, then check your understanding and com"
@@ -153,7 +186,7 @@ window.SHORTCUT_INDEX = [
     "kind": "FAQ",
     "title": "How do licenses work?",
     "url": "faq.html#q-how-do-licenses-work",
-    "keywords": "Licenses and devices  Each purchase gives you a license code that starts with SCUT. The code is checked in your browser and unlocks the guide you bought; a Complete Software Skills Library code unlocks all seven guides. Activated licenses ar"
+    "keywords": "Licenses and devices  Each purchase gives you a license code that starts with SCUT. The code is checked in your browser and unlocks the guide you bought, together with any extras you chose; a Complete Software Skills Library code unlocks the"
   },
   {
     "kind": "FAQ",

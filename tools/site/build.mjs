@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 import { esc, products as storeCopy, library as libCopy } from "./storefront.mjs";
 import { I_SEARCH, I_SUN, I_MOON, I_CLOSE, ART, AREA, BENTO_ORDER, keyboard } from "./art.mjs";
 import * as copy from "./copy.mjs";
+import { LIBRARY_GUIDES, MORE_GUIDES, CATEGORIES, loadGuides } from "../guides/index.mjs";
 
 const require = createRequire(import.meta.url);
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
@@ -24,11 +25,16 @@ const cfg = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(ROOT, "js/site-config.js"), "utf8"), cfg);
 const SUPPORT = cfg.window.SITE_CONFIG.supportEmail;
 
-const GUIDE_IDS = ["spreadsheet-formulas", "pivot-tables-charts", "document-formatting", "blender-3d-modeling", "davinci-resolve-editing", "figma-interface-design", "inkscape-vector-illustration"];
-const guides = {};
-for (const id of GUIDE_IDS) guides[id] = (await import(`../guides/${id}.mjs`)).default;
+// GUIDE_IDS: the seven Library guides. MORE_IDS: guides sold on their own with add-ons
+// (only those with both a guide module and a catalog entry are built).
+const GUIDE_IDS = LIBRARY_GUIDES;
+const guides = await loadGuides([...LIBRARY_GUIDES, ...MORE_GUIDES]);
+const MORE_IDS = MORE_GUIDES.filter((id) => guides[id] && catalog[id]);
+const ALL_GUIDES = [...GUIDE_IDS, ...MORE_IDS];
 const copyById = Object.fromEntries([...storeCopy, libCopy].map((p) => [p.id, p]));
-const allIds = [...GUIDE_IDS, "complete-library"];
+for (const id of MORE_IDS) copyById[id] = { id, ...guides[id].store };
+const allIds = [...GUIDE_IDS, "complete-library", ...MORE_IDS];
+const CAT_NAME = Object.fromEntries(CATEGORIES);
 
 const VERSION_NOTE = "Software makers update their programs, so menus and button locations can change between versions. This guide is revised when an update changes the steps, and the revised version appears the next time you open it.";
 
@@ -36,7 +42,7 @@ function sizeOf(file) {
   const b = fs.statSync(file).size;
   return b >= 1048576 ? (b / 1048576).toFixed(1) + " MB" : Math.max(1, Math.round(b / 1024)) + " KB";
 }
-for (const id of GUIDE_IDS) {
+for (const id of ALL_GUIDES) {
   const g = guides[id];
   g.versionNote = VERSION_NOTE;
   for (const f of g.files) f.size = sizeOf(path.join(ROOT, "guides", g.slug, "files", f.name));
@@ -67,7 +73,7 @@ function header(r, current) {
 }
 
 function footer(r) {
-  const list = allIds.map((id) => `<li><a href="${r}${catalog[id].page}">${esc(catalog[id].name)}</a></li>`).join("");
+  const list = [...GUIDE_IDS, "complete-library"].map((id) => `<li><a href="${r}${catalog[id].page}">${esc(catalog[id].name)}</a></li>`).join("") + (MORE_IDS.length ? `<li><a href="${r}index.html#more-guides">All ${ALL_GUIDES.length} guides &rarr;</a></li>` : "");
   return `<footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
@@ -187,6 +193,34 @@ function tile(id, i) {
 </article>`;
 }
 
+function catCard(id) {
+  const p = catalog[id];
+  const c = copyById[id];
+  return `<li class="cat-card" data-cat="${c.category}">
+  <span class="cat-key" aria-hidden="true">${p.code}</span>
+  <p class="cat-meta">${esc(c.level)} &middot; ${esc(c.softwareShort || c.software)}</p>
+  <h4 class="cat-title"><a class="cat-link" href="${p.page}">${esc(p.name)}</a></h4>
+  <p class="cat-desc">${esc(p.summary)}</p>
+  <p class="cat-foot"><span class="price" data-price="${id}">$${p.price}</span><span>${guides[id].lessons.length} lessons${p.addons && p.addons.length ? ` &middot; ${p.addons.length} extras` : ""}</span></p>
+</li>`;
+}
+
+function catalogGrid() {
+  if (!MORE_IDS.length) return "";
+  const cats = CATEGORIES.filter(([k]) => MORE_IDS.some((id) => copyById[id].category === k));
+  return `<div class="cat-head" id="more-guides">
+      <h3>More guides</h3>
+      <p>${MORE_IDS.length} more guides, each sold on its own, with optional extras you can add when you buy.</p>
+    </div>
+    <ul class="cat-filters js-only" aria-label="Filter guides by topic">
+      <li><button type="button" class="cat-filter" data-cat-filter="all" aria-pressed="true">All</button></li>
+      ${cats.map(([k, label]) => `<li><button type="button" class="cat-filter" data-cat-filter="${k}" aria-pressed="false">${esc(label)}</button></li>`).join("\n      ")}
+    </ul>
+    <ul class="cat-grid" data-cat-grid>
+      ${MORE_IDS.map(catCard).join("\n      ")}
+    </ul>`;
+}
+
 function home() {
   const previewQs = [copy.FAQ[0].items[0], copy.FAQ[1].items[1], copy.FAQ[2].items[0], copy.FAQ[4].items[2]];
   const body = `<main id="main">
@@ -209,12 +243,13 @@ function home() {
 <section class="section" id="guides" aria-labelledby="guides-title">
   <div class="container">
     <div class="sec-head">
-      <div>${label("01", "The guides")}<h2 id="guides-title">Seven guides and the complete library</h2></div>
+      <div>${label("01", "The guides")}<h2 id="guides-title">${MORE_IDS.length ? `${ALL_GUIDES.length} guides and the complete library` : "Seven guides and the complete library"}</h2></div>
       <p>Each guide covers one program, from the first steps to a finished piece of work. Prices are in US dollars; applicable taxes are shown at checkout.</p>
     </div>
     <div class="bento">
       ${BENTO_ORDER.map((id, i) => tile(id, i)).join("\n      ")}
     </div>
+    ${catalogGrid()}
   </div>
 </section>
 
@@ -306,6 +341,25 @@ function preview(id) {
 </div>`;
 }
 
+function addonPicker(id) {
+  const p = catalog[id];
+  return `<fieldset class="addons js-only" data-addons="${id}">
+    <legend>Optional extras</legend>
+    ${p.addons.map((a) => `<label class="addon"><input type="checkbox" value="${a.id}" data-addon data-addon-price="${a.price}"><span class="addon-name">${esc(a.name)}</span><span class="addon-price">+$${a.price}</span><span class="addon-desc">${esc(a.description)}</span></label>`).join("\n    ")}
+    <p class="addons-total"><span>Total</span><strong data-addons-total>$${p.price}</strong></p>
+  </fieldset>`;
+}
+
+const addonSection = (id) => {
+  const p = catalog[id];
+  if (!p.addons || !p.addons.length) return "";
+  return `<section class="p-sec" id="extras" aria-labelledby="extras-title">
+      <h2 id="extras-title">Optional extras</h2>
+      <p>Add any of these when you buy. They're delivered with the guide: the same license code unlocks them in the guide's Extras section.</p>
+      <ul class="addon-list">${p.addons.map((a) => `<li><strong>${esc(a.name)}</strong><span class="addon-price">+$${a.price}</span><p>${esc(a.description)}</p></li>`).join("")}</ul>
+    </section>`;
+};
+
 function aside(id) {
   const p = catalog[id];
   const c = copyById[id];
@@ -321,6 +375,7 @@ function aside(id) {
     <dt>Needs</dt><dd>A modern web browser on a computer, tablet or phone</dd>
   </dl>
   <p class="p-price"><span class="price" data-price="${id}">$${p.price}</span><span class="p-currency">USD</span></p>
+  ${p.addons && p.addons.length ? addonPicker(id) : ""}
   <p class="p-terms">${BUY_LINE()}</p>
   <div class="agree" data-agree hidden>
     <label class="agree-label"><input type="checkbox" class="agree-box" data-agree-box aria-describedby="agree-hint"><span>I agree to the <a href="terms-of-service.html">Terms of Service</a> and <a href="refund-policy.html">Refund Policy</a></span></label>
@@ -344,6 +399,11 @@ const seqList = (items) => `<ol class="seq" data-seq><span class="seq-track" ari
 
 function licenseNote() {
   return `<div class="status-msg status-info license-note" data-license-note hidden><span class="status-icon" aria-hidden="true"></span><span>This guide needs a license on this device. If you've bought it, open <button type="button" class="link-btn" data-open-dock>My Guides</button> and enter your license code.</span></div>`;
+}
+
+function related(id) {
+  if (MORE_IDS.includes(id)) return MORE_IDS.filter((o) => o !== id && copyById[o].category === copyById[id].category);
+  return [...GUIDE_IDS, "complete-library"].filter((o) => o !== id);
 }
 
 function productPage(id) {
@@ -394,6 +454,7 @@ function productPage(id) {
       <h2 id="inside-title">What's inside</h2>
       ${inside}
     </section>
+    ${addonSection(id)}
     <section class="p-sec" id="software" aria-labelledby="software-title">
       <h2 id="software-title">Software required</h2>
       ${software}
@@ -416,7 +477,7 @@ function productPage(id) {
     </section>
     <section class="p-sec" aria-labelledby="related-title">
       <h2 id="related-title">Other guides</h2>
-      <ul class="chips">${allIds.filter((o) => o !== id).map((o) => `<li><a href="${catalog[o].page}">${esc(catalog[o].name)}</a></li>`).join("")}</ul>
+      <ul class="chips">${related(id).map((o) => `<li><a href="${catalog[o].page}">${esc(catalog[o].name)}</a></li>`).join("")}${MORE_IDS.length ? `<li><a href="index.html#guides">All ${ALL_GUIDES.length} guides</a></li>` : ""}</ul>
     </section>
   </div>
 </div>
@@ -528,6 +589,7 @@ function guideShell(id) {
   const g = guides[id];
   const extra = ["js/diagrams.js", "js/trainer.js"];
   if (g && g.sandbox) extra.unshift("vendor/fast-formula-parser/parser.min.js", "js/sandbox.js");
+  if (p.addons && p.addons.length) extra.push("js/pdf.js");
   extra.push(...(isHub ? [] : ["./content.js"]), "js/guide-app.js");
   const body = `<div id="guide-app" data-guide="${id}" data-mode="${isHub ? "hub" : "guide"}">
   <main id="main" class="container gd-locked"><h1>${esc(p.name)}</h1>
@@ -555,13 +617,14 @@ function confirmShell(id) {
 /* ---------- data files ---------- */
 function guidesIndex() {
   const out = {};
-  for (const id of GUIDE_IDS) out[id] = { title: guides[id].title, lessons: guides[id].lessons.map((l) => ({ id: l.id, title: l.title })) };
+  for (const id of ALL_GUIDES) out[id] = { title: guides[id].title, lessons: guides[id].lessons.map((l) => ({ id: l.id, title: l.title })) };
   return `/* Shortcut Press — lesson index for My Guides (generated by tools/site/build.mjs). */\nwindow.SP_GUIDES = ${JSON.stringify(out)};\n`;
 }
 
 function guideContent(id) {
   const g = { ...guides[id] };
-  if (g.sandbox) {
+  delete g.store;
+  if (g.sandbox && !g.sandboxCells) {
     const { sfProducts } = awaitDatasets;
     const cells = {};
     const COLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -577,7 +640,7 @@ const awaitDatasets = await import("../files/datasets.mjs");
 
 function searchIndex() {
   const entries = [];
-  for (const id of allIds) entries.push({ kind: "Guide", id, title: catalog[id].name, url: catalog[id].page, keywords: `${copyById[id].software} ${copyById[id].level} ${catalog[id].summary} ${id === "complete-library" ? "all seven bundle" : guides[id].lessons.map((l) => l.title).join(" ")}` });
+  for (const id of allIds) entries.push({ kind: "Guide", id, title: catalog[id].name, url: catalog[id].page, keywords: `${copyById[id].software} ${copyById[id].level} ${catalog[id].summary} ${id === "complete-library" ? "all seven bundle" : guides[id].lessons.map((l) => l.title).join(" ")}${catalog[id].addons ? " extras add-ons " + catalog[id].addons.map((a) => a.name).join(" ") : ""}${copyById[id].category ? " " + CAT_NAME[copyById[id].category] : ""}` });
   const pages = [
     ["Home", "index.html", "start overview"],
     ["All guides", "index.html#guides", "products catalog"],
@@ -598,6 +661,7 @@ function searchIndex() {
 }
 
 /* ---------- write pages ---------- */
+const fill = (html) => html.replace(/{{GUIDE_COUNT}}/g, String(ALL_GUIDES.length));
 const files = {
   "index.html": home(),
   "about.html": docPage({ file: "about.html", title: "About — Shortcut Press", h1: "About Shortcut Press", eyebrow: "About", lead: "Shortcut Press makes interactive, self-paced guides to software for spreadsheets, documents, 3D modeling, video editing, interface design and illustration.", html: copy.aboutHtml, description: "What Shortcut Press makes and why: interactive, self-paced software guides that run in your browser, with diagrams, quizzes, exercises, practice files and a shortcut trainer.", current: "about" }),
@@ -618,11 +682,11 @@ for (const id of allIds) files[catalog[id].confirmationPath + "index.html"] = co
 for (const [name, html] of Object.entries(files)) {
   const full = path.join(ROOT, name);
   fs.mkdirSync(path.dirname(full), { recursive: true });
-  fs.writeFileSync(full, html);
+  fs.writeFileSync(full, fill(html));
 }
 fs.writeFileSync(path.join(ROOT, "js/guides-index.js"), guidesIndex());
-for (const id of GUIDE_IDS) fs.writeFileSync(path.join(ROOT, "guides", guides[id].slug, "content.js"), guideContent(id));
-fs.writeFileSync(path.join(ROOT, "js/search-index.js"), searchIndex());
+for (const id of ALL_GUIDES) fs.writeFileSync(path.join(ROOT, "guides", guides[id].slug, "content.js"), guideContent(id));
+fs.writeFileSync(path.join(ROOT, "js/search-index.js"), fill(searchIndex()));
 
 const sitemapPages = Object.keys(files).filter((f) => f !== "404.html" && !f.startsWith("guides/") && !f.startsWith("thank-you/"));
 fs.writeFileSync(path.join(ROOT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
@@ -660,11 +724,10 @@ function listFiles(dir, filter) {
 }
 const precache = [
   "./",
-  ...Object.keys(files).filter((f) => !f.startsWith("thank-you/") && f !== "index.html").map((f) => f.replace(/index\.html$/, "")),
+  ...Object.keys(files).filter((f) => !f.startsWith("thank-you/") && !f.startsWith("guides/") && f !== "index.html").map((f) => f.replace(/index\.html$/, "")),
   ...listFiles("css", () => true),
   ...listFiles("js", () => true),
   ...listFiles("vendor", (f) => f.endsWith(".js")),
-  ...GUIDE_IDS.map((id) => `guides/${guides[id].slug}/content.js`),
   "favicon.svg",
   "manifest.webmanifest",
   "icons/icon-192.png",
@@ -686,6 +749,9 @@ fs.writeFileSync(path.join(ROOT, "sw.js"), `/*
 var VERSION = "${VERSION}";
 var CACHE = "sp-" + VERSION;
 var RUNTIME = "sp-runtime-" + VERSION;
+// Guides are cached the first time they are opened and kept across site updates
+// (refreshed in the background), so a guide opened once keeps working offline.
+var GUIDES = "sp-guides";
 var PRECACHE = ${JSON.stringify(precache)};
 
 self.addEventListener("install", function (event) {
@@ -699,7 +765,7 @@ self.addEventListener("install", function (event) {
 self.addEventListener("activate", function (event) {
   event.waitUntil(
     caches.keys().then(function (keys) {
-      return Promise.all(keys.filter(function (k) { return k !== CACHE && k !== RUNTIME && k.indexOf("sp-") === 0; }).map(function (k) { return caches.delete(k); }));
+      return Promise.all(keys.filter(function (k) { return k !== CACHE && k !== RUNTIME && k !== GUIDES && k.indexOf("sp-") === 0; }).map(function (k) { return caches.delete(k); }));
     }).then(function () { return self.clients.claim(); })
   );
 });
@@ -725,11 +791,27 @@ self.addEventListener("fetch", function (event) {
   }
   if (url.origin !== self.location.origin) return;
 
+  var inGuides = url.pathname.indexOf("/guides/") !== -1;
   if (req.mode === "navigate") {
     event.respondWith(
-      fromNetworkThenCache(req, RUNTIME).catch(function () {
+      fromNetworkThenCache(req, inGuides ? GUIDES : RUNTIME).catch(function () {
         return caches.match(req, { ignoreSearch: true }).then(function (hit) {
           return hit || caches.match(new URL("404.html", self.registration.scope).href);
+        });
+      })
+    );
+    return;
+  }
+  if (inGuides) {
+    event.respondWith(
+      caches.open(GUIDES).then(function (cache) {
+        return cache.match(req, { ignoreSearch: true }).then(function (hit) {
+          var refresh = fromNetworkThenCache(req, GUIDES);
+          if (hit) {
+            event.waitUntil(refresh.catch(function () {}));
+            return hit;
+          }
+          return refresh;
         });
       })
     );
@@ -743,4 +825,4 @@ self.addEventListener("fetch", function (event) {
 });
 `);
 
-console.log(`Built ${Object.keys(files).length} pages, ${GUIDE_IDS.length} guide data files, service worker ${VERSION} (${precache.length} files precached).`);
+console.log(`Built ${Object.keys(files).length} pages, ${ALL_GUIDES.length} guide data files, service worker ${VERSION} (${precache.length} files precached).`);

@@ -117,5 +117,69 @@ window.SHORTCUT_PRODUCTS = {
       "inkscape-vector-illustration"
     ],
     checkoutUrl: ""
+  },
+
+  /*
+    Guides sold on their own. Each has optional add-ons (extras):
+      addons: [{ id, name, price, kind, description }]
+    kind is how the guide delivers it: cheatsheet, workbook or flashcards are made
+    from the guide itself; project, quizbank and practice use the extras in the
+    guide's content. The order matters: add-on n is bit n of the license code's
+    add-on mask (see js/license.js), so never reorder or remove an add-on once sold;
+    add new ones at the end (at most four per guide).
+  */
+  "google-sheets-budgeting": {
+    name: "Personal Budgeting in Google Sheets",
+    slug: "google-sheets-budgeting",
+    code: "BG",
+    price: 24,
+    summary: "A monthly budget built from scratch: transactions, SUMIF totals, budget versus actual, charts and savings goals.",
+    description: "An interactive browser guide to building your own monthly budget in Google Sheets: a tidy transactions sheet, totals and category summaries with SUMIF and SUMIFS, a budget-versus-actual table, conditional formatting and charts, and a savings goal tracker, with an in-browser formula sandbox and practice workbooks.",
+    page: "google-sheets-budgeting.html",
+    guidePath: "guides/google-sheets-budgeting/",
+    confirmationPath: "thank-you/google-sheets-budgeting/",
+    addons: [
+      { id: "year-dashboard", name: "Bonus project: yearly budget dashboard", price: 4, kind: "project", description: "An extra lesson that turns one month into a whole year: a month column, a category-by-month SUMIFS grid and sparkline trends." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on budgeting formulas, references and formatting, with explanations and a running score." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "Every Google Sheets shortcut in the guide and the key steps of each lesson, as a PDF to print and keep beside your keyboard." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for the cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "powerpoint-presentations": {
+    name: "Presentation Design in PowerPoint",
+    slug: "powerpoint-presentations",
+    code: "PP",
+    price: 32,
+    summary: "Slide masters, outlines to slides, alignment, charts, pictures and icons, animation and presenting.",
+    description: "An interactive browser guide to designing clear, consistent presentations in Microsoft PowerPoint: slide masters and layouts, turning an outline into slides, alignment and spacing, charts and tables, pictures and icons, and animation, Presenter View and PDF export, with practice files for a complete short talk.",
+    page: "powerpoint-presentations.html",
+    guidePath: "guides/powerpoint-presentations/",
+    confirmationPath: "thank-you/powerpoint-presentations/",
+    addons: [
+      { id: "pitch-project", name: "Bonus project: five-slide pitch", price: 5, kind: "project", description: "An extra lesson that plans and builds a five-slide pitch with a problem, solution, proof, cost and ask, using one layout system." },
+      { id: "practice-pack", name: "Extra practice pack", price: 3, kind: "practice", description: "Three more exercises with worked solutions: rebuilding a cluttered slide as a table, a section divider layout, and animating a chart by series." },
+      { id: "workbook", name: "Printable workbook", price: 3, kind: "workbook", description: "The whole guide as a PDF to read and write on away from the screen, with every quiz and exercise and the answers at the back." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "Every PowerPoint shortcut in the guide and the key steps of each lesson, as a PDF to print." }
+    ],
+    checkoutUrl: ""
+  },
+  "excel-power-query": {
+    name: "Cleaning Data with Excel Power Query",
+    slug: "excel-power-query",
+    code: "PQ",
+    price: 59,
+    summary: "Repeatable data cleaning: import, fix text and types, unpivot, append, merge, group and refresh.",
+    description: "An interactive browser guide to cleaning and reshaping data with Power Query in Microsoft Excel: importing files, fixing text and data types, unpivoting wide tables, appending monthly exports, merging lookup tables, and grouping into a report that refreshes with one click, with messy practice files to clean.",
+    page: "excel-power-query.html",
+    guidePath: "guides/excel-power-query/",
+    confirmationPath: "thank-you/excel-power-query/",
+    addons: [
+      { id: "folder-report", name: "Bonus project: self-refreshing report", price: 5, kind: "project", description: "An extra lesson that builds a monthly report from a folder of exports, merges categories and groups totals, updated by one refresh." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on steps, joins, appends and M functions, with explanations and a running score." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "The guide's shortcuts and every lesson's key steps on paper, for quick reference beside your keyboard." },
+      { id: "workbook", name: "Printable workbook", price: 3, kind: "workbook", description: "The whole guide as a PDF with every lesson, quiz and exercise, and the worked solutions at the back." }
+    ],
+    checkoutUrl: ""
   }
 };

@@ -1,7 +1,7 @@
 // Site copy: policies, FAQ, About and Consumer Rights. Plain language; every statement
 // matches how the site works (browser-based guides unlocked by a license code).
 
-export const UPDATED = { human: "November 13, 2026", iso: "2026-11-13" };
+export const UPDATED = { human: "November 20, 2026", iso: "2026-11-20" };
 export const SELF_STUDY = "There are no video lessons, no live instruction, no tutoring, and no feedback on your work.";
 
 const C = `<a href="contact.html">contact us through the Contact page</a>`;
@@ -18,7 +18,7 @@ export const refundHtml = `
 </ul></div>
 
 <h2>Full refunds within 14 days</h2>
-<p>You can get a full refund on any Shortcut Press purchase, including the Complete Software Skills Library, if you ask within 14 days of buying. You don't need to give a reason, and it doesn't matter how much of the guide you've used.</p>
+<p>You can get a full refund on any Shortcut Press purchase, including the Complete Software Skills Library and any extras bought with a guide, if you ask within 14 days of buying. You don't need to give a reason, and it doesn't matter how much of the guide you've used.</p>
 
 <h2>How to ask for a refund</h2>
 <p>${CC} and include your order number. Including the email address you used at checkout helps us find your order quickly.</p>
@@ -27,7 +27,7 @@ export const refundHtml = `
 <p>Refunds are made to your original payment method and are issued within 5 business days of your request. Your payment provider's own processing time may add a few days before the money appears in your account.</p>
 
 <h2>What happens to the license</h2>
-<p>When a purchase is refunded, the license for it ends and you may no longer use the guide or guides it unlocked. You can remove the license from your devices in My Guides.</p>
+<p>When a purchase is refunded, the license for it ends and you may no longer use the guide or guides it unlocked, or any extras bought with it. You can remove the license from your devices in My Guides.</p>
 
 <h2>If something doesn't work</h2>
 <p>If a guide or a practice file doesn't work as described, ${C} and tell us what happens. We'll fix the problem or replace what's needed, and you can still choose a refund within the 14 days. Your legal rights as a consumer are not affected by this policy; see <a href="consumer-rights.html">Consumer Rights</a>.</p>
@@ -47,11 +47,11 @@ export const deliveryHtml = `
 </ul></div>
 
 <h2>What you receive</h2>
-<p>Each guide is a series of interactive lessons in your browser, with step-by-step instructions, diagrams, quizzes, exercises with worked solutions, practice files to download, a keyboard shortcut trainer and progress tracking. The spreadsheet guides also include a formula sandbox. You receive one license code per purchase; a Complete Software Skills Library code unlocks all seven guides. No software, physical item or account is included.</p>
+<p>Each guide is a series of interactive lessons in your browser, with step-by-step instructions, diagrams, quizzes, exercises with worked solutions, practice files to download, a keyboard shortcut trainer and progress tracking. The spreadsheet guides also include a formula sandbox. You receive one license code per purchase; a Complete Software Skills Library code unlocks the seven guides it includes. Some guides offer optional extras, such as a printable cheat sheet or a bonus project lesson, which you choose on the guide's page before checkout. Extras are delivered with the guide: the same license code unlocks them in the guide's Extras section. No software, physical item or account is included.</p>
 
 <h2>How delivery works, step by step</h2>
 <ol>
-<li><strong>Agree and pay.</strong> On the guide's page, tick the box to agree to the <a href="terms-of-service.html">Terms of Service</a> and <a href="refund-policy.html">Refund Policy</a>, then select the buy button. You pay on our payment provider's secure checkout, where applicable taxes are shown.</li>
+<li><strong>Agree and pay.</strong> On the guide's page, choose any extras you'd like, tick the box to agree to the <a href="terms-of-service.html">Terms of Service</a> and <a href="refund-policy.html">Refund Policy</a>, then select the buy button. You pay on our payment provider's secure checkout, where applicable taxes are shown.</li>
 <li><strong>Your confirmation page opens.</strong> Immediately after payment, you're shown your order confirmation page. It issues your license code and shows the product, the date and time, and your order reference when the payment provider supplies one.</li>
 <li><strong>Your license is activated in that browser.</strong> The confirmation page activates the code automatically in the browser you bought with. You can copy the code, save the confirmation as a PDF, or print it.</li>
 <li><strong>Open your guide.</strong> The Open my guide button takes you straight into the first lesson.</li>
@@ -156,10 +156,10 @@ export const termsHtml = `
 <p>Before you can go to checkout, you must agree to these Terms of Service and the <a href="refund-policy.html">Refund Policy</a>. On each product page, the buy button stays disabled until you tick the box that reads “I agree to the Terms of Service and Refund Policy”. Completing a purchase confirms that you agreed to both.</p>
 
 <h2 id="products">What Shortcut Press sells</h2>
-<p>Shortcut Press sells self-paced, interactive software skills guides that run in your web browser and are unlocked with a license code. Each guide includes lessons with step-by-step instructions, diagrams, quizzes, exercises with worked solutions, downloadable practice files, a keyboard shortcut trainer and progress tracking. The guides are self-study materials: they include no video lessons, no live instruction, no tutoring and no feedback on your work.</p>
+<p>Shortcut Press sells self-paced, interactive software skills guides that run in your web browser and are unlocked with a license code. Each guide includes lessons with step-by-step instructions, diagrams, quizzes, exercises with worked solutions, downloadable practice files, a keyboard shortcut trainer and progress tracking. Some guides also offer optional extras, chosen before checkout and unlocked by the same license code. The guides and extras are self-study materials: they include no video lessons, no live instruction, no tutoring and no feedback on your work.</p>
 
 <h2 id="license">Your personal-use license</h2>
-<p>When you buy a guide, you receive a personal, non-transferable license to use that guide (or, for the Complete Software Skills Library, all seven guides) and its practice files for your own learning, on any devices you use. Anything you create while working through the exercises is yours.</p>
+<p>When you buy a guide, you receive a personal, non-transferable license to use that guide (or, for the Complete Software Skills Library, the seven guides it includes), its practice files and any extras you bought with it for your own learning, on any devices you use. Anything you create while working through the exercises is yours.</p>
 
 <h2 id="license-codes">License codes</h2>
 <p>Your license code is for you alone. You may not share, publish, sell or transfer it, or post it where others can use it. You may also not resell, redistribute or upload the guides or practice files, share them with a class or with coworkers, or claim them as your own work.</p>
@@ -174,7 +174,7 @@ export const termsHtml = `
 <p>Your licenses and learning progress are stored only in your own browser. You are responsible for backing up that data using the Export backup feature in My Guides. Shortcut Press can't recover data that was stored only in your browser.</p>
 
 <h2 id="payment">Prices, taxes and payment</h2>
-<p>Prices are shown in US dollars on each product page. Payment is handled by a third-party payment provider at checkout, under its own terms, and applicable taxes are shown at checkout. Prices may change from time to time, but a change never affects a purchase you've already made.</p>
+<p>Prices are shown in US dollars on each product page, and the price of each optional extra is shown beside it. Payment is handled by a third-party payment provider at checkout, under its own terms, and applicable taxes are shown at checkout. Prices may change from time to time, but a change never affects a purchase you've already made.</p>
 
 <h2 id="delivery">Delivery and refunds</h2>
 <p>Products are delivered as described in the <a href="delivery-policy.html">Delivery Policy</a>. Refunds are handled as described in the <a href="refund-policy.html">Refund Policy</a>. Both policies form part of these terms.</p>
@@ -242,7 +242,7 @@ export const consumerHtml = `
 </ul>
 
 <h2 id="price">Price</h2>
-<p>Prices are shown in US dollars on each product page. The total you pay, including any applicable taxes, is shown at checkout before you confirm your payment.</p>
+<p>Prices are shown in US dollars on each product page, with the price of each optional extra beside it. The total you pay, including any extras you choose and any applicable taxes, is shown at checkout before you confirm your payment.</p>
 
 <h2 id="cancel">Your right to cancel</h2>
 <p>If you live in the European Union or the United Kingdom, consumer law normally gives you 14 days to cancel a purchase made online. For digital content supplied straight away, that right can end once supply begins, if you agree to it. Shortcut Press doesn't ask you to give up that right: you can cancel any purchase within 14 days of buying and receive a full refund, whether or not you've started using the guide, and without giving a reason. This applies to every customer, wherever you live.</p>
@@ -262,7 +262,7 @@ export const consumerHtml = `
 export const aboutHtml = `
 <h2>What we make</h2>
 <p>Shortcut Press makes interactive software skills guides that run in your web browser. Each guide takes one program and works through it lesson by lesson: every lesson explains a skill, breaks it into numbered steps with an original diagram, checks your understanding with a short quiz, and ends with a practice exercise and a worked solution. Practice files, a keyboard shortcut trainer and progress tracking come with every guide, and the spreadsheet guides add a formula sandbox you can type into.</p>
-<p>There are seven guides, each covering one program, and a library that unlocks all seven with a single license. You can see the full list on the <a href="index.html#guides">home page</a>.</p>
+<p>There are {{GUIDE_COUNT}} guides, each covering one program. Seven of them are also sold together as the Complete Software Skills Library, unlocked by a single license, and the others offer optional extras such as printable cheat sheets and bonus project lessons. You can see the full list on the <a href="index.html#guides">home page</a>.</p>
 
 <h2>Why written, interactive guides</h2>
 <p>A written step stays put while you carry it out. You can read it, try it in the program, read it again, and move on when you're ready, without scrubbing back through a recording. Quizzes and exercises turn reading into doing, and the worked solutions show every step, not just the final answer.</p>
@@ -298,14 +298,16 @@ export const FAQ = [
     group: "Buying and delivery",
     items: [
       ["What exactly do I receive after purchase, and how?", `<p>You receive a license code for an interactive guide that runs in your web browser. Immediately after payment, you're shown your order confirmation page, which issues the code, activates it in that browser, and has an <strong>Open my guide</strong> button that takes you straight into the first lesson. You can also copy the code, save the confirmation as a PDF, or print it. Nothing is shipped. The <a href="delivery-policy.html">Delivery Policy</a> goes through each step.</p>`],
-      ["What's inside a guide?", `<p>A series of lessons, each with step-by-step instructions, an original diagram, a short quiz and a practice exercise with a worked solution. Every guide also has downloadable practice files, a keyboard shortcut trainer for its program, and progress tracking with a Resume button. The two spreadsheet guides add a formula sandbox you can type formulas into. The Complete Software Skills Library unlocks all seven guides with one code.</p>`],
+      ["What's inside a guide?", `<p>A series of lessons, each with step-by-step instructions, an original diagram, a short quiz and a practice exercise with a worked solution. Every guide also has downloadable practice files, a keyboard shortcut trainer for its program, and progress tracking with a Resume button. The spreadsheet guides add a formula sandbox you can type formulas into. The Complete Software Skills Library unlocks its seven guides with one code.</p>`],
+      ["What are extras?", `<p>Some guides offer optional extras you can add when you buy, each for a few dollars: for example a printable cheat sheet, a printable workbook, a flashcard deck, an extra set of quiz questions or practice exercises, or a bonus project lesson. They're listed with their prices on the guide's page, and the total updates as you tick them. Extras are delivered with the guide: the same license code unlocks them in the guide's <em>Extras</em> section.</p>`],
+      ["Can I add an extra after buying?", `<p>Extras are chosen on the guide's page before checkout. If you'd like to add one to a guide you've already bought, ${C} with your order number and we'll arrange it and send you an updated license code that unlocks the guide and all its extras.</p>`],
       ["Is there video or tutoring?", `<p>No. The guides are self-study material. ${SELF_STUDY} You read each step, carry it out in the software, then check your understanding and compare your work with the worked solutions.</p>`],
     ],
   },
   {
     group: "Licenses and devices",
     items: [
-      ["How do licenses work?", `<p>Each purchase gives you a license code that starts with SCUT. The code is checked in your browser and unlocks the guide you bought; a Complete Software Skills Library code unlocks all seven guides. Activated licenses are saved in your browser on that device. Capitals, spaces and dashes don't matter when you type a code.</p>`],
+      ["How do licenses work?", `<p>Each purchase gives you a license code that starts with SCUT. The code is checked in your browser and unlocks the guide you bought, together with any extras you chose; a Complete Software Skills Library code unlocks the seven guides it includes. Activated licenses are saved in your browser on that device. Capitals, spaces and dashes don't matter when you type a code.</p>`],
       ["How do I use my guide on another device?", `<p>Open any page of this site on the other device, select <strong>My Guides</strong> in the bottom-left corner, and enter the same license code under <em>Add a license</em>. The same code works on all your devices. Progress is saved separately on each device; to move your progress, export a backup on one device and import it on the other.</p>`],
       ["I've lost my license code. What should I do?", `<p>If you still have a device where the guide is activated, open My Guides there: the code is listed under <em>License details</em>. Otherwise, ${C} with your order number and the email address you used at checkout, and we'll send your code again.</p>`],
       ["How do backups work?", `<p>Your licenses and progress are stored only in your own browser, so clearing your browser's data removes them. In My Guides, <strong>Export backup</strong> saves a small file with all your licenses and progress; <strong>Import backup</strong> restores it on any device. If you haven't made a backup in 30 days, My Guides reminds you.</p>`],

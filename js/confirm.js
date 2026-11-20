@@ -23,6 +23,19 @@
   var product = catalog[productId];
   var productCode = L.codeForProduct(productId);
   var PARAMS = ["session_id", "order_id", "order", "transaction_id", "txn_id", "token"];
+  var addons = (product && product.addons) || [];
+
+  // Add-ons chosen at checkout arrive as ?addons=id,id (passed through by the payment provider).
+  function addonMaskFromUrl() {
+    var raw = new URLSearchParams(location.search).get("addons") || "";
+    var mask = 0;
+    raw.split(",").forEach(function (id) {
+      for (var i = 0; i < addons.length && i < 4; i++) if (addons[i].id === id.trim()) mask |= 1 << i;
+    });
+    return mask;
+  }
+  var addonMask = L.hasAddons && L.hasAddons(productCode) ? addonMaskFromUrl() : 0;
+  var chosen = addons.filter(function (_, i) { return addonMask & (1 << i); });
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -53,7 +66,7 @@
   function issue() {
     var ref = orderRef();
     if (ref) {
-      return L.generateFromOrder(productCode, ref).then(function (code) {
+      return L.generateFromOrder(productCode, ref, addonMask).then(function (code) {
         var key = "sp-order-" + code;
         var seen = read(key);
         var issuedAt = (seen && seen.issuedAt) || new Date().toISOString();
@@ -61,12 +74,12 @@
         return { code: code, ref: ref, issuedAt: issuedAt };
       });
     }
-    var key = "sp-confirm-" + productId;
+    var key = "sp-confirm-" + productId + (addonMask ? "-" + addonMask : "");
     var saved = read(key);
-    if (saved && saved.code && L.validate(saved.code).valid && L.validate(saved.code).productId === productId) {
+    if (saved && saved.code && L.validate(saved.code).valid && L.validate(saved.code).productId === productId && (L.validate(saved.code).addonMask || 0) === addonMask) {
       return Promise.resolve({ code: saved.code, ref: null, issuedAt: saved.issuedAt });
     }
-    var fresh = { code: L.generateRandom(productCode), issuedAt: new Date().toISOString() };
+    var fresh = { code: L.generateRandom(productCode, addonMask), issuedAt: new Date().toISOString() };
     write(key, fresh);
     return Promise.resolve({ code: fresh.code, ref: null, issuedAt: fresh.issuedAt });
   }
@@ -102,6 +115,7 @@
       '<h2 id="cf-details" class="cf-h">Order details</h2>' +
       '<dl class="cf-dl">' +
       "<dt>Product</dt><dd>" + esc(product.name) + "</dd>" +
+      (chosen.length ? "<dt>Extras</dt><dd>" + chosen.map(function (a) { return esc(a.name); }).join("<br>") + "</dd>" : "") +
       "<dt>Date</dt><dd>" + esc(t.date) + "</dd>" +
       "<dt>Time</dt><dd>" + esc(t.time) + "</dd>" +
       (order.ref ? "<dt>Order reference</dt><dd><code>" + esc(order.ref) + "</code></dd>" : "") +
@@ -112,7 +126,7 @@
       '<p class="cf-code"><code data-cf-code>' + esc(order.code) + "</code></p>" +
       '<div class="cf-actions"><button type="button" class="btn btn-ghost" data-cf-copy>Copy code</button></div>' +
       '<p class="cf-status status-msg status-' + (activation.ok ? "good" : "bad") + '" role="status"><span class="status-icon" aria-hidden="true"></span><span>' +
-      (activation.ok ? "Activated in this browser. " + (isLib ? "All seven guides are unlocked." : "Your guide is unlocked.") : "This browser couldn't save the license. Copy the code and add it in My Guides.") +
+      (activation.ok ? "Activated in this browser. " + (isLib ? "All seven guides are unlocked." : chosen.length ? "Your guide and its extras are unlocked." : "Your guide is unlocked.") : "This browser couldn't save the license. Copy the code and add it in My Guides.") +
       "</span></p>" +
       '<p class="small-note">Keep this code. To use your guide' + (isLib ? "s" : "") + " on another device, open My Guides there (bottom-left corner) and enter the same code.</p>" +
       "</section></div>" +
@@ -159,6 +173,7 @@
         { text: "Date: " + t.date },
         { text: "Time: " + t.time },
       ];
+      if (chosen.length) blocks.push({ text: "Extras: " + chosen.map(function (a) { return a.name; }).join(", ") });
       if (order.ref) blocks.push({ text: "Order reference: " + order.ref });
       blocks.push(
         { text: "License code: " + order.code, bold: true, gap: 8 },

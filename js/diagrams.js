@@ -466,6 +466,177 @@
     return svg(out, "Text placed along a curved path", 228);
   }
 
+  /* ---------- generic: code listing ---------- */
+  // { lines: ["..."], highlight: [index...], notes: [[lineIndex, "note"]], lang }
+  function code(d) {
+    var lines = d.lines || [];
+    var hi = d.highlight || [];
+    var lh = 20;
+    var h = Math.max(120, 44 + lines.length * lh + 16);
+    var hasNotes = d.notes && d.notes.length;
+    var pw = hasNotes ? 300 : 440;
+    var out = rect(20, 12, pw, h - 24, "dg-box", 8);
+    if (d.lang) out += text(20 + pw - 12, 30, d.lang, "dg-h", "end");
+    lines.forEach(function (ln, i) {
+      var y = 44 + i * lh;
+      if (hi.indexOf(i) !== -1) out += rect(26, y - 14, pw - 12, lh - 2, "dg-cell-acc", 3);
+      out += text(38, y, String(i + 1), "dg-h", "end") + text(48, y, ln, "dg-m");
+    });
+    (d.notes || []).forEach(function (n) {
+      var y = 44 + n[0] * lh - 4;
+      out += arrow(pw + 40, y, pw + 24, y, "dg-arrow-acc") + text(pw + 46, y + 4, n[1], "dg-cap");
+    });
+    return svg(out, d.title || "Code listing", h);
+  }
+
+  /* ---------- generic: hierarchy ---------- */
+  // { root: "label", items: [["label", depth, accent?]], caption }
+  function tree(d) {
+    var items = d.items || [];
+    var lh = 26;
+    var h = Math.max(140, 54 + items.length * lh + 10);
+    var out = rect(20, 14, 26, 20, "dg-chip-acc", 4) + text(56, 29, d.root || "Root", "dg-t");
+    var lastAt = { 0: 34 };
+    items.forEach(function (it, i) {
+      var depth = it[1] || 1;
+      var y = 50 + i * lh;
+      var x = 20 + depth * 26;
+      var parentY = lastAt[depth - 1] || 34;
+      out += '<path class="dg-wire" d="M' + (x - 13) + " " + parentY + " V" + (y + 10) + " H" + x + '"/>';
+      out += rect(x, y, 20, 20, it[2] ? "dg-chip-acc" : "dg-chip", 4) + text(x + 30, y + 15, it[0], it[2] ? "dg-f" : "dg-t");
+      lastAt[depth] = y + 20;
+    });
+    if (d.caption) out += text(W - 20, h - 14, d.caption, "dg-cap", "end");
+    return svg(out, d.title || "Hierarchy", h);
+  }
+
+  /* ---------- generic: stacked layers ---------- */
+  // { items: ["top", ...], highlight, caption, heading }
+  function layers(d) {
+    var items = d.items || [];
+    var out = d.heading ? text(40, 24, d.heading, "dg-h") : "";
+    items.forEach(function (it, i) {
+      var y = 36 + i * 34;
+      var off = (items.length - i) * 6;
+      out += '<path class="' + (i === d.highlight ? "dg-box dg-box-acc" : "dg-box") + '" d="M' + (60 + off) + " " + y + ' h220 l30 22 h-220 z"/>';
+      out += text(330 + off, y + 16, it, i === d.highlight ? "dg-f" : "dg-t");
+    });
+    if (d.caption) out += text(W / 2, 54 + items.length * 34, d.caption, "dg-cap", "middle");
+    return svg(out, d.title || "Layers", 70 + items.length * 34);
+  }
+
+  /* ---------- generic: table ---------- */
+  // { head: [...], rows: [[...]], highlight: { rows: [i], cols: [j] }, caption }
+  function table(d) {
+    var head = d.head || [];
+    var rows = d.rows || [];
+    var cw = (W - 40) / Math.max(1, head.length);
+    var rh = 26;
+    var hi = d.highlight || {};
+    var out = "";
+    head.forEach(function (c, j) {
+      out += rect(20 + j * cw, 14, cw, rh, "dg-cell-soft", 0) + text(28 + j * cw, 31, c, "dg-h");
+    });
+    rows.forEach(function (r, i) {
+      r.forEach(function (v, j) {
+        var acc = (hi.rows || []).indexOf(i) !== -1 || (hi.cols || []).indexOf(j) !== -1;
+        out += rect(20 + j * cw, 14 + (i + 1) * rh, cw, rh, acc ? "dg-cell-acc" : "dg-cell", 0) + text(28 + j * cw, 31 + (i + 1) * rh, String(v), acc ? "dg-f" : "dg-t");
+      });
+    });
+    var h = 14 + (rows.length + 1) * rh + (d.caption ? 40 : 16);
+    if (d.caption) out += text(20, h - 14, d.caption, "dg-cap");
+    return svg(out, d.title || "Table", h);
+  }
+
+  /* ---------- generic: cycle ---------- */
+  // { nodes: [...], highlight, center }
+  function cycle(d) {
+    var nodes = d.nodes || [];
+    var n = nodes.length;
+    var cx = W / 2;
+    var cy = 120;
+    var rx = 170;
+    var ry = 82;
+    var out = d.center ? text(cx, cy + 4, d.center, "dg-cap", "middle") : "";
+    var pts = nodes.map(function (_, i) {
+      var a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
+      return [cx + rx * Math.cos(a), cy + ry * Math.sin(a)];
+    });
+    pts.forEach(function (p, i) {
+      var q = pts[(i + 1) % n];
+      out += arrow(Math.round(p[0] + (q[0] - p[0]) * 0.3), Math.round(p[1] + (q[1] - p[1]) * 0.3), Math.round(p[0] + (q[0] - p[0]) * 0.7), Math.round(p[1] + (q[1] - p[1]) * 0.7));
+    });
+    nodes.forEach(function (label, i) {
+      var p = pts[i];
+      var w = Math.max(74, String(label).length * 7 + 20);
+      out += rect(p[0] - w / 2, p[1] - 15, w, 30, i === d.highlight ? "dg-box dg-box-acc" : "dg-box", 15) + text(p[0], p[1] + 4, label, "dg-t", "middle");
+    });
+    return svg(out, d.title || "Cycle", 240);
+  }
+
+  /* ---------- generic: terminal session ---------- */
+  // { lines: [["$", "command"], ["", "output"]], highlight: [i], shell }
+  function terminal(d) {
+    var lines = d.lines || [];
+    var lh = 20;
+    var h = 46 + lines.length * lh + 14;
+    var hi = d.highlight || [];
+    var out = rect(20, 10, W - 40, h - 20, "dg-box", 8) + '<circle class="dg-chip" cx="38" cy="26" r="4"/><circle class="dg-chip" cx="52" cy="26" r="4"/><circle class="dg-chip" cx="66" cy="26" r="4"/>';
+    if (d.shell) out += text(W - 32, 30, d.shell, "dg-h", "end");
+    lines.forEach(function (ln, i) {
+      var y = 56 + i * lh;
+      if (hi.indexOf(i) !== -1) out += rect(28, y - 14, W - 56, lh - 2, "dg-cell-acc", 3);
+      if (ln[0]) out += text(36, y, ln[0], "dg-num") + text(36 + ln[0].length * 8 + 8, y, ln[1], "dg-m");
+      else out += text(36, y, ln[1], "dg-h");
+    });
+    return svg(out, d.title || "Terminal session", h);
+  }
+
+  /* ---------- generic: step sequencer ---------- */
+  // { rows: [["Kick", "x...x...x...x..."]], steps: 16, caption }
+  function steps(d) {
+    var rows = d.rows || [];
+    var n = d.steps || 16;
+    var sw = (W - 110) / n;
+    var out = "";
+    for (var s = 0; s < n; s += 4) out += text(96 + s * sw + sw / 2, 22, String(s / 4 + 1), "dg-h", "middle");
+    rows.forEach(function (r, i) {
+      var y = 32 + i * 34;
+      out += text(20, y + 19, r[0], "dg-t");
+      for (var s2 = 0; s2 < n; s2++) {
+        var on = r[1][s2] === "x";
+        out += rect(96 + s2 * sw + 2, y + 2, sw - 4, 26, on ? "dg-cell-acc" : s2 % 8 < 4 ? "dg-cell" : "dg-cell-soft", 4);
+      }
+    });
+    var h = 44 + rows.length * 34 + (d.caption ? 22 : 0);
+    if (d.caption) out += text(20, h - 10, d.caption, "dg-cap");
+    return svg(out, d.title || "Step sequencer", h);
+  }
+
+  /* ---------- generic: keyframes ---------- */
+  // { tracks: [["Position", [0.1, 0.6], accentIndex]], ease: true, caption }
+  function keyframes(d) {
+    var tracks = d.tracks || [];
+    var out = "";
+    for (var i = 0; i < 13; i++) out += '<path class="dg-tick" d="M' + (130 + i * 27) + " 20 V" + (i % 4 ? 26 : 32) + '"/>';
+    tracks.forEach(function (t, i) {
+      var y = 52 + i * 34;
+      out += text(20, y + 4, t[0], "dg-t") + '<path class="dg-wire-soft" d="M130 ' + y + ' H454"/>';
+      (t[1] || []).forEach(function (k, j) {
+        var x = 130 + k * 324;
+        out += '<path class="' + (t[2] === j ? "dg-acc-face" : "dg-node") + '" d="M' + x + " " + (y - 7) + ' l7 7 l-7 7 l-7 -7 z"/>';
+      });
+    });
+    var top = 60 + tracks.length * 34;
+    if (d.ease) {
+      out += rect(130, top, 324, 80, "dg-box", 6) + '<path class="dg-curve" d="M130 ' + (top + 80) + " L454 " + top + '"/>' + '<path class="dg-curve-acc" d="M130 ' + (top + 80) + " C 250 " + (top + 80) + ", 334 " + top + ", 454 " + top + '"/>';
+      out += text(20, top + 34, "Value graph", "dg-h") + text(454, top + 98, "Linear (gray) and eased (accent)", "dg-cap", "end");
+      top += 104;
+    }
+    if (d.caption) out += text(20, top + 8, d.caption, "dg-cap");
+    return svg(out, d.title || "Keyframes", top + (d.caption ? 20 : 0));
+  }
+
   var renderers = {
     grid: grid,
     flow: flow,
@@ -487,7 +658,15 @@
     dates: dates,
     chartpick: chartpick,
     color: color,
-    textpath: textpath
+    textpath: textpath,
+    code: code,
+    tree: tree,
+    layers: layers,
+    table: table,
+    cycle: cycle,
+    terminal: terminal,
+    steps: steps,
+    keyframes: keyframes
   };
 
   function render(spec) {

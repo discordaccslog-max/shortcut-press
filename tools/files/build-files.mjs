@@ -3,7 +3,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { xlsx, docx, Obj, wav } from "./formats.mjs";
+import { xlsx, docx, Obj, wav, zip, png, midi } from "./formats.mjs";
+import { MORE_GUIDES, loadGuides } from "../guides/index.mjs";
 import { sfProducts, sfPeople, sfOrders, salesRows, salesRawRows, salesExtraRows, serial } from "./datasets.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
@@ -407,4 +408,14 @@ if (!only || only === "figma") figmaFiles();
 if (!only || only === "inkscape") inkscapeFiles();
 if (!only || only === "resolve" || only === "audio") resolveAudio();
 if (!only || only === "resolve" || only === "video") await resolveVideos();
+
+// Guides sold on their own: each guide module makes its own files with makeFiles(formats).
+const more = await loadGuides(MORE_GUIDES);
+for (const [id, g] of Object.entries(more)) {
+  if (only && only !== id && only !== "more") continue;
+  if (typeof g.makeFiles !== "function") continue;
+  const made = await g.makeFiles({ xlsx, docx, Obj, wav, zip, png, midi });
+  for (const f of g.files) if (!made[f.name]) throw new Error(`${id}: makeFiles didn't produce ${f.name}`);
+  for (const [name, data] of Object.entries(made)) out(g.slug, name, data);
+}
 console.log("Done.");

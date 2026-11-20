@@ -98,11 +98,31 @@ test("order-linked codes: same order always gives the same code, different order
   assert.notEqual(sf.slice(8), pt.slice(8));
 });
 
-test("a Library code unlocks all seven guides; other codes unlock only their own", () => {
+test("a Library code unlocks its seven guides; other codes unlock only their own", () => {
   const lib = L.validate(L.generateRandom("CS"));
   assert.equal(lib.isLibrary, true);
   const unlocked = L.unlocks(lib.productId);
   assert.equal(unlocked.length, 7);
-  assert.deepEqual(new Set(unlocked), new Set(Object.values(L.PRODUCT_CODES).filter((id) => id !== "complete-library")));
+  assert.deepEqual(new Set(unlocked), new Set(L.LIBRARY_INCLUDES.map((c) => L.PRODUCT_CODES[c])));
+  assert.ok(!unlocked.includes("python-automation"));
   assert.deepEqual(L.unlocks("figma-interface-design"), ["figma-interface-design"]);
+});
+
+test("add-on masks: every mask round-trips, and codes issued before add-ons are unchanged", async () => {
+  for (let mask = 0; mask < 16; mask++) {
+    for (let i = 0; i < 20; i++) {
+      const v = L.validate(L.generateRandom("BG", mask));
+      assert.ok(v.valid);
+      assert.equal(v.addonMask, mask);
+    }
+    const a = await L.generateFromOrder("PY", "ORDER-7", mask);
+    assert.equal(a, await L.generateFromOrder("PY", "ORDER-7", mask));
+    assert.equal(L.validate(a).addonMask, mask);
+  }
+  assert.notEqual(await L.generateFromOrder("PY", "ORDER-7", 1), await L.generateFromOrder("PY", "ORDER-7", 3));
+  // Products without add-ons ignore the mask, so existing order codes still match.
+  assert.equal(await L.generateFromOrder("SF", "ORDER-1001", 5), await L.generateFromOrder("SF", "ORDER-1001"));
+  assert.equal(L.validate(L.generateRandom("SF")).addonMask, 0);
+  assert.equal(L.hasAddons("SF"), false);
+  assert.equal(L.hasAddons("BG"), true);
 });

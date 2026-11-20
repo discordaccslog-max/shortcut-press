@@ -117,6 +117,19 @@
     return !!licenseFor(productId);
   }
 
+  // Bit mask of the add-ons unlocked for a guide: every license for the guide counts.
+  function addonMask(productId) {
+    var mask = 0;
+    load().licenses.forEach(function (l) {
+      if (l.productId === productId) mask |= L.validate(l.code).addonMask || 0;
+    });
+    return mask;
+  }
+
+  function hasAddon(productId, index) {
+    return !!(addonMask(productId) & (1 << index));
+  }
+
   function unlockedGuides() {
     var out = [];
     load().licenses.forEach(function (l) {
@@ -268,6 +281,8 @@
     removeLicense: removeLicense,
     licenseFor: licenseFor,
     hasAccess: hasAccess,
+    addonMask: addonMask,
+    hasAddon: hasAddon,
     unlockedGuides: unlockedGuides,
     guideProgress: guideProgress,
     setPosition: setPosition,

@@ -97,10 +97,49 @@
     button.className = "btn btn-buy";
     button.href = url;
     button.setAttribute("data-href", url);
+    button.setAttribute("data-base", url);
+    button.setAttribute("data-product", slot.getAttribute("data-buy"));
     button.textContent = "Buy now · " + formatPrice(product.price);
     slot.appendChild(button);
     buyButtons.push(button);
   });
+
+  /* Add-ons: a running total, and the chosen add-ons passed to checkout as ?addons=id,id */
+  var addonBox = document.querySelector("[data-addons]");
+  function chosenAddons() {
+    var out = [];
+    if (!addonBox) return out;
+    each("[data-addon]", function (box) {
+      if (box.checked) out.push(box);
+    });
+    return out;
+  }
+  function syncAddons() {
+    if (!addonBox) return;
+    var product = catalog[addonBox.getAttribute("data-addons")];
+    var chosen = chosenAddons();
+    var total = product.price;
+    chosen.forEach(function (box) {
+      total += Number(box.getAttribute("data-addon-price")) || 0;
+    });
+    var totalEl = addonBox.querySelector("[data-addons-total]");
+    if (totalEl) totalEl.textContent = formatPrice(total);
+    var ids = chosen.map(function (box) {
+      return box.value;
+    });
+    buyButtons.forEach(function (button) {
+      if (button.getAttribute("data-product") !== addonBox.getAttribute("data-addons")) return;
+      var base = button.getAttribute("data-base");
+      var url = ids.length ? base + (base.indexOf("?") === -1 ? "?" : "&") + "addons=" + encodeURIComponent(ids.join(",")) : base;
+      button.setAttribute("data-href", url);
+      if (button.hasAttribute("href")) button.href = url;
+      button.textContent = "Buy now · " + formatPrice(total);
+    });
+  }
+  if (addonBox) {
+    addonBox.addEventListener("change", syncAddons);
+    syncAddons();
+  }
 
   /* Terms agreement: shown only when buy buttons exist; buttons stay disabled until it is ticked */
   var agree = document.querySelector("[data-agree]");
@@ -142,6 +181,22 @@
       });
     });
     syncBuyButtons();
+  }
+
+  /* ---------- Catalog topic filter (home page) ---------- */
+  var catGrid = document.querySelector("[data-cat-grid]");
+  if (catGrid) {
+    each("[data-cat-filter]", function (btn) {
+      btn.addEventListener("click", function () {
+        var cat = btn.getAttribute("data-cat-filter");
+        each("[data-cat-filter]", function (b) {
+          b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+        });
+        each(".cat-card", function (card) {
+          card.hidden = cat !== "all" && card.getAttribute("data-cat") !== cat;
+        }, catGrid);
+      });
+    });
   }
 
   each("[data-year]", function (el) {

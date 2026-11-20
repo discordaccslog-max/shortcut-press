@@ -3,10 +3,13 @@
   Caches the site so guides work offline once loaded. VERSION changes whenever any
   site file changes, which installs a new worker and refreshes the cached files.
 */
-var VERSION = "ea892985ff58";
+var VERSION = "7b9e935e30de";
 var CACHE = "sp-" + VERSION;
 var RUNTIME = "sp-runtime-" + VERSION;
-var PRECACHE = ["./","about.html","faq.html","contact.html","refund-policy.html","delivery-policy.html","privacy-policy.html","terms-of-service.html","disclaimer.html","consumer-rights.html","404.html","spreadsheet-formulas-functions.html","data-analysis-pivot-tables-charts.html","professional-document-formatting.html","blender-3d-modeling-fundamentals.html","davinci-resolve-video-editing.html","figma-interface-design.html","inkscape-vector-illustration.html","complete-software-skills-library.html","guides/spreadsheet-formulas-functions/","guides/data-analysis-pivot-tables-charts/","guides/professional-document-formatting/","guides/blender-3d-modeling-fundamentals/","guides/davinci-resolve-video-editing/","guides/figma-interface-design/","guides/inkscape-vector-illustration/","guides/complete-software-skills-library/","css/app.css","css/styles.css","js/confirm.js","js/diagrams.js","js/dock.js","js/guide-app.js","js/guides-index.js","js/license.js","js/main.js","js/pdf.js","js/products.js","js/sandbox.js","js/search-index.js","js/site-config.js","js/store.js","js/trainer.js","vendor/fast-formula-parser/parser.min.js","guides/spreadsheet-formulas-functions/content.js","guides/data-analysis-pivot-tables-charts/content.js","guides/professional-document-formatting/content.js","guides/blender-3d-modeling-fundamentals/content.js","guides/davinci-resolve-video-editing/content.js","guides/figma-interface-design/content.js","guides/inkscape-vector-illustration/content.js","favicon.svg","manifest.webmanifest","icons/icon-192.png","icons/icon-512.png"];
+// Guides are cached the first time they are opened and kept across site updates
+// (refreshed in the background), so a guide opened once keeps working offline.
+var GUIDES = "sp-guides";
+var PRECACHE = ["./","about.html","faq.html","contact.html","refund-policy.html","delivery-policy.html","privacy-policy.html","terms-of-service.html","disclaimer.html","consumer-rights.html","404.html","spreadsheet-formulas-functions.html","data-analysis-pivot-tables-charts.html","professional-document-formatting.html","blender-3d-modeling-fundamentals.html","davinci-resolve-video-editing.html","figma-interface-design.html","inkscape-vector-illustration.html","complete-software-skills-library.html","google-sheets-budgeting.html","powerpoint-presentations.html","excel-power-query.html","css/app.css","css/styles.css","js/confirm.js","js/diagrams.js","js/dock.js","js/guide-app.js","js/guides-index.js","js/license.js","js/main.js","js/pdf.js","js/products.js","js/sandbox.js","js/search-index.js","js/site-config.js","js/store.js","js/trainer.js","vendor/fast-formula-parser/parser.min.js","favicon.svg","manifest.webmanifest","icons/icon-192.png","icons/icon-512.png"];
 
 self.addEventListener("install", function (event) {
   event.waitUntil(
@@ -19,7 +22,7 @@ self.addEventListener("install", function (event) {
 self.addEventListener("activate", function (event) {
   event.waitUntil(
     caches.keys().then(function (keys) {
-      return Promise.all(keys.filter(function (k) { return k !== CACHE && k !== RUNTIME && k.indexOf("sp-") === 0; }).map(function (k) { return caches.delete(k); }));
+      return Promise.all(keys.filter(function (k) { return k !== CACHE && k !== RUNTIME && k !== GUIDES && k.indexOf("sp-") === 0; }).map(function (k) { return caches.delete(k); }));
     }).then(function () { return self.clients.claim(); })
   );
 });
@@ -45,11 +48,27 @@ self.addEventListener("fetch", function (event) {
   }
   if (url.origin !== self.location.origin) return;
 
+  var inGuides = url.pathname.indexOf("/guides/") !== -1;
   if (req.mode === "navigate") {
     event.respondWith(
-      fromNetworkThenCache(req, RUNTIME).catch(function () {
+      fromNetworkThenCache(req, inGuides ? GUIDES : RUNTIME).catch(function () {
         return caches.match(req, { ignoreSearch: true }).then(function (hit) {
           return hit || caches.match(new URL("404.html", self.registration.scope).href);
+        });
+      })
+    );
+    return;
+  }
+  if (inGuides) {
+    event.respondWith(
+      caches.open(GUIDES).then(function (cache) {
+        return cache.match(req, { ignoreSearch: true }).then(function (hit) {
+          var refresh = fromNetworkThenCache(req, GUIDES);
+          if (hit) {
+            event.waitUntil(refresh.catch(function () {}));
+            return hit;
+          }
+          return refresh;
         });
       })
     );

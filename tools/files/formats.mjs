@@ -1,4 +1,4 @@
-// Writers for the practice file formats: ZIP, XLSX, DOCX, OBJ, WAV. No third-party code.
+// Writers for the practice file formats: ZIP, XLSX, DOCX, OBJ, WAV, PNG, MIDI. No third-party code.
 import zlib from "node:zlib";
 
 /* ---------- ZIP ---------- */
@@ -276,4 +276,93 @@ export function wav(left, right, sampleRate = 48000) {
     buf.writeInt16LE(Math.max(-32768, Math.min(32767, Math.round(right[i] * 32767))), 46 + i * 4);
   }
   return buf;
+}
+
+/* ---------- PNG ---------- */
+
+// png(width, height, (x, y) => [r, g, b, a?]) — 8-bit RGBA, no interlace.
+export function png(width, height, pixel) {
+  const raw = Buffer.alloc((width * 4 + 1) * height);
+  let o = 0;
+  for (let y = 0; y < height; y++) {
+    raw[o++] = 0;
+    for (let x = 0; x < width; x++) {
+      const p = pixel(x, y);
+      raw[o++] = clamp8(p[0]);
+      raw[o++] = clamp8(p[1]);
+      raw[o++] = clamp8(p[2]);
+      raw[o++] = p[3] === undefined ? 255 : clamp8(p[3]);
+    }
+  }
+  const chunk = (type, data) => {
+    const len = Buffer.alloc(4);
+    len.writeUInt32BE(data.length);
+    const td = Buffer.concat([Buffer.from(type, "ascii"), data]);
+    const crc = Buffer.alloc(4);
+    crc.writeUInt32BE(crc32(td));
+    return Buffer.concat([len, td, crc]);
+  };
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(width, 0);
+  ihdr.writeUInt32BE(height, 4);
+  ihdr[8] = 8;
+  ihdr[9] = 6;
+  return Buffer.concat([
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
+    chunk("IHDR", ihdr),
+    chunk("IDAT", zlib.deflateSync(raw, { level: 9 })),
+    chunk("IEND", Buffer.alloc(0)),
+  ]);
+}
+
+function clamp8(v) {
+  return Math.max(0, Math.min(255, Math.round(v)));
+}
+
+/* ---------- MIDI ---------- */
+
+// midi({ bpm, tracks: [{ name, channel, notes: [{ note, start, length, velocity }] }] })
+// start and length are in beats. Format 1, 480 ticks per beat.
+export function midi({ bpm = 120, tracks }) {
+  const TPB = 480;
+  const vlq = (n) => {
+    const bytes = [n & 0x7f];
+    while ((n >>= 7)) bytes.unshift((n & 0x7f) | 0x80);
+    return bytes;
+  };
+  const track = (events) => {
+    const body = Buffer.from(events);
+    const head = Buffer.alloc(8);
+    head.write("MTrk", 0);
+    head.writeUInt32BE(body.length, 4);
+    return Buffer.concat([head, body]);
+  };
+  const tempo = Math.round(60000000 / bpm);
+  const conductor = [0, 0xff, 0x51, 3, (tempo >> 16) & 255, (tempo >> 8) & 255, tempo & 255, 0, 0xff, 0x58, 4, 4, 2, 24, 8, 0, 0xff, 0x2f, 0];
+  const chunks = [track(conductor)];
+  for (const t of tracks) {
+    const ch = t.channel || 0;
+    const evs = [];
+    for (const n of t.notes) {
+      evs.push([Math.round(n.start * TPB), 0x90 | ch, n.note, n.velocity || 100]);
+      evs.push([Math.round((n.start + n.length) * TPB), 0x80 | ch, n.note, 0]);
+    }
+    evs.sort((a, b) => a[0] - b[0] || (a[1] & 0xf0) - (b[1] & 0xf0));
+    const name = Buffer.from(t.name || "Track", "ascii");
+    const bytes = [0, 0xff, 0x03, ...vlq(name.length), ...name];
+    let now = 0;
+    for (const e of evs) {
+      bytes.push(...vlq(e[0] - now), e[1], e[2], e[3]);
+      now = e[0];
+    }
+    bytes.push(0, 0xff, 0x2f, 0);
+    chunks.push(track(bytes));
+  }
+  const head = Buffer.alloc(14);
+  head.write("MThd", 0);
+  head.writeUInt32BE(6, 4);
+  head.writeUInt16BE(1, 8);
+  head.writeUInt16BE(chunks.length, 10);
+  head.writeUInt16BE(TPB, 12);
+  return Buffer.concat([head, ...chunks]);
 }

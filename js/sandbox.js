@@ -157,6 +157,35 @@
     IFNA: function (value, alt) {
       var v = scalar(value);
       return isErr(v) && String(v) === "#N/A" ? scalar(alt) : v;
+    },
+    // Financial functions, with the same sign convention as Excel and Google Sheets.
+    PMT: function (rate, nper, pv, fv, type) {
+      var r = Number(scalar(rate)), n = Number(scalar(nper)), p = Number(scalar(pv));
+      var f = fv === undefined ? 0 : Number(scalar(fv)), t = type === undefined ? 0 : Number(scalar(type));
+      if (!n) return FE("NUM");
+      if (r === 0) return -(p + f) / n;
+      var q = Math.pow(1 + r, n);
+      return -(r * (p * q + f)) / ((1 + r * t) * (q - 1));
+    },
+    FV: function (rate, nper, pmt, pv, type) {
+      var r = Number(scalar(rate)), n = Number(scalar(nper)), m = Number(scalar(pmt));
+      var p = pv === undefined ? 0 : Number(scalar(pv)), t = type === undefined ? 0 : Number(scalar(type));
+      if (r === 0) return -(p + m * n);
+      var q = Math.pow(1 + r, n);
+      return -(p * q + (m * (1 + r * t) * (q - 1)) / r);
+    },
+    PV: function (rate, nper, pmt, fv, type) {
+      var r = Number(scalar(rate)), n = Number(scalar(nper)), m = Number(scalar(pmt));
+      var f = fv === undefined ? 0 : Number(scalar(fv)), t = type === undefined ? 0 : Number(scalar(type));
+      if (r === 0) return -(f + m * n);
+      var q = Math.pow(1 + r, n);
+      return -(f + (m * (1 + r * t) * (q - 1)) / r) / q;
+    },
+    NPV: function (rate) {
+      var r = Number(scalar(rate));
+      var vals = [];
+      for (var i = 1; i < arguments.length; i++) vals = vals.concat(flat(arguments[i]).filter(function (v) { return typeof v === "number"; }));
+      return vals.reduce(function (sum, v, j) { return sum + v / Math.pow(1 + r, j + 1); }, 0);
     }
   };
 
