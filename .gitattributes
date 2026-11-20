@@ -4,3 +4,4 @@
 *.wav binary
 *.xlsx binary
 *.docx binary
+guides/*/files/** -text
