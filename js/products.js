@@ -102,8 +102,8 @@ window.SHORTCUT_PRODUCTS = {
     slug: "complete-software-skills-library",
     code: "CS",
     price: 149,
-    summary: "All seven guides, unlocked by a single license.",
-    description: "All seven Shortcut Press guides, unlocked by a single license code. Each guide is complete on its own, with lessons, diagrams, quizzes, exercises with worked solutions, a keyboard shortcut trainer, practice files and progress tracking, so you can work through them in any order.",
+    summary: "The seven original guides, unlocked by a single license.",
+    description: "Seven Shortcut Press guides (spreadsheets, data analysis, documents, Blender, DaVinci Resolve, Figma and Inkscape), unlocked by a single license code. Each guide is complete on its own, with lessons, diagrams, quizzes, exercises with worked solutions, a keyboard shortcut trainer, practice files and progress tracking, so you can work through them in any order. Guides added later are sold separately.",
     page: "complete-software-skills-library.html",
     guidePath: "guides/complete-software-skills-library/",
     confirmationPath: "thank-you/complete-software-skills-library/",
@@ -483,6 +483,96 @@ window.SHORTCUT_PRODUCTS = {
       { id: "enemy-project", name: "Bonus project: a patrolling enemy", price: 5, kind: "project", description: "An extra lesson that adds an enemy that patrols platforms, turns at edges and restarts the level on contact." },
       { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on nodes, physics, input, signals and export, with explanations." },
       { id: "workbook", name: "Printable workbook", price: 3, kind: "workbook", description: "The whole guide as a PDF with every lesson, quiz and exercise, and the worked solutions at the back." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "freecad-3d-printing": {
+    name: "3D-Printable Parts in FreeCAD",
+    slug: "freecad-3d-printing",
+    code: "FC",
+    price: 55,
+    summary: "Constrained sketches, pads and pockets, holes, fillets, parameters and STL export for 3D printing.",
+    description: "An interactive browser guide to designing parts for 3D printing in FreeCAD's Part Design workbench: navigation, fully constrained sketches, pads and pockets, holes on sketched faces, fillets, chamfers and patterns, and spreadsheet-driven parameters and STL export, built around a shelf bracket from a dimensioned drawing.",
+    page: "freecad-3d-printing.html",
+    guidePath: "guides/freecad-3d-printing/",
+    confirmationPath: "thank-you/freecad-3d-printing/",
+    addons: [
+      { id: "box-project", name: "Bonus project: a box with a snug lid", price: 5, kind: "project", description: "An extra lesson that designs a parametric box and a matching lid with a clearance you tune for your printer." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on sketches, features, parameters and printing, with explanations." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "The FreeCAD shortcuts and each lesson's key steps as a PDF to keep beside you." },
+      { id: "workbook", name: "Printable workbook", price: 3, kind: "workbook", description: "The whole guide as a PDF with every lesson, quiz and exercise, and the worked solutions at the back." }
+    ],
+    checkoutUrl: ""
+  },
+  "after-effects-motion": {
+    name: "Motion Graphics in After Effects",
+    slug: "after-effects-motion",
+    code: "AE",
+    price: 69,
+    summary: "A ten-second logo sting: keyframes, easing, shape and text animation, parenting, precomps and rendering.",
+    description: "An interactive browser guide to motion graphics in Adobe After Effects, built around a ten-second logo animation: compositions and layers, keyframes and transform properties, easing and the graph editor, shape layers and animated text, parenting, precomps and mattes, and timing to music and rendering, with a storyboard, artwork and a music loop.",
+    page: "after-effects-motion.html",
+    guidePath: "guides/after-effects-motion/",
+    confirmationPath: "thank-you/after-effects-motion/",
+    addons: [
+      { id: "lower-third-project", name: "Bonus project: reusable lower third", price: 5, kind: "project", description: "An extra lesson that builds an animated lower third with Essential Graphics controls for quick reuse." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on keyframes, easing, layers and rendering, with explanations." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "Every After Effects shortcut in the guide and the key steps of each lesson, as a PDF." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "audacity-audio": {
+    name: "Audio Editing & Podcasts in Audacity",
+    slug: "audacity-audio",
+    code: "AU",
+    price: 26,
+    summary: "Edit spoken audio, remove noise, hum and clicks, set loudness, duck music and export a podcast episode.",
+    description: "An interactive browser guide to editing spoken audio and producing a short podcast in Audacity: navigation and editing, removing noise, hum and clicks, compression and loudness normalization, music beds with fades and automatic ducking, and labels, metadata and export, with a raw test recording full of problems to fix and a music bed.",
+    page: "audacity-audio.html",
+    guidePath: "guides/audacity-audio/",
+    confirmationPath: "thank-you/audacity-audio/",
+    addons: [
+      { id: "macro-project", name: "Bonus project: one-click clean-up macro", price: 3, kind: "project", description: "An extra lesson that saves the clean-up chain as a macro to run on every new recording." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on editing, noise reduction, loudness and export, with explanations." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "Every Audacity shortcut in the guide and the key steps of each lesson, as a PDF to print." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "lmms-beat-making": {
+    name: "Beat Making in LMMS",
+    slug: "lmms-beat-making",
+    code: "BM",
+    price: 42,
+    summary: "Drums, chords and bass, arrangement, mixing, automation and export, in a free music program.",
+    description: "An interactive browser guide to making a complete beat in LMMS, the free music production program: the workspace, programming drums in the Beat+Bassline Editor, instruments and the Piano Roll, arranging a song, mixing with the FX Mixer, and automation and export, with drum samples, MIDI chords and bass, and a song plan.",
+    page: "lmms-beat-making.html",
+    guidePath: "guides/lmms-beat-making/",
+    confirmationPath: "thank-you/lmms-beat-making/",
+    addons: [
+      { id: "pump-project", name: "Bonus project: pumping chords", price: 4, kind: "project", description: "An extra lesson that makes the chords dip on every beat with an amplifier and an LFO controller." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on patterns, notes, mixing and export, with explanations." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "Every LMMS shortcut in the guide and the key steps of each lesson, as a PDF." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "obs-streaming": {
+    name: "Recording & Streaming with OBS Studio",
+    slug: "obs-streaming",
+    code: "ST",
+    price: 29,
+    summary: "Scenes and sources, clean microphone audio, transitions and hotkeys, safe recording and streaming.",
+    description: "An interactive browser guide to recording and streaming with OBS Studio: setup and the OBS window, screen, camera and overlay sources, clean and consistent audio with filters, scenes, transitions and hotkeys, crash-safe recording, and streaming safely and using the virtual camera, with overlays, a test tone and a show plan.",
+    page: "obs-streaming.html",
+    guidePath: "guides/obs-streaming/",
+    confirmationPath: "thank-you/obs-streaming/",
+    addons: [
+      { id: "countdown-project", name: "Bonus project: live clock and countdown", price: 3, kind: "project", description: "An extra lesson that adds a countdown and a clock to your scenes with local Browser sources." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on scenes, sources, audio, recording and streaming, with explanations." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "The OBS shortcuts and each lesson's key steps as a PDF to keep beside your setup." },
       { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
     ],
     checkoutUrl: ""

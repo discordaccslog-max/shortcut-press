@@ -1,0 +1,395 @@
+import { k } from "./_helpers.mjs";
+
+const PLAN = `Night Market: a 90 BPM practice beat (LMMS)
+
+Tempo 90 BPM, 4/4, key A minor.
+Drums (Beat+Bassline Editor, 16 steps per bar):
+  Kick   steps 1, 7, 9, 11        x.....x.x.x.....
+  Snare  steps 5, 13              ....x.......x...
+  Clap   step 13 (layered with the snare)
+  Hats   every odd step           x.x.x.x.x.x.x.x.
+Chords: Am - F - C - G, one bar each (chords.mid)
+Bass: bassline.mid, follows the chord roots
+Song structure (bars):  1-4 intro (chords + hats)  5-12 main (everything)  13-16 outro (chords fade, filter closes)
+Export: WAV for archiving, MP3 for sharing.
+`;
+
+const STEPS = { Kick: "x.....x.x.x.....", Snare: "....x.......x...", Clap: "............x...", Hats: "x.x.x.x.x.x.x.x." };
+
+export default {
+  id: "lmms-beat-making",
+  slug: "lmms-beat-making",
+  title: "Beat Making in LMMS",
+  software: "LMMS",
+  apps: ["LMMS"],
+  intro:
+    "Make a complete beat in LMMS, the free music production program: program drums in the Beat+Bassline Editor, play and draw melodies in the Piano Roll, choose and shape instruments, arrange a song, mix with effects, automate changes over time, and export a finished track.",
+  platformNote: "Shortcuts are shown for LMMS 1.2 on Windows and Linux. On a Mac, use Cmd in place of Ctrl.",
+  store: {
+    category: "media",
+    level: "Beginner",
+    software: "LMMS 1.2 (free and open source, for Windows, Mac and Linux)",
+    softwareShort: "LMMS",
+    softwareHtml: `<p>This guide is written for <strong>LMMS 1.2</strong>, the free and open-source music production program for Windows, Mac and Linux, obtained separately from lmms.io; it is not included with the guide. Headphones help; a MIDI keyboard is optional, since every note can be drawn with the mouse.</p>`,
+    forWho: [
+      "You'd like to make beats or simple tracks and have never used music software.",
+      "You've opened LMMS and didn't know where to start.",
+      "You want to understand drum patterns, chords and arrangement by building them.",
+    ],
+    notFor: [
+      "You need to record and mix live instruments and vocals in depth. Audacity or a full DAW suits that better.",
+      "You want music theory in depth; the guide teaches just enough to make a beat.",
+      "You want video lessons, live help, or someone to review your work.",
+    ],
+  },
+  files: [
+    { name: "kick.wav", title: "Kick drum", desc: "A punchy synthesized kick, as a short one-shot sample." },
+    { name: "snare.wav", title: "Snare drum", desc: "A synthesized snare with body and noise." },
+    { name: "clap.wav", title: "Clap", desc: "A layered synthesized clap." },
+    { name: "hihat.wav", title: "Closed hi-hat", desc: "A short, bright synthesized hi-hat." },
+    { name: "chords.mid", title: "Chord progression", desc: "Am, F, C and G, one bar each, as a MIDI file." },
+    { name: "bassline.mid", title: "Bassline", desc: "A four-bar bassline following the chord roots, as a MIDI file." },
+    { name: "song-plan.txt", title: "Song plan", desc: "Tempo, key, drum patterns and the song's structure, bar by bar." },
+  ],
+  shortcuts: [
+    { keys: "Space", action: "Play or stop", app: "LMMS" },
+    { keys: "Ctrl+S", action: "Save the project", app: "LMMS" },
+    { keys: "Ctrl+E", action: "Export the song", app: "LMMS" },
+    { keys: "Ctrl+Z", action: "Undo", app: "LMMS" },
+    { keys: "Ctrl+C", action: "Copy the selection", app: "LMMS" },
+    { keys: "Ctrl+V", action: "Paste", app: "LMMS" },
+    { keys: "Ctrl+A", action: "Select all notes (Piano Roll)", app: "LMMS" },
+    { keys: "D", action: "Draw mode (Piano Roll)", app: "LMMS" },
+    { keys: "E", action: "Erase mode (Piano Roll)", app: "LMMS" },
+    { keys: "S", action: "Select mode (Piano Roll)", app: "LMMS" },
+    { keys: "F8", action: "Show the Automation Editor", app: "LMMS" },
+    { keys: "F9", action: "Show the FX Mixer", app: "LMMS" },
+    { keys: "Delete", action: "Delete the selection", app: "LMMS" },
+    { keys: "F5", action: "Show the Song Editor", app: "LMMS", practice: false, note: "Your browser uses this key to reload the page." },
+    { keys: "F6", action: "Show the Beat+Bassline Editor", app: "LMMS", practice: false, note: "Your browser uses this key for the address bar." },
+    { keys: "F7", action: "Show the Piano Roll", app: "LMMS", practice: false, note: "Your browser uses this key for caret browsing." },
+  ],
+  lessons: [
+    {
+      id: "interface",
+      title: "The LMMS workspace",
+      summary: "Find the main editors, set the tempo, load samples from the sidebar, and play your first sounds.",
+      diagram: { type: "tree", root: "LMMS project", items: [["Song Editor: the arrangement", 1, true], ["Beat+Bassline Editor: drum patterns", 1], ["Piano Roll: notes", 1], ["FX Mixer: effects and levels", 1], ["Automation Editor: changes over time", 1]], caption: "Five editors, one project" },
+      steps: [
+        {
+          title: "The editors",
+          body: `<p>LMMS opens with the <strong>Song Editor</strong>, where the arrangement lives. Toolbar buttons (or F5 to F9) open the <strong>Beat+Bassline Editor</strong> for drum patterns, the <strong>Piano Roll</strong> for notes, the <strong>Automation Editor</strong> and the <strong>FX Mixer</strong>. Each is a window you can move and close.</p>`,
+        },
+        {
+          title: "Tempo and time signature",
+          body: `<p>In the top toolbar, set <em>Tempo</em> to 90 BPM (beats per minute) by dragging the number or double-clicking to type. Leave the time signature at 4/4: four beats per bar, the most common meter in popular music.</p>`,
+        },
+        {
+          title: "The sidebar",
+          body: `<p>The left sidebar holds <em>Instrument plugins</em>, <em>My Projects</em>, <em>My Samples</em>, <em>My Presets</em> and a file browser for your computer (<em>My Home</em> or <em>Root directory</em>). Put the practice files in a folder, browse to it, and click a sample such as kick.wav to hear it.</p>`,
+        },
+        {
+          title: "Save the project",
+          body: `<p>Choose <em>Project › Save As</em> and save night-market.mmpz. LMMS projects refer to samples on your disk; keep the practice samples in the same place, or LMMS won't find them next time. Press ${k("Space")} at any point to play and stop.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Which editor holds the song's arrangement?", options: ["Piano Roll", "Song Editor", "FX Mixer", "Automation Editor"], answer: 1, explain: "The Song Editor arranges patterns over time." },
+        { q: "What does 90 BPM mean?", options: ["90 bars per minute", "90 beats per minute", "90 notes in the song", "90% volume"], answer: 1, explain: "Tempo is measured in beats per minute." },
+      ],
+      exercise: {
+        title: "Set up Night Market",
+        task: `<p>Start a new project, set the tempo to 90 BPM, browse to the practice files in the sidebar and audition each drum sample, then save the project as night-market.mmpz.</p>`,
+        files: ["kick.wav", "snare.wav", "clap.wav", "hihat.wav", "song-plan.txt"],
+        solution: [
+          "<em>Project › New</em>.",
+          "Toolbar: set Tempo to 90.",
+          "Sidebar › <em>My Home</em> (or your computer's file browser tab): open the practice folder and click each WAV to hear it.",
+          "<em>Project › Save As</em>, night-market.mmpz.",
+        ],
+      },
+    },
+    {
+      id: "drums",
+      title: "Programming drums",
+      summary: "Load samples into the Beat+Bassline Editor, program a 16-step pattern, and add feel with volume and variation.",
+      diagram: { type: "steps", rows: [["Kick", STEPS.Kick], ["Snare", STEPS.Snare], ["Clap", STEPS.Clap], ["Hats", STEPS.Hats]], caption: "One bar of the Night Market beat: 16 steps" },
+      steps: [
+        {
+          title: "Samples as tracks",
+          body: `<p>Open the Beat+Bassline Editor. Drag kick.wav from the sidebar into the editor: it becomes an <em>AudioFileProcessor</em> track. Do the same for snare.wav, clap.wav and hihat.wav. Remove any tracks you don't need from the default pattern with their track menu.</p>`,
+        },
+        {
+          title: "Steps",
+          body: `<p>Each row shows 16 buttons: one bar divided into sixteenth notes. Click a step to turn it on. Program the pattern from <strong>song-plan.txt</strong>: kick on steps 1, 7, 9 and 11, snare and clap on 5 and 13, hats on every odd step. Press ${k("Space")} to loop it.</p>`,
+        },
+        {
+          title: "Volume per step",
+          body: `<p>Hover over an active step and scroll the mouse wheel to change its volume; it shows as a lighter or darker shade. Make every second hat quieter and the groove relaxes. Small differences in loudness are what make programmed drums feel human.</p>`,
+        },
+        {
+          title: "Variation",
+          body: `<p>Add a second pattern with the <em>Add beat/bassline</em> button (or clone the first) and change a few steps for a fill: extra snares on steps 14 to 16, say. Patterns are reusable blocks you'll place in the Song Editor in Lesson 4.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "How many steps make one 4/4 bar in the Beat+Bassline Editor's default view?", options: ["4", "8", "16", "32"], answer: 2, explain: "Sixteen sixteenth-note steps." },
+        { q: "How do you make a single step quieter?", options: ["Delete it", "Scroll the mouse wheel over it", "Right-click the track", "Change the tempo"], answer: 1, explain: "Scrolling sets the step's volume." },
+      ],
+      exercise: {
+        title: "Program the beat",
+        task: `<p>Load the four drum samples into the Beat+Bassline Editor and program the pattern from <strong>song-plan.txt</strong>. Make every other hat quieter. Then make a second pattern with a snare fill at the end.</p>`,
+        files: ["kick.wav", "snare.wav", "clap.wav", "hihat.wav", "song-plan.txt"],
+        solution: [
+          "Drag the four WAVs into the Beat+Bassline Editor; rename the tracks Kick, Snare, Clap and Hats.",
+          "Kick: steps 1, 7, 9, 11. Snare: 5, 13. Clap: 13. Hats: 1, 3, 5, … 15.",
+          "Scroll down over hats on steps 3, 7, 11 and 15 to about 60%.",
+          "<em>Add beat/bassline</em> (or clone), program the same pattern and add snares on steps 14, 15 and 16.",
+          "Press Space: a laid-back 90 BPM groove.",
+        ],
+      },
+    },
+    {
+      id: "melody",
+      title: "Instruments and the Piano Roll",
+      summary: "Add a synthesizer, choose and tweak presets, draw and edit notes in the Piano Roll, and import MIDI files.",
+      diagram: { type: "table", head: ["Bar", "Chord", "Notes"], rows: [["1", "Am", "A C E"], ["2", "F", "F A C"], ["3", "C", "C E G"], ["4", "G", "G B D"]], highlight: { rows: [0] }, caption: "The progression in chords.mid" },
+      steps: [
+        {
+          title: "Add an instrument",
+          body: `<p>In the sidebar's <em>Instrument plugins</em>, drag <strong>TripleOscillator</strong> into the Song Editor: a new instrument track appears. Click its name to open the instrument window. <em>My Presets</em> and the factory presets in the sidebar give ready-made sounds; try a pad or keys preset.</p>`,
+        },
+        {
+          title: "The Piano Roll",
+          body: `<p>Double-click in the instrument's row in the Song Editor to create a pattern clip, then double-click the clip to open it in the Piano Roll. Press ${k("D")} for draw mode and click to add notes; drag a note's right edge to lengthen it. ${k("E")} erases and ${k("S")} selects, so you can move or copy groups of notes.</p>`,
+        },
+        {
+          title: "Import MIDI",
+          body: `<p>MIDI files contain notes, not sound. Choose <em>Project › Import</em> and pick <strong>chords.mid</strong>: LMMS adds tracks with the notes. Move the notes to your synth track by copying them (${k("Ctrl", "A")}, ${k("Ctrl", "C")} in the Piano Roll) and pasting into a pattern on your instrument (${k("Ctrl", "V")}), then delete the imported track.</p>`,
+        },
+        {
+          title: "A bass",
+          body: `<p>Add another instrument for bass, such as <em>LB302</em> or a bass preset, and bring in <strong>bassline.mid</strong> the same way. Bass usually plays the chord's root note an octave or two lower; that's what the practice bassline does.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "What does a MIDI file contain?", options: ["Recorded audio", "Note information such as pitch, timing and length", "Effects settings", "A whole project"], answer: 1, explain: "MIDI is instructions; an instrument turns it into sound." },
+        { q: "Which key switches the Piano Roll to draw mode?", options: ["P", "D", "N", "B"], answer: 1, explain: "D for draw, E for erase, S for select." },
+      ],
+      exercise: {
+        title: "Chords and bass",
+        task: `<p>Add a TripleOscillator with a pad or keys preset and give it the chords from <strong>chords.mid</strong>; add a bass instrument with <strong>bassline.mid</strong>. Play them with the drums in the Beat+Bassline pattern.</p>`,
+        files: ["chords.mid", "bassline.mid"],
+        solution: [
+          "Drag TripleOscillator into the Song Editor; load a pad preset from the sidebar onto it (drag the preset onto the track).",
+          "<em>Project › Import</em> › chords.mid; open its pattern, Ctrl+A, Ctrl+C; create a pattern on your synth track, open it, Ctrl+V; delete the imported track.",
+          "Repeat with an LB302 (or bass preset) track and bassline.mid.",
+          "Place the drum pattern in the Song Editor across bars 1–4 (Lesson 4 explains it) and press Space.",
+        ],
+      },
+    },
+    {
+      id: "arrange",
+      title: "Arranging a song",
+      summary: "Place patterns in the Song Editor, build an intro, main section and outro, and use loop points while you work.",
+      diagram: { type: "table", head: ["Bars", "Section", "What plays"], rows: [["1–4", "Intro", "chords + hats"], ["5–12", "Main", "everything"], ["13–16", "Outro", "chords, filter closes"]], highlight: { rows: [1] }, caption: "The structure from song-plan.txt" },
+      steps: [
+        {
+          title: "Beat+Bassline blocks",
+          body: `<p>Each beat/bassline pattern appears as a row in the Song Editor. Click in its row at bar 5 to place a block of that pattern; drag the block's right edge to make it repeat. Use the fill pattern for the last bar of a section.</p>`,
+        },
+        {
+          title: "Build the structure",
+          body: `<p>Follow <strong>song-plan.txt</strong>: chords and hats only for bars 1 to 4 (make a hats-only pattern for this), everything for bars 5 to 12, then chords alone for the outro. Contrast between sections, such as dropping the kick in the intro, makes the main section hit harder when it arrives.</p>`,
+        },
+        {
+          title: "Copy and move",
+          body: `<p>Select clips by dragging a rectangle with Ctrl held (or the select tool), then ${k("Ctrl", "C")} and ${k("Ctrl", "V")} to duplicate them, or drag with the mouse. Patterns are shared: edit one copy of a melody clip in the Piano Roll and, if it's a linked copy, every copy changes.</p>`,
+        },
+        {
+          title: "Loop points",
+          body: `<p>Drag in the Song Editor's timeline to set loop points and turn on looping with the loop button, so playback repeats one section while you work on it. Turn it off to hear the whole song.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Why drop the kick in the intro?", options: ["To save memory", "Contrast makes the main section feel bigger when everything comes in", "Kicks can't play in intros", "To change the tempo"], answer: 1, explain: "Energy comes from contrast between sections." },
+        { q: "What do loop points do?", options: ["Repeat a chosen section during playback", "Delete patterns", "Export loops", "Change the key"], answer: 0, explain: "Looping helps you focus on one part." },
+      ],
+      exercise: {
+        title: "Arrange 16 bars",
+        task: `<p>Arrange Night Market following the plan: a 4-bar intro, an 8-bar main section with the fill in bar 12, and a 4-bar outro. Loop the main section while you check it, then play the whole song.</p>`,
+        files: ["song-plan.txt"],
+        solution: [
+          "In the Beat+Bassline Editor, make a hats-only pattern for the intro.",
+          "Song Editor: place the hats pattern in bars 1–4, the main pattern in bars 5–11 and the fill in bar 12.",
+          "Place chord clips in bars 1–16 and bass clips in bars 5–12.",
+          "Drag in the timeline over bars 5–12 to set loop points, enable looping, press Space; then disable looping and play from bar 1.",
+        ],
+      },
+    },
+    {
+      id: "mix",
+      title: "Mixing with the FX Mixer",
+      summary: "Send each instrument to its own mixer channel, balance levels and panning, and add effects such as EQ, reverb and compression.",
+      diagram: { type: "table", head: ["Channel", "Effect", "Why"], rows: [["Drums", "Dynamics Processor", "punch, control peaks"], ["Chords", "Reverb", "space and softness"], ["Bass", "EQ (low-pass)", "keep it under the chords"], ["Master", "limiter (Dynamics)", "no clipping on export"]], highlight: { rows: [1] }, caption: "A simple mix plan" },
+      steps: [
+        {
+          title: "Mixer channels",
+          body: `<p>Press ${k("F9")} for the FX Mixer. In each instrument track, set the <em>FX</em> number (in the instrument window, or the track's FX field) to its own channel: drums 1, chords 2, bass 3. Name channels by double-clicking their labels. Everything ends up in the Master channel.</p>`,
+        },
+        {
+          title: "Balance and pan",
+          body: `<p>Start with all faders lower than you think, push up the most important part (usually drums and bass), then fit the rest around it. Pan the hats slightly to one side using the hat track's panning knob. Watch the meters: no channel, and especially not Master, should hit the top.</p>`,
+        },
+        {
+          title: "Add effects",
+          body: `<p>Select a channel and use the effects chain's <em>Add effect</em> button. Try <em>Reverb</em> on the chords for space, the <em>Equalizer</em> to cut the bass's high end so it doesn't clash, and the <em>Dynamics Processor</em> on drums for punch. Each effect has a wet/dry knob; less is more.</p>`,
+        },
+        {
+          title: "Check on different speakers",
+          body: `<p>Listen on headphones and on small speakers or a phone. If the bass disappears on small speakers, it may need a little more upper harmonic content; if the mix sounds muddy, cut low frequencies from instruments that don't need them.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Why send instruments to separate FX Mixer channels?", options: ["It's required to play", "So each can have its own level and effects", "To save memory", "To change tempo"], answer: 1, explain: "Separate channels give independent control." },
+        { q: "What should the Master meter never do?", options: ["Move", "Hit the top (clip)", "Show green", "Go quiet"], answer: 1, explain: "Clipping on the master distorts the export." },
+      ],
+      exercise: {
+        title: "Mix Night Market",
+        task: `<p>Route drums, chords and bass to their own named mixer channels, balance them so the Master never clips, add reverb to the chords and a low-pass EQ to the bass, and pan the hats slightly right.</p>`,
+        files: ["song-plan.txt"],
+        solution: [
+          "F9; set each track's FX channel (drum tracks 1, chords 2, bass 3); rename the channels.",
+          "Lower all faders, then raise drums and bass first, chords last, keeping Master below the top.",
+          "Chords channel: <em>Add effect › Reverb</em> (LMMS Reverb SC or similar), wet about 25%.",
+          "Bass channel: <em>Add effect › Equalizer</em>, turn on the low-pass and lower its frequency until the bass sits under the chords.",
+          "Hats track: panning about 20% right.",
+        ],
+      },
+    },
+    {
+      id: "automation-export",
+      title: "Automation and export",
+      summary: "Automate a filter or volume over time, draw curves in the Automation Editor, and export the finished track to WAV and MP3.",
+      diagram: { type: "keyframes", tracks: [["Filter cutoff", [0.6, 0.95], 1], ["Chords volume", [0.75, 1]]], ease: true, caption: "The outro: the filter closes and the chords fade" },
+      steps: [
+        {
+          title: "Automation tracks",
+          body: `<p>Hold ${k("Ctrl")} and drag a knob (for example the cutoff of a filter in the chord instrument's <em>Envelope/LFO</em> tab, or a mixer fader) onto the Song Editor: LMMS creates an automation track linked to it, with a clip.</p>`,
+        },
+        {
+          title: "Draw the curve",
+          body: `<p>Double-click the automation clip to open it in the Automation Editor (${k("F8")}). Draw points to set the knob's value over time; choose linear or smooth (cubic Hermite) curves in the editor's toolbar. For the outro, start high and draw down to a low value at bar 16.</p>`,
+        },
+        {
+          title: "A fade-out",
+          body: `<p>Automate the Master fader, or the chords' volume, from full to silent across the last two bars. Automation is how electronic music changes over time without anyone touching a knob.</p>`,
+        },
+        {
+          title: "Export",
+          body: `<p>Choose <em>Project › Export</em> (${k("Ctrl", "E")}), pick a file name and type: WAV for the best quality to archive, MP3 for sharing. Leave the sample rate at 44100 Hz and select <em>Start</em>. LMMS renders the whole song; listen to the file in a normal player before sharing.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "How do you create an automation track for a knob?", options: ["Right-click the song", "Ctrl+drag the knob onto the Song Editor", "Press F8 twice", "Export the knob"], answer: 1, explain: "Ctrl+drag links the knob to a new automation clip." },
+        { q: "Which export format is best for archiving?", options: ["MP3", "WAV", "MIDI", "OGG at low quality"], answer: 1, explain: "WAV is uncompressed; MP3 is for sharing." },
+      ],
+      exercise: {
+        title: "Finish and export",
+        task: `<p>Automate the chord filter closing over the outro and a fade-out over the last two bars, then export Night Market as night-market.wav and night-market.mp3.</p>`,
+        files: ["song-plan.txt"],
+        solution: [
+          "Open the chord instrument, <em>Envelope/LFO</em> tab › enable the filter; Ctrl+drag its cutoff knob onto the Song Editor.",
+          "F8: draw the cutoff high until bar 13, then down to low by bar 16.",
+          "Ctrl+drag the Master fader onto the Song Editor and draw a line from full at bar 15 to silent at bar 17.",
+          "Ctrl+E: night-market.wav, <em>Start</em>; repeat choosing MP3.",
+          "Play both files: about 43 seconds (16 bars of 4 beats at 90 BPM).",
+        ],
+      },
+    },
+  ],
+  extras: {
+    project: {
+      id: "bonus-sidechain",
+      title: "Bonus project: pumping chords with sidechain-style ducking",
+      summary: "Make the chords dip on every beat, the classic “pumping” sound, with an amplifier and an LFO controller, and use it to tie the groove together.",
+      diagram: { type: "steps", rows: [["Beats", "x...x...x...x..."], ["Chord vol.", "...x...x...x...x"]], caption: "Chords drop on each beat and swell back between" },
+      steps: [
+        {
+          title: "The idea",
+          body: `<p>When the chords briefly get quieter on every beat, the drums cut through and the whole track breathes with the groove. Producers call it sidechain compression; in LMMS you can build the effect with automation or an LFO.</p>`,
+        },
+        {
+          title: "LFO method",
+          body: `<p>Open the FX Mixer, add an <em>Amplifier</em> effect to the chords channel, and Ctrl+drag its volume knob onto an <em>LFO Controller</em> in the Controller Rack (Edit › Controller Rack, or the sidebar button). Set the LFO to a saw shape at a rate that matches quarter notes at 90 BPM (1.5 Hz).</p>`,
+        },
+        {
+          title: "Tune it",
+          body: `<p>Adjust the LFO's amount so the dip is noticeable but not choppy, and line its phase up so each dip starts on a beat, where the kick on step 1 lands. Compare with the effect bypassed: the pumping version feels tighter.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "At 90 BPM, how often do quarter notes occur?", options: ["Every second", "1.5 times per second", "Twice per second", "90 times per second"], answer: 1, explain: "90 beats ÷ 60 seconds = 1.5 per second." },
+        { q: "What does the pumping effect help?", options: ["Makes the file smaller", "Lets the drums cut through and makes the groove breathe", "Changes the key", "Removes noise"], answer: 1, explain: "Ducking the chords on each beat gives space and movement." },
+      ],
+      exercise: {
+        title: "Add the pump",
+        task: `<p>Add a pumping effect to the chords with an Amplifier and an LFO Controller at 1.5 Hz, line it up with the beat, and compare with and without it.</p>`,
+        files: ["song-plan.txt"],
+        solution: [
+          "FX Mixer › chords channel › <em>Add effect › Amplifier</em>.",
+          "Open the Controller Rack, <em>Add</em> an LFO Controller; set the shape to saw, speed 1.5 Hz.",
+          "Ctrl+drag the Amplifier's volume knob onto the LFO Controller to connect them (or right-click the knob › <em>Connect to controller</em>).",
+          "Adjust the LFO amount and phase until the chords dip on each beat; bypass the effect to compare.",
+        ],
+      },
+    },
+    quizbank: [
+      { q: "Which editor programs drum patterns step by step?", options: ["Piano Roll", "Beat+Bassline Editor", "Automation Editor", "FX Mixer"], answer: 1, explain: "The Beat+Bassline Editor is a step sequencer." },
+      { q: "What does the AudioFileProcessor do?", options: ["Exports files", "Plays a sample (an audio file) as an instrument", "Applies reverb", "Imports MIDI"], answer: 1, explain: "Dragging a WAV into LMMS creates one." },
+      { q: "How long is one bar at 90 BPM in 4/4?", options: ["About 1.33 seconds", "About 2.67 seconds", "4 seconds", "90 seconds"], answer: 1, explain: "4 beats × (60 ÷ 90) s ≈ 2.67 s." },
+      { q: "Which notes make an A minor chord?", options: ["A C# E", "A C E", "A D F", "G B D"], answer: 1, explain: "A minor is A, C and E." },
+      { q: "What's the Master channel?", options: ["The first instrument", "The final mix that every channel feeds into", "A preset", "The loudest track"], answer: 1, explain: "All mixer channels end up in Master." },
+      { q: "Which shortcut exports the song?", options: ["Ctrl+S", "Ctrl+E", "Ctrl+X", "F9"], answer: 1, explain: "Project › Export is Ctrl+E." },
+      { q: "Why keep samples where the project expects them?", options: ["LMMS deletes moved samples", "Projects refer to samples on disk and can't find moved ones", "Samples play faster", "It's required for MIDI"], answer: 1, explain: "Moving samples breaks the project's references." },
+      { q: "What does an automation clip control?", options: ["The tempo only", "A linked knob's value over time", "The song's key", "Which samples load"], answer: 1, explain: "Automation changes parameters as the song plays." },
+    ],
+  },
+  async makeFiles({ wav, midi }) {
+    const rate = 44100;
+    const make = (secs, fn) => {
+      const n = Math.round(rate * secs), L = new Float32Array(n);
+      let s = 9;
+      const noise = () => ((s = (Math.imul(s, 1664525) + 1013904223) >>> 0) / 2147483648 - 1);
+      let ph = 0;
+      for (let i = 0; i < n; i++) {
+        const t = i / rate;
+        const r = fn(t, noise, (f) => (ph += (2 * Math.PI * f) / rate));
+        L[i] = Math.max(-1, Math.min(1, r));
+      }
+      return wav(L, L, rate);
+    };
+    const kick = make(0.45, (t, _n, adv) => Math.sin(adv(45 + 110 * Math.exp(-t * 30))) * Math.exp(-t * 7) * 0.95);
+    const snare = make(0.28, (t, noise, adv) => (Math.sin(adv(190)) * Math.exp(-t * 25) * 0.5 + noise() * Math.exp(-t * 14) * 0.45));
+    let prev = 0;
+    const hihat = make(0.09, (t, noise) => { const x = noise(); const y = x - prev; prev = x; return y * Math.exp(-t * 55) * 0.4; });
+    const clap = make(0.3, (t, noise) => {
+      const bursts = [0, 0.012, 0.024];
+      let e = 0;
+      for (const b of bursts) if (t >= b) e = Math.max(e, Math.exp(-(t - b) * (b === 0.024 ? 18 : 120)));
+      return noise() * e * 0.6;
+    });
+    const roots = [45, 41, 36, 43]; // A2, F2, C2, G2
+    const chordNotes = [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]];
+    const chords = midi({
+      bpm: 90,
+      tracks: [{ name: "Chords", channel: 0, notes: chordNotes.flatMap((c, bar) => c.map((note) => ({ note, start: bar * 4, length: 3.9, velocity: 80 }))) }],
+    });
+    const bassPattern = [0, 1.5, 2, 3];
+    const bass = midi({
+      bpm: 90,
+      tracks: [{ name: "Bass", channel: 1, notes: roots.flatMap((r, bar) => bassPattern.map((b, j) => ({ note: r - 12 + (j === 2 ? 12 : 0), start: bar * 4 + b, length: j === 1 ? 0.4 : 0.9, velocity: 100 }))) }],
+    });
+    return { "kick.wav": kick, "snare.wav": snare, "clap.wav": clap, "hihat.wav": hihat, "chords.mid": chords, "bassline.mid": bass, "song-plan.txt": PLAN };
+  },
+};

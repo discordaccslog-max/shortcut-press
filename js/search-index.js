@@ -57,7 +57,7 @@ window.SHORTCUT_INDEX = [
     "id": "complete-library",
     "title": "Complete Software Skills Library",
     "url": "complete-software-skills-library.html",
-    "keywords": "Each guide uses its own program Beginner to intermediate All seven guides, unlocked by a single license. all seven bundle"
+    "keywords": "Each guide uses its own program Beginner to intermediate The seven original guides, unlocked by a single license. all seven bundle"
   },
   {
     "kind": "Guide",
@@ -198,6 +198,41 @@ window.SHORTCUT_INDEX = [
     "title": "2D Game Development in Godot",
     "url": "godot-game-dev.html",
     "keywords": "Godot Engine 4 (free and open source, for Windows, Mac and Linux) Beginner to intermediate A small platformer from scratch: scenes, GDScript movement, tiles, camera, coins, score, sound and export. Projects, scenes and nodes A player that runs and jumps Input actions and tuning Platforms, tiles and the camera Coins and signals Score, sound and export extras add-ons Bonus project: a patrolling enemy Extra quiz pack Printable workbook Flashcard deck Design & 3D"
+  },
+  {
+    "kind": "Guide",
+    "id": "freecad-3d-printing",
+    "title": "3D-Printable Parts in FreeCAD",
+    "url": "freecad-3d-printing.html",
+    "keywords": "FreeCAD 1.0 (free and open source, for Windows, Mac and Linux) Beginner to intermediate Constrained sketches, pads and pockets, holes, fillets, parameters and STL export for 3D printing. The interface and navigation Sketches and constraints From sketch to solid Pockets, holes and sketches on faces Fillets, chamfers and patterns Parameters and exporting for printing extras add-ons Bonus project: a box with a snug lid Extra quiz pack Printable cheat sheet Printable workbook Design & 3D"
+  },
+  {
+    "kind": "Guide",
+    "id": "after-effects-motion",
+    "title": "Motion Graphics in After Effects",
+    "url": "after-effects-motion.html",
+    "keywords": "Adobe After Effects (Creative Cloud subscription) Beginner to intermediate A ten-second logo sting: keyframes, easing, shape and text animation, parenting, precomps and rendering. Projects, compositions and layers Keyframes and transform properties Easing and the graph editor Shape layers and animated text Parenting, precomps and mattes Timing to music and rendering extras add-ons Bonus project: reusable lower third Extra quiz pack Printable cheat sheet Flashcard deck Audio & video"
+  },
+  {
+    "kind": "Guide",
+    "id": "audacity-audio",
+    "title": "Audio Editing & Podcasts in Audacity",
+    "url": "audacity-audio.html",
+    "keywords": "Audacity 3 (free and open source, for Windows, Mac and Linux) Beginner Edit spoken audio, remove noise, hum and clicks, set loudness, duck music and export a podcast episode. Projects, waveforms and navigation Cutting and arranging Removing noise, hum and clicks Levels, compression and loudness Music, ducking and fades Labels, metadata and export extras add-ons Bonus project: one-click clean-up macro Extra quiz pack Printable cheat sheet Flashcard deck Audio & video"
+  },
+  {
+    "kind": "Guide",
+    "id": "lmms-beat-making",
+    "title": "Beat Making in LMMS",
+    "url": "lmms-beat-making.html",
+    "keywords": "LMMS 1.2 (free and open source, for Windows, Mac and Linux) Beginner Drums, chords and bass, arrangement, mixing, automation and export, in a free music program. The LMMS workspace Programming drums Instruments and the Piano Roll Arranging a song Mixing with the FX Mixer Automation and export extras add-ons Bonus project: pumping chords Extra quiz pack Printable cheat sheet Flashcard deck Audio & video"
+  },
+  {
+    "kind": "Guide",
+    "id": "obs-streaming",
+    "title": "Recording & Streaming with OBS Studio",
+    "url": "obs-streaming.html",
+    "keywords": "OBS Studio 30 or later (free and open source, for Windows, Mac and Linux) Beginner Scenes and sources, clean microphone audio, transitions and hotkeys, safe recording and streaming. Setup and the OBS window Screen, camera and overlays Clean, consistent audio Scenes, transitions and hotkeys Recording Streaming and the virtual camera extras add-ons Bonus project: live clock and countdown Extra quiz pack Printable cheat sheet Flashcard deck Audio & video"
   },
   {
     "kind": "Page",

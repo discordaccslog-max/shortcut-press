@@ -1,0 +1,15 @@
+Garden Hour podcast, episode 1: practice plan
+
+interview-raw.wav (about 24 seconds, synthesized voice-like test signal, no real speech)
+  0.0 - 1.5 s   room noise only (use this for the noise profile)
+  1.5 - 9 s     first answer
+  9 - 12 s      long pause to tighten
+  12 - 22 s     second answer, with two loud clicks to repair
+  22 - 24 s     room noise
+  Problems to fix: a low hum, steady hiss, two clicks, a quiet overall level.
+
+music-bed.wav (20 seconds, 100 BPM)
+  Intro under the first answer, ducked automatically while the voice plays.
+
+Chapters (labels): Intro at 0 s, Answer 1, Answer 2.
+Export: MP3, about -16 LUFS integrated loudness, with title and artist metadata.

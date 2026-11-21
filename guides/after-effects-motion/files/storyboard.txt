@@ -1,0 +1,10 @@
+Harbor Coffee: 10-second logo sting (1920 x 1080, 30 fps)
+
+0:00 - 0:01  Background fades up from black.
+0:01 - 0:03  Logo mark scales from 0% to 100% with an overshoot, while rotating -20 to 0 degrees.
+0:02 - 0:04  A line draws itself under the logo (Trim Paths).
+0:03 - 0:06  "Harbor Coffee" types on, letter by letter, rising 20 px as each letter fades in.
+0:06 - 0:08  Tagline "Small-batch coffee by the water" fades in below.
+0:08 - 0:10  Hold, then everything fades out together (parented to one null).
+
+Music: music-loop.wav, 120 BPM, starts at 0:00. Beats fall every 0.5 s: land key moments on beats.

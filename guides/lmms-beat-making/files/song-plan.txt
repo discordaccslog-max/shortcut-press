@@ -1,0 +1,12 @@
+Night Market: a 90 BPM practice beat (LMMS)
+
+Tempo 90 BPM, 4/4, key A minor.
+Drums (Beat+Bassline Editor, 16 steps per bar):
+  Kick   steps 1, 7, 9, 11        x.....x.x.x.....
+  Snare  steps 5, 13              ....x.......x...
+  Clap   step 13 (layered with the snare)
+  Hats   every odd step           x.x.x.x.x.x.x.x.
+Chords: Am - F - C - G, one bar each (chords.mid)
+Bass: bassline.mid, follows the chord roots
+Song structure (bars):  1-4 intro (chords + hats)  5-12 main (everything)  13-16 outro (chords fade, filter closes)
+Export: WAV for archiving, MP3 for sharing.

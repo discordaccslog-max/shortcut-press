@@ -261,9 +261,10 @@ function home() {
     </div>
     <div class="fade">${tree("An interactive guide", [
       ["Lessons", "Each skill explained, then broken into numbered steps.", ["Step-by-step instructions", "Original diagrams", "A short quiz", "An exercise with a worked solution"]],
-      ["Practice files", "Workbooks, documents, 3D models, video clips or vector assets for the exercises, downloaded inside the guide."],
+      ["Practice files", "Workbooks, documents, code, images, audio, 3D models or video clips for the exercises, downloaded inside the guide."],
       ["Shortcut trainer", "Practice the program's keyboard shortcuts and get instant feedback."],
-      ["Formula sandbox", "In the two spreadsheet guides: type formulas into a grid and see the results."],
+      ["Formula sandbox", "In the spreadsheet guides: type formulas into a grid and see the results."],
+      ["Optional extras", "On most guides: add a cheat sheet, workbook, flashcards, extra quizzes or practice, or a bonus project when you buy."],
       ["Progress tracking", "Completed lessons, quiz answers and a Resume button."],
     ], "Software is not included. Each guide's page names the program it uses, which you obtain separately from its maker.")}</div>
   </div>
@@ -483,7 +484,7 @@ function productPage(id) {
 </div>
 </main>`;
   const metaDesc = isLib
-    ? `All seven Shortcut Press guides unlocked by a single license: spreadsheets, data analysis, document formatting, Blender, DaVinci Resolve, Figma and Inkscape. $${p.price} USD.`
+    ? `Seven Shortcut Press guides unlocked by a single license: spreadsheets, data analysis, document formatting, Blender, DaVinci Resolve, Figma and Inkscape. $${p.price} USD.`
     : `${p.name}: an interactive browser guide to ${p.summary.charAt(0).toLowerCase() + p.summary.slice(1).replace(/\.$/, "")}. Lessons, quizzes, worked solutions, practice files and a shortcut trainer. $${p.price} USD.`;
   return page({ file: p.page, title: `${p.name} — Shortcut Press`, description: metaDesc, current: "guides", body, ogType: "product", bodyClass: "has-pbar", after: pbar(id) });
 }
@@ -664,7 +665,7 @@ function searchIndex() {
 const fill = (html) => html.replace(/{{GUIDE_COUNT}}/g, String(ALL_GUIDES.length));
 const files = {
   "index.html": home(),
-  "about.html": docPage({ file: "about.html", title: "About — Shortcut Press", h1: "About Shortcut Press", eyebrow: "About", lead: "Shortcut Press makes interactive, self-paced guides to software for spreadsheets, documents, 3D modeling, video editing, interface design and illustration.", html: copy.aboutHtml, description: "What Shortcut Press makes and why: interactive, self-paced software guides that run in your browser, with diagrams, quizzes, exercises, practice files and a shortcut trainer.", current: "about" }),
+  "about.html": docPage({ file: "about.html", title: "About — Shortcut Press", h1: "About Shortcut Press", eyebrow: "About", lead: "Shortcut Press makes interactive, self-paced guides to software for office and data work, coding, design, 3D, audio and video.", html: copy.aboutHtml, description: "What Shortcut Press makes and why: interactive, self-paced software guides that run in your browser, with diagrams, quizzes, exercises, practice files and a shortcut trainer.", current: "about" }),
   "faq.html": docPage({ file: "faq.html", title: "FAQ — Shortcut Press", h1: "Frequently asked questions", eyebrow: "FAQ", lead: 'Licenses, devices, backups, offline use, software, refunds and licensing for groups. If your question isn\'t answered here, contact us through the <a href="contact.html">Contact page</a>.', html: faqHtml(), description: "Answers about Shortcut Press guides: what you receive and how, licenses on other devices, backups, offline use, supported devices, software, updates, group licenses and refunds.", current: "faq" }),
   "contact.html": contact(),
   "refund-policy.html": docPage({ file: "refund-policy.html", title: "Refund Policy — Shortcut Press", h1: "Refund Policy", eyebrow: "Policy", lead: "Every purchase can be refunded in full within 14 days.", updated: true, html: copy.refundHtml, description: "Shortcut Press refund policy: a full refund on any purchase within 14 days, no reason required, issued to your original payment method within 5 business days." }),

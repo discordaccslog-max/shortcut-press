@@ -1,0 +1,17 @@
+Practice show: "Garden Hour Live" (recording first, streaming later)
+
+Canvas: 1920 x 1080, 30 fps
+
+Scenes
+  1. Starting soon   starting-soon.png full screen, music at low volume
+  2. Main            screen or window capture, webcam bottom-right in webcam-frame.png, lower-third.png with your name
+  3. Camera only     webcam full screen, lower third
+  4. Be right back   starting-soon.png with the text changed to "Back in a moment"
+
+Hotkeys (set in Settings > Hotkeys)
+  Ctrl+Shift+1  Main
+  Ctrl+Shift+2  Camera only
+
+Audio
+  Microphone peaks in the yellow zone (about -20 to -10 dB), never red.
+  test-tone.wav: a 1 kHz tone at -18 dBFS for checking meters and monitoring.

@@ -1,0 +1,378 @@
+import { k } from "./_helpers.mjs";
+
+const PLAN = `Practice show: "Garden Hour Live" (recording first, streaming later)
+
+Canvas: 1920 x 1080, 30 fps
+
+Scenes
+  1. Starting soon   starting-soon.png full screen, music at low volume
+  2. Main            screen or window capture, webcam bottom-right in webcam-frame.png, lower-third.png with your name
+  3. Camera only     webcam full screen, lower third
+  4. Be right back   starting-soon.png with the text changed to "Back in a moment"
+
+Hotkeys (set in Settings > Hotkeys)
+  Ctrl+Shift+1  Main
+  Ctrl+Shift+2  Camera only
+
+Audio
+  Microphone peaks in the yellow zone (about -20 to -10 dB), never red.
+  test-tone.wav: a 1 kHz tone at -18 dBFS for checking meters and monitoring.
+`;
+
+export default {
+  id: "obs-streaming",
+  slug: "obs-streaming",
+  title: "Recording & Streaming with OBS Studio",
+  software: "OBS Studio",
+  apps: ["OBS Studio"],
+  intro:
+    "Record tutorials and stream with OBS Studio, the free broadcasting software: set up video settings, capture your screen, webcam and overlays, make your microphone sound clean, build scenes with transitions and hotkeys, record high-quality files, and stream safely. The lessons build a small show with four scenes.",
+  platformNote: "Shortcuts are shown for OBS Studio on Windows and Linux. On a Mac, use Cmd in place of Ctrl. OBS has few default shortcuts; you set scene hotkeys yourself in Lesson 4.",
+  store: {
+    category: "media",
+    level: "Beginner",
+    software: "OBS Studio 30 or later (free and open source, for Windows, Mac and Linux)",
+    softwareShort: "OBS Studio",
+    softwareHtml: `<p>This guide is written for <strong>OBS Studio</strong> 30 or later, free and open source for Windows, Mac and Linux, obtained separately from obsproject.com; it is not included with the guide. You'll want a webcam and a microphone for some exercises, though the practice files let you build every scene without them. Streaming needs an account with a streaming service, which the guide doesn't provide.</p>`,
+    forWho: [
+      "You want to record clean screen tutorials, presentations or gameplay.",
+      "You plan to stream and want your setup right before going live.",
+      "You've installed OBS and found scenes, sources and settings confusing.",
+    ],
+    notFor: [
+      "You need to edit recordings. See Video Editing in DaVinci Resolve.",
+      "You want growth or monetization advice for a channel; the guide is about the software.",
+      "You want video lessons, live help, or someone to review your work.",
+    ],
+  },
+  files: [
+    { name: "starting-soon.png", title: "Starting soon card", desc: "A 1920 × 1080 holding card for the start of a show." },
+    { name: "lower-third.png", title: "Lower third", desc: "A 1920 × 1080 transparent overlay with a name bar in the lower left." },
+    { name: "webcam-frame.png", title: "Webcam frame", desc: "A 520 × 300 transparent frame to place around a webcam image." },
+    { name: "test-tone.wav", title: "Test tone", desc: "Five seconds of a 1 kHz tone at −18 dBFS, for checking audio meters and monitoring." },
+    { name: "show-plan.txt", title: "Show plan", desc: "The four scenes, hotkeys and audio targets for the practice show." },
+  ],
+  shortcuts: [
+    { keys: "Ctrl+E", action: "Edit the selected source's transform", app: "OBS Studio" },
+    { keys: "Ctrl+F", action: "Fit the source to the screen", app: "OBS Studio" },
+    { keys: "Ctrl+S", action: "Stretch the source to the screen", app: "OBS Studio" },
+    { keys: "Ctrl+D", action: "Center the source on the screen", app: "OBS Studio" },
+    { keys: "Ctrl+C", action: "Copy the selected source", app: "OBS Studio" },
+    { keys: "Ctrl+V", action: "Paste the source (as a reference)", app: "OBS Studio" },
+    { keys: "F2", action: "Rename the selected scene or source", app: "OBS Studio" },
+    { keys: "Delete", action: "Remove the selected source", app: "OBS Studio" },
+    { keys: "Ctrl+Z", action: "Undo", app: "OBS Studio" },
+    { keys: "Ctrl+Shift+1", action: "Switch to the Main scene (hotkey you set in Lesson 4)", app: "OBS Studio" },
+    { keys: "Ctrl+Shift+2", action: "Switch to the Camera only scene (hotkey you set in Lesson 4)", app: "OBS Studio" },
+    { keys: "Ctrl+R", action: "Reset the source's transform", app: "OBS Studio", practice: false, note: "Your browser uses this shortcut to reload the page." },
+  ],
+  lessons: [
+    {
+      id: "setup",
+      title: "Setup and the OBS window",
+      summary: "Run the auto-configuration wizard, set the canvas size and frame rate, and learn the scenes, sources, mixer and controls.",
+      diagram: { type: "tree", root: "OBS window", items: [["Preview (what will be recorded or streamed)", 1, true], ["Scenes dock", 1], ["Sources dock (layers of the current scene)", 1], ["Audio Mixer", 1], ["Controls: Start Recording, Start Streaming, Settings", 1]], caption: "Docks can be rearranged from the Docks menu" },
+      steps: [
+        {
+          title: "The wizard",
+          body: `<p>The first time OBS starts, the <em>Auto-Configuration Wizard</em> appears (or choose <em>Tools › Auto-Configuration Wizard</em>). Choose <em>Optimize just for recording</em> to start; it picks a resolution, frame rate and encoder that suit your computer. You can change everything later in Settings.</p>`,
+        },
+        {
+          title: "Canvas and output",
+          body: `<p>Open <em>Settings › Video</em>. The <em>Base (Canvas) Resolution</em> is the size of your scenes; the <em>Output (Scaled) Resolution</em> is the size of the recording or stream. For this guide, set both to 1920 × 1080 and the frame rate to 30. Use 60 for fast-moving gameplay.</p>`,
+        },
+        {
+          title: "Scenes and sources",
+          body: `<p>A <strong>scene</strong> is a layout; <strong>sources</strong> are its layers: a screen capture, a webcam, an image, text. The Sources list works like layers in an image editor: items higher in the list appear in front. Switch scenes by clicking them in the Scenes dock.</p>`,
+        },
+        {
+          title: "Mixer and controls",
+          body: `<p>The <em>Audio Mixer</em> shows a meter and fader for each audio source. The <em>Controls</em> dock has <em>Start Recording</em>, <em>Start Streaming</em>, <em>Studio Mode</em> and <em>Settings</em>. Rearrange docks by dragging their title bars; <em>Docks › Reset UI</em> puts them back.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "What's the difference between base and output resolution?", options: ["None", "Base is the scene canvas; output is the size of the recording or stream", "Output is the webcam size", "Base is for audio"], answer: 1, explain: "OBS draws at the base size and scales to the output size." },
+        { q: "In the Sources list, which items appear in front?", options: ["Lower ones", "Higher ones", "The newest", "The largest"], answer: 1, explain: "Higher sources are drawn on top." },
+      ],
+      exercise: {
+        title: "Configure OBS",
+        task: `<p>Run the wizard for recording, then set the base and output resolution to 1920 × 1080 at 30 fps. Rename the default scene to “Main” and add three more empty scenes from <strong>show-plan.txt</strong>.</p>`,
+        files: ["show-plan.txt"],
+        solution: [
+          "<em>Tools › Auto-Configuration Wizard</em> › <em>Optimize just for recording</em>, accept the results.",
+          "<em>Settings › Video</em>: Base 1920 × 1080, Output 1920 × 1080, Common FPS 30, <em>OK</em>.",
+          `Select the scene in the Scenes dock, press ${k("F2")}, type Main.`,
+          "Use <em>+</em> under Scenes to add Starting soon, Camera only and Be right back.",
+        ],
+      },
+    },
+    {
+      id: "sources",
+      title: "Screen, camera and overlays",
+      summary: "Capture a screen or a window, add a webcam with a frame, place image and text overlays, and size and crop sources precisely.",
+      diagram: { type: "layers", items: ["lower-third.png (name bar)", "webcam-frame.png", "Webcam (Video Capture Device)", "Window or display capture"], highlight: 2, caption: "The Main scene, back to front" },
+      steps: [
+        {
+          title: "Capture the screen",
+          body: `<p>In the Main scene, select <em>+</em> under Sources and choose <em>Display Capture</em> (macOS: <em>macOS Screen Capture</em>) for a whole screen, or <em>Window Capture</em> for one app. Window Capture keeps notifications and other windows out of the recording, which is usually what you want.</p>`,
+        },
+        {
+          title: "Webcam and frame",
+          body: `<p>Add a <em>Video Capture Device</em> for your webcam. Drag its corner handles to resize it, and place it bottom-right. Add <strong>webcam-frame.png</strong> as an <em>Image</em> source above it and size it around the camera. Hold ${k("Alt")} while dragging an edge to crop instead of resize.</p>`,
+        },
+        {
+          title: "Exact placement",
+          body: `<p>Select a source and press ${k("Ctrl", "E")} to type its position, size and crop. ${k("Ctrl", "F")} fits a source to the canvas keeping its shape, ${k("Ctrl", "S")} stretches it to fill, and ${k("Ctrl", "D")} centers it. Lock a source with its padlock icon so it can't be moved by accident.</p>`,
+        },
+        {
+          title: "Text and overlays",
+          body: `<p>Add <strong>lower-third.png</strong> as an Image source; it's already 1920 × 1080 with transparency, so it lines up when fitted to the screen. Add a <em>Text</em> source (Text (GDI+) on Windows, Text (FreeType 2) on Mac and Linux) with your name and position it on the bar.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Why prefer Window Capture over Display Capture for a tutorial?", options: ["It's sharper", "It records only that app, keeping notifications and other windows out", "It records audio", "It's the only one that works"], answer: 1, explain: "Only the chosen window appears." },
+        { q: "How do you crop a source with the mouse?", options: ["Right-click", "Hold Alt while dragging an edge", "Hold Shift", "Double-click"], answer: 1, explain: "Alt-drag crops instead of scaling." },
+      ],
+      exercise: {
+        title: "Build the Main scene",
+        task: `<p>In Main, add a window capture of a browser, your webcam in the bottom-right at about 480 × 270 inside <strong>webcam-frame.png</strong>, <strong>lower-third.png</strong> fitted to the screen and a text source with your name on the bar. Lock everything when it's placed.</p>`,
+        files: ["webcam-frame.png", "lower-third.png", "show-plan.txt"],
+        solution: [
+          "Sources › + › <em>Window Capture</em>, pick the browser window, then Ctrl+F to fit.",
+          "+ › <em>Video Capture Device</em> (your webcam); Ctrl+E: size 480 × 270, position near the bottom-right (for example 1400, 770).",
+          "+ › <em>Image</em> › webcam-frame.png, placed around the camera and above it in the list.",
+          "+ › <em>Image</em> › lower-third.png, Ctrl+F; + › <em>Text</em> with your name, moved onto the bar.",
+          "Click each source's padlock icon.",
+        ],
+      },
+    },
+    {
+      id: "audio",
+      title: "Clean, consistent audio",
+      summary: "Set microphone and desktop audio levels, add noise suppression, a gate, a compressor and a limiter, and monitor what you're sending.",
+      diagram: { type: "flow", nodes: ["Noise Suppression", "Noise Gate", "Compressor", "Limiter"], highlight: 0, title: "A microphone filter chain, in order" },
+      steps: [
+        {
+          title: "Devices and levels",
+          body: `<p>Check <em>Settings › Audio</em> for your microphone and desktop audio devices. Speak normally and watch the mic's meter in the Audio Mixer: peaks should sit in the yellow zone, roughly −20 to −10 dB, and never reach red. Adjust the input level in your system settings first, then the OBS fader.</p>`,
+        },
+        {
+          title: "Filters",
+          body: `<p>Click the three dots (or cog) next to the microphone in the mixer and choose <em>Filters</em>. Add, in this order: <em>Noise Suppression</em> (RNNoise for strong suppression), <em>Noise Gate</em> (silences the mic below a threshold), <em>Compressor</em> (ratio about 4:1, threshold around −18 dB) and <em>Limiter</em> (threshold −3 dB). Filters run top to bottom.</p>`,
+        },
+        {
+          title: "Monitoring",
+          body: `<p>Add <strong>test-tone.wav</strong> as a <em>Media Source</em>. In <em>Edit › Advanced Audio Properties</em>, set its monitoring to <em>Monitor and Output</em> to hear it in your headphones; the tone sits at −18 dBFS, a good reference point on the meter. Use headphones when monitoring the mic, or you'll create echo.</p>`,
+        },
+        {
+          title: "Sync and test",
+          body: `<p>Record ten seconds of yourself clapping on camera and watch it back. If sound and picture don't match, set a <em>Sync Offset</em> in Advanced Audio Properties (often 100 to 300 ms for webcams). Always test-record before an important session.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Where should microphone peaks sit on the OBS meter?", options: ["Green, near the bottom", "In the yellow zone, about −20 to −10 dB", "Red", "It doesn't matter"], answer: 1, explain: "Loud enough to be clear, with headroom before clipping." },
+        { q: "Why does the limiter go last in the chain?", options: ["It's the quietest", "It catches any peaks left after the other filters", "It removes noise", "OBS requires it"], answer: 1, explain: "A final safety net against clipping." },
+      ],
+      exercise: {
+        title: "Set up the microphone",
+        task: `<p>Add noise suppression, a noise gate, a compressor and a limiter to your microphone, check your speaking level sits in the yellow zone, and use <strong>test-tone.wav</strong> to check monitoring in headphones.</p>`,
+        files: ["test-tone.wav"],
+        solution: [
+          "Mixer › mic › <em>Filters</em> › + <em>Noise Suppression</em> (RNNoise), + <em>Noise Gate</em> (close −32 dB, open −26 dB), + <em>Compressor</em> (4:1, −18 dB), + <em>Limiter</em> (−3 dB).",
+          "Speak at your normal volume: peaks in the yellow zone. Adjust the input level if not.",
+          "Sources › + › <em>Media Source</em> › test-tone.wav.",
+          "<em>Edit › Advanced Audio Properties</em>: test-tone monitoring <em>Monitor and Output</em>; play it with headphones on and check the meter around −18 dB.",
+        ],
+      },
+    },
+    {
+      id: "scenes",
+      title: "Scenes, transitions and hotkeys",
+      summary: "Build the show's scenes, reuse sources between them, choose transitions, prepare changes in Studio Mode, and switch with hotkeys.",
+      diagram: { type: "cycle", nodes: ["Starting soon", "Main", "Camera only", "Be right back"], highlight: 1, center: "Switch with hotkeys" },
+      steps: [
+        {
+          title: "Reuse sources",
+          body: `<p>Select the webcam in Main, press ${k("Ctrl", "C")}, switch to Camera only and press ${k("Ctrl", "V")}: OBS pastes a <em>reference</em> to the same source, so settings and filters stay shared. Then ${k("Ctrl", "F")} to fit it full screen. Choose <em>Paste (Duplicate)</em> from the right-click menu when you want an independent copy.</p>`,
+        },
+        {
+          title: "Holding cards",
+          body: `<p>In Starting soon, add <strong>starting-soon.png</strong> as an Image and press ${k("Ctrl", "F")}. Copy it into Be right back and add a Text source saying “Back in a moment”. Holding scenes give you time to settle before you appear.</p>`,
+        },
+        {
+          title: "Transitions and Studio Mode",
+          body: `<p>In the <em>Scene Transitions</em> dock, choose <em>Fade</em> at about 300 ms; a <em>Stinger</em> plays a video over the switch. <em>Studio Mode</em> shows two views: prepare the next scene on the left (preview), then select <em>Transition</em> to send it live on the right (program).</p>`,
+        },
+        {
+          title: "Hotkeys",
+          body: `<p>Open <em>Settings › Hotkeys</em>, find each scene and click in the <em>Switch to scene</em> box, then press the key combination: ${k("Ctrl", "Shift", "1")} for Main, ${k("Ctrl", "Shift", "2")} for Camera only. Hotkeys work even when OBS isn't the active window, so you can switch while presenting in another app.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "What does pasting a source normally create?", options: ["An independent copy", "A reference to the same source, sharing its settings", "A screenshot", "A new scene"], answer: 1, explain: "Paste (Duplicate) makes an independent copy." },
+        { q: "What does Studio Mode let you do?", options: ["Record in higher quality", "Prepare a scene in preview before sending it live", "Edit video", "Mute all audio"], answer: 1, explain: "Preview on the left, program on the right." },
+      ],
+      exercise: {
+        title: "Finish the four scenes",
+        task: `<p>Build Starting soon, Camera only and Be right back from <strong>show-plan.txt</strong>, reusing the webcam and lower third as references, set a 300 ms fade, and assign Ctrl+Shift+1 and Ctrl+Shift+2 to Main and Camera only. Test switching with the hotkeys.</p>`,
+        files: ["starting-soon.png", "lower-third.png", "show-plan.txt"],
+        solution: [
+          "Starting soon: + <em>Image</em> starting-soon.png, Ctrl+F.",
+          "Camera only: paste the webcam (Ctrl+V), Ctrl+F; paste the lower third and name text.",
+          "Be right back: paste the starting-soon image and add a Text source “Back in a moment”.",
+          "Scene Transitions: <em>Fade</em>, duration 300 ms.",
+          "<em>Settings › Hotkeys</em>: Main › Switch to scene: Ctrl+Shift+1; Camera only: Ctrl+Shift+2. Press them with another window focused to test.",
+        ],
+      },
+    },
+    {
+      id: "recording",
+      title: "Recording",
+      summary: "Choose where and how recordings are saved, pick a safe format and the right encoder, record, and convert to MP4.",
+      diagram: { type: "table", head: ["Setting", "Choice", "Why"], rows: [["Format", "MKV or Hybrid MP4", "survives a crash"], ["Encoder", "Hardware (NVENC, QuickSync, AMF, Apple VT)", "low CPU use"], ["Quality", "High or Indistinguishable", "good for editing"], ["Path", "a drive with space", "files are large"]], highlight: { rows: [0] }, caption: "Settings › Output › Recording" },
+      steps: [
+        {
+          title: "Output settings",
+          body: `<p>Open <em>Settings › Output</em>. In <em>Simple</em> mode, choose a <em>Recording Path</em> on a drive with plenty of space, <em>Recording Quality</em> set to “High Quality, Medium File Size” (or higher for editing), and a hardware <em>Encoder</em> if your graphics card offers one, which keeps the processor free.</p>`,
+        },
+        {
+          title: "A safe format",
+          body: `<p>A plain MP4 file is unreadable if OBS or the computer crashes mid-recording. Record to <strong>MKV</strong> (or <strong>Hybrid MP4</strong>, offered in OBS 30.2 and later, which is crash-safe). After recording, <em>File › Remux Recordings</em> converts MKV to MP4 in seconds without re-encoding.</p>`,
+        },
+        {
+          title: "Record",
+          body: `<p>Select <em>Start Recording</em>; the status bar shows the time and any dropped frames. Use <em>Pause</em> to skip a break without splitting the file. <em>Stop Recording</em> finishes the file; <em>File › Show Recordings</em> opens the folder.</p>`,
+        },
+        {
+          title: "Replay buffer",
+          body: `<p>Enable the <em>Replay Buffer</em> in Output settings to keep the last 20 to 60 seconds in memory; press its save hotkey and OBS writes that stretch to a file. It's handy for catching a moment you didn't plan to record.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Why record to MKV rather than plain MP4?", options: ["Smaller files", "An MKV recording survives a crash; a plain MP4 may be unreadable", "Better colors", "Required for streaming"], answer: 1, explain: "Remux to MP4 afterwards." },
+        { q: "What does File › Remux Recordings do?", options: ["Re-encodes at lower quality", "Repackages MKV as MP4 without re-encoding", "Deletes recordings", "Uploads them"], answer: 1, explain: "Remuxing is fast and lossless." },
+      ],
+      exercise: {
+        title: "Record a short tutorial",
+        task: `<p>Set recording to MKV (or Hybrid MP4) with a hardware encoder if available, record two minutes switching between Main and Camera only with your hotkeys, then remux the file to MP4 and play it.</p>`,
+        files: ["show-plan.txt"],
+        solution: [
+          "<em>Settings › Output</em> (Simple): path, quality High, format MKV or Hybrid MP4, hardware encoder if listed.",
+          "<em>Start Recording</em>; talk through something in your browser, switching scenes with Ctrl+Shift+1 and Ctrl+Shift+2; <em>Stop Recording</em>.",
+          "<em>File › Remux Recordings</em>: choose the MKV, <em>Remux</em>.",
+          "<em>File › Show Recordings</em> and play the MP4: scene switches with fades, clean audio.",
+        ],
+      },
+    },
+    {
+      id: "streaming",
+      title: "Streaming and the virtual camera",
+      summary: "Connect a streaming service safely, choose bitrate and resolution, check performance with the Stats dock, and use the virtual camera in video calls.",
+      diagram: { type: "table", head: ["Resolution", "FPS", "Video bitrate (typical)"], rows: [["1280 × 720", "30", "2,500–4,000 kbps"], ["1920 × 1080", "30", "4,500–6,000 kbps"], ["1920 × 1080", "60", "6,000–9,000 kbps"]], highlight: { rows: [1] }, caption: "Check your service's current recommendations" },
+      steps: [
+        {
+          title: "Connect safely",
+          body: `<p>Open <em>Settings › Stream</em> and choose your service. Use <em>Connect Account</em> where offered; otherwise paste the <strong>stream key</strong> from the service's dashboard. Treat the stream key like a password: anyone who has it can broadcast on your channel. Never show it on screen or share it, and reset it if it leaks.</p>`,
+        },
+        {
+          title: "Bitrate and resolution",
+          body: `<p>Your upload speed limits quality. Run the wizard with <em>Optimize for streaming</em> to test it, or set a video bitrate yourself in <em>Settings › Output</em>, keeping it to about 70% of your upload speed. 720p at a steady bitrate looks better than 1080p with dropped frames.</p>`,
+        },
+        {
+          title: "Watch the stats",
+          body: `<p>Open <em>Docks › Stats</em>. Watch <em>dropped frames</em> (network trouble), <em>skipped frames due to encoding lag</em> (the encoder can't keep up) and CPU usage. Do a private or unlisted test stream before your first public one.</p>`,
+        },
+        {
+          title: "Virtual camera",
+          body: `<p>Select <em>Start Virtual Camera</em> in Controls, and OBS appears as a webcam (“OBS Virtual Camera”) in video-calling apps. Your scenes, overlays and filters go into the call, which is handy for presentations.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Why must you keep your stream key private?", options: ["It contains your password", "Anyone with it can broadcast on your channel", "It expires if seen", "It slows the stream"], answer: 1, explain: "Treat it like a password and reset it if it leaks." },
+        { q: "Dropped frames in the Stats dock usually mean…", options: ["The encoder is overloaded", "Network problems between you and the service", "The microphone is too loud", "The scene is too complex"], answer: 1, explain: "Encoder overload shows as skipped frames instead." },
+      ],
+      exercise: {
+        title: "Prepare a test stream",
+        task: `<p>Run the wizard optimized for streaming, check the suggested bitrate, open the Stats dock, and (if you have a streaming account) do a two-minute private or unlisted test stream using all four scenes. Then try the virtual camera in a video-calling app.</p>`,
+        files: ["show-plan.txt"],
+        solution: [
+          "<em>Tools › Auto-Configuration Wizard</em> › <em>Optimize for streaming</em>, pick your service; note the bitrate it chooses.",
+          "<em>Docks › Stats</em>; keep it visible.",
+          "With your service set to private or unlisted, <em>Start Streaming</em>, switch through all four scenes, then <em>Stop Streaming</em>; check dropped frames stayed near 0%.",
+          "<em>Start Virtual Camera</em>; in your video-calling app choose OBS Virtual Camera as the camera.",
+        ],
+      },
+    },
+  ],
+  extras: {
+    project: {
+      id: "bonus-browser-alerts",
+      title: "Bonus project: a live clock and a countdown",
+      summary: "Add a live clock and a starting-soon countdown with OBS's Browser source and a small local HTML file, with no third-party services.",
+      diagram: { type: "code", lang: "countdown.html", lines: ["<p id=\"t\"></p>", "<script>", "let s = 300;", "setInterval(() => { … s--; }, 1000);", "</script>"], highlight: [3], notes: [[3, "Updates every second"]] },
+      steps: [
+        {
+          title: "A local HTML file",
+          body: `<p>A Browser source can show any web page, including a file on your computer. Create <code>countdown.html</code> with a large text element and a few lines of JavaScript that count down from 5:00, updating once a second, with a transparent page background so it overlays cleanly.</p>`,
+        },
+        {
+          title: "Add it to OBS",
+          body: `<p>In Starting soon, add a <em>Browser</em> source, tick <em>Local file</em> and choose countdown.html. Set the width and height to match your design, and tick <em>Refresh browser when scene becomes active</em> so the countdown restarts each time you show the scene.</p>`,
+        },
+        {
+          title: "A clock",
+          body: `<p>Make clock.html the same way, showing <code>new Date().toLocaleTimeString()</code> every second, and add it to Main in a corner. Style both with CSS: a font, size and color that match your overlays.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Why tick Refresh browser when scene becomes active for the countdown?", options: ["To save power", "So the countdown restarts each time the scene is shown", "To load faster", "It's required for local files"], answer: 1, explain: "Refreshing reloads the page and restarts the timer." },
+        { q: "Why give the page a transparent background?", options: ["It loads faster", "So only the text appears over the scene", "OBS requires it", "To hide errors"], answer: 1, explain: "Transparency lets the scene show through." },
+      ],
+      exercise: {
+        title: "Add the countdown",
+        task: `<p>Write countdown.html that counts down from 5:00 in large white text on a transparent background, add it to the Starting soon scene as a local Browser source that refreshes when the scene becomes active, and test it.</p>`,
+        files: ["starting-soon.png"],
+        solution: [
+          "countdown.html: <code>&lt;body style=\"margin:0;background:transparent;color:#fff;font:700 120px system-ui\"&gt;&lt;p id=\"t\"&gt;&lt;/p&gt;</code> and a script that formats minutes and seconds from a counter starting at 300.",
+          "In the script: <code>setInterval(() =&gt; { … s = Math.max(0, s - 1); }, 1000);</code> updating the paragraph's text each time.",
+          "Starting soon › + › <em>Browser</em> › tick <em>Local file</em>, choose countdown.html, width 800, height 200.",
+          "Tick <em>Refresh browser when scene becomes active</em>; switch away and back: the countdown restarts at 5:00.",
+        ],
+      },
+    },
+    quizbank: [
+      { q: "What is a scene in OBS?", options: ["A recording", "A layout made of sources", "An audio filter", "A transition"], answer: 1, explain: "Scenes hold sources arranged on the canvas." },
+      { q: "Which shortcut opens a source's transform dialog?", options: ["Ctrl+T", "Ctrl+E", "Ctrl+F", "F2"], answer: 1, explain: "Ctrl+E edits the transform." },
+      { q: "What does Ctrl+F do to a selected source?", options: ["Finds a source", "Fits it to the screen, keeping its shape", "Flips it", "Freezes it"], answer: 1, explain: "Fit to screen keeps the aspect ratio." },
+      { q: "In which order do OBS audio filters run?", options: ["Bottom to top", "Top to bottom, as listed", "Alphabetically", "All at once"], answer: 1, explain: "The list order is the processing order." },
+      { q: "What is the safest recording format if OBS might crash?", options: ["MP4", "MKV (or Hybrid MP4)", "MOV", "FLV"], answer: 1, explain: "MKV recordings remain readable after a crash." },
+      { q: "Where do you set scene-switching hotkeys?", options: ["Settings › Video", "Settings › Hotkeys", "The Sources dock", "Tools menu"], answer: 1, explain: "Settings › Hotkeys lists every scene." },
+      { q: "What does Studio Mode add?", options: ["4K recording", "A preview to prepare scenes before they go live", "Automatic captions", "Cloud backup"], answer: 1, explain: "Preview on the left, program on the right." },
+      { q: "What should you do if your stream key is accidentally shown?", options: ["Nothing", "Reset it in your streaming service's dashboard", "Restart OBS", "Change the bitrate"], answer: 1, explain: "A leaked key lets others broadcast as you." },
+    ],
+  },
+  async makeFiles({ png, wav }) {
+    const card = png(1920, 1080, (x, y) => {
+      const t = y / 1080;
+      let c = [18 + 20 * t, 52 + 30 * t, 70 + 30 * t];
+      const band = y > 470 && y < 610 && x > 360 && x < 1560;
+      if (band) c = [246, 241, 232];
+      for (const dx of [-60, 0, 60]) if ((x - 960 - dx) ** 2 + (y - 760) ** 2 < 18 * 18) c = [200, 120, 79];
+      return c;
+    });
+    const lower = png(1920, 1080, (x, y) => {
+      if (y > 850 && y < 960 && x > 80 && x < 820) return x < 100 ? [200, 120, 79, 255] : [29, 39, 51, 220];
+      return [0, 0, 0, 0];
+    });
+    const frame = png(520, 300, (x, y) => {
+      const edge = x < 12 || x >= 508 || y < 12 || y >= 288;
+      const corner = (x < 60 && y < 60) || (x >= 460 && y >= 240);
+      if (edge) return corner ? [200, 120, 79, 255] : [246, 241, 232, 255];
+      return [0, 0, 0, 0];
+    });
+    const rate = 48000, n = rate * 5, L = new Float32Array(n);
+    const amp = Math.pow(10, -18 / 20);
+    for (let i = 0; i < n; i++) L[i] = Math.sin((2 * Math.PI * 1000 * i) / rate) * amp * Math.min(1, i / 480, (n - i) / 480);
+    return { "starting-soon.png": card, "lower-third.png": lower, "webcam-frame.png": frame, "test-tone.wav": wav(L, L, rate), "show-plan.txt": PLAN };
+  },
+};
