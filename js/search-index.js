@@ -95,6 +95,41 @@ window.SHORTCUT_INDEX = [
     "keywords": "Microsoft Excel (Microsoft 365 or Excel 2021 and later) Intermediate A five-year model for a small business: drivers, costs, a loan schedule, NPV and IRR, scenarios and checks. Model structure The revenue forecast Costs and operating profit A loan schedule NPV and IRR Scenarios and sensitivity Checks, charts and handing it over extras add-ons Bonus project: Year 1 monthly cash flow Extra quiz pack Printable workbook Printable cheat sheet Office & data"
   },
   {
+    "kind": "Guide",
+    "id": "power-bi-reports",
+    "title": "Reports & Dashboards in Power BI",
+    "url": "power-bi-reports.html",
+    "keywords": "Microsoft Power BI Desktop (Windows) Beginner to intermediate From CSV files to an interactive report: data model, DAX measures, visuals, slicers and export. Get and shape the data The data model Measures with DAX Visuals that answer questions Slicers, filters and drill-down Design, export and share extras add-ons Bonus project: targets and variance page Extra quiz pack Printable workbook Flashcard deck Office & data"
+  },
+  {
+    "kind": "Guide",
+    "id": "sql-queries",
+    "title": "SQL Queries for Data Analysis",
+    "url": "sql-queries.html",
+    "keywords": "DB Browser for SQLite (free, for Windows, Mac and Linux) Beginner SELECT, WHERE, GROUP BY, JOINs, revenue across tables, subqueries and views, in a free SQLite tool. Your first database SELECT, WHERE and ORDER BY Counting and grouping Joining tables Revenue across four tables Subqueries, views and changing data extras add-ons Bonus project: customer value report Extra practice pack Printable cheat sheet Flashcard deck Office & data"
+  },
+  {
+    "kind": "Guide",
+    "id": "obsidian-notes",
+    "title": "Linked Notes in Obsidian",
+    "url": "obsidian-notes.html",
+    "keywords": "Obsidian (free for personal use, Windows, Mac, Linux, iOS and Android) Beginner Markdown notes, links and backlinks, tags and properties, the graph, Canvas, daily notes and templates. Vaults and Markdown notes Links and backlinks Folders, tags and properties The graph and Canvas Daily notes and templates Embeds, attachments and keeping your vault safe extras add-ons Bonus project: reading notes system Extra quiz pack Printable cheat sheet Flashcard deck Office & data"
+  },
+  {
+    "kind": "Guide",
+    "id": "python-automation",
+    "title": "Python for Everyday Automation",
+    "url": "python-automation.html",
+    "keywords": "Python 3 and Visual Studio Code (both free, for Windows, Mac and Linux) Beginner Small Python scripts that tidy folders, total CSV exports, extract text and run on a schedule. Set up and run your first script Python basics in ten minutes Tidy a folder with pathlib Reports from a CSV file Find things in text with regular expressions Functions, errors and running on a schedule extras add-ons Bonus project: safe photo renamer Extra quiz pack Printable workbook Printable cheat sheet Code & development"
+  },
+  {
+    "kind": "Guide",
+    "id": "python-pandas",
+    "title": "Data Analysis with Python & pandas",
+    "url": "python-pandas.html",
+    "keywords": "Python 3 with pandas and Jupyter (all free), in VS Code or JupyterLab Intermediate Load, filter, clean, group, merge, pivot and chart data with pandas in a Jupyter notebook. Notebooks and your first DataFrame Selecting, filtering and sorting Cleaning messy data New columns and grouping Combining tables Dates and pivot tables Charts and sharing results extras add-ons Bonus project: reusable monthly report Extra quiz pack Printable workbook Flashcard deck Code & development"
+  },
+  {
     "kind": "Page",
     "title": "Home",
     "url": "index.html",

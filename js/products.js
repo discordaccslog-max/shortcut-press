@@ -217,5 +217,95 @@ window.SHORTCUT_PRODUCTS = {
       { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "The modeling shortcuts and each lesson's key steps on paper, for quick reference while you build." }
     ],
     checkoutUrl: ""
+  },
+  "power-bi-reports": {
+    name: "Reports & Dashboards in Power BI",
+    slug: "power-bi-reports",
+    code: "PB",
+    price: 75,
+    summary: "From CSV files to an interactive report: data model, DAX measures, visuals, slicers and export.",
+    description: "An interactive browser guide to building reports in Microsoft Power BI Desktop: loading and shaping data, a star-schema data model with a date table, DAX measures with CALCULATE, visuals that answer questions, slicers, interactions and drill-down, and themes, mobile layout and PDF export, with three practice data files.",
+    page: "power-bi-reports.html",
+    guidePath: "guides/power-bi-reports/",
+    confirmationPath: "thank-you/power-bi-reports/",
+    addons: [
+      { id: "targets-project", name: "Bonus project: targets and variance page", price: 5, kind: "project", description: "An extra lesson that adds a targets table and builds a page of revenue against target with conditional colors." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on models, relationships, DAX and interactions, with explanations and a running score." },
+      { id: "workbook", name: "Printable workbook", price: 3, kind: "workbook", description: "The whole guide as a PDF with every lesson, quiz and exercise, and the worked solutions at the back." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "sql-queries": {
+    name: "SQL Queries for Data Analysis",
+    slug: "sql-queries",
+    code: "SQ",
+    price: 39,
+    summary: "SELECT, WHERE, GROUP BY, JOINs, revenue across tables, subqueries and views, in a free SQLite tool.",
+    description: "An interactive browser guide to querying data with SQL in the free DB Browser for SQLite: selecting, filtering and sorting, counting and grouping, inner and left joins, calculating revenue across four tables, and subqueries, views and safe changes, with a practice bookshop database where every answer is checked against the data.",
+    page: "sql-queries.html",
+    guidePath: "guides/sql-queries/",
+    confirmationPath: "thank-you/sql-queries/",
+    addons: [
+      { id: "customer-report", name: "Bonus project: customer value report", price: 4, kind: "project", description: "An extra lesson that builds a view of every customer's spend and value tier with CASE, and finds the biggest order." },
+      { id: "practice-pack", name: "Extra practice pack", price: 3, kind: "practice", description: "Three more exercises with worked solutions: importing a CSV, querying by date, and finding books nobody has bought." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "The guide's shortcuts and every lesson's key steps as a PDF, for quick reference while you write queries." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "obsidian-notes": {
+    name: "Linked Notes in Obsidian",
+    slug: "obsidian-notes",
+    code: "MD",
+    price: 20,
+    summary: "Markdown notes, links and backlinks, tags and properties, the graph, Canvas, daily notes and templates.",
+    description: "An interactive browser guide to building a personal knowledge base in Obsidian: Markdown notes in a vault you own, links and backlinks, folders, tags and properties, the graph view and Canvas, daily notes and templates, and embeds, callouts and backups, with a small practice vault.",
+    page: "obsidian-notes.html",
+    guidePath: "guides/obsidian-notes/",
+    confirmationPath: "thank-you/obsidian-notes/",
+    addons: [
+      { id: "reading-project", name: "Bonus project: reading notes system", price: 4, kind: "project", description: "An extra lesson that sets up a reading template, linked ideas and a live search index for books and articles." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on vaults, links, embeds, properties and plugins, with explanations and a running score." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "Every Obsidian shortcut in the guide and the key steps of each lesson, as a PDF to print." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "python-automation": {
+    name: "Python for Everyday Automation",
+    slug: "python-automation",
+    code: "PY",
+    price: 45,
+    summary: "Small Python scripts that tidy folders, total CSV exports, extract text and run on a schedule.",
+    description: "An interactive browser guide to automating everyday computer tasks with Python and Visual Studio Code, from installing Python to running scripts on a schedule: Python basics, tidying folders with pathlib, reports from CSV files, finding text with regular expressions, and functions, error handling and command-line options, with practice files and finished scripts to compare.",
+    page: "python-automation.html",
+    guidePath: "guides/python-automation/",
+    confirmationPath: "thank-you/python-automation/",
+    addons: [
+      { id: "renamer-project", name: "Bonus project: safe photo renamer", price: 4, kind: "project", description: "An extra lesson that renames photos to a date pattern without overwriting anything, with a log and an undo script." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on Python basics, files, CSV, regular expressions and errors, with explanations." },
+      { id: "workbook", name: "Printable workbook", price: 3, kind: "workbook", description: "The whole guide as a PDF with every lesson, quiz and exercise, and the worked solutions at the back." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "The VS Code shortcuts and each lesson's key steps on paper, to keep beside you while you code." }
+    ],
+    checkoutUrl: ""
+  },
+  "python-pandas": {
+    name: "Data Analysis with Python & pandas",
+    slug: "python-pandas",
+    code: "PA",
+    price: 89,
+    summary: "Load, filter, clean, group, merge, pivot and chart data with pandas in a Jupyter notebook.",
+    description: "An interactive browser guide to analyzing data with Python and pandas in a Jupyter notebook: loading and exploring a CSV, selecting and filtering, cleaning duplicates, messy text and missing values, calculated columns and groupby, merging tables, dates and pivot tables, and charts and exports, with practice data, a starter notebook and a completed notebook.",
+    page: "python-pandas.html",
+    guidePath: "guides/python-pandas/",
+    confirmationPath: "thank-you/python-pandas/",
+    addons: [
+      { id: "report-project", name: "Bonus project: reusable monthly report", price: 5, kind: "project", description: "An extra lesson that turns the analysis into functions that clean any orders file and write a multi-sheet Excel report." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on DataFrames, cleaning, grouping and merging, each answered from the practice data." },
+      { id: "workbook", name: "Printable workbook", price: 3, kind: "workbook", description: "The whole guide as a PDF with every lesson, quiz and exercise, and the worked solutions at the back." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
   }
 };
