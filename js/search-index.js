@@ -130,6 +130,41 @@ window.SHORTCUT_INDEX = [
     "keywords": "Python 3 with pandas and Jupyter (all free), in VS Code or JupyterLab Intermediate Load, filter, clean, group, merge, pivot and chart data with pandas in a Jupyter notebook. Notebooks and your first DataFrame Selecting, filtering and sorting Cleaning messy data New columns and grouping Combining tables Dates and pivot tables Charts and sharing results extras add-ons Bonus project: reusable monthly report Extra quiz pack Printable workbook Flashcard deck Code & development"
   },
   {
+    "kind": "Guide",
+    "id": "machine-learning-sklearn",
+    "title": "Machine Learning Foundations with scikit-learn",
+    "url": "machine-learning-sklearn.html",
+    "keywords": "Python 3 with pandas, scikit-learn and Jupyter (all free) Intermediate Regression, classification, pipelines, trees and forests, cross-validation and responsible use, with real numbers. What machine learning is Exploring data for modeling Your first model: linear regression Classification and its metrics Preprocessing and pipelines Decision trees and random forests Cross-validation and tuning Using models responsibly extras add-ons Bonus project: full house-price pipeline Extra quiz pack Printable workbook Flashcard deck Code & development"
+  },
+  {
+    "kind": "Guide",
+    "id": "git-github",
+    "title": "Version Control with Git & GitHub",
+    "url": "git-github.html",
+    "keywords": "Git (free) and a free GitHub account; VS Code optional Beginner Commits, undoing safely, branches, merge conflicts, and pushing, pulling and pull requests on GitHub. What Git does and setting it up Staging and committing Looking back and undoing Branches and merging Resolving merge conflicts Working with GitHub extras add-ons Bonus project: tags, releases and a changelog Extra quiz pack Printable cheat sheet Flashcard deck Code & development"
+  },
+  {
+    "kind": "Guide",
+    "id": "html-css",
+    "title": "Build a Web Page with HTML & CSS",
+    "url": "html-css.html",
+    "keywords": "A code editor (the guide uses VS Code, free) and any modern web browser Beginner A responsive one-page site from plain text: structure, styling, the box model, Flexbox, Grid and media queries. Your first HTML page Structure and meaning Styling with CSS The box model and spacing Layout with Flexbox and Grid Responsive design and finishing touches extras add-ons Bonus project: second page and dark mode Extra practice pack Printable cheat sheet Flashcard deck Code & development"
+  },
+  {
+    "kind": "Guide",
+    "id": "javascript-basics",
+    "title": "JavaScript Fundamentals for the Browser",
+    "url": "javascript-basics.html",
+    "keywords": "A code editor (the guide uses VS Code, free) and a modern web browser Beginner to intermediate Variables, functions, arrays and objects, the DOM, events and forms, fetch and localStorage, in one small app. Running JavaScript, variables and types Functions and decisions Arrays and objects Changing the page with the DOM Events and forms Loading and saving data extras add-ons Bonus project: a category chart without libraries Extra quiz pack Printable workbook Printable cheat sheet Code & development"
+  },
+  {
+    "kind": "Guide",
+    "id": "command-line",
+    "title": "Command Line Essentials",
+    "url": "command-line.html",
+    "keywords": "A terminal: Terminal on a Mac (zsh), any Linux terminal, or Git Bash on Windows (free); PowerShell notes included Beginner Navigate, manage files, read and search text, pipes and redirects, and a first script, in Bash or zsh. Finding your way around Creating, copying, moving and deleting Reading files Searching and filtering with pipes Redirects, chaining and finding files Your first script and your environment extras add-ons Bonus project: a dated backup script Extra quiz pack Printable cheat sheet Flashcard deck Code & development"
+  },
+  {
     "kind": "Page",
     "title": "Home",
     "url": "index.html",

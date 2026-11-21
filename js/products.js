@@ -307,5 +307,95 @@ window.SHORTCUT_PRODUCTS = {
       { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
     ],
     checkoutUrl: ""
+  },
+  "machine-learning-sklearn": {
+    name: "Machine Learning Foundations with scikit-learn",
+    slug: "machine-learning-sklearn",
+    code: "SK",
+    price: 145,
+    summary: "Regression, classification, pipelines, trees and forests, cross-validation and responsible use, with real numbers.",
+    description: "An interactive browser guide to machine learning with Python and scikit-learn, in eight lessons: the train-and-test workflow, exploring data, linear regression, classification metrics, preprocessing pipelines, decision trees and random forests, cross-validation and tuning, and thresholds, leakage, fairness and saving models, with two practice datasets and notebooks whose results match the guide exactly.",
+    page: "machine-learning-sklearn.html",
+    guidePath: "guides/machine-learning-sklearn/",
+    confirmationPath: "thank-you/machine-learning-sklearn/",
+    addons: [
+      { id: "price-pipeline", name: "Bonus project: full house-price pipeline", price: 5, kind: "project", description: "An extra lesson that adds the neighborhood with a pipeline, compares it with the simpler model and checks errors by area." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on fitting, metrics, overfitting, tuning and pipelines, with explanations." },
+      { id: "workbook", name: "Printable workbook", price: 3, kind: "workbook", description: "The whole guide as a PDF with every lesson, quiz and exercise, and the worked solutions at the back." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "git-github": {
+    name: "Version Control with Git & GitHub",
+    slug: "git-github",
+    code: "GH",
+    price: 35,
+    summary: "Commits, undoing safely, branches, merge conflicts, and pushing, pulling and pull requests on GitHub.",
+    description: "An interactive browser guide to version control with Git and GitHub: setting up Git, staging and committing, looking back and undoing safely, branches and merging, resolving merge conflicts, and publishing to GitHub with push, pull and pull requests, with a small practice website to track.",
+    page: "git-github.html",
+    guidePath: "guides/git-github/",
+    confirmationPath: "thank-you/git-github/",
+    addons: [
+      { id: "release-project", name: "Bonus project: tags, releases and a changelog", price: 4, kind: "project", description: "An extra lesson that marks versions with tags, writes a changelog from history and publishes a GitHub release." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on status, staging, branches, merges and remotes, with explanations." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "The guide's shortcuts and every lesson's key steps as a PDF, for quick reference at the terminal." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "html-css": {
+    name: "Build a Web Page with HTML & CSS",
+    slug: "html-css",
+    code: "HC",
+    price: 38,
+    summary: "A responsive one-page site from plain text: structure, styling, the box model, Flexbox, Grid and media queries.",
+    description: "An interactive browser guide to building a responsive one-page website for a small café with HTML and CSS: page structure and meaning, styling with selectors and custom properties, the box model, Flexbox and Grid layouts, a labeled contact form, and media queries and finishing touches, with the content, a hero picture and a finished version to compare.",
+    page: "html-css.html",
+    guidePath: "guides/html-css/",
+    confirmationPath: "thank-you/html-css/",
+    addons: [
+      { id: "second-page", name: "Bonus project: second page and dark mode", price: 4, kind: "project", description: "An extra lesson that adds an About page sharing the stylesheet, and dark mode with custom properties." },
+      { id: "practice-pack", name: "Extra practice pack", price: 3, kind: "practice", description: "Three more exercises with worked solutions: an opening-hours table, a link styled as a button, and a two-column layout." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "The editor and browser shortcuts and every lesson's key steps on paper." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "javascript-basics": {
+    name: "JavaScript Fundamentals for the Browser",
+    slug: "javascript-basics",
+    code: "JV",
+    price: 49,
+    summary: "Variables, functions, arrays and objects, the DOM, events and forms, fetch and localStorage, in one small app.",
+    description: "An interactive browser guide to JavaScript in the browser, built around a small expense tracker: variables and types, functions and decisions, arrays and objects with map, filter and reduce, changing the page with the DOM, events and forms, and loading data with fetch and saving it with localStorage, with starter files and a finished version.",
+    page: "javascript-basics.html",
+    guidePath: "guides/javascript-basics/",
+    confirmationPath: "thank-you/javascript-basics/",
+    addons: [
+      { id: "chart-project", name: "Bonus project: a category chart without libraries", price: 4, kind: "project", description: "An extra lesson that totals spending by category with reduce and draws bars with plain elements that update live." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on types, arrays, the DOM, events and async code, with explanations." },
+      { id: "workbook", name: "Printable workbook", price: 3, kind: "workbook", description: "The whole guide as a PDF with every lesson, quiz and exercise, and the worked solutions at the back." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "The console and editor shortcuts and every lesson's key steps as a PDF." }
+    ],
+    checkoutUrl: ""
+  },
+  "command-line": {
+    name: "Command Line Essentials",
+    slug: "command-line",
+    code: "CM",
+    price: 27,
+    summary: "Navigate, manage files, read and search text, pipes and redirects, and a first script, in Bash or zsh.",
+    description: "An interactive browser guide to the command line in Bash and zsh, with PowerShell equivalents: moving around folders, creating, copying, moving and deleting files safely, reading files, searching and filtering with grep and pipes, redirects and find, and a first script with variables, permissions, PATH and aliases, with a practice folder maker, a server log and a CSV file.",
+    page: "command-line.html",
+    guidePath: "guides/command-line/",
+    confirmationPath: "thank-you/command-line/",
+    addons: [
+      { id: "backup-project", name: "Bonus project: a dated backup script", price: 4, kind: "project", description: "An extra lesson that writes a script to make dated backups, keep the newest few and log every run." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on navigation, files, grep, pipes and scripts, with explanations." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "Every terminal shortcut in the guide and the key steps of each lesson, as a PDF to keep beside your keyboard." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
   }
 };

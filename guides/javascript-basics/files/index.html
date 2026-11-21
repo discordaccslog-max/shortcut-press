@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pocket Expenses</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 34rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    form { display: grid; grid-template-columns: 1fr 7rem 8rem auto; gap: .5rem; margin-bottom: 1rem; }
+    input, select, button { font: inherit; padding: .4rem .5rem; }
+    ul { list-style: none; padding: 0; }
+    li { display: flex; justify-content: space-between; gap: 1rem; padding: .5rem 0; border-bottom: 1px solid #ddd; }
+    li.big { font-weight: 700; }
+    .total { font-size: 1.25rem; }
+    .error { color: #b00020; }
+  </style>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <h1>Pocket Expenses</h1>
+  <form id="add-form">
+    <input id="label" placeholder="What was it?" aria-label="What was it?">
+    <input id="amount" type="number" step="0.01" min="0" placeholder="Amount" aria-label="Amount">
+    <select id="category" aria-label="Category">
+      <option>Food</option><option>Transport</option><option>Bills</option><option>Fun</option>
+    </select>
+    <button type="submit">Add</button>
+  </form>
+  <p class="error" id="error" hidden></p>
+  <label>Show <select id="filter"><option value="All">All categories</option><option>Food</option><option>Transport</option><option>Bills</option><option>Fun</option></select></label>
+  <ul id="list"></ul>
+  <p class="total">Total: <strong id="total">0.00</strong></p>
+</body>
+</html>

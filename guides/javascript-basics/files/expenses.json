@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "label": "Groceries",
+    "amount": 64.2,
+    "category": "Food"
+  },
+  {
+    "id": 2,
+    "label": "Bus pass",
+    "amount": 45,
+    "category": "Transport"
+  },
+  {
+    "id": 3,
+    "label": "Lunch with Sam",
+    "amount": 18.5,
+    "category": "Food"
+  },
+  {
+    "id": 4,
+    "label": "Electricity",
+    "amount": 61.15,
+    "category": "Bills"
+  },
+  {
+    "id": 5,
+    "label": "Cinema",
+    "amount": 24,
+    "category": "Fun"
+  },
+  {
+    "id": 6,
+    "label": "Groceries",
+    "amount": 58.75,
+    "category": "Food"
+  }
+]

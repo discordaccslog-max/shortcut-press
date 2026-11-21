@@ -1,0 +1,10 @@
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 40rem;
+  margin: 2rem auto;
+  color: #1f2a1c;
+}
+
+h1 {
+  color: #2f6b2a;
+}

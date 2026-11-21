@@ -16,3 +16,22 @@ export function cells(rows, start = "A1") {
 }
 
 export const k = (...keys) => keys.map((x) => `<kbd>${x}</kbd>`).join(" ");
+
+// Builds a Jupyter notebook (nbformat 4) from [kind, text] cells.
+export function notebook(cells) {
+  return JSON.stringify(
+    {
+      cells: cells.map(([kind, text]) => ({
+        cell_type: kind,
+        metadata: {},
+        source: text.split("\n").map((l, i, a) => (i < a.length - 1 ? l + "\n" : l)),
+        ...(kind === "code" ? { execution_count: null, outputs: [] } : {}),
+      })),
+      metadata: { kernelspec: { display_name: "Python 3", language: "python", name: "python3" }, language_info: { name: "python" } },
+      nbformat: 4,
+      nbformat_minor: 5,
+    },
+    null,
+    1
+  ) + "\n";
+}
