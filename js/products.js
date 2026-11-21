@@ -391,9 +391,98 @@ window.SHORTCUT_PRODUCTS = {
     guidePath: "guides/command-line/",
     confirmationPath: "thank-you/command-line/",
     addons: [
-      { id: "backup-project", name: "Bonus project: a dated backup script", price: 4, kind: "project", description: "An extra lesson that writes a script to make dated backups, keep the newest few and log every run." },
+      { id: "backup-project", name: "Bonus project: dated backup script", price: 4, kind: "project", description: "An extra lesson that writes a script to make dated backups, keep the newest few and log every run." },
       { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on navigation, files, grep, pipes and scripts, with explanations." },
       { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "Every terminal shortcut in the guide and the key steps of each lesson, as a PDF to keep beside your keyboard." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "docker-containers": {
+    name: "Containers with Docker",
+    slug: "docker-containers",
+    code: "DK",
+    price: 85,
+    summary: "Run, build and combine containers: images, Dockerfiles, layers, volumes, Compose and safe sharing.",
+    description: "An interactive browser guide to containers with Docker, in seven lessons: images and containers, running and managing containers, building your own image, layers and caching, keeping data with volumes, running several services with Docker Compose, and sharing images with good security habits, built around a small practice web app with no extra libraries.",
+    page: "docker-containers.html",
+    guidePath: "guides/docker-containers/",
+    confirmationPath: "thank-you/docker-containers/",
+    addons: [
+      { id: "postgres-project", name: "Bonus project: add a database service", price: 5, kind: "project", description: "An extra lesson that adds PostgreSQL to the Compose setup with a volume, a health check and a backup command." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on images, Dockerfiles, volumes and Compose, with explanations and a running score." },
+      { id: "workbook", name: "Printable workbook", price: 3, kind: "workbook", description: "The whole guide as a PDF with every lesson, quiz and exercise, and the worked solutions at the back." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "The terminal shortcuts and each lesson's key steps and commands as a PDF." }
+    ],
+    checkoutUrl: ""
+  },
+  "gimp-photo-editing": {
+    name: "Photo Editing in GIMP",
+    slug: "gimp-photo-editing",
+    code: "GP",
+    price: 34,
+    summary: "Crop and straighten, fix exposure and color, retouch, cut out with masks, and export, in free software.",
+    description: "An interactive browser guide to editing photos in GIMP, the free image editor: the workspace, cropping, straightening and resizing, exposure and color with levels and curves, healing and cloning, selections, layer masks and cutouts, and text, sharpening and export, with practice images made for each lesson.",
+    page: "gimp-photo-editing.html",
+    guidePath: "guides/gimp-photo-editing/",
+    confirmationPath: "thank-you/gimp-photo-editing/",
+    addons: [
+      { id: "collage-project", name: "Bonus project: three-photo collage", price: 4, kind: "project", description: "An extra lesson that builds a square social collage with guides, layer masks and a shared color treatment." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on tools, adjustments, retouching and export, with explanations." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "Every GIMP shortcut in the guide and the key steps of each lesson, as a PDF to print." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "krita-digital-painting": {
+    name: "Digital Painting in Krita",
+    slug: "krita-digital-painting",
+    code: "KR",
+    price: 36,
+    summary: "Brushes, layers and blending modes, coloring line art, light and shadow, transforms and export.",
+    description: "An interactive browser guide to digital painting in Krita, the free painting program: canvas, brushes and navigation, layers and blending modes, coloring line art with the fill tool and colorize masks, light and shadow, selections and transformations, and adjustments and export, with line art, a value study and a color palette to work with.",
+    page: "krita-digital-painting.html",
+    guidePath: "guides/krita-digital-painting/",
+    confirmationPath: "thank-you/krita-digital-painting/",
+    addons: [
+      { id: "pattern-project", name: "Bonus project: a seamless pattern", price: 4, kind: "project", description: "An extra lesson that paints a repeating pattern tile in wrap-around mode and checks it for seams." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on brushes, layers, blending modes and export, with explanations." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "Every Krita shortcut in the guide and the key steps of each lesson, as a PDF to keep beside your tablet." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "canva-social-graphics": {
+    name: "Social Media Graphics in Canva",
+    slug: "canva-social-graphics",
+    code: "CV",
+    price: 21,
+    summary: "Right sizes, clear type, brand colors, photos and frames, tidy layouts, animation and export.",
+    description: "An interactive browser guide to designing consistent social media graphics in Canva: sizes and the editor, text hierarchy, brand colors and logos, photos, frames and grids, alignment and safe zones, and resizing, animation and export, with a practice brand, photos and post text, and free-plan alternatives wherever a feature needs a paid plan.",
+    page: "canva-social-graphics.html",
+    guidePath: "guides/canva-social-graphics/",
+    confirmationPath: "thank-you/canva-social-graphics/",
+    addons: [
+      { id: "carousel-project", name: "Bonus project: five-slide carousel", price: 3, kind: "project", description: "An extra lesson that designs a carousel with one slide template, a strong hook and a clear call to action." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 1, kind: "quizbank", description: "Eight more questions on sizes, type, color, layout and export, with explanations." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "Every Canva shortcut in the guide and the key steps of each lesson, as a PDF." }
+    ],
+    checkoutUrl: ""
+  },
+  "godot-game-dev": {
+    name: "2D Game Development in Godot",
+    slug: "godot-game-dev",
+    code: "GD",
+    price: 65,
+    summary: "A small platformer from scratch: scenes, GDScript movement, tiles, camera, coins, score, sound and export.",
+    description: "An interactive browser guide to making a small 2D platformer in the free Godot Engine 4: projects, scenes and nodes, a player that runs and jumps in GDScript, input actions and tuning, platforms, tiles and a following camera, coins and signals, and a score, sound and an exported game, with sprites, a sound effect and finished scripts.",
+    page: "godot-game-dev.html",
+    guidePath: "guides/godot-game-dev/",
+    confirmationPath: "thank-you/godot-game-dev/",
+    addons: [
+      { id: "enemy-project", name: "Bonus project: a patrolling enemy", price: 5, kind: "project", description: "An extra lesson that adds an enemy that patrols platforms, turns at edges and restarts the level on contact." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on nodes, physics, input, signals and export, with explanations." },
+      { id: "workbook", name: "Printable workbook", price: 3, kind: "workbook", description: "The whole guide as a PDF with every lesson, quiz and exercise, and the worked solutions at the back." },
       { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
     ],
     checkoutUrl: ""

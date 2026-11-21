@@ -1,0 +1,20 @@
+# Two services for the Docker Compose lesson.
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      GREETING: "Hello from Compose"
+    volumes:
+      - visits:/data
+
+  docs:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./site:/usr/share/nginx/html:ro
+
+volumes:
+  visits:

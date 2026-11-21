@@ -1,0 +1,16 @@
+Post 1: new menu item (square post, 1080 x 1080)
+Headline: Cardamom buns are back
+Subline: Baked every morning from 7am
+Small print: 12 Quay Street, Seaview
+
+Post 2: event (story, 1080 x 1920)
+Headline: Latte art night
+Details: Friday 14 March, 6pm to 8pm
+Call to action: Free entry, spaces are limited, reply to save yours
+
+Post 3: carousel (5 slides) for the bonus project
+1. How we brew a pour-over
+2. Grind: medium-fine, 15 g
+3. Bloom: 30 g water, wait 30 seconds
+4. Pour: slow circles to 250 g
+5. Visit us to taste the difference

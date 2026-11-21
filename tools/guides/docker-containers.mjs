@@ -1,0 +1,381 @@
+import { k } from "./_helpers.mjs";
+import { APP_PY, DOCKERFILE, COMPOSE, DOCS_HTML } from "./_docker-files.mjs";
+
+export default {
+  id: "docker-containers",
+  slug: "docker-containers",
+  title: "Containers with Docker",
+  software: "Docker Desktop (or Docker Engine) and a terminal",
+  apps: ["Docker", "Terminal"],
+  intro:
+    "Understand and use containers with Docker: run ready-made images, build your own image for a small Python web app, keep data with volumes, run several services together with Docker Compose, and share images safely. The practice app needs no extra libraries, so every build works offline after the first download.",
+  platformNote: "Docker commands are the same on Windows, Mac and Linux. Terminal shortcuts use Ctrl on every system; editor shortcuts are shown for VS Code on Windows and Linux (use Cmd on a Mac).",
+  store: {
+    category: "code",
+    level: "Intermediate",
+    software: "Docker Desktop (Windows, Mac, Linux) or Docker Engine (Linux), and a terminal",
+    softwareShort: "Docker",
+    softwareHtml: `<p>This guide uses <strong>Docker Desktop</strong> on Windows, Mac or Linux, or <strong>Docker Engine</strong> with the Compose plugin on Linux, obtained separately from docker.com; neither is included with the guide. Docker Desktop is free for personal use, education and small businesses, and needs a paid subscription for larger companies under Docker's terms. On Windows it uses WSL 2, which the installer sets up. You also need a terminal and a text editor.</p>`,
+    forWho: [
+      "You've heard “it works on my machine” once too often and want reproducible environments.",
+      "You're comfortable in a terminal and want to run, build and combine containers.",
+      "You're deploying small apps or joining a team that uses Docker.",
+    ],
+    notFor: [
+      "You're new to the command line. Start with Command Line Essentials.",
+      "You need Kubernetes, cluster operations or production orchestration.",
+      "You want video lessons, live help, or someone to review your work.",
+    ],
+  },
+  files: [
+    { name: "app.py", title: "Practice web app", desc: "A tiny Python web app with a visit counter, using only the standard library." },
+    { name: "Dockerfile", title: "Dockerfile", desc: "Builds an image for the app from python:3.12-slim." },
+    { name: "compose.yaml", title: "Compose file", desc: "Runs the app and an nginx docs site together, with a named volume." },
+    { name: "site-index.html", title: "Docs page", desc: "A one-page site for the Compose lesson. Save it as site/index.html next to compose.yaml." },
+  ],
+  shortcuts: [
+    { keys: "Ctrl+C", action: "Stop a container running in the foreground", app: "Terminal" },
+    { keys: "Ctrl+D", action: "Leave a shell inside a container", app: "Terminal" },
+    { keys: "Tab", action: "Complete a command or file name", app: "Terminal" },
+    { keys: "ArrowUp", action: "Bring back the previous command", app: "Terminal" },
+    { keys: "Ctrl+A", action: "Jump to the start of the line", app: "Terminal" },
+    { keys: "Ctrl+E", action: "Jump to the end of the line", app: "Terminal" },
+    { keys: "Ctrl+U", action: "Delete to the start of the line", app: "Terminal" },
+    { keys: "Ctrl+`", action: "Show or hide the terminal (VS Code)", app: "VS Code" },
+    { keys: "Ctrl+Shift+P", action: "Command palette (VS Code)", app: "VS Code" },
+    { keys: "Ctrl+R", action: "Search your command history", app: "Terminal", practice: false, note: "Your browser uses this shortcut to reload the page." },
+  ],
+  lessons: [
+    {
+      id: "concepts",
+      title: "Images and containers",
+      summary: "Understand what images and containers are, install Docker, and run your first container.",
+      diagram: { type: "flow", nodes: ["Dockerfile", "docker build", "Image", "docker run", "Container"], highlight: 2, title: "An image is the recipe's result; a container is a running copy" },
+      steps: [
+        {
+          title: "Why containers",
+          body: `<p>A container packages an app with everything it needs (the right language version, libraries and settings) so it runs the same on your laptop, a colleague's and a server. Unlike a virtual machine, a container shares the host's operating system kernel, so it starts in a second and uses little memory.</p>`,
+        },
+        {
+          title: "Images and containers",
+          body: `<p>An <strong>image</strong> is a read-only template: a filesystem plus a command to run. A <strong>container</strong> is a running (or stopped) instance of an image, with its own writable layer. One image can start many containers. Images come from a <em>registry</em> such as Docker Hub, or you build them yourself.</p>`,
+        },
+        {
+          title: "Install and check",
+          body: `<p>Install Docker Desktop from docker.com and start it (on Windows, accept the WSL 2 setup). In a terminal, <code>docker --version</code> and <code>docker compose version</code> confirm it's working. Docker Desktop must be running whenever you use the <code>docker</code> command.</p>`,
+        },
+        {
+          title: "Hello, world",
+          body: `<p><code>docker run hello-world</code> downloads a tiny image, starts a container from it, prints a message and exits. The message explains each step Docker just took. <code>docker ps -a</code> lists containers including stopped ones; the hello-world container is there with status <em>Exited</em>.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "What's the relationship between an image and a container?", options: ["They're the same thing", "A container is a running instance of an image", "An image is a running container", "Images run inside containers"], answer: 1, explain: "Images are templates; containers are instances created from them." },
+        { q: "Why do containers start faster than virtual machines?", options: ["They're smaller files", "They share the host's kernel instead of booting a whole operating system", "They don't run code", "They're cached on Docker Hub"], answer: 1, explain: "No separate operating system boot is needed." },
+      ],
+      exercise: {
+        title: "Run hello-world",
+        task: `<p>Install Docker Desktop, check the versions, run the hello-world image, and list all containers. What status does the hello-world container have, and why?</p>`,
+        files: [],
+        solution: [
+          "<code>docker --version</code> and <code>docker compose version</code> both print version numbers.",
+          "<code>docker run hello-world</code> prints “Hello from Docker!” and a list of the steps it took.",
+          "<code>docker ps</code> shows nothing; <code>docker ps -a</code> shows the container with status <strong>Exited (0)</strong>.",
+          "It exited because its only job was to print the message; a container runs as long as its main command does.",
+        ],
+      },
+    },
+    {
+      id: "running",
+      title: "Running and managing containers",
+      summary: "Run a web server in the background, publish its port, read its logs, open a shell inside it, and stop and remove it.",
+      diagram: { type: "terminal", shell: "bash", lines: [["$", "docker run -d -p 8080:80 --name web nginx:alpine"], ["$", "docker ps"], ["", "… nginx:alpine  … 0.0.0.0:8080->80/tcp   web"], ["$", "docker logs web"], ["$", "docker stop web && docker rm web"]], highlight: [0] },
+      steps: [
+        {
+          title: "Run in the background",
+          body: `<p><code>docker run -d -p 8080:80 --name web nginx:alpine</code> starts the nginx web server. <code>-d</code> detaches (runs in the background), <code>-p 8080:80</code> publishes container port 80 on your computer's port 8080, and <code>--name</code> gives it a name. Open <code>http://localhost:8080</code>: nginx's welcome page.</p>`,
+        },
+        {
+          title: "See what's running",
+          body: `<p><code>docker ps</code> lists running containers with their image, ports and name. <code>docker logs web</code> prints what the container has written to its output; your page visit appears as a request line. Add <code>-f</code> to follow the log live, and ${k("Ctrl", "C")} to stop following.</p>`,
+        },
+        {
+          title: "Look inside",
+          body: `<p><code>docker exec -it web sh</code> opens a shell inside the running container (<code>-it</code> makes it interactive). Try <code>ls /usr/share/nginx/html</code>: the files nginx serves. Press ${k("Ctrl", "D")} or type <code>exit</code> to leave; the container keeps running.</p>`,
+        },
+        {
+          title: "Stop, remove, clean up",
+          body: `<p><code>docker stop web</code> stops it; <code>docker start web</code> starts it again; <code>docker rm web</code> removes it once stopped (<code>docker rm -f web</code> does both). <code>docker images</code> lists downloaded images; <code>docker image prune</code> removes unused ones. Containers are disposable: removing one doesn't touch its image.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "In -p 8080:80, which number is the port on your computer?", options: ["80", "8080", "Both", "Neither"], answer: 1, explain: "The format is host:container." },
+        { q: "What does docker exec -it web sh do?", options: ["Restarts web", "Opens an interactive shell inside the running container", "Builds an image", "Shows logs"], answer: 1, explain: "exec runs a command in an existing container." },
+      ],
+      exercise: {
+        title: "Run and inspect nginx",
+        task: `<p>Run nginx:alpine in the background on port 8080 with the name web, visit it in a browser, check its logs, open a shell inside and list the HTML folder, then stop and remove it.</p>`,
+        files: [],
+        solution: [
+          "<code>docker run -d -p 8080:80 --name web nginx:alpine</code>; open http://localhost:8080.",
+          "<code>docker logs web</code> shows a <code>GET /</code> request line for your visit.",
+          "<code>docker exec -it web sh</code>, then <code>ls /usr/share/nginx/html</code> lists index.html and 50x.html; <code>exit</code>.",
+          "<code>docker rm -f web</code>; <code>docker ps -a</code> no longer lists it, but <code>docker images</code> still shows nginx:alpine.",
+        ],
+      },
+    },
+    {
+      id: "build",
+      title: "Build your own image",
+      summary: "Read a Dockerfile line by line, build an image for the practice app, run it, and pass settings in with environment variables.",
+      diagram: { type: "code", lang: "Dockerfile", lines: ["FROM python:3.12-slim", "WORKDIR /app", "COPY app.py .", "ENV COUNT_FILE=/data/visits.txt", "EXPOSE 8000", "CMD [\"python\", \"app.py\"]"], highlight: [0, 5], notes: [[0, "Start from an official image"], [5, "What runs when it starts"]] },
+      steps: [
+        {
+          title: "The Dockerfile",
+          body: `<p>A Dockerfile is the recipe for an image. <code>FROM</code> picks a base image (here, Python 3.12 on a slim Debian), <code>WORKDIR</code> sets the folder for later steps, <code>COPY</code> copies files in, <code>ENV</code> sets an environment variable, <code>EXPOSE</code> documents the port, and <code>CMD</code> says what to run when a container starts.</p>`,
+        },
+        {
+          title: "Build",
+          body: `<p>Put <strong>app.py</strong> and <strong>Dockerfile</strong> in one folder and, in a terminal there, run <code>docker build -t visits-app .</code>. <code>-t</code> names (tags) the image; the final dot is the <em>build context</em>, the folder whose files the Dockerfile can copy. <code>docker images</code> now lists visits-app.</p>`,
+        },
+        {
+          title: "Run it",
+          body: `<p><code>docker run -d -p 8000:8000 --name visits visits-app</code>, then open <code>http://localhost:8000</code>. You get JSON like <code>{"message": "Hello from a container", "visits": 1, "host": "…"}</code>; the host is the container's ID. Reload and visits goes up.</p>`,
+        },
+        {
+          title: "Settings from the environment",
+          body: `<p>The app reads its greeting from the <code>GREETING</code> environment variable. <code>docker run -d -p 8001:8000 -e GREETING="Hi from my laptop" visits-app</code> starts a second container with a different message, from the same image. Configuring through environment variables keeps one image usable everywhere.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "What does the dot at the end of docker build -t visits-app . mean?", options: ["Build quietly", "Use the current folder as the build context", "Tag as latest", "Nothing"], answer: 1, explain: "The context is the folder of files available to COPY." },
+        { q: "Why read settings like GREETING from environment variables?", options: ["It's faster", "The same image can be configured differently without rebuilding", "Dockerfiles can't contain text", "To hide the code"], answer: 1, explain: "One image, many configurations." },
+      ],
+      exercise: {
+        title: "Build and run the practice app",
+        task: `<p>Build the practice app's image as visits-app, run it on port 8000, visit it three times, then start a second container on port 8001 with GREETING set to “Hi from my laptop”. What does each return?</p>`,
+        files: ["app.py", "Dockerfile"],
+        solution: [
+          "In the folder with app.py and Dockerfile: <code>docker build -t visits-app .</code>",
+          "<code>docker run -d -p 8000:8000 --name visits visits-app</code>; after three visits to http://localhost:8000 the JSON shows <code>\"visits\": 3</code>.",
+          "<code>docker run -d -p 8001:8000 --name visits2 -e GREETING=\"Hi from my laptop\" visits-app</code>",
+          "http://localhost:8001 shows the new message with <code>\"visits\": 1</code>: each container has its own counter file. <code>http://localhost:8000/health</code> returns <code>ok</code>.",
+        ],
+      },
+    },
+    {
+      id: "layers",
+      title: "Layers, caching and image size",
+      summary: "See how images are built in layers, order a Dockerfile so rebuilds are fast, keep the build context lean, and tag versions.",
+      diagram: { type: "layers", items: ["CMD (metadata)", "COPY app.py (changes often)", "RUN mkdir -p /data", "WORKDIR /app", "FROM python:3.12-slim (cached)"], highlight: 1, caption: "Only layers from the first change upward are rebuilt" },
+      steps: [
+        {
+          title: "Every step is a layer",
+          body: `<p>Each Dockerfile instruction that changes files adds a layer on top of the previous ones. <code>docker history visits-app</code> lists them with their sizes; almost all the size comes from the base image.</p>`,
+        },
+        {
+          title: "The build cache",
+          body: `<p>Docker reuses a layer if nothing it depends on has changed. Edit app.py and rebuild: the output marks earlier steps <code>CACHED</code> and only redoes <code>COPY app.py</code> and what follows. Put steps that rarely change (installing dependencies) above steps that change often (copying your code).</p>`,
+        },
+        {
+          title: ".dockerignore",
+          body: `<p>Everything in the build context is sent to Docker, even files you never copy. A <code>.dockerignore</code> file next to the Dockerfile lists what to leave out, such as <code>.git</code>, <code>*.log</code>, <code>visits.txt</code> or <code>node_modules</code>. Smaller contexts build faster and can't accidentally include secrets.</p>`,
+        },
+        {
+          title: "Tags and size",
+          body: `<p><code>docker build -t visits-app:1.1 .</code> tags a version; without a tag, Docker uses <code>latest</code>. Slim and Alpine base images are much smaller than the full ones: compare sizes with <code>docker images</code>. Pin base images to a version (<code>python:3.12-slim</code>, not just <code>python</code>) so builds don't change underneath you.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "You change only app.py and rebuild. Which steps run again?", options: ["All of them", "COPY app.py and the steps after it", "Only FROM", "None"], answer: 1, explain: "Layers before the change are reused from the cache." },
+        { q: "What does .dockerignore control?", options: ["Which containers to stop", "Which files are left out of the build context", "Which ports are closed", "Which images to delete"], answer: 1, explain: "It filters what's sent to the builder." },
+      ],
+      exercise: {
+        title: "Watch the cache work",
+        task: `<p>Change the default greeting in app.py, rebuild with the tag 1.1, and look at which steps were cached. Add a .dockerignore that excludes visits.txt and *.log, and list the image's layers with docker history.</p>`,
+        files: ["app.py", "Dockerfile"],
+        solution: [
+          "Edit <code>GREETING = os.environ.get(\"GREETING\", \"Hello from version 1.1\")</code>.",
+          "<code>docker build -t visits-app:1.1 .</code>: FROM, WORKDIR are shown as CACHED; COPY and later steps run.",
+          "Create <code>.dockerignore</code> with the lines <code>visits.txt</code> and <code>*.log</code>, and rebuild.",
+          "<code>docker history visits-app:1.1</code> lists each layer; the app's own layers are a few kilobytes, while the base layers are tens of megabytes.",
+        ],
+      },
+    },
+    {
+      id: "volumes",
+      title: "Keeping data with volumes",
+      summary: "See why container data disappears, keep it with named volumes, and use bind mounts to work on code without rebuilding.",
+      diagram: { type: "compare", left: { title: "No volume", items: ["Remove the container", "→ visits.txt is gone", "Counter restarts at 1"] }, right: { title: "Named volume at /data", items: ["Remove the container", "→ the volume remains", "New container continues the count"] }, accentRight: true, title: "Containers are disposable; volumes aren't" },
+      steps: [
+        {
+          title: "Container data is temporary",
+          body: `<p>The app writes its counter to <code>/data/visits.txt</code> inside the container's writable layer. Remove the container and run a new one, and the count starts again at 1. That's by design: containers should be replaceable.</p>`,
+        },
+        {
+          title: "Named volumes",
+          body: `<p><code>docker volume create visits</code> makes a volume, storage managed by Docker that lives outside any container. <code>docker run -d -p 8000:8000 -v visits:/data --name visits visits-app</code> mounts it at <code>/data</code>. Remove the container, start a new one with the same <code>-v</code>, and the count carries on.</p>`,
+        },
+        {
+          title: "Bind mounts for development",
+          body: `<p>A bind mount maps a folder on your computer into the container: <code>-v "$(pwd)":/app</code> (PowerShell: <code>-v "\${PWD}:/app"</code>). Edit app.py on your computer and the container sees the change at once; restart the container (<code>docker restart visits</code>) for Python to load it. Great for development, not for shipping.</p>`,
+        },
+        {
+          title: "Managing volumes",
+          body: `<p><code>docker volume ls</code> lists volumes; <code>docker volume inspect visits</code> shows details; <code>docker volume rm visits</code> deletes one (only when no container uses it). Deleting a volume deletes its data for good, so treat it like deleting files.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Where should the app's counter live so it survives the container being removed?", options: ["In the image", "In a volume mounted at /data", "In the container's writable layer", "In the Dockerfile"], answer: 1, explain: "Volumes outlive containers." },
+        { q: "When is a bind mount the right choice?", options: ["Shipping to production", "Editing code on your computer and seeing it in the container straight away", "Storing database files on Docker Hub", "Never"], answer: 1, explain: "Bind mounts are ideal for development." },
+      ],
+      exercise: {
+        title: "Make the counter survive",
+        task: `<p>Run the app with a named volume called visits at /data, visit it five times, remove the container, start a new one with the same volume, and visit again. What count do you see?</p>`,
+        files: ["app.py", "Dockerfile"],
+        solution: [
+          "<code>docker rm -f visits</code> (if it exists), then <code>docker volume create visits</code>.",
+          "<code>docker run -d -p 8000:8000 -v visits:/data --name visits visits-app</code>; visit http://localhost:8000 five times.",
+          "<code>docker rm -f visits</code>, then the same <code>docker run</code> command again.",
+          "The next visit shows <strong>\"visits\": 6</strong>: the count continued from the volume.",
+        ],
+      },
+    },
+    {
+      id: "compose",
+      title: "Several services with Docker Compose",
+      summary: "Describe an app and its companions in compose.yaml, start and stop them together, read their logs, and understand the network Compose creates.",
+      diagram: { type: "tree", root: "compose.yaml", items: [["service: app (build .)  port 8000", 1, true], ["volume: visits → /data", 2], ["service: docs (nginx:alpine)  port 8080", 1], ["bind mount: ./site → html folder", 2]], caption: "One file describes the whole setup" },
+      steps: [
+        {
+          title: "Why Compose",
+          body: `<p>Real projects have several containers (an app, a database, a cache) with ports, volumes and settings. Typing long <code>docker run</code> commands doesn't scale. <strong>compose.yaml</strong> describes them all, and one command starts or stops the lot.</p>`,
+        },
+        {
+          title: "Read compose.yaml",
+          body: `<p>Under <code>services:</code>, <code>app</code> is built from the Dockerfile in the same folder (<code>build: .</code>), publishes port 8000, sets GREETING and mounts the named volume <code>visits</code>. <code>docs</code> runs nginx:alpine on port 8080 and serves the local <code>site</code> folder read-only (<code>:ro</code>). Indentation matters in YAML: use spaces, never tabs.</p>`,
+        },
+        {
+          title: "Up, logs, down",
+          body: `<p>Save <strong>site-index.html</strong> as <code>site/index.html</code> next to compose.yaml. <code>docker compose up -d --build</code> builds and starts both; <code>docker compose ps</code> lists them; <code>docker compose logs -f app</code> follows one service's logs. <code>docker compose down</code> stops and removes the containers; add <code>-v</code> to remove the volumes too.</p>`,
+        },
+        {
+          title: "Services find each other by name",
+          body: `<p>Compose puts the services on a private network where each can reach the others by service name: from inside the docs container, <code>wget -qO- http://app:8000/health</code> prints <code>ok</code>. That's how an app connects to its database: the host name is simply the service name, such as <code>db</code>.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "What does docker compose down -v do that down doesn't?", options: ["Stops faster", "Also removes the named volumes and their data", "Removes the images", "Shows logs"], answer: 1, explain: "-v deletes the volumes declared in the file." },
+        { q: "How does the docs service reach the app service on the Compose network?", options: ["localhost:8000", "http://app:8000", "Its container ID only", "It can't"], answer: 1, explain: "Service names work as host names on the Compose network." },
+      ],
+      exercise: {
+        title: "Run the two-service setup",
+        task: `<p>Put compose.yaml, the Dockerfile, app.py and site/index.html together, start everything with Compose, visit both services, check that the docs container can reach the app by name, and stop it all.</p>`,
+        files: ["compose.yaml", "Dockerfile", "app.py", "site-index.html"],
+        solution: [
+          "Save site-index.html as <code>site/index.html</code>; <code>docker rm -f visits</code> first if that container is still using port 8000.",
+          "<code>docker compose up -d --build</code>; <code>docker compose ps</code> lists app and docs as running.",
+          "http://localhost:8000 shows “Hello from Compose”; http://localhost:8080 shows the docs page.",
+          "<code>docker compose exec docs wget -qO- http://app:8000/health</code> prints <code>ok</code>.",
+          "<code>docker compose down</code> (add <code>-v</code> to reset the counter).",
+        ],
+      },
+    },
+    {
+      id: "share",
+      title: "Sharing images and good habits",
+      summary: "Push an image to a registry, keep secrets out of images, run as a non-root user, add a health check, and clean up disk space.",
+      diagram: { type: "flow", nodes: ["docker build", "docker tag", "docker push", "Registry", "docker pull anywhere"], highlight: 3, title: "Build once, run anywhere" },
+      steps: [
+        {
+          title: "Push to a registry",
+          body: `<p>With a free Docker Hub account, <code>docker login</code>, then tag the image with your username: <code>docker tag visits-app yourname/visits-app:1.0</code>, and <code>docker push yourname/visits-app:1.0</code>. Anyone (or any server) can now <code>docker pull</code> it. Choose private repositories for anything that isn't meant to be public.</p>`,
+        },
+        {
+          title: "Keep secrets out",
+          body: `<p>Never put passwords or API keys in a Dockerfile or copy them into an image: anyone with the image can read every layer. Pass them at run time as environment variables or, with Compose, through an <code>env_file</code> that you keep out of version control and out of the build context with .dockerignore.</p>`,
+        },
+        {
+          title: "Run as a non-root user",
+          body: `<p>By default the app runs as root inside the container. Add <code>RUN useradd --create-home appuser &amp;&amp; chown appuser /data</code> and <code>USER appuser</code> before <code>CMD</code>. If the app is ever compromised, the attacker has far less power. Add <code>HEALTHCHECK CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"</code> so <code>docker ps</code> reports whether the app is actually responding.</p>`,
+        },
+        {
+          title: "Reclaim disk space",
+          body: `<p>Images, stopped containers and build cache add up. <code>docker system df</code> shows what's using space; <code>docker system prune</code> removes stopped containers, unused networks, dangling images and build cache (it asks first). Volumes are only removed if you add <code>--volumes</code>, so your data is safe by default.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Why is copying an API key into an image dangerous?", options: ["Images can't hold text", "Anyone with the image can read it from the layers", "It slows the build", "Docker deletes it"], answer: 1, explain: "Image layers are readable by anyone who can pull the image." },
+        { q: "What does docker system prune remove by default?", options: ["Everything including volumes", "Stopped containers, unused networks, dangling images and build cache", "Only volumes", "Running containers"], answer: 1, explain: "Volumes need --volumes." },
+      ],
+      exercise: {
+        title: "Harden and tag the image",
+        task: `<p>Add a non-root user and a health check to the Dockerfile, rebuild as visits-app:1.2, run it, and check docker ps shows it as healthy. If you have a Docker Hub account, tag and push it.</p>`,
+        files: ["Dockerfile", "app.py"],
+        solution: [
+          "After <code>RUN mkdir -p /data</code>: <code>RUN useradd --create-home appuser &amp;&amp; chown appuser /data</code> and <code>USER appuser</code>.",
+          "Before CMD: the <code>HEALTHCHECK</code> line from step 3.",
+          "<code>docker build -t visits-app:1.2 .</code> and <code>docker run -d -p 8000:8000 --name visits12 visits-app:1.2</code>.",
+          "After about 30 seconds, <code>docker ps</code> shows <strong>(healthy)</strong> in the status. <code>docker exec visits12 whoami</code> prints appuser.",
+          "Optional: <code>docker login</code>, <code>docker tag visits-app:1.2 yourname/visits-app:1.2</code>, <code>docker push yourname/visits-app:1.2</code>.",
+        ],
+      },
+    },
+  ],
+  extras: {
+    project: {
+      id: "bonus-postgres",
+      title: "Bonus project: add a database service",
+      summary: "Add PostgreSQL to the Compose setup with a volume and a health check, connect to it from another container by service name, and back up its data.",
+      diagram: { type: "tree", root: "compose.yaml", items: [["app", 1], ["docs", 1], ["db (postgres:16-alpine)", 1, true], ["volume: pgdata", 2], ["healthcheck: pg_isready", 2]], caption: "A third service with its own storage" },
+      steps: [
+        {
+          title: "The db service",
+          body: `<p>Add a service named <code>db</code> using <code>postgres:16-alpine</code>, with <code>POSTGRES_PASSWORD</code> set from an env file and a named volume mounted at <code>/var/lib/postgresql/data</code>. Don't publish its port unless you need to reach it from your computer; the other services can reach it as <code>db:5432</code>.</p>`,
+        },
+        {
+          title: "Health and start order",
+          body: `<p>Give db a <code>healthcheck</code> that runs <code>pg_isready -U postgres</code>, and give a service that needs it <code>depends_on: db: condition: service_healthy</code>. Compose then waits until the database actually accepts connections, not just until its container starts.</p>`,
+        },
+        {
+          title: "Connect and back up",
+          body: `<p><code>docker compose exec db psql -U postgres</code> opens a SQL prompt inside the container. A backup is one command: <code>docker compose exec db pg_dump -U postgres postgres &gt; backup.sql</code>, which writes a file on your computer.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Why not publish the database's port to your computer?", options: ["It's slower", "Other services reach it on the Compose network; publishing exposes it unnecessarily", "Postgres forbids it", "Volumes stop working"], answer: 1, explain: "Keep internal services internal unless you need direct access." },
+        { q: "What does depends_on with condition: service_healthy add?", options: ["Nothing", "Waits until the db's health check passes before starting the dependent service", "Restarts the db", "Creates the volume"], answer: 1, explain: "It waits for readiness, not just for the container to start." },
+      ],
+      exercise: {
+        title: "Add and use Postgres",
+        task: `<p>Add the db service with a .env file holding POSTGRES_PASSWORD, a pgdata volume and a health check, start everything, create a table with psql, and make a backup file with pg_dump.</p>`,
+        files: ["compose.yaml"],
+        solution: [
+          "Create <code>.env</code> with <code>POSTGRES_PASSWORD=change-me</code> (add .env to .gitignore and .dockerignore).",
+          "Under services: <code>db:</code> with <code>image: postgres:16-alpine</code>, <code>env_file: .env</code>, <code>volumes: [pgdata:/var/lib/postgresql/data]</code> and a healthcheck <code>test: [\"CMD\", \"pg_isready\", \"-U\", \"postgres\"]</code>; add <code>pgdata:</code> under volumes.",
+          "<code>docker compose up -d</code>; <code>docker compose ps</code> shows db as healthy after a few seconds.",
+          "<code>docker compose exec db psql -U postgres -c \"CREATE TABLE notes (id serial, body text);\"</code>",
+          "<code>docker compose exec db pg_dump -U postgres postgres &gt; backup.sql</code>; the file contains the CREATE TABLE statement.",
+        ],
+      },
+    },
+    quizbank: [
+      { q: "Which command lists running containers?", options: ["docker images", "docker ps", "docker list", "docker run"], answer: 1, explain: "docker ps lists running containers; add -a for stopped ones." },
+      { q: "What does -d do in docker run -d?", options: ["Deletes the container after", "Runs it in the background", "Enables debugging", "Downloads only"], answer: 1, explain: "Detached mode returns your terminal." },
+      { q: "Which Dockerfile instruction sets the command a container runs?", options: ["RUN", "CMD", "FROM", "COPY"], answer: 1, explain: "RUN executes during the build; CMD at container start." },
+      { q: "What's the difference between RUN and CMD?", options: ["None", "RUN runs while building the image; CMD runs when a container starts", "CMD runs while building", "RUN only works with Python"], answer: 1, explain: "Build time versus run time." },
+      { q: "What happens to a named volume when you remove the container using it?", options: ["It's deleted", "It remains, with its data", "It's emptied", "It's moved to the image"], answer: 1, explain: "Volumes are independent of containers." },
+      { q: "Which file does Docker Compose read by default?", options: ["docker.yml", "compose.yaml (or docker-compose.yml)", "Dockerfile", "services.json"], answer: 1, explain: "compose.yaml is the current default name." },
+      { q: "Why pin a base image like python:3.12-slim instead of python?", options: ["It's required", "Builds stay consistent instead of changing when the latest image changes", "It's faster to type", "It enables caching"], answer: 1, explain: "Unpinned tags can change underneath you." },
+      { q: "How do you open a shell in a running container named web?", options: ["docker run web sh", "docker exec -it web sh", "docker shell web", "docker attach sh"], answer: 1, explain: "exec runs a command in an existing container." },
+    ],
+  },
+  async makeFiles() {
+    return {
+      "app.py": APP_PY,
+      Dockerfile: DOCKERFILE,
+      "compose.yaml": COMPOSE,
+      "site-index.html": DOCS_HTML,
+    };
+  },
+};

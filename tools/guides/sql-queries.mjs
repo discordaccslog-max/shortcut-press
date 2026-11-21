@@ -41,6 +41,8 @@ export default {
     { keys: "Ctrl+O", action: "Open a database", app: "DB Browser for SQLite" },
     { keys: "Ctrl+F", action: "Find in the SQL editor", app: "DB Browser for SQLite" },
     { keys: "Ctrl+Z", action: "Undo typing in the editor", app: "DB Browser for SQLite" },
+    { keys: "Ctrl+A", action: "Select all the SQL in the editor", app: "DB Browser for SQLite" },
+    { keys: "Ctrl+C", action: "Copy the selected result cells", app: "DB Browser for SQLite" },
     { keys: "F5", action: "Execute all SQL", app: "DB Browser for SQLite", practice: false, note: "Your browser uses this key to reload the page." },
     { keys: "Ctrl+T", action: "Open a new SQL editor tab", app: "DB Browser for SQLite", practice: false, note: "Your browser uses this shortcut to open a new tab." },
     { keys: "Ctrl+N", action: "New database", app: "DB Browser for SQLite", practice: false, note: "Your browser uses this shortcut to open a new window." },

@@ -334,8 +334,8 @@ export default {
         },
       ],
       quiz: [
-        { q: "Which element should hold the page's unique main content?", options: ["<div>", "<main>", "<section>", "<body>"], answer: 1, explain: "There's one <main> per page, for its primary content." },
-        { q: "How do you link to a section with id=\"visit\" on the same page?", options: ["<a href=\"visit\">", "<a href=\"#visit\">", "<a id=\"visit\">", "<a href=\"/visit\">"], answer: 1, explain: "A # followed by the id links to that element." },
+        { q: "Which element should hold the page's unique main content?", options: ["&lt;div&gt;", "&lt;main&gt;", "&lt;section&gt;", "&lt;body&gt;"], answer: 1, explain: "There's one &lt;main&gt; per page, for its primary content." },
+        { q: "How do you link to a section with id=\"visit\" on the same page?", options: ["&lt;a href=\"visit\"&gt;", "&lt;a href=\"#visit\"&gt;", "&lt;a id=\"visit\"&gt;", "&lt;a href=\"/visit\"&gt;"], answer: 1, explain: "A # followed by the id links to that element." },
       ],
       exercise: {
         title: "Give the page structure",
@@ -373,7 +373,7 @@ export default {
         },
       ],
       quiz: [
-        { q: "Which selector matches <p class=\"price\">?", options: ["price", ".price", "#price", "p.price only"], answer: 1, explain: "A dot targets a class (p.price would also work)." },
+        { q: "Which selector matches &lt;p class=\"price\"&gt;?", options: ["price", ".price", "#price", "p.price only"], answer: 1, explain: "A dot targets a class (p.price would also work)." },
         { q: "Two rules with equally specific selectors set different colors. Which wins?", options: ["The first", "The one later in the stylesheet", "The darker color", "Neither"], answer: 1, explain: "With equal specificity, the last rule wins." },
       ],
       exercise: {

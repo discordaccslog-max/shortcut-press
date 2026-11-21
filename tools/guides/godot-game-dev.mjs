@@ -1,0 +1,451 @@
+import { k } from "./_helpers.mjs";
+
+const PLAYER_GD = `extends CharacterBody2D
+## The player: runs left and right and jumps. Attach to a CharacterBody2D.
+
+@export var speed := 220.0
+@export var jump_velocity := -420.0
+
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+
+func _physics_process(delta: float) -> void:
+	# Fall when not standing on something.
+	if not is_on_floor():
+		velocity.y += gravity * delta
+
+	# Jump only from the ground.
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_velocity
+
+	# -1 for left, 1 for right, 0 for neither.
+	var direction := Input.get_axis("move_left", "move_right")
+	velocity.x = direction * speed
+
+	move_and_slide()
+
+	# Fell off the level: start again.
+	if position.y > 1200:
+		get_tree().reload_current_scene()
+`;
+
+const COIN_GD = `extends Area2D
+## A coin that disappears when the player touches it. Attach to an Area2D.
+
+signal collected
+
+
+func _ready() -> void:
+	body_entered.connect(_on_body_entered)
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		collected.emit()
+		queue_free()
+`;
+
+const MAIN_GD = `extends Node2D
+## The level: counts coins and updates the score label.
+
+var score := 0
+
+@onready var score_label: Label = $HUD/ScoreLabel
+@onready var pickup_sound: AudioStreamPlayer = $PickupSound
+
+
+func _ready() -> void:
+	for coin in get_tree().get_nodes_in_group("coins"):
+		coin.collected.connect(_on_coin_collected)
+	_update_label()
+
+
+func _on_coin_collected() -> void:
+	score += 1
+	pickup_sound.play()
+	_update_label()
+
+
+func _update_label() -> void:
+	score_label.text = "Coins: %d" % score
+`;
+
+export default {
+  id: "godot-game-dev",
+  slug: "godot-game-dev",
+  title: "2D Game Development in Godot",
+  software: "Godot Engine 4",
+  apps: ["Godot"],
+  intro:
+    "Make a small 2D platformer in the free Godot Engine: scenes and nodes, a player that runs and jumps with GDScript, input actions and tuning, platforms, tiles and a following camera, coins with signals, and a score display, sound and an exported game you can share.",
+  platformNote: "Shortcuts are shown for Godot 4 on Windows and Linux. On a Mac, use Cmd in place of Ctrl.",
+  store: {
+    category: "design",
+    level: "Beginner to intermediate",
+    software: "Godot Engine 4 (free and open source, for Windows, Mac and Linux)",
+    softwareShort: "Godot 4",
+    softwareHtml: `<p>This guide is written for <strong>Godot Engine 4</strong> (4.3 or later), free and open source for Windows, Mac and Linux, obtained separately from godotengine.org; it is not included with the guide. Use the standard version (not the .NET version); the code is GDScript, Godot's own language, and no prior programming is assumed.</p>`,
+    forWho: [
+      "You've always wanted to make a game and don't know where to start.",
+      "You've tried a game engine and got lost in the interface.",
+      "You'd like to learn programming through something playful.",
+    ],
+    notFor: [
+      "You want 3D games. The guide covers 2D.",
+      "You want to publish a commercial game; the guide ends with a playable exported prototype.",
+      "You want video lessons, live help, or someone to review your work.",
+    ],
+  },
+  files: [
+    { name: "player.png", title: "Player sprite", desc: "A 64 × 64 pixel character with a transparent background." },
+    { name: "coin.png", title: "Coin sprite", desc: "A 32 × 32 pixel coin." },
+    { name: "ground-tile.png", title: "Ground tile", desc: "A 64 × 64 pixel grass-topped ground tile for platforms and the TileMap." },
+    { name: "coin.wav", title: "Pickup sound", desc: "A short two-note chime for collecting a coin." },
+    { name: "player.gd", title: "Solution: player.gd", desc: "The finished player script from Lessons 2 and 3." },
+    { name: "coin.gd", title: "Solution: coin.gd", desc: "The finished coin script from Lesson 5." },
+    { name: "main.gd", title: "Solution: main.gd", desc: "The finished level script from Lessons 5 and 6." },
+  ],
+  shortcuts: [
+    { keys: "Ctrl+A", action: "Add a child node", app: "Godot" },
+    { keys: "Ctrl+D", action: "Duplicate the selected node", app: "Godot" },
+    { keys: "Ctrl+S", action: "Save the scene", app: "Godot" },
+    { keys: "Q", action: "Select mode (2D)", app: "Godot" },
+    { keys: "W", action: "Move mode (2D)", app: "Godot" },
+    { keys: "E", action: "Rotate mode (2D)", app: "Godot" },
+    { keys: "S", action: "Scale mode (2D)", app: "Godot" },
+    { keys: "F", action: "Frame the selection in the viewport", app: "Godot" },
+    { keys: "F8", action: "Stop the running game", app: "Godot" },
+    { keys: "Ctrl+K", action: "Comment or uncomment lines (script editor)", app: "Godot" },
+    { keys: "Ctrl+Space", action: "Show code completion (script editor)", app: "Godot" },
+    { keys: "Ctrl+Shift+O", action: "Quick open a scene", app: "Godot" },
+    { keys: "F5", action: "Run the project", app: "Godot", practice: false, note: "Your browser uses this key to reload the page." },
+    { keys: "F6", action: "Run the current scene", app: "Godot", practice: false, note: "Your browser uses this key for the address bar." },
+  ],
+  lessons: [
+    {
+      id: "editor",
+      title: "Projects, scenes and nodes",
+      summary: "Create a project, find your way around the editor, and understand Godot's building blocks: nodes arranged in scenes.",
+      diagram: { type: "tree", root: "Main (Node2D)", items: [["Player (CharacterBody2D)", 1, true], ["Sprite2D", 2], ["CollisionShape2D", 2], ["Camera2D", 2], ["Ground (StaticBody2D)", 1], ["HUD (CanvasLayer)", 1]], caption: "A scene is a tree of nodes; scenes can contain other scenes" },
+      steps: [
+        {
+          title: "Create a project",
+          body: `<p>Open Godot; the <em>Project Manager</em> appears. Select <em>Create</em> (or <em>New Project</em>), name it <em>Coin Hop</em>, choose an empty folder, and pick the <em>Compatibility</em> renderer if your computer is older; <em>Forward+</em> is fine on recent machines. Select <em>Create &amp; Edit</em>.</p>`,
+        },
+        {
+          title: "The editor",
+          body: `<p>The <em>Scene</em> dock (top left) shows the current scene's node tree; <em>FileSystem</em> (bottom left) shows your project's files; the <em>Inspector</em> (right) shows the selected node's properties. Switch the main view with <em>2D</em>, <em>3D</em>, <em>Script</em> and <em>AssetLib</em> at the top. Drag the practice files into the FileSystem dock to add them to the project.</p>`,
+        },
+        {
+          title: "Nodes and scenes",
+          body: `<p>Everything is a <strong>node</strong>: a sprite, a collision shape, a camera, a label. Nodes form a tree, and a saved tree is a <strong>scene</strong> (a <code>.tscn</code> file). A player is a scene; a coin is a scene; the level is a scene containing the others. In the Scene dock, choose <em>2D Scene</em> to start with a Node2D root, rename it Main, and press ${k("Ctrl", "S")} to save it as main.tscn.</p>`,
+        },
+        {
+          title: "Run it",
+          body: `<p>Press F6 to run the current scene, or F5 to run the project (the first time, Godot asks which scene is the main one: choose main.tscn). An empty gray window opens. Press ${k("F8")} or close the window to stop. Running often is the fastest way to learn.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "What is a scene in Godot?", options: ["A level only", "A saved tree of nodes, such as a player, a coin or a level", "A script file", "A camera setting"], answer: 1, explain: "Scenes are reusable trees of nodes, saved as .tscn files." },
+        { q: "Which dock shows the selected node's properties?", options: ["Scene", "FileSystem", "Inspector", "Output"], answer: 2, explain: "The Inspector lists and edits properties." },
+      ],
+      exercise: {
+        title: "Set up Coin Hop",
+        task: `<p>Create a project called Coin Hop, add the practice files to it, create a 2D scene with a root named Main, save it as main.tscn, and run the project with it as the main scene.</p>`,
+        files: ["player.png", "coin.png", "ground-tile.png", "coin.wav"],
+        solution: [
+          "Project Manager › <em>Create</em>, name Coin Hop, an empty folder, <em>Create &amp; Edit</em>.",
+          "Drag player.png, coin.png, ground-tile.png and coin.wav from your file manager into the FileSystem dock.",
+          "Scene dock › <em>2D Scene</em>; double-click the root node and rename it Main; Ctrl+S, save as main.tscn.",
+          "Press F5, choose <em>Select Current</em> when asked for the main scene. A blank window opens; press F8 to stop.",
+        ],
+      },
+    },
+    {
+      id: "player",
+      title: "A player that runs and jumps",
+      summary: "Build a player scene from a CharacterBody2D, a sprite and a collision shape, and write a GDScript that adds gravity, running and jumping.",
+      diagram: { type: "code", lang: "player.gd", lines: ["if not is_on_floor():", "\tvelocity.y += gravity * delta", "var direction := Input.get_axis(\"move_left\", \"move_right\")", "velocity.x = direction * speed", "move_and_slide()"], highlight: [4], notes: [[0, "Fall when in the air"], [4, "Move and stop at walls/floors"]] },
+      steps: [
+        {
+          title: "The player scene",
+          body: `<p>Choose <em>Scene › New Scene</em>, select <em>Other Node</em> and pick <strong>CharacterBody2D</strong>; rename it Player. Press ${k("Ctrl", "A")} to add a <strong>Sprite2D</strong> child and drag player.png into its <em>Texture</em> property. Add a <strong>CollisionShape2D</strong> child, set its <em>Shape</em> to a new RectangleShape2D or CapsuleShape2D, and size it to the body. Save as player.tscn.</p>`,
+        },
+        {
+          title: "Attach a script",
+          body: `<p>Select Player and choose the <em>Attach Script</em> button (a scroll with a plus) at the top of the Scene dock. Keep the suggested name player.gd and the <em>Node: Default</em> template, which already includes basic movement; delete its contents to type your own, or compare with <strong>player.gd</strong>. GDScript uses indentation (tabs) to group lines, like Python.</p>`,
+        },
+        {
+          title: "Gravity and movement",
+          body: `<p><code>_physics_process(delta)</code> runs 60 times a second. If the player isn't on the floor, add gravity to <code>velocity.y</code>. <code>Input.get_axis("move_left", "move_right")</code> gives −1, 0 or 1, which times <code>speed</code> sets <code>velocity.x</code>. <code>move_and_slide()</code> moves the body and stops it at floors and walls.</p>`,
+        },
+        {
+          title: "Jumping and testing",
+          body: `<p>When the jump action is pressed and <code>is_on_floor()</code> is true, set <code>velocity.y</code> to a negative number (up is negative in 2D). To test, drag player.tscn from FileSystem into main.tscn, add a temporary floor (Lesson 4 builds proper ones), and run. Until Lesson 3 adds the actions, use <code>ui_left</code>, <code>ui_right</code> and <code>ui_accept</code> (Space or Enter).</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Why is jump_velocity negative?", options: ["It's a bug", "In Godot 2D, the y axis points down, so up is negative", "Negative numbers are faster", "To slow the player"], answer: 1, explain: "Positive y goes down the screen." },
+        { q: "What does move_and_slide() do?", options: ["Plays an animation", "Moves the body using velocity and handles collisions with floors and walls", "Deletes the player", "Sets gravity"], answer: 1, explain: "It applies velocity and resolves collisions." },
+      ],
+      exercise: {
+        title: "Make the player move",
+        task: `<p>Build player.tscn with a sprite and collision shape, attach a script with gravity, left and right movement at 220 pixels per second and a jump, add the player to main.tscn above a temporary floor, and play.</p>`,
+        files: ["player.png", "player.gd"],
+        solution: [
+          "<em>Scene › New Scene › Other Node › CharacterBody2D</em>, rename Player; add Sprite2D (texture player.png) and CollisionShape2D (CapsuleShape2D sized to the character). Save as player.tscn.",
+          "Attach player.gd and type the script from the steps (use <code>ui_left</code>, <code>ui_right</code> and <code>ui_accept</code> for now).",
+          "Temporary floor in main.tscn: a StaticBody2D with a CollisionShape2D (RectangleShape2D about 1000 × 40) and a ColorRect child the same size so you can see it.",
+          "Drag player.tscn into main.tscn above the floor, press F5: the player falls, lands, runs with the arrow keys and jumps with Space.",
+        ],
+      },
+    },
+    {
+      id: "input",
+      title: "Input actions and tuning",
+      summary: "Define your own input actions with keys and controller buttons, and expose speed and jump strength in the Inspector to tune the feel.",
+      diagram: { type: "table", head: ["Action", "Keys", "Controller"], rows: [["move_left", "A, ←", "D-pad left"], ["move_right", "D, →", "D-pad right"], ["jump", "Space, W, ↑", "Bottom face button"]], highlight: { rows: [2] }, caption: "Project › Project Settings › Input Map" },
+      steps: [
+        {
+          title: "The Input Map",
+          body: `<p>Choose <em>Project › Project Settings</em> and the <em>Input Map</em> tab. Type <code>move_left</code> in the <em>Add New Action</em> box and select <em>Add</em>; repeat for <code>move_right</code> and <code>jump</code>. Code refers to these names, so players can later rebind keys without code changes.</p>`,
+        },
+        {
+          title: "Assign keys and buttons",
+          body: `<p>Select the <em>+</em> next to an action, press the key you want (A for move_left) and confirm. Add a second event for the arrow key, and a third for a controller: the dialog listens for a button press too. Then change the script to use your action names.</p>`,
+        },
+        {
+          title: "@export variables",
+          body: `<p><code>@export var speed := 220.0</code> makes the variable appear in the Inspector when the Player node is selected. Change it there (even while the game runs, with the Remote tree) to tune how the game feels without editing code. Do the same for <code>jump_velocity</code>.</p>`,
+        },
+        {
+          title: "What makes it feel good",
+          body: `<p>Try speed 260 and jump −460 for a lighter, bouncier character; 180 and −380 for a heavier one. Games feel responsive when movement starts and stops quickly; that's why this script sets velocity directly instead of accelerating slowly.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Why define input actions instead of checking keys directly?", options: ["Keys can't be checked in GDScript", "One action can have several keys and buttons, and players can rebind them without code changes", "It runs faster", "Actions are required for jumping"], answer: 1, explain: "Actions decouple code from physical keys." },
+        { q: "What does @export do to a variable?", options: ["Saves it to disk", "Shows it in the Inspector for editing", "Makes it global", "Exports the game"], answer: 1, explain: "Exported variables are editable per node in the Inspector." },
+      ],
+      exercise: {
+        title: "Your own controls",
+        task: `<p>Add move_left (A and Left), move_right (D and Right) and jump (Space and W) to the Input Map, update the script to use them, export speed and jump_velocity, and find values you like.</p>`,
+        files: ["player.gd"],
+        solution: [
+          "<em>Project › Project Settings › Input Map</em>; add the three actions.",
+          "For each, select <em>+</em>, press the key, <em>OK</em>; add the second key the same way.",
+          "In player.gd, replace ui_left, ui_right and ui_accept with move_left, move_right and jump.",
+          "Make sure <code>@export</code> is on both variables; select Player in its scene and change Speed and Jump Velocity in the Inspector; press F5 to test.",
+        ],
+      },
+    },
+    {
+      id: "level",
+      title: "Platforms, tiles and the camera",
+      summary: "Build platforms with static bodies, paint ground with a TileMapLayer, and make the camera follow the player within limits.",
+      diagram: { type: "tree", root: "Main", items: [["Ground (TileMapLayer)", 1, true], ["TileSet: ground-tile.png, 64 × 64", 2], ["Physics layer on the tile", 2], ["Player", 1], ["Camera2D (child of Player)", 2]], caption: "Tiles with collision, and a camera that follows" },
+      steps: [
+        {
+          title: "Static platforms",
+          body: `<p>A platform is a <strong>StaticBody2D</strong> (it doesn't move) with a <strong>CollisionShape2D</strong> and something visible, such as a Sprite2D with ground-tile.png. Make one, save it as platform.tscn, and drag several into main.tscn. Select one and press ${k("Ctrl", "D")} to duplicate it, then ${k("W")} to move it.</p>`,
+        },
+        {
+          title: "A TileMapLayer",
+          body: `<p>For longer ground, add a <strong>TileMapLayer</strong> node to Main. In the Inspector, create a new <em>TileSet</em>, set its tile size to 64 × 64, and drag ground-tile.png into the <em>TileSet</em> panel at the bottom. Then select the <em>TileMap</em> panel and paint tiles onto the level with the pencil tool.</p>`,
+        },
+        {
+          title: "Tile collisions",
+          body: `<p>Painted tiles don't block the player until they have collision. In the TileSet resource (Inspector), add a <em>Physics Layer</em>. Then in the TileSet panel, select the tile, open <em>Paint</em> properties, choose <em>Physics Layer 0</em> and click the tile to give it a full square collision shape.</p>`,
+        },
+        {
+          title: "A following camera",
+          body: `<p>Open player.tscn and add a <strong>Camera2D</strong> as a child of Player: it now follows the player. In its Inspector, turn on <em>Position Smoothing</em> for a softer follow, and set the <em>Limit</em> values (left, top, right, bottom) so the view never shows beyond the level's edges.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Which node type is right for a platform that never moves?", options: ["CharacterBody2D", "RigidBody2D", "StaticBody2D", "Area2D"], answer: 2, explain: "StaticBody2D blocks other bodies without moving." },
+        { q: "Why don't freshly painted tiles stop the player?", options: ["Tiles can't collide", "The TileSet needs a physics layer and a collision shape on the tile", "The player has no script", "The camera blocks them"], answer: 1, explain: "Collision is set per tile in the TileSet." },
+      ],
+      exercise: {
+        title: "Build a small level",
+        task: `<p>Replace the temporary floor with a TileMapLayer of ground tiles that have collision, add three floating platforms at different heights, and give the player a smoothed Camera2D with limits around the level.</p>`,
+        files: ["ground-tile.png"],
+        solution: [
+          "Delete the temporary floor; add a TileMapLayer to Main; Inspector › <em>Tile Set › New TileSet</em>, tile size 64 × 64; drag ground-tile.png into the TileSet panel (accept creating tiles automatically).",
+          "In the TileSet resource, <em>Physics Layers › Add Element</em>; in the TileSet panel's <em>Paint</em> mode choose Physics Layer 0 and click the tile.",
+          "TileMap panel: paint a ground strip; paint or place three platforms higher up.",
+          "In player.tscn, add Camera2D; tick <em>Position Smoothing › Enabled</em>; set Limit Left 0, Top −400, Right to your level's width, Bottom 700.",
+          "Press F5: the player lands on tiles, jumps between platforms and the camera follows.",
+        ],
+      },
+    },
+    {
+      id: "coins",
+      title: "Coins and signals",
+      summary: "Make a coin scene with an Area2D, detect the player with a signal, use groups, and send your own signal when a coin is collected.",
+      diagram: { type: "flow", nodes: ["Player enters coin", "body_entered signal", "Is it the player?", "emit collected", "Main adds 1"], highlight: 3, title: "Signals let scenes talk without knowing each other" },
+      steps: [
+        {
+          title: "The coin scene",
+          body: `<p>New scene with an <strong>Area2D</strong> root named Coin, a Sprite2D (coin.png) and a CollisionShape2D (CircleShape2D). An Area2D detects overlaps without blocking movement. Save as coin.tscn and drag several coins into main.tscn.</p>`,
+        },
+        {
+          title: "Groups",
+          body: `<p>Select the Player node in player.tscn, open the <em>Node</em> dock next to the Inspector, choose <em>Groups</em> and add the group <code>player</code>. In coin.tscn, add the Coin root to the group <code>coins</code>. Code can then ask “is this the player?” and find every coin.</p>`,
+        },
+        {
+          title: "Signals",
+          body: `<p>A signal is a message a node sends when something happens. Area2D sends <code>body_entered</code> when a body overlaps it. In coin.gd, <code>body_entered.connect(_on_body_entered)</code> in <code>_ready()</code> runs your function each time; if the body is in the player group, call <code>queue_free()</code> to remove the coin. You can also connect signals from the Node dock's <em>Signals</em> tab.</p>`,
+        },
+        {
+          title: "Your own signal",
+          body: `<p>Declare <code>signal collected</code> at the top of coin.gd and call <code>collected.emit()</code> before <code>queue_free()</code>. The coin doesn't need to know who counts coins; the level script connects to every coin's <code>collected</code> signal and does the counting. That separation keeps scenes reusable.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Why is the coin an Area2D rather than a StaticBody2D?", options: ["Area2D is faster", "It detects the player overlapping without blocking movement", "StaticBody2D can't have sprites", "To use groups"], answer: 1, explain: "Areas sense; bodies collide." },
+        { q: "What does queue_free() do?", options: ["Pauses the node", "Removes the node from the scene safely", "Frees memory for later", "Hides the sprite"], answer: 1, explain: "The node is deleted at the end of the current frame." },
+      ],
+      exercise: {
+        title: "Collectible coins",
+        task: `<p>Make coin.tscn, put the player in the player group and coins in the coins group, write coin.gd so coins vanish when touched and emit collected, and place five coins in the level.</p>`,
+        files: ["coin.png", "coin.gd"],
+        solution: [
+          "<em>Scene › New Scene › Other Node › Area2D</em>, rename Coin; add Sprite2D (coin.png) and CollisionShape2D (CircleShape2D, radius about 14). Save coin.tscn.",
+          "Node dock › <em>Groups</em>: add <code>coins</code> to Coin; in player.tscn add <code>player</code> to Player.",
+          "Attach coin.gd to Coin with the code from <strong>coin.gd</strong>: the signal, the connect in _ready, and the check, emit and queue_free.",
+          "Drag coin.tscn into main.tscn five times (or once, then Ctrl+D four times) and spread them around.",
+          "Press F5: touching a coin makes it disappear.",
+        ],
+      },
+    },
+    {
+      id: "finish",
+      title: "Score, sound and export",
+      summary: "Show a score with a CanvasLayer and Label, play a sound on pickup, restart when the player falls, and export the game.",
+      diagram: { type: "layers", items: ["HUD (CanvasLayer): Coins: 3", "Game world (moves with the camera)"], highlight: 0, caption: "A CanvasLayer stays fixed on screen" },
+      steps: [
+        {
+          title: "A score display",
+          body: `<p>In main.tscn, add a <strong>CanvasLayer</strong> named HUD and a <strong>Label</strong> child named ScoreLabel. A CanvasLayer draws on top of the game and ignores the camera, so the label stays in the corner. Set its text and font size in the Inspector under <em>Theme Overrides</em>.</p>`,
+        },
+        {
+          title: "Count in the level script",
+          body: `<p>Attach main.gd to Main. <code>@onready var score_label: Label = $HUD/ScoreLabel</code> gets the label once the scene is ready. In <code>_ready()</code>, loop over <code>get_tree().get_nodes_in_group("coins")</code> and connect each coin's <code>collected</code> signal to a function that adds 1 and sets <code>score_label.text = "Coins: %d" % score</code>.</p>`,
+        },
+        {
+          title: "Sound and restarting",
+          body: `<p>Add an <strong>AudioStreamPlayer</strong> named PickupSound to Main, drag coin.wav into its <em>Stream</em> property, and call <code>pickup_sound.play()</code> when a coin is collected. In player.gd, <code>get_tree().reload_current_scene()</code> when the player falls below the level restarts it.</p>`,
+        },
+        {
+          title: "Export",
+          body: `<p>Choose <em>Project › Export</em>. The first time, Godot asks you to download export templates (<em>Manage Export Templates › Download and Install</em>). Add a preset for your system (Windows Desktop, macOS or Linux), select <em>Export Project</em>, and choose a file name. The result runs without Godot installed; zip the exported files to share them.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "Why put the score label in a CanvasLayer?", options: ["Labels need one", "It stays fixed on screen instead of moving with the camera", "It's faster", "To add sound"], answer: 1, explain: "CanvasLayers ignore the game camera." },
+        { q: "What does \"Coins: %d\" % score produce when score is 3?", options: ["Coins: %d", "Coins: 3", "Coins: score", "An error"], answer: 1, explain: "%d is replaced with the whole number." },
+      ],
+      exercise: {
+        title: "Finish Coin Hop",
+        task: `<p>Add the HUD with a score label, attach main.gd to count coins and play coin.wav on each pickup, make falling restart the level, and export the game for your system.</p>`,
+        files: ["main.gd", "coin.wav", "player.gd"],
+        solution: [
+          "Main › Ctrl+A › CanvasLayer (rename HUD) › Ctrl+A › Label (rename ScoreLabel); position it top-left.",
+          "Add AudioStreamPlayer named PickupSound with coin.wav as its Stream.",
+          "Attach main.gd with the code from <strong>main.gd</strong>; the label shows Coins: 0, and each pickup chimes and counts up.",
+          "In player.gd, check <code>if position.y &gt; 1200:</code> and call <code>get_tree().reload_current_scene()</code>.",
+          "<em>Project › Export</em>, install templates if asked, <em>Add… › Windows Desktop</em> (or your system), <em>Export Project</em>.",
+        ],
+      },
+    },
+  ],
+  extras: {
+    project: {
+      id: "bonus-enemy",
+      title: "Bonus project: a patrolling enemy",
+      summary: "Add an enemy that walks back and forth on a platform, turns at edges and walls, and restarts the level when it touches the player.",
+      diagram: { type: "flow", nodes: ["Walk", "Wall or edge ahead?", "Turn around", "Touch player?", "Restart"], highlight: 1, title: "A simple patrol loop" },
+      steps: [
+        {
+          title: "The enemy scene",
+          body: `<p>Make a CharacterBody2D named Enemy with a Sprite2D (reuse player.png with <em>Modulate</em> set to red) and a CollisionShape2D. Add a <strong>RayCast2D</strong> pointing down and slightly ahead: it reports whether there's ground in front, so the enemy can turn at edges.</p>`,
+        },
+        {
+          title: "Patrol script",
+          body: `<p>Keep a <code>direction</code> of 1 or −1. Each physics frame: apply gravity, set <code>velocity.x = direction * 80</code>, call <code>move_and_slide()</code>, then reverse direction if <code>is_on_wall()</code> or the ray isn't colliding (<code>not $RayCast2D.is_colliding()</code>). Flip the ray's <code>target_position.x</code> and the sprite's <code>flip_h</code> with it.</p>`,
+        },
+        {
+          title: "Hurting the player",
+          body: `<p>Add an Area2D child slightly larger than the enemy and connect its <code>body_entered</code> signal: if the body is in the player group, call <code>get_tree().reload_current_scene()</code>. Place two enemies on platforms and tune their speed so they're avoidable.</p>`,
+        },
+      ],
+      quiz: [
+        { q: "What does the downward RayCast2D tell the enemy?", options: ["Where the player is", "Whether there's ground ahead, so it can turn before falling", "How fast to move", "When to jump"], answer: 1, explain: "No collision ahead means an edge." },
+        { q: "Why use an Area2D on the enemy to detect the player?", options: ["Bodies can't detect each other", "It senses overlap without changing how the bodies collide", "It's required for sprites", "To play sound"], answer: 1, explain: "Areas are for detection." },
+      ],
+      exercise: {
+        title: "Add two enemies",
+        task: `<p>Build the enemy scene with an edge-detecting ray and a patrol script, make touching it restart the level, and place two enemies on different platforms.</p>`,
+        files: ["player.png", "player.gd"],
+        solution: [
+          "CharacterBody2D Enemy; Sprite2D (player.png, Modulate red); CollisionShape2D; RayCast2D with Target Position (20, 40).",
+          "Script: <code>var direction := 1</code>; in _physics_process apply gravity, set velocity.x, move_and_slide, then <code>if is_on_wall() or not $RayCast2D.is_colliding(): direction *= -1</code>, and set <code>$RayCast2D.target_position.x = 20 * direction</code> and <code>$Sprite2D.flip_h = direction &lt; 0</code>.",
+          "Area2D child with a slightly bigger CollisionShape2D; connect body_entered and reload the scene when the body is in the player group.",
+          "Save enemy.tscn and drag two into main.tscn on platforms; press F5 to test.",
+        ],
+      },
+    },
+    quizbank: [
+      { q: "Which file extension does a saved Godot scene use?", options: [".gd", ".tscn", ".godot", ".scene"], answer: 1, explain: "Scenes are .tscn; scripts are .gd; project settings are project.godot." },
+      { q: "Which function runs every physics frame?", options: ["_ready", "_physics_process", "_init", "_input_frame"], answer: 1, explain: "_physics_process(delta) runs at the physics rate, 60 times a second by default." },
+      { q: "What does Input.get_axis(\"move_left\", \"move_right\") return when only right is held?", options: ["-1", "0", "1", "true"], answer: 2, explain: "The positive action gives 1." },
+      { q: "Where do you add input actions?", options: ["Editor Settings", "Project › Project Settings › Input Map", "The Inspector", "The Script editor"], answer: 1, explain: "The Input Map is part of the project settings." },
+      { q: "Which node detects overlaps without blocking movement?", options: ["StaticBody2D", "Area2D", "CharacterBody2D", "TileMapLayer"], answer: 1, explain: "Area2D sends signals like body_entered." },
+      { q: "How does a node announce that something happened, without knowing who's listening?", options: ["With a group", "With a signal", "With @export", "With queue_free"], answer: 1, explain: "Signals decouple sender and receiver." },
+      { q: "What does @onready do?", options: ["Runs code at export", "Sets the variable when the node is ready, after its children exist", "Makes a variable global", "Pauses the game"], answer: 1, explain: "It's evaluated just before _ready, when child nodes are available." },
+      { q: "What must you download the first time you export?", options: ["A new Godot version", "Export templates", "A license", "Python"], answer: 1, explain: "Export templates are the runtime builds for each platform." },
+    ],
+  },
+  async makeFiles({ png, wav }) {
+    const player = png(64, 64, (x, y) => {
+      const body = Math.hypot((x - 32) / 20, (y - 38) / 22) < 1;
+      const ear1 = Math.abs(x - 20) + Math.abs(y - 14) < 8 && y < 22;
+      const ear2 = Math.abs(x - 44) + Math.abs(y - 14) < 8 && y < 22;
+      const eye = Math.hypot(x - 39, y - 32) < 3 || Math.hypot(x - 26, y - 32) < 3;
+      const foot = y > 56 && y < 62 && ((x > 18 && x < 28) || (x > 36 && x < 46));
+      if (eye) return [30, 30, 40, 255];
+      if (body || ear1 || ear2) return [232, 128, 52, 255];
+      if (foot) return [90, 60, 40, 255];
+      return [0, 0, 0, 0];
+    });
+    const coin = png(32, 32, (x, y) => {
+      const d = Math.hypot(x - 15.5, y - 15.5);
+      if (d < 11) return Math.abs(x - 15.5) < 2 && Math.abs(y - 15.5) < 6 ? [255, 236, 140, 255] : [240, 190, 40, 255];
+      if (d < 14) return [190, 130, 20, 255];
+      return [0, 0, 0, 0];
+    });
+    const tile = png(64, 64, (x, y) => {
+      if (y < 14) return [96 + ((x * 7) % 20), 160 + ((x * 3) % 18), 70, 255];
+      const stone = ((Math.floor(x / 16) + Math.floor((y - 14) / 12)) % 2) * 12;
+      return [120 + stone, 86 + stone, 60 + stone, 255];
+    });
+    const rate = 44100, n = Math.round(rate * 0.32);
+    const L = new Float32Array(n), R = new Float32Array(n);
+    for (let i = 0; i < n; i++) {
+      const t = i / rate;
+      const f = t < 0.1 ? 988 : 1319;
+      const env = Math.exp(-((t < 0.1 ? t : t - 0.1)) * 18) * 0.5;
+      L[i] = R[i] = Math.sin(2 * Math.PI * f * t) * env;
+    }
+    return {
+      "player.png": player,
+      "coin.png": coin,
+      "ground-tile.png": tile,
+      "coin.wav": wav(L, R, rate),
+      "player.gd": PLAYER_GD,
+      "coin.gd": COIN_GD,
+      "main.gd": MAIN_GD,
+    };
+  },
+};

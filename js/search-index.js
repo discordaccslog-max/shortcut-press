@@ -162,7 +162,42 @@ window.SHORTCUT_INDEX = [
     "id": "command-line",
     "title": "Command Line Essentials",
     "url": "command-line.html",
-    "keywords": "A terminal: Terminal on a Mac (zsh), any Linux terminal, or Git Bash on Windows (free); PowerShell notes included Beginner Navigate, manage files, read and search text, pipes and redirects, and a first script, in Bash or zsh. Finding your way around Creating, copying, moving and deleting Reading files Searching and filtering with pipes Redirects, chaining and finding files Your first script and your environment extras add-ons Bonus project: a dated backup script Extra quiz pack Printable cheat sheet Flashcard deck Code & development"
+    "keywords": "A terminal: Terminal on a Mac (zsh), any Linux terminal, or Git Bash on Windows (free); PowerShell notes included Beginner Navigate, manage files, read and search text, pipes and redirects, and a first script, in Bash or zsh. Finding your way around Creating, copying, moving and deleting Reading files Searching and filtering with pipes Redirects, chaining and finding files Your first script and your environment extras add-ons Bonus project: dated backup script Extra quiz pack Printable cheat sheet Flashcard deck Code & development"
+  },
+  {
+    "kind": "Guide",
+    "id": "docker-containers",
+    "title": "Containers with Docker",
+    "url": "docker-containers.html",
+    "keywords": "Docker Desktop (Windows, Mac, Linux) or Docker Engine (Linux), and a terminal Intermediate Run, build and combine containers: images, Dockerfiles, layers, volumes, Compose and safe sharing. Images and containers Running and managing containers Build your own image Layers, caching and image size Keeping data with volumes Several services with Docker Compose Sharing images and good habits extras add-ons Bonus project: add a database service Extra quiz pack Printable workbook Printable cheat sheet Code & development"
+  },
+  {
+    "kind": "Guide",
+    "id": "gimp-photo-editing",
+    "title": "Photo Editing in GIMP",
+    "url": "gimp-photo-editing.html",
+    "keywords": "GIMP 3 (free and open source, for Windows, Mac and Linux) Beginner Crop and straighten, fix exposure and color, retouch, cut out with masks, and export, in free software. The GIMP workspace Crop, straighten and resize Exposure and color Retouching: healing and cloning Selections, masks and cutouts Text, sharpening and export extras add-ons Bonus project: three-photo collage Extra quiz pack Printable cheat sheet Flashcard deck Design & 3D"
+  },
+  {
+    "kind": "Guide",
+    "id": "krita-digital-painting",
+    "title": "Digital Painting in Krita",
+    "url": "krita-digital-painting.html",
+    "keywords": "Krita 5 (free and open source, for Windows, Mac and Linux) Beginner Brushes, layers and blending modes, coloring line art, light and shadow, transforms and export. Canvas, brushes and navigation Layers and blending modes Coloring line art Light and shadow Selections and transformations Adjustments and export extras add-ons Bonus project: a seamless pattern Extra quiz pack Printable cheat sheet Flashcard deck Design & 3D"
+  },
+  {
+    "kind": "Guide",
+    "id": "canva-social-graphics",
+    "title": "Social Media Graphics in Canva",
+    "url": "canva-social-graphics.html",
+    "keywords": "Canva (free plan; a few optional features need a paid plan) Beginner Right sizes, clear type, brand colors, photos and frames, tidy layouts, animation and export. Sizes and the editor Text and hierarchy Brand colors and logo Photos, frames and elements Alignment and layout Resizing, animation and export extras add-ons Bonus project: five-slide carousel Extra quiz pack Printable cheat sheet Design & 3D"
+  },
+  {
+    "kind": "Guide",
+    "id": "godot-game-dev",
+    "title": "2D Game Development in Godot",
+    "url": "godot-game-dev.html",
+    "keywords": "Godot Engine 4 (free and open source, for Windows, Mac and Linux) Beginner to intermediate A small platformer from scratch: scenes, GDScript movement, tiles, camera, coins, score, sound and export. Projects, scenes and nodes A player that runs and jumps Input actions and tuning Platforms, tiles and the camera Coins and signals Score, sound and export extras add-ons Bonus project: a patrolling enemy Extra quiz pack Printable workbook Flashcard deck Design & 3D"
   },
   {
     "kind": "Page",

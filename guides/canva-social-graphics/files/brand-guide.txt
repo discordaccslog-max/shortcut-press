@@ -1,0 +1,17 @@
+Harbor Coffee: brand guide for the Canva practice project
+
+Colors
+  Sea blue     #1F6F8B   headlines, buttons, one accent per design
+  Sand         #F6F1E8   backgrounds
+  Ink          #1D2733   body text
+  Terracotta   #C8784F   highlights, prices, small details
+
+Fonts (free in Canva)
+  Headings     a bold sans serif, for example Montserrat ExtraBold
+  Body         a clean sans serif, for example Open Sans
+
+Logo
+  harbor-logo.svg on light backgrounds; leave space around it at least the height of the cup.
+
+Voice
+  Short, warm, specific. "Cardamom buns are back" rather than "Exciting news!"

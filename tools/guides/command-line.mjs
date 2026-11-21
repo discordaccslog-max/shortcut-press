@@ -268,7 +268,7 @@ export default {
       ],
       quiz: [
         { q: "What does chmod +x script.sh do?", options: ["Deletes it", "Makes it executable", "Makes it read-only", "Hides it"], answer: 1, explain: "+x adds execute permission." },
-        { q: "In a script, what does ${1:-server.log} mean?", options: ["Always server.log", "The first argument, or server.log if none was given", "The first line of server.log", "An error"], answer: 1, explain: "The :- part supplies a default value." },
+        { q: "In a script, what does <code>${1:-server.log}</code> mean?", options: ["Always server.log", "The first argument, or server.log if none was given", "The first line of server.log", "An error"], answer: 1, explain: "The :- part supplies a default value." },
       ],
       exercise: {
         title: "Write log-summary.sh",
