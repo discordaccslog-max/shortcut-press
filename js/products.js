@@ -181,5 +181,41 @@ window.SHORTCUT_PRODUCTS = {
       { id: "workbook", name: "Printable workbook", price: 3, kind: "workbook", description: "The whole guide as a PDF with every lesson, quiz and exercise, and the worked solutions at the back." }
     ],
     checkoutUrl: ""
+  },
+  "excel-vba-macros": {
+    name: "Automating Excel with Macros & VBA",
+    slug: "excel-vba-macros",
+    code: "VB",
+    price: 55,
+    summary: "Record macros, read and write VBA, loop through rows, add buttons and write your own functions.",
+    description: "An interactive browser guide to automating Microsoft Excel with macros and VBA: recording macros, the VBA editor, ranges and worksheets in code, variables, loops and decisions, message boxes and buttons, and your own worksheet functions and event macros, with a practice workbook and a finished code module to compare.",
+    page: "excel-vba-macros.html",
+    guidePath: "guides/excel-vba-macros/",
+    confirmationPath: "thank-you/excel-vba-macros/",
+    addons: [
+      { id: "report-macro", name: "Bonus project: one-click weekly report", price: 5, kind: "project", description: "An extra lesson that writes a macro to copy, sort, total and summarize the orders on a new dated sheet." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on the editor, objects, loops, events and macro security, with explanations." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "Every editor shortcut in the guide and the key steps of each lesson, as a PDF to keep beside you while you code." },
+      { id: "flashcards", name: "Flashcard deck", price: 1, kind: "flashcards", description: "An interactive, shuffled deck of the guide's shortcuts and quiz questions, with a pile for cards you're still learning." }
+    ],
+    checkoutUrl: ""
+  },
+  "financial-modeling-excel": {
+    name: "Financial Modeling in Excel",
+    slug: "financial-modeling-excel",
+    code: "FM",
+    price: 95,
+    summary: "A five-year model for a small business: drivers, costs, a loan schedule, NPV and IRR, scenarios and checks.",
+    description: "An interactive browser guide to building a clear, checkable financial model in Microsoft Excel for a small café: an inputs sheet, a five-year revenue and cost forecast, a loan schedule with PMT, NPV and IRR, scenario switches, data tables and Goal Seek, and the checks, protection and charts that make a model ready to hand over, with a formula sandbox and practice workbooks.",
+    page: "financial-modeling-excel.html",
+    guidePath: "guides/financial-modeling-excel/",
+    confirmationPath: "thank-you/financial-modeling-excel/",
+    addons: [
+      { id: "monthly-cash", name: "Bonus project: Year 1 monthly cash flow", price: 5, kind: "project", description: "An extra lesson that splits Year 1 into months with seasonality and a running cash balance, and finds the lowest cash point." },
+      { id: "quiz-pack", name: "Extra quiz pack", price: 2, kind: "quizbank", description: "Eight more questions on structure, PMT, NPV, IRR and what-if tools, with explanations and a running score." },
+      { id: "workbook", name: "Printable workbook", price: 3, kind: "workbook", description: "The whole guide as a PDF with every lesson, quiz and exercise, and the worked solutions at the back." },
+      { id: "cheat-sheet", name: "Printable cheat sheet", price: 2, kind: "cheatsheet", description: "The modeling shortcuts and each lesson's key steps on paper, for quick reference while you build." }
+    ],
+    checkoutUrl: ""
   }
 };

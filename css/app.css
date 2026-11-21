@@ -1795,3 +1795,10 @@ html.guide-unlocked .gd-locked {
     border-color: #bbb;
   }
 }
+
+/* Long code samples wrap instead of widening the page on small screens */
+.gd-wrap code,
+.gd-opt label,
+.gd-feedback {
+  overflow-wrap: anywhere;
+}

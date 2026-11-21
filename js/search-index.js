@@ -81,6 +81,20 @@ window.SHORTCUT_INDEX = [
     "keywords": "Microsoft Excel (Microsoft 365 or Excel 2021 and later, for Windows) Intermediate Repeatable data cleaning: import, fix text and types, unpivot, append, merge, group and refresh. Get data and the Power Query Editor Clean text, rows and types Reshape: unpivot and headers Append months of data Merge: look up values from another table Group, summarize and refresh extras add-ons Bonus project: self-refreshing report Extra quiz pack Printable cheat sheet Printable workbook Office & data"
   },
   {
+    "kind": "Guide",
+    "id": "excel-vba-macros",
+    "title": "Automating Excel with Macros & VBA",
+    "url": "excel-vba-macros.html",
+    "keywords": "Microsoft Excel for Windows (Microsoft 365 or Excel 2021 and later) Intermediate Record macros, read and write VBA, loop through rows, add buttons and write your own functions. Record your first macro The VBA editor Ranges, sheets and properties Variables, loops and decisions Messages, input and buttons Your own functions and automatic macros extras add-ons Bonus project: one-click weekly report Extra quiz pack Printable cheat sheet Flashcard deck Office & data"
+  },
+  {
+    "kind": "Guide",
+    "id": "financial-modeling-excel",
+    "title": "Financial Modeling in Excel",
+    "url": "financial-modeling-excel.html",
+    "keywords": "Microsoft Excel (Microsoft 365 or Excel 2021 and later) Intermediate A five-year model for a small business: drivers, costs, a loan schedule, NPV and IRR, scenarios and checks. Model structure The revenue forecast Costs and operating profit A loan schedule NPV and IRR Scenarios and sensitivity Checks, charts and handing it over extras add-ons Bonus project: Year 1 monthly cash flow Extra quiz pack Printable workbook Printable cheat sheet Office & data"
+  },
+  {
     "kind": "Page",
     "title": "Home",
     "url": "index.html",

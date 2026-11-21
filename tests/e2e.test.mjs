@@ -252,11 +252,8 @@ test("the formula sandbox evaluates formulas and checks answers", async () => {
   await set("H9", '=SUMIFS(D2:D9,C2:C9,">1",C2:C9,"<10")');
   assert.equal(await val("H9"), "88");
   // every lesson sandbox: the worked-solution formula gives the expected answer and passes the check
-  for (const gid of ["spreadsheet-formulas", "pivot-tables-charts"]) {
-    if (gid === "pivot-tables-charts") {
-      await page.goto(BASE + catalog[gid].confirmationPath);
-      await page.waitForSelector("[data-cf-code]");
-    }
+  await unlockAll(page);
+  for (const gid of GUIDE_IDS) {
     const lessons = await page.evaluate(async (url) => {
       const src = await (await fetch(url)).text();
       const w = {};

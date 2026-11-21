@@ -186,6 +186,37 @@
       var vals = [];
       for (var i = 1; i < arguments.length; i++) vals = vals.concat(flat(arguments[i]).filter(function (v) { return typeof v === "number"; }));
       return vals.reduce(function (sum, v, j) { return sum + v / Math.pow(1 + r, j + 1); }, 0);
+    },
+    // Interest and principal parts of a payment (end-of-period payments).
+    IPMT: function (rate, per, nper, pv) {
+      var r = Number(scalar(rate)), k = Number(scalar(per)) - 1, p = Number(scalar(pv));
+      var pmt = extra.PMT(rate, nper, pv);
+      var bal = r === 0 ? p + pmt * k : p * Math.pow(1 + r, k) + (pmt * (Math.pow(1 + r, k) - 1)) / r;
+      return -bal * r;
+    },
+    PPMT: function (rate, per, nper, pv) {
+      return extra.PMT(rate, nper, pv) - extra.IPMT(rate, per, nper, pv);
+    },
+    // The parser passes itself as the first argument to CHOOSE; skip it.
+    CHOOSE: function () {
+      var args = Array.prototype.slice.call(arguments);
+      if (args[0] && args[0].functions) args.shift();
+      var i = Math.floor(Number(scalar(args[0])));
+      if (!(i >= 1 && i < args.length)) return FE("VALUE");
+      return scalar(args[i]);
+    },
+    IRR: function (values, guess) {
+      var vals = flat(values).filter(function (v) { return typeof v === "number"; });
+      var npv = function (r) { return vals.reduce(function (s, v, j) { return s + v / Math.pow(1 + r, j); }, 0); };
+      var lo = -0.99, hi = 10;
+      if (npv(lo) * npv(hi) > 0) return FE("NUM");
+      for (var i = 0; i < 200; i++) {
+        var mid = (lo + hi) / 2;
+        if (npv(lo) * npv(mid) <= 0) hi = mid;
+        else lo = mid;
+      }
+      void guess;
+      return (lo + hi) / 2;
     }
   };
 
